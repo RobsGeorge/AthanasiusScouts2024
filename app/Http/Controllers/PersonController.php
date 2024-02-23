@@ -46,8 +46,25 @@ class PersonController extends Controller
 
         public function createPersonController()
         {
-            return view('createperson');
+            $address = DB::table('PersonalPhysicalAddress')->get();
+            $blood = DB::table('BloodType')->get();
+            $rotab = DB::table('RotbaInformation')->get();
+            $persons = DB::table('PersonInformation')->get();
+
+            return view("createperson", array('rotab' => $rotab, 'persons'=> $persons, 'blood' => $blood, 'address' => $address));
         }
+
+        /*public function selectSearch(Request $request)
+        {
+            $streetNames = [];
+            if($request->has('q')){
+                $search = $request->q;
+                $streetNames =DB::table('PersonalPhysicalAddress')::select("PersonID", "MainStreetName")
+                        ->where('MainStreetName', 'LIKE', "%$search%")
+                        ->get();
+            }
+            return response()->json($movies);
+        }*/
 
         public function submitPersonController(Request  $request)
         {

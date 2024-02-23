@@ -73,6 +73,11 @@
                         <a class="collapse-item">تعديل بيانات</a>
                         <a class="collapse-item">كلمات السر</a>
                         <a class="collapse-item">الترقيات</a>
+                        <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
+                        <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
+                        <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
+                        <a class="collapse-item" href={{ route('marhala-sana.index') }}>السنوات والمراحل الدراسية</a>
+                        <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
                     </div>
                 </div>
             </li>
@@ -730,6 +735,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/chart-pie-demo2.js"></script>
+
 
 </body>
 
