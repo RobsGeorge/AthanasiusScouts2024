@@ -78,6 +78,7 @@
                         <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
                         <a class="collapse-item" href={{ route('marhala-sana.index') }}>السنوات والمراحل الدراسية</a>
                         <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
+                        <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
                     </div>
                 </div>
             </li>
