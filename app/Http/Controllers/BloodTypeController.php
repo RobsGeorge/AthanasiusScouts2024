@@ -20,12 +20,12 @@ class BloodTypeController extends Controller
         public function index()
         {
             $blood = DB::table('BloodType')->get();
-            return view("blood-index", array('blood' => $blood, 'title'=> "فصائل الدم"));
+            return view("blood.blood-index", array('blood' => $blood, 'title'=> "فصائل الدم"));
         }
 
         public function create()
         {
-            return view("blood-create");
+            return view("blood.blood-create");
         }
 
         public function insert(Request  $request)
@@ -61,7 +61,7 @@ class BloodTypeController extends Controller
         public function edit($id)
         {
             $blood = DB::table('BloodType')->where('BloodTypeID', $id)->first();
-            return view("blood-edit", array('blood' => $blood, 'title'=> "تعديل فصيلة دم"));
+            return view("blood.blood-edit", array('blood' => $blood, 'title'=> "تعديل فصيلة دم"));
         }
     
         public function updates(Request $request, $id)
@@ -76,7 +76,7 @@ class BloodTypeController extends Controller
         public function deletes($id)
         {
             $blood = DB::table('BloodType')->where('BloodTypeID', $id)->first();
-            return view("blood-delete", array('blood' => $blood, 'title'=> "حذف فصيلة دم"));
+            return view("blood.blood-delete", array('blood' => $blood, 'title'=> "حذف فصيلة دم"));
         }
 
         public function destroy($id)

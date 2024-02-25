@@ -373,10 +373,11 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>رقم السؤال ID</th>
+                                            <th>رقم السؤال</th>
                                             <th>نوع السؤال</th>
-                                            <th>المرحلة</th>
+                                            <th>القطاع</th>
                                             <th>نص السؤال</th>
+                                            <th>الاختيارات المتاحة</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -389,13 +390,16 @@
                                             </td>
 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $entryQuestion->RequiredAnswerType }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionTypeInArabicWords }}</label>
                                             </td>
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="marhalaIDLabel-{{$loop->iteration}}">{{ $entryQuestion->MarhalaID }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QetaaName }}</label>
                                             </td>
                                             <td>
                                                 <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionText }}</label>
+                                            </td>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->MCAnswer }}</label>
                                             </td>
                                             <td> 
                                                     <a href="{{ route('entry-questions.edit', $entryQuestion->QuestionID) }}"

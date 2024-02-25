@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,10 +21,10 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
 </head>
 
@@ -366,40 +366,44 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة سؤال جديد</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">تعديل سؤال</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('entry-questions.insert') }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('entry-questions.update', $entryQuestion->QuestionID) }}">
+                            @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-
-                                        <select class="form-control" style="margin-top: 8px;" name="marhala_id" id="marhala_id" onChange="" placeholder="اختار المرحلة الدراسية">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر المرحلة الدراسية</option>
-                                        @foreach($marahel as $marhala)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhala->MarhalaID}}">{{$marhala->MarhalaName}}</option>
-                                        @endforeach
-                                        </select>
-
-                                        <br>
-                                        
-                                        <select class="form-control" style="margin-top: 8px;" name="required_answer_type" id="required_answer_type" onChange="" placeholder="اختار نوع السؤال">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر نوع السؤال</option>
-                                        @foreach($questionTypes as $questionType)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$questionType->QuestionType}}">{{$questionType->QuestionType}}</option>
-                                        @endforeach
-                                        </select>
-
-                                        <br>
-
-                                        <input type="text" class="" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; width: 800px; height:150px"
-                                            placeholder="ادخل نص السؤال المطلوب">
-                                        <br>
-                                        <br>
-                                        <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" onsubmit="validateData()" value="تأكيد"></input>
+                                <div>
+                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$entryQuestion->QuestionTypeInArabicWords}}" disabled></input>
+                                <br>
+                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$entryQuestion->QetaaName}}" disabled></input>
+                                <br>
                                 </div>
+                            </div>
+                            
+                            <div style="margin-left: 5px; margin-right: 5px">
+                                <div style="display: flex;align-items: center;">
+                                    <span>اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا ويمكنك أيضاً تعديل نص السؤال</span>
+                                </div>
+                                <select class="form-control" style="margin-top: 8px; margin-bottom:  8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا">
+                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر القطاع الكشفي الجديد</option>
+                                @foreach($qetaat as $qetaa)
+                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                @endforeach
+                                </select>
+                                
+                                <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
+                                    placeholder="ادخل نص السؤال المطلوب" value="{{$entryQuestion->QuestionText}}">
+                                
+                                <br>
+                                @if($entryQuestion->RequiredAnswerType=="MultipleChoice")
+                                <label>الاختيارات</label>
+                                <label>{{$entryQuestion->MCAnswer}}</label>
+                                @endif
+                                <hr>
+                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل السؤال"></input>
                             </div>
                         </form>
                     </div>
@@ -454,44 +458,131 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <script src="../../js/demo/datatables-demo.js"></script>
 
     <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
+    
+    var globalIncrement = 0;
 
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
+    function clicked(){
+    var dropdown = document.getElementById('required_answer_type');
+    var text = dropdown.options[dropdown.selectedIndex].value;
+    console.log(text);
+
+    if(text==="MultipleChoice")
+        {
+            
+
+            console.log('Inside Multiple Choice Options');
+            var container = document.getElementById("container");
+            container.appendChild(document.createElement("br"));
+            while (container.hasChildNodes()) {
+                    container.removeChild(container.lastChild);
+            }
+            
+            var labelA = document.createElement("label");
+            labelA.innerHTML = " أدخل عدد الاختيارات المطلوبة";
+            container.appendChild(labelA);
+            container.appendChild(document.createElement("br"));
+            var labelB = document.createElement("label");
+            labelB.innerHTML = "(بحد أقصى 6 اختيارات فقط)";
+            labelB.style.fontWeight = "bold";
+            container.appendChild(labelB);
+
+
+            container.appendChild(document.createElement("br"));
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "memberA";
+            input.id = "memberA";
+            input.placeholder = "";
+            input.onchange = "";
+            input.setAttribute("class", "form-control");
+            container.appendChild(input);
+
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("hr"));
+            
+            var a = document.createElement("input");
+            a.type = "button";
+            a.id = "filldetails";
+            a.setAttribute("onclick", "addFields()");
+            a.value = "اضغط لاضافة تفاصيل الاختيارات";
+
+            container.appendChild(a);
+            
+            container.appendChild(document.createElement("br"));
+
         }
+    else
+        {
+            console.log('Inside Else Options');
+            var container = document.getElementById("container");
+            while (container.hasChildNodes()) {
+                    container.removeChild(container.lastChild);
+            }
+        }
+   }
+
+   function addFields(){
+    console.log(globalIncrement);
+    if(globalIncrement!=0)
+    {
+        for(var i = 1; i <= globalIncrement; i++)
+        {
+                document.getElementById("choice"+i).remove();
+                document.getElementById("label"+i).remove();
+                document.getElementById("br"+i).remove();
+                document.getElementById("brx"+i).remove();
+                console.log("Removing choice"+i+" , label"+i+" , br"+i+" , brx"+i);
+        }
+        globalIncrement = 0;
     }
-    */
+    
+    var numberOfChoices = document.getElementById("memberA").value;
+    if(numberOfChoices>6)
+        numberOfChoices = 6;
+    console.log("Input Function");
+    console.log(numberOfChoices);
+    globalIncrement = numberOfChoices;
+
+    for(var i = 1; i <= numberOfChoices; i++)
+    {
+                var label = document.createElement("label");
+                label.id = "label"+i;
+                label.innerHTML =  "اختيار رقم: "+i;
+                container.appendChild(label);
+                var br = document.createElement("br");
+                br.id = "br"+i;
+                container.appendChild(br);
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "choice" + i;
+                input.id = "choice" + i;
+                container.appendChild(input);
+                // Append a line break 
+                var brx = document.createElement("br");
+                brx.id = "brx"+i;
+                container.appendChild(brx);
+
+                
+    }
+}
 </script>
 
 </body>
