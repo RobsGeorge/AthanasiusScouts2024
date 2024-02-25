@@ -29,18 +29,18 @@ Route::get('/register', function () {return view('register');});
 Route::get('/forgot-password', function () {return view('forgot-password');});
 
 //Person Tables Routes
-Route::get('/tables', function () {return view('tables');});
+//Route::get('/tables', function () {return view('tables');});
 
 //Routes for Person Information
 //Route::get('/createperson', function () {return view('createperson');});
-Route::get('/person', 'App\Http\Controllers\PersonController@index');
+//Route::get('/person', 'App\Http\Controllers\PersonController@index');
 //Route::get('/insertperson','App\Http\Controllers\PersonController@insert');
-Route::get('/createperson','App\Http\Controllers\PersonController@createPersonController');
-Route::post('/submitPerson','App\Http\Controllers\PersonController@submitPersonController');
+//Route::get('/createperson','App\Http\Controllers\PersonController@createPersonController');
+//Route::post('/submitPerson','App\Http\Controllers\PersonController@submitPersonController');
 
 //New Routes for Person Information
 Route::get('/person', array('as'=> 'person.index', 'uses'=>'App\Http\Controllers\PersonNewController@index'));
-Route::get('/person/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
+Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/add', array('as' => 'person.create', 'uses' =>'App\Http\Controllers\PersonNewController@create'));
 Route::post('/person/insert', array('as' => 'person.insert', 'uses' => 'App\Http\Controllers\PersonNewController@insert'));
 Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));

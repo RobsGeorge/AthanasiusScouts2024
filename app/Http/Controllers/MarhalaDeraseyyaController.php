@@ -20,12 +20,12 @@ class MarhalaDeraseyyaController extends Controller
         public function index()
         {
             $marhala = DB::table('Marhala')->get();
-            return view("marhala-index", array('marhala' => $marhala, 'title'=> "الرتب الكشفية"));
+            return view("marhala.marhala-index", array('marhala' => $marhala, 'title'=> "الرتب الكشفية"));
         }
 
         public function create()
         {
-            return view("marhala-create");
+            return view("marhala.marhala-create");
         }
 
         public function insert(Request  $request)
@@ -61,7 +61,7 @@ class MarhalaDeraseyyaController extends Controller
         public function edit($id)
         {
             $marhala = DB::table('Marhala')->where('MarhalaID', $id)->first();
-            return view("marhala-edit", array('marhala' => $marhala, 'title'=> "تعديل مرحلة دراسية"));
+            return view("marhala.marhala-edit", array('marhala' => $marhala, 'title'=> "تعديل مرحلة دراسية"));
         }
     
         public function updates(Request $request, $id)
@@ -76,7 +76,7 @@ class MarhalaDeraseyyaController extends Controller
         public function deletes($id)
         {
             $marhala = DB::table('Marhala')->where('MarhalaID', $id)->first();
-            return view("marhala-delete", array('marhala' => $marhala, 'title'=> "حذف مرحلة دراسية"));
+            return view("marhala.marhala-delete", array('marhala' => $marhala, 'title'=> "حذف مرحلة دراسية"));
         }
 
         public function destroy($id)

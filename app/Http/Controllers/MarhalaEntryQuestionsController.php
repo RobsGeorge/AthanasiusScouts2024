@@ -19,16 +19,21 @@ class MarhalaEntryQuestionsController extends Controller
         */
         public function index()
         {
-            $marahel = DB::table('Marhala')->get();
-            $entryQuestions = DB::table('MarhalaEntryQuestions')->get();
-            return view("entry-questions-index", array('entryQuestions' => $entryQuestions, 'marahel'=>$marahel, 'title'=> "الأسئلة"));
+            $qetaat = DB::table('Qetaa')->get();
+            $entryQuestions = DB::table('MarhalaEntryQuestions')
+            ->Join('Qetaa', 'MarhalaEntryQuestions.QetaaID', '=', 'Qetaa.QetaaID')
+            ->Join('QuestionsTypes', 'MarhalaEntryQuestions.RequiredAnswerType', '=','QuestionsTypes.QuestionType')
+            ->select('MarhalaEntryQuestions.*', 'Qetaa.QetaaName', 'QuestionsTypes.QuestionTypeInArabicWords')
+            ->get();
+
+            return view("entry-questions.entry-questions-index", array('entryQuestions' => $entryQuestions, 'title'=> "الأسئلة"));
         }
 
         public function create()
         {
-            $marahel = DB::table('Marhala')->get();
+            $qetaat = DB::table('Qetaa')->get();
             $questionTypes = DB::table('QuestionsTypes')->get();
-            return view("entry-questions-create", array('marahel'=>$marahel, 'questionTypes' => $questionTypes));
+            return view("entry-questions.entry-questions-create", array('qetaat'=>$qetaat, 'questionTypes' => $questionTypes));
         }
 
         public function insert(Request  $request)
@@ -39,16 +44,31 @@ class MarhalaEntryQuestionsController extends Controller
                 $thisQuestionID = 1;
             else
                 $thisQuestionID = $lastQuestionID->QuestionID + 1;
+            
+            
+            $numberOfChoices =  $request->memberA;
+            $stringOfChoices = "";
+            for ($i=1; $i<=$numberOfChoices; $i++)
+            {
+                $choice = "choice".$i;
+                $stringOfChoices = $stringOfChoices.$request->$choice;
 
+                if($i<$numberOfChoices)
+                    $stringOfChoices = $stringOfChoices.'|';
+            }
+            
             DB::table('MarhalaEntryQuestions')->insert(
-                array(
-                    'QuestionID' => $thisQuestionID,
-                    'MarhalaID' => $request -> marhala_id,
-                    'QuestionText' => $request -> question_text,
-                    'RequiredAnswerType' => $request -> required_answer_type
-                )
-            );
+                    array(
+                        'QuestionID' => $thisQuestionID,
+                        'QetaaID' => $request -> qetaa_id,
+                        'QuestionText' => $request -> question_text,
+                        'RequiredAnswerType' => $request -> required_answer_type,
+                        'MCAnswer' => $stringOfChoices
+                    )
+                );
+            
             return redirect()->route('entry-questions.index')->with('status',' :تم ادخال بنجاح السؤال' .$thisQuestionID);
+            
         }
     
         /**
@@ -70,27 +90,32 @@ class MarhalaEntryQuestionsController extends Controller
             */
         public function edit($id)
         {
+            $qetaat = DB::table('Qetaa')->get();
             $questionTypes = DB::table('QuestionsTypes')->get();
-            $marahel = DB::table('Marhala')->get();
-            $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-            //print_r($rotab->RotbaID);
-            return view("entry-questions-edit", array('entryQuestions' => $entryQuestions, 'marahel'=>$marahel, 'questionTypes'=>$questionTypes,'title'=> "تعديل سؤال"));
+            //$entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
+            $entryQuestion = DB::table('MarhalaEntryQuestions')
+                            ->where('QuestionID', $id)
+                            ->Join('Qetaa', 'MarhalaEntryQuestions.QetaaID', '=', 'Qetaa.QetaaID')
+                            ->Join('QuestionsTypes', 'MarhalaEntryQuestions.RequiredAnswerType', '=','QuestionsTypes.QuestionType')
+                            ->select('MarhalaEntryQuestions.QuestionID', 'MarhalaEntryQuestions.QuestionText', 'Qetaa.QetaaName', 'QuestionsTypes.QuestionTypeInArabicWords', 'MarhalaEntryQuestions.RequiredAnswerType', 'MarhalaEntryQuestions.MCAnswer')
+                            ->first();
+            return view("entry-questions.entry-questions-edit", array('entryQuestion' => $entryQuestion, 'qetaat'=>$qetaat, 'questionTypes'=> $questionTypes));
         }
     
         public function updates(Request $request, $id)
         {
-            $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
 
-            $affected = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->update(['QuestionText' => $request->question_text, 'RequiredAnswerType'=> $request->required_answer_type]);
+            $affected = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->update(['QuestionText' => $request->question_text, 'QetaaID' => $request->qetaa_id]);
             
-            return redirect()->route('entry-questions.index')->with('status','تم تعديل بنجاح السؤال');
+            return $affected;
+            //return redirect()->route('entry-questions.index')->with('status','تم تعديل بنجاح السؤال');
         }
     
         public function deletes($id)
         {
-            $marahel = DB::table('Marhala')->get();
+            $qetaat = DB::table('Qetaa')->get();
             $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-            return view("entry-questions-delete", array('marahel' => $marahel, 'entryQuestions' => $entryQuestions, 'title'=> "حذف رتبة كشفية"));
+            return view("entry-questions.entry-questions-delete", array('qetaat' => $qetaat, 'entryQuestions' => $entryQuestions, 'title'=> "حذف رتبة كشفية"));
         }
 
         public function destroy($id)

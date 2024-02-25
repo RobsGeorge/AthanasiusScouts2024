@@ -24,7 +24,7 @@ class PersonNewController extends Controller
             ->leftJoin('PersonPhoneNumbers', 'PersonInformation.PersonID', '=', 'PersonPhoneNumbers.PersonID')
             ->select('PersonInformation.*', 'PersonPhoneNumbers.PersonPersonalMobileNumber')
             ->get();
-            return view("person-index", array('persons' => $persons));
+            return view("person.person-index", array('persons' => $persons));
         }
 
         public function create()
@@ -37,7 +37,7 @@ class PersonNewController extends Controller
             $betakat = DB::table('EgazetBetakatTaqaddom')->get();
             $manateq = DB::table('Manteqa')->get();
             $districts = DB::table('Districts')->get(); 
-            return view("person-create", array('marahel'=>$marahel, 'rotab'=>$rotab, 'seneen_marahel'=>$seneen_marahel, 'questionTypes'=>$questionTypes, 'blood'=>$blood, 'betakat'=>$betakat, 'manateq'=>$manateq, 'districts'=>$districts));
+            return view("person.person-create", array('marahel'=>$marahel, 'rotab'=>$rotab, 'seneen_marahel'=>$seneen_marahel, 'questionTypes'=>$questionTypes, 'blood'=>$blood, 'betakat'=>$betakat, 'manateq'=>$manateq, 'districts'=>$districts));
         }
 
         public function insert(Request  $request)
@@ -180,7 +180,7 @@ class PersonNewController extends Controller
         public function show($id)
         {
             $person = DB::table('PersonInformation')->where('PersonID', $id)->first();
-            return view("person-show", array('person'=>$person));
+            return view("person.person-show", array('person'=>$person));
         }
     
         /**
@@ -195,7 +195,7 @@ class PersonNewController extends Controller
             $marahel = DB::table('Marhala')->get();
             $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
             //print_r($rotab->RotbaID);
-            return view("person-edit", array('entryQuestions' => $entryQuestions, 'marahel'=>$marahel, 'questionTypes'=>$questionTypes,'title'=> "تعديل بيانات شخص"));
+            return view("person.person-edit", array('entryQuestions' => $entryQuestions, 'marahel'=>$marahel, 'questionTypes'=>$questionTypes,'title'=> "تعديل بيانات شخص"));
         }
     
         public function updates(Request $request, $id)
@@ -211,7 +211,7 @@ class PersonNewController extends Controller
         {
             $marahel = DB::table('Marhala')->get();
             $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-            return view("person-delete", array('marahel' => $marahel, 'entryQuestions' => $entryQuestions, 'title'=> "حذف شخص "));
+            return view("person.person-delete", array('marahel' => $marahel, 'entryQuestions' => $entryQuestions, 'title'=> "حذف شخص "));
         }
 
         public function destroy($id)

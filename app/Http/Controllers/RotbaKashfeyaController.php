@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
 use Session;
 
-class MarhalaDeraseyyaController extends Controller
+class RotbaKashfeyaController extends Controller
 {
 /**
         * Display a listing of the resource.
@@ -20,12 +20,12 @@ class MarhalaDeraseyyaController extends Controller
         public function index()
         {
             $rotab = DB::table('RotbaInformation')->get();
-            return view("rotab-index", array('rotab' => $rotab, 'title'=> "الرتب الكشفية"));
+            return view("rotab.rotab-index", array('rotab' => $rotab, 'title'=> "الرتب الكشفية"));
         }
 
         public function create()
         {
-            return view("rotab-create");
+            return view("rotab.rotab-create");
         }
 
         public function insert(Request  $request)
@@ -62,7 +62,7 @@ class MarhalaDeraseyyaController extends Controller
         {
             $rotab = DB::table('RotbaInformation')->where('RotbaID', $id)->first();
             //print_r($rotab->RotbaID);
-            return view("rotab-edit", array('rotab' => $rotab, 'title'=> "تعديل رتبة كشفية"));
+            return view("rotab.rotab-edit", array('rotab' => $rotab, 'title'=> "تعديل رتبة كشفية"));
         }
     
         public function updates(Request $request, $id)
@@ -77,7 +77,7 @@ class MarhalaDeraseyyaController extends Controller
         public function deletes($id)
         {
             $rotab = DB::table('RotbaInformation')->where('RotbaID', $id)->first();
-            return view("rotab-delete", array('rotab' => $rotab, 'title'=> "حذف رتبة كشفية"));
+            return view("rotab.rotab-delete", array('rotab' => $rotab, 'title'=> "حذف رتبة كشفية"));
         }
 
         public function destroy($id)
