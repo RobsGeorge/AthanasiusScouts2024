@@ -48,7 +48,20 @@ class PersonNewController extends Controller
                 $thisPersonID = 1;
             else
                 $thisPersonID = $lastPersonID->PersonID + 1;
+            
+            $shamandoraCode="SH-";
 
+            $shamandoraCodeNumberOfDigits = 5;
+
+            for ($i=0;$i<$shamandoraCodeNumberOfDigits-strlen((string)$thisPersonID);$i++)
+            {
+                $shamandoraCode = $shamandoraCode.'0';
+            }
+
+            $shamandoraCode = $shamandoraCode. $thisPersonID;
+
+            print_r($shamandoraCode);
+            
             $validatedData = $request->validate([
                 'first_name' => 'required',
                 'second_name' => 'required',
@@ -75,6 +88,7 @@ class PersonNewController extends Controller
             DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
+                    'ShamandoraCode'=>$shamandoraCode,
                     'FirstName' => $request->first_name,
                     'SecondName' => $request->second_name,
                     'ThirdName'   => $request->third_name,

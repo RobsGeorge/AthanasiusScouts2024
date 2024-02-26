@@ -59,6 +59,15 @@ Route::patch('/rotab/update/{id}', array('as'=> 'rotab.update', 'uses'=> 'App\Ht
 Route::get('/rotab/delete/{id}', array('as'=> 'rotab.delete', 'uses'=>'App\Http\Controllers\RotbaKashfeyaController@deletes'));
 Route::delete('/rotab/destroy/{id}', array('as'=> 'rotab.destroy', 'uses'=>'App\Http\Controllers\RotbaKashfeyaController@destroy'));
 
+//Routes for Betakat Takaddom
+Route::get('/betaka', array('as' => 'betaka.index', 'uses' => 'App\Http\Controllers\BetakaTakaddomController@index'));
+Route::get('/betaka/add', array('as' => 'betaka.create', 'uses' =>'App\Http\Controllers\BetakaTakaddomController@create'));
+Route::post('/betaka/insert', array('as' => 'betaka.insert', 'uses' => 'App\Http\Controllers\BetakaTakaddomController@insert'));
+Route::get('/betaka/edit/{id}', array('as' => 'betaka.edit', 'uses' => 'App\Http\Controllers\BetakaTakaddomController@edit'));
+Route::patch('/betaka/update/{id}', array('as'=> 'betaka.update', 'uses'=> 'App\Http\Controllers\BetakaTakaddomController@updates'));
+Route::get('/betaka/delete/{id}', array('as'=> 'betaka.delete', 'uses'=>'App\Http\Controllers\BetakaTakaddomController@deletes'));
+Route::delete('/betaka/destroy/{id}', array('as'=> 'betaka.destroy', 'uses'=>'App\Http\Controllers\BetakaTakaddomController@destroy'));
+
 
 //Routes for Blood Types
 Route::get('/blood', array('as'=> 'blood.index', 'uses'=> 'App\Http\Controllers\BloodTypeController@index'));
@@ -68,6 +77,15 @@ Route::get('/blood/edit/{id}', array('as' => 'blood.edit', 'uses' => 'App\Http\C
 Route::patch('/blood/update/{id}', array('as'=> 'blood.update', 'uses'=> 'App\Http\Controllers\BloodTypeController@updates'));
 Route::get('/blood/delete/{id}', array('as'=> 'blood.delete', 'uses'=>'App\Http\Controllers\BloodTypeController@deletes'));
 Route::delete('/blood/destroy/{id}', array('as'=> 'blood.destroy', 'uses'=>'App\Http\Controllers\BloodTypeController@destroy'));
+
+//Routes for Qetaat
+Route::get('/qetaa', array('as'=> 'qetaa.index', 'uses'=> 'App\Http\Controllers\QetaaController@index'));
+Route::get('/qetaa/add', array('as' => 'qetaa.create', 'uses' =>'App\Http\Controllers\QetaaController@create'));
+Route::post('/qetaa/insert', array('as' => 'qetaa.insert', 'uses' => 'App\Http\Controllers\QetaaController@insert'));
+Route::get('/qetaa/edit/{id}', array('as' => 'qetaa.edit', 'uses' => 'App\Http\Controllers\QetaaController@edit'));
+Route::patch('/qetaa/update/{id}', array('as'=> 'qetaa.update', 'uses'=> 'App\Http\Controllers\QetaaController@updates'));
+Route::get('/qetaa/delete/{id}', array('as'=> 'qetaa.delete', 'uses'=>'App\Http\Controllers\QetaaController@deletes'));
+Route::delete('/qetaa/destroy/{id}', array('as'=> 'qetaa.destroy', 'uses'=>'App\Http\Controllers\QetaaController@destroy'));
 
 //Routes for Marhala Deraseyya
 Route::get('/marhala', array('as'=> 'marhala.index', 'uses'=> 'App\Http\Controllers\MarhalaDeraseyyaController@index'));

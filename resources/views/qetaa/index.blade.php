@@ -366,48 +366,30 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">جدول الأسئلة</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">جدول القطاعات الكشفية</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>رقم السؤال</th>
-                                            <th>نوع السؤال</th>
-                                            <th>القطاع</th>
-                                            <th>نص السؤال</th>
-                                            <th>الاختيارات المتاحة</th>
+                                            <th>رقم القطاع ID</th>
+                                            <th> اسم القطاع</th>
                                             <th></th>
-                                            <th>اخفاء السؤال؟</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($entryQuestions as $entryQuestion)
-                                        
+                                        @foreach($qetaat as $qetaa)
                                         <tr> 
                                             <td>
-                                                {{ $entryQuestion->QuestionID }}
+                                                {{ $qetaa->QetaaID }}
                                             </td>
 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionTypeInArabicWords }}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QetaaName }}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionText }}</label>
-                                            </td>
-                                            <td>
-                                                @if($entryQuestion->MCAnswer!="")
-                                                    <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->MCAnswer }}</label>
-                                                @else
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">لا يوجد اختيارات</label>
-                                                @endif
+                                                <label style="color: #4e73df; font-weight: bolder;" id="rotbaIDLabel-{{$loop->iteration}}">{{ $qetaa->QetaaName }}</label>
                                             </td>
                                             <td> 
-                                                    <a href="{{ route('entry-questions.edit', $entryQuestion->QuestionID) }}"
+                                                    <a href="{{ route('qetaa.edit', $qetaa->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -431,7 +413,7 @@
                                                                 white-space: nowrap;" 
                                                     > تعديل</a>
 
-                                                    <a href="{{ route('entry-questions.delete', $entryQuestion->QuestionID) }}"
+                                                    <a href="{{ route('qetaa.delete', $qetaa->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #E21739;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -455,16 +437,13 @@
                                                                 white-space: nowrap;" 
                                                     > مسح</a>
                                             </td>
-                                            <td>
-                                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':''}} disabled/>
-                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div>
-                                                <a href="{{ route('entry-questions.create') }}"  style="appearance: none;
+                                                <a href="{{ route('qetaa.create') }}"  style="appearance: none;
                                                             background-color: #1216F0;
                                                             border: 1px solid rgba(27, 31, 35, .15);
                                                             border-radius: 6px;
@@ -485,7 +464,7 @@
                                                             touch-action: manipulation;
                                                             vertical-align: middle;
                                                             white-space: nowrap;" 
-                                                id="s"> اضافة سؤال جديد</a>
+                                                id="s"> اضافة قطاع</a>
                                 </div>
                         </div>
                     </div>

@@ -74,8 +74,10 @@
                         <a class="collapse-item">كلمات السر</a>
                         <a class="collapse-item">الترقيات</a>
                         <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
+                        <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
                         <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
                         <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
+                        <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
                         <a class="collapse-item" href={{ route('marhala-sana.index') }}>السنوات والمراحل الدراسية</a>
                         <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
                         <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
@@ -323,7 +325,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">مارك ابراهيم</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>

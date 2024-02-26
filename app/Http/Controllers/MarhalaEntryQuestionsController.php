@@ -63,7 +63,8 @@ class MarhalaEntryQuestionsController extends Controller
                         'QetaaID' => $request -> qetaa_id,
                         'QuestionText' => $request -> question_text,
                         'RequiredAnswerType' => $request -> required_answer_type,
-                        'MCAnswer' => $stringOfChoices
+                        'MCAnswer' => $stringOfChoices,
+                        'NotToBeShown' => 0
                     )
                 );
             
@@ -91,24 +92,61 @@ class MarhalaEntryQuestionsController extends Controller
         public function edit($id)
         {
             $qetaat = DB::table('Qetaa')->get();
+            $qetaaSelected = DB::table('MarhalaEntryQuestions')
+                            ->where('QuestionID', '=', $id)
+                            ->Join('Qetaa', 'MarhalaEntryQuestions.QetaaID', '=', 'Qetaa.QetaaID')
+                            ->select('Qetaa.QetaaID', 'Qetaa.QetaaName')
+                            ->first();
             $questionTypes = DB::table('QuestionsTypes')->get();
             //$entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
             $entryQuestion = DB::table('MarhalaEntryQuestions')
                             ->where('QuestionID', $id)
                             ->Join('Qetaa', 'MarhalaEntryQuestions.QetaaID', '=', 'Qetaa.QetaaID')
                             ->Join('QuestionsTypes', 'MarhalaEntryQuestions.RequiredAnswerType', '=','QuestionsTypes.QuestionType')
-                            ->select('MarhalaEntryQuestions.QuestionID', 'MarhalaEntryQuestions.QuestionText', 'Qetaa.QetaaName', 'QuestionsTypes.QuestionTypeInArabicWords', 'MarhalaEntryQuestions.RequiredAnswerType', 'MarhalaEntryQuestions.MCAnswer')
+                            ->select(   'MarhalaEntryQuestions.QuestionID', 
+                                        'MarhalaEntryQuestions.QuestionText', 
+                                        'Qetaa.QetaaName', 
+                                        'QuestionsTypes.QuestionTypeInArabicWords', 
+                                        'MarhalaEntryQuestions.RequiredAnswerType', 
+                                        'MarhalaEntryQuestions.MCAnswer',
+                                        'MarhalaEntryQuestions.NotToBeShown')
                             ->first();
-            return view("entry-questions.entry-questions-edit", array('entryQuestion' => $entryQuestion, 'qetaat'=>$qetaat, 'questionTypes'=> $questionTypes));
+            $arrayOfMCAnswers = explode('|', $entryQuestion->MCAnswer); 
+            //return $arrayOfMCAnswers;
+            return view("entry-questions.entry-questions-edit", array('entryQuestion' => $entryQuestion, 'qetaat'=>$qetaat, 'questionTypes'=> $questionTypes, 'qetaaSelected'=>$qetaaSelected, 'arrayOfMCAnswers'=>$arrayOfMCAnswers));
         }
     
         public function updates(Request $request, $id)
         {
 
-            $affected = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->update(['QuestionText' => $request->question_text, 'QetaaID' => $request->qetaa_id]);
+            if($request->has('questionNotToBeShown'))
+                $notToBeShown = 1;
+            else
+                $notToBeShown = 0;
+
+                $numberOfChoices =  $request->answers;
+                
+                $stringOfChoices = "";
+                for ($i=1; $i<=$numberOfChoices; $i++)
+                {
+                    $answer = "answer".$i;
+                    $stringOfChoices = $stringOfChoices.$request->$answer;
+    
+                    if($i<$numberOfChoices)
+                        $stringOfChoices = $stringOfChoices.'|';
+                }
+                
+
+            DB::table('MarhalaEntryQuestions')
+                            ->where('QuestionID', $id)
+                            ->update(['QuestionText' => $request->question_text, 
+                                      'QetaaID' => $request->qetaa_id, 
+                                      'NotToBeShown' => $notToBeShown,
+                                      'MCAnswer' => $stringOfChoices
+                                    ]);
             
-            return $affected;
-            //return redirect()->route('entry-questions.index')->with('status','تم تعديل بنجاح السؤال');
+            return redirect()->route('entry-questions.index')->with('status','تم تعديل بنجاح السؤال');
+
         }
     
         public function deletes($id)

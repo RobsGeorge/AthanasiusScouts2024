@@ -21,10 +21,10 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
 </head>
 
@@ -366,128 +366,22 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">جدول الأسئلة</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">اضافة قطاع كشفي جديد</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>رقم السؤال</th>
-                                            <th>نوع السؤال</th>
-                                            <th>القطاع</th>
-                                            <th>نص السؤال</th>
-                                            <th>الاختيارات المتاحة</th>
-                                            <th></th>
-                                            <th>اخفاء السؤال؟</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($entryQuestions as $entryQuestion)
-                                        
-                                        <tr> 
-                                            <td>
-                                                {{ $entryQuestion->QuestionID }}
-                                            </td>
+                    </div>
 
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionTypeInArabicWords }}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $entryQuestion->QetaaName }}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionText }}</label>
-                                            </td>
-                                            <td>
-                                                @if($entryQuestion->MCAnswer!="")
-                                                    <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->MCAnswer }}</label>
-                                                @else
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">لا يوجد اختيارات</label>
-                                                @endif
-                                            </td>
-                                            <td> 
-                                                    <a href="{{ route('entry-questions.edit', $entryQuestion->QuestionID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #2ea44f;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > تعديل</a>
-
-                                                    <a href="{{ route('entry-questions.delete', $entryQuestion->QuestionID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #E21739;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > مسح</a>
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':''}} disabled/>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div>
-                                                <a href="{{ route('entry-questions.create') }}"  style="appearance: none;
-                                                            background-color: #1216F0;
-                                                            border: 1px solid rgba(27, 31, 35, .15);
-                                                            border-radius: 6px;
-                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                            box-sizing: border-box;
-                                                            color: #fff;
-                                                            cursor: pointer;
-                                                            display: inline-block;
-                                                            font-size: 14px;
-                                                            font-weight: 600;
-                                                            line-height: 20px;
-                                                            padding: 6px 16px;
-                                                            position: relative;
-                                                            text-align: center;
-                                                            text-decoration: none;
-                                                            user-select: none;
-                                                            -webkit-user-select: none;
-                                                            touch-action: manipulation;
-                                                            vertical-align: middle;
-                                                            white-space: nowrap;" 
-                                                id="s"> اضافة سؤال جديد</a>
+                    <div class="card shadow mb-4">
+                        <form class="user" id="regForm" method="POST" action="{{ route('qetaa.insert') }}">
+                            @csrf
+                            <div class="card-header py-3">
+                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" name="qetaa_name" id="qetaa_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                    placeholder="ادخل اسم القطاع" onfocusout="myFunction()">
+                                                    <br>
+                                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="validate"></input>
                                 </div>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -540,42 +434,45 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script>
 
     <script>
-    function EditButtonClicked(itemNumber) {
-        // Retrieve the item data based on the itemNumber
-        // Enable editing for the corresponding item
-        console.log(`Editing item ${itemNumber}`);
-        document.getElementById('rotbaIDTextBox-'+itemNumber).removeAttribute("readonly");
-        document.getElementById('SubmitButtonNumber-'+itemNumber).removeAttribute("hidden");
-        document.getElementById('EditButtonNumber-'+itemNumber).disabled = true;
-        // Implement your custom logic here
+/*    function myFunction() {
+        const first_name = document.getElementById('rotba_name');
+        if(first_name.value=='') {
+        first_name.style.backgroundColor = '#C53939';
+        first_name.style.color = '#FFFFFF';
+        document.getElementById('submit-button').disabled = true;
+        }
+        else {
+            first_name.style.backgroundColor = 'White';
+            first_name.style.color = '#1D43EC';
+        }
     }
 
-    function SubmitButtonClicked(itemNumber) {
-        // Retrieve the item data based on the itemNumber
-        // Enable editing for the corresponding item
-        console.log(`Submitting item ${itemNumber}`);
-        document.getElementById('EditButtonNumber-'+itemNumber).disabled = false;
-        document.getElementById('rotbaIDTextBox-'+itemNumber).disabled = true;
-        // Implement your custom logic here
+    function clickSubmitButton(){
+        const rotba_name = document.getElementById('rotba_name');
+        if(rotba_name.value==''){
+            alert("الرجاء ادخال البيانات بشكل صحيح");
+                return false;
+        }
     }
-    </script>
+    */
+</script>
 
 </body>
 

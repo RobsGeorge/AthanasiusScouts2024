@@ -32,6 +32,20 @@ class RotbaKashfeyaController extends Controller
         {
             $lastRotbaID = DB::table('RotbaInformation')->orderBy('RotbaID','desc')->first();
             $thisRotbaID = $lastRotbaID->RotbaID + 1;
+
+            $shamandoraCode="SH-";
+
+            $shamandoraCodeNumberOfDigits = 5;
+
+            for ($i=0;$i<$shamandoraCodeNumberOfDigits-strlen((string)$thisRotbaID);$i++)
+            {
+                $shamandoraCode = $shamandoraCode.'0';
+            }
+
+            $shamandoraCode = $shamandoraCode. $thisRotbaID;
+
+            return $shamandoraCode;
+            /*
             DB::table('RotbaInformation')->insert(
                 array(
                     'RotbaID' => $thisRotbaID,
@@ -39,6 +53,7 @@ class RotbaKashfeyaController extends Controller
                 )
             );
             return redirect()->route('rotab.index')->with('status',' :تم ادخال بنجاح الرتبة' .$request->rotba_name);
+            */
         }
     
         /**
