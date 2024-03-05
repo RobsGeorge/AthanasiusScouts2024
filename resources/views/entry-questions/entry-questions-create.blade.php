@@ -72,8 +72,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item" href="buttons.html">A</a>
-                        <a class="collapse-item" href="cards.html">B</a>
+                        <a class="collapse-item">A</a>
+                        <a class="collapse-item">B</a>
                     </div>
                 </div>
             </li>
@@ -89,7 +89,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item">Colors</a>
                     </div>
                 </div>
             </li>
