@@ -40,7 +40,7 @@
                     <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
                 </div>
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-text mx-3">Athanasius Scouts</div>
             </a>
 
@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href={{ url('/index') }}>
+                <a class="nav-link">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
             </li>
@@ -112,17 +112,17 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
-                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
-                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
-                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
+                        <a class="collapse-item" >تسجيل الدخول</a>
+                        <a class="collapse-item" >اضافة حساب جديد</a>
+                        <a class="collapse-item" >نسيت كلمة السر؟</a>
+                        <a class="collapse-item" >اضافة ملتحق جديد</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href={{ url('/person') }}>
+                <a class="nav-link">
                     <i class="fas fa-fw fa-table"></i>
                     <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
             </li>
