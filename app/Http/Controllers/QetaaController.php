@@ -31,7 +31,12 @@ class QetaaController extends Controller
         public function insert(Request  $request)
         {
             $lastQetaaID = DB::table('Qetaa')->orderBy('QetaaID','desc')->first();
-            $thisQetaaID = $lastQetaaID->QetaaID + 1;
+            
+            if($lastQetaaID==Null)
+                $thisQetaaID = 1;
+            else
+                $thisQetaaID = $lastQetaaID->QetaaID + 1;
+
             DB::table('Qetaa')->insert(
                 array(
                     'QetaaID' => $thisQetaaID,

@@ -50,19 +50,19 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل بيانات مستخدم</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">تعديل فصيلة دم</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('blood.update', $blood->BloodTypeID) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>ID = {{$person->PersonID}}</label>
-                                                <input type="text" class="form-control form-control-user" name="person_name" id="person_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل " onfocusout="myFunction()" value="{{$person->PersonID}}">
+                                                <label>ID = {{$blood->BloodTypeID}}</label>
+                                                <input type="text" class="form-control form-control-user" name="blood_name" id="blood_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                    placeholder="ادخل اسم فصيلة الدم" onfocusout="myFunction()" value="{{$blood->BloodTypeName}}">
                                                     <br>
                                                 <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
                                 </div>

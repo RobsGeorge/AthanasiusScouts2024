@@ -366,42 +366,30 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">جدول حسابات المستخدمين</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">جدول الكليات</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>الكود</th>
-                                            <th> الاسم</th>
-                                            <th>سنة الالتحاق بالكشافة</th>
-                                            <th>الرقم القومي</th>
-                                            <th>رقم الموبايل</th>
+                                            <th>رقم الكلية ID</th>
+                                            <th> اسم الكلية</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($persons as $person)
+                                        @foreach($faculty as $faculty_element)
                                         <tr> 
                                             <td>
-                                                {{ $person->ShamandoraCode }}
+                                                {{ $faculty_element->FacultyID }}
                                             </td>
 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="personIDLabel-{{$loop->iteration}}">{{ $person->FirstName}} {{$person->SecondName}} {{$person->ThirdName}} {{$person->FourthName}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->ScoutJoiningYear}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->RaqamQawmy}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="mobileNumberId-{{$loop->iteration}}">{{ $person->PersonPersonalMobileNumber}}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="facultyIDLabel-{{$loop->iteration}}">{{ $faculty_element->FacultyName }}</label>
                                             </td>
                                             <td> 
-                                                    <a
+                                                    <a href="{{ route('faculty.edit', $faculty_element->FacultyID) }}"
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -425,7 +413,7 @@
                                                                 white-space: nowrap;" 
                                                     > تعديل</a>
 
-                                                    <a href="{{ route('person.delete', $person->PersonID) }}" 
+                                                    <a href="{{ route('faculty.delete', $faculty_element->FacultyID) }}"
                                                         style="appearance: none;
                                                                 background-color: #E21739;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -448,30 +436,6 @@
                                                                 vertical-align: middle;
                                                                 white-space: nowrap;" 
                                                     > مسح</a>
-
-                                                    <a href="{{ route('person.show', $person->PersonID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #202DDF;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > عرض</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -479,7 +443,7 @@
                                 </table>
                             </div>
                             <div>
-                                                <a href="{{ route('person.create') }}"  style="appearance: none;
+                                                <a href="{{ route('faculty.create') }}"  style="appearance: none;
                                                             background-color: #1216F0;
                                                             border: 1px solid rgba(27, 31, 35, .15);
                                                             border-radius: 6px;
@@ -500,7 +464,7 @@
                                                             touch-action: manipulation;
                                                             vertical-align: middle;
                                                             white-space: nowrap;" 
-                                                id="s"> اضافة حساب جديد</a>
+                                                id="s"> اضافة كلية جديدة</a>
                                 </div>
                         </div>
                     </div>

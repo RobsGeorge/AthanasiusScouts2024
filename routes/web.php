@@ -47,8 +47,8 @@ Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http
 Route::patch('/person/update/{id}', array('as'=> 'person.update', 'uses'=> 'App\Http\Controllers\PersonNewController@updates'));
 Route::get('/person/delete/{id}', array('as'=> 'person.delete', 'uses'=>'App\Http\Controllers\PersonNewController@deletes'));
 Route::delete('/person/destroy/{id}', array('as'=> 'person.destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroy'));
-Route::get('/person/entry-questions/{id}', array('as'=> 'person-entry-questions.insert', 'App\Http\Controllers\PersonNewController@insertQuestions'));
-
+Route::get('/person/entry-questions/insert/{id}', array('as'=> 'person.entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestions'));
+Route::post('/person/entry-questions/submit', array('as'=> 'person.entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestions'));
 
 //Routes for Rotab Kashfeyya
 Route::get('/rotab', array('as' => 'rotab.index', 'uses' => 'App\Http\Controllers\RotbaKashfeyaController@index'));
@@ -78,6 +78,24 @@ Route::patch('/blood/update/{id}', array('as'=> 'blood.update', 'uses'=> 'App\Ht
 Route::get('/blood/delete/{id}', array('as'=> 'blood.delete', 'uses'=>'App\Http\Controllers\BloodTypeController@deletes'));
 Route::delete('/blood/destroy/{id}', array('as'=> 'blood.destroy', 'uses'=>'App\Http\Controllers\BloodTypeController@destroy'));
 
+//Routes for Manateq
+Route::get('/manteqa', array('as'=> 'manteqa.index', 'uses'=> 'App\Http\Controllers\ManteqaController@index'));
+Route::get('/manteqa/add', array('as' => 'manetqa.create', 'uses' =>'App\Http\Controllers\ManteqaController@create'));
+Route::post('/manteqa/insert', array('as' => 'manteqa.insert', 'uses' => 'App\Http\Controllers\ManteqaController@insert'));
+Route::get('/manteqa/edit/{id}', array('as' => 'manteqa.edit', 'uses' => 'App\Http\Controllers\ManteqaController@edit'));
+Route::patch('/manteqa/update/{id}', array('as'=> 'manteqa.update', 'uses'=> 'App\Http\Controllers\ManteqaController@updates'));
+Route::get('/manteqa/delete/{id}', array('as'=> 'manteqa.delete', 'uses'=>'App\Http\Controllers\ManteqaController@deletes'));
+Route::delete('/manteqa/destroy/{id}', array('as'=> 'manteqa.destroy', 'uses'=>'App\Http\Controllers\ManteqaController@destroy'));
+
+//Routes for Districts
+Route::get('/district', array('as'=> 'district.index', 'uses'=> 'App\Http\Controllers\DistrictController@index'));
+Route::get('/district/add', array('as' => 'district.create', 'uses' =>'App\Http\Controllers\DistrictController@create'));
+Route::post('/district/insert', array('as' => 'district.insert', 'uses' => 'App\Http\Controllers\DistrictController@insert'));
+Route::get('/district/edit/{id}', array('as' => 'district.edit', 'uses' => 'App\Http\Controllers\DistrictController@edit'));
+Route::patch('/district/update/{id}', array('as'=> 'district.update', 'uses'=> 'App\Http\Controllers\DistrictController@updates'));
+Route::get('/district/delete/{id}', array('as'=> 'district.delete', 'uses'=>'App\Http\Controllers\DistrictController@deletes'));
+Route::delete('/district/destroy/{id}', array('as'=> 'district.destroy', 'uses'=>'App\Http\Controllers\DistrictController@destroy'));
+
 //Routes for Qetaat
 Route::get('/qetaa', array('as'=> 'qetaa.index', 'uses'=> 'App\Http\Controllers\QetaaController@index'));
 Route::get('/qetaa/add', array('as' => 'qetaa.create', 'uses' =>'App\Http\Controllers\QetaaController@create'));
@@ -86,6 +104,24 @@ Route::get('/qetaa/edit/{id}', array('as' => 'qetaa.edit', 'uses' => 'App\Http\C
 Route::patch('/qetaa/update/{id}', array('as'=> 'qetaa.update', 'uses'=> 'App\Http\Controllers\QetaaController@updates'));
 Route::get('/qetaa/delete/{id}', array('as'=> 'qetaa.delete', 'uses'=>'App\Http\Controllers\QetaaController@deletes'));
 Route::delete('/qetaa/destroy/{id}', array('as'=> 'qetaa.destroy', 'uses'=>'App\Http\Controllers\QetaaController@destroy'));
+
+//Routes for Faculty
+Route::get('/faculty', array('as'=> 'faculty.index', 'uses'=> 'App\Http\Controllers\FacultyController@index'));
+Route::get('/faculty/add', array('as' => 'faculty.create', 'uses' =>'App\Http\Controllers\FacultyController@create'));
+Route::post('/faculty/insert', array('as' => 'faculty.insert', 'uses' => 'App\Http\Controllers\FacultyController@insert'));
+Route::get('/faculty/edit/{id}', array('as' => 'faculty.edit', 'uses' => 'App\Http\Controllers\FacultyController@edit'));
+Route::patch('/faculty/update/{id}', array('as'=> 'faculty.update', 'uses'=> 'App\Http\Controllers\FacultyController@updates'));
+Route::get('/faculty/delete/{id}', array('as'=> 'faculty.delete', 'uses'=>'App\Http\Controllers\FacultyController@deletes'));
+Route::delete('/faculty/destroy/{id}', array('as'=> 'faculty.destroy', 'uses'=>'App\Http\Controllers\FacultyController@destroy'));
+
+//Routes for University
+Route::get('/university', array('as'=> 'university.index', 'uses'=> 'App\Http\Controllers\UniversityController@index'));
+Route::get('/university/add', array('as' => 'university.create', 'uses' =>'App\Http\Controllers\UniversityController@create'));
+Route::post('/university/insert', array('as' => 'university.insert', 'uses' => 'App\Http\Controllers\UniversityController@insert'));
+Route::get('/university/edit/{id}', array('as' => 'university.edit', 'uses' => 'App\Http\Controllers\UniversityController@edit'));
+Route::patch('/university/update/{id}', array('as'=> 'university.update', 'uses'=> 'App\Http\Controllers\UniversityController@updates'));
+Route::get('/university/delete/{id}', array('as'=> 'university.delete', 'uses'=>'App\Http\Controllers\UniversityController@deletes'));
+Route::delete('/university/destroy/{id}', array('as'=> 'university.destroy', 'uses'=>'App\Http\Controllers\UniversityController@destroy'));
 
 //Routes for Marhala Deraseyya
 Route::get('/marhala', array('as'=> 'marhala.index', 'uses'=> 'App\Http\Controllers\MarhalaDeraseyyaController@index'));
@@ -97,7 +133,13 @@ Route::get('/marhala/delete/{id}', array('as'=> 'marhala.delete', 'uses'=>'App\H
 Route::delete('/marhala/destroy/{id}', array('as'=> 'marhala.destroy', 'uses'=>'App\Http\Controllers\MarhalaDeraseyyaController@destroy'));
 
 //Routes for Sana Marhala
-Route::get('/marhala-sana', array('as'=> 'marhala-sana.index', 'uses'=> 'App\Http\Controllers\MarhalaSanaDeraseyyaController@index'));
+Route::get('/sana-marhala', array('as'=> 'sana-marhala.index', 'uses'=> 'App\Http\Controllers\SanaMarhalaDeraseyyaController@index'));
+Route::get('/sana-marhala/add', array('as' => 'sana-marhala.create', 'uses' =>'App\Http\Controllers\SanaMarhalaDeraseyyaController@create'));
+Route::post('/sana-marhala/insert', array('as' => 'sana-marhala.insert', 'uses' => 'App\Http\Controllers\SanaMarhalaDeraseyyaController@insert'));
+Route::get('/sana-marhala/edit/{id}', array('as' => 'sana-marhala.edit', 'uses' => 'App\Http\Controllers\SanaMarhalaDeraseyyaController@edit'));
+Route::patch('/sana-marhala/update/{id}', array('as'=> 'sana-marhala.update', 'uses'=> 'App\Http\Controllers\SanaMarhalaDeraseyyaController@updates'));
+Route::get('/sana-marhala/delete/{id}', array('as'=> 'sana-marhala.delete', 'uses'=>'App\Http\Controllers\SanaMarhalaDeraseyyaController@deletes'));
+Route::delete('/sana-marhala/destroy/{id}', array('as'=> 'sana-marhala.destroy', 'uses'=>'App\Http\Controllers\SanaMarhalaDeraseyyaController@destroy'));
 
 //Routes for Entry Questions
 Route::get('/entry-questions', array('as'=> 'entry-questions.index', 'uses'=>'App\Http\Controllers\MarhalaEntryQuestionsController@index'));

@@ -78,9 +78,13 @@
                         <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
                         <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
                         <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
-                        <a class="collapse-item" href={{ route('marhala-sana.index') }}>السنوات والمراحل الدراسية</a>
+                        <a class="collapse-item" href={{ route('sana-marhala.index') }}>السنوات والمراحل الدراسية</a>
                         <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
                         <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
+                        <a class="collapse-item" href={{ route('district.index') }}>الأحياء السكنية</a>
+                        <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
+                        <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
+                        <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
                     </div>
                 </div>
             </li>

@@ -31,7 +31,12 @@ class MarhalaDeraseyyaController extends Controller
         public function insert(Request  $request)
         {
             $lastMarhalaID = DB::table('Marhala')->orderBy('marhala','desc')->first();
-            $thisMarhalaID = $lastMarhalaID->MarhalaID + 1;
+            
+            if($lastMarhalaID==Null)
+                $thisMarhalaID = 1;
+            else
+                $thisMarhalaID = $lastMarhalaID->MarhalaID + 1;
+
             DB::table('Marhala')->insert(
                 array(
                     'MarhalaID' => $thisMarhalaID,

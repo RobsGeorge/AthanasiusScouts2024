@@ -31,7 +31,12 @@ class BloodTypeController extends Controller
         public function insert(Request  $request)
         {
             $lastBloodID = DB::table('BloodType')->orderBy('BloodTypeID','desc')->first();
-            $thisBloodID = $lastBloodID->BloodTypeID + 1;
+            
+            if($lastBloodID==Null)
+                $thisBloodID = 1;
+            else
+                $thisBloodID = $lastBloodID->BloodTypeID + 1;            
+
             DB::table('BloodType')->insert(
                 array(
                     'BloodTypeID' => $thisBloodID,

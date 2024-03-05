@@ -50,19 +50,19 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل بيانات مستخدم</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">تعديل منطقة سكنية</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('manteqa.update', $manteqa->ManteqaID) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>ID = {{$person->PersonID}}</label>
-                                                <input type="text" class="form-control form-control-user" name="person_name" id="person_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل " onfocusout="myFunction()" value="{{$person->PersonID}}">
+                                                <label>ID = {{$manteqa->ManteqaID}}</label>
+                                                <input type="text" class="form-control form-control-user" name="manteqa_name" id="manteqa_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                    placeholder="ادخل اسم المنطقة" onfocusout="myFunction()" value="{{$manteqa->ManteqaName}}">
                                                     <br>
                                                 <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
                                 </div>

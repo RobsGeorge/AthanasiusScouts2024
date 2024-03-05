@@ -36,8 +36,23 @@ class PersonNewController extends Controller
             $blood = DB::table('BloodType')->get();
             $betakat = DB::table('EgazetBetakatTaqaddom')->get();
             $manateq = DB::table('Manteqa')->get();
-            $districts = DB::table('Districts')->get(); 
-            return view("person.person-create", array('marahel'=>$marahel, 'rotab'=>$rotab, 'seneen_marahel'=>$seneen_marahel, 'questionTypes'=>$questionTypes, 'blood'=>$blood, 'betakat'=>$betakat, 'manateq'=>$manateq, 'districts'=>$districts));
+            $districts = DB::table('Districts')->get();
+            $qetaat = DB::table('Qetaa')->get();
+            $faculties = DB::table('Faculty')->get();
+            $universities = DB::table('University')->get();
+            return view("person.person-create", 
+            array('marahel'=>$marahel, 
+                    'rotab'=>$rotab, 
+                    'seneen_marahel'=>$seneen_marahel, 
+                    'questionTypes'=>$questionTypes, 
+                    'blood'=>$blood, 
+                    'betakat'=>$betakat, 
+                    'manateq'=>$manateq, 
+                    'districts'=>$districts, 
+                    'qetaat'=>$qetaat,
+                    'faculties'=>$faculties,
+                    'universities'=>$universities,
+                ));
         }
 
         public function insert(Request  $request)
@@ -60,7 +75,9 @@ class PersonNewController extends Controller
 
             $shamandoraCode = $shamandoraCode. $thisPersonID;
 
-            print_r($shamandoraCode);
+            //print_r($shamandoraCode);
+            //return "".$thisPersonID."\n".$shamandoraCode;
+
             
             $validatedData = $request->validate([
                 'first_name' => 'required',
@@ -84,8 +101,10 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
                 'sana_marhala_id'=>'required',
               ]);
+              
             
-            DB::table('PersonInformation')->insert(
+
+            $x = DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'ShamandoraCode'=>$shamandoraCode,
@@ -106,7 +125,8 @@ class PersonNewController extends Controller
                 )
             );
 
-            DB::table('PersonPhoneNumbers')->insert(
+
+            $x = DB::table('PersonPhoneNumbers')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'PersonPersonalMobileNumber' => $request->personal_phone_number,
@@ -117,33 +137,62 @@ class PersonNewController extends Controller
                 )
             );
 
+            $x = DB::table('PersonJob')->insert(
+                array(
+                    'PersonID'=>$thisPersonID,
+                    'JobName'=>$request->job_name,
+                    'WorkPlace'=>$request->work_place
+                )
+            );
+
+            $x = DB::table('PersonLearningInformation')->insert(
+                array(
+                    'PersonID'=>$thisPersonID,
+                    'SchoolName'=>$request->school_name,
+                    'SchoolGraduationYear'=>$request->school_grad_year,
+                    'FacultyID'=>$request->person_faculty,
+                    'UniversityID'=>$request->person_university,
+                    'ActualFacultyGraduationYear'=>$request->university_grad_year
+                )
+            );
+
+
+
+
             $timestamp = time();
             $formatted = date('y-m-d h:i:s T', $timestamp);
 
-            DB::table('PersonRotbaKashfeyya')->insert(
+            $x = DB::table('PersonRotbaKashfeyya')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'RotbaID=>'=>$request->rotba_kashfeyya_id,
-                    'UpdateTimestamp'=>$formatted
+                    'RotbaID'=>$request->rotba_kashfeyya_id
                 )
             );
 
-            DB::table('PersonEgazetBetakatTaqaddom')->insert(
+
+            $x = DB::table('PersonQetaa')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'EgazetBetakatTaqaddomID'=>$request->betaka_id,
-                    'UpdateTimestamp'=>$formatted
+                    'QetaaID'=>$request->qetaa_id
                 )
             );
 
-            DB::table('PersonSanaMarhala')->insert(
+
+            $x = DB::table('PersonEgazetBetakatTaqaddom')->insert(
+                array(
+                    'PersonID'=>$thisPersonID,
+                    'EgazetBetakatTaqaddomID'=>$request->betaka_id
+                )
+            );
+
+            $x = DB::table('PersonSanaMarhala')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'SanaMarhalaID'=>$request->sana_marhala_id
                 )
             );
 
-            DB::table('PersonSpiritualFatherInformation')->insert(
+            $x = DB::table('PersonSpiritualFatherInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'SpiritualFatherName'=>$request->spiritual_father,
@@ -160,15 +209,16 @@ class PersonNewController extends Controller
                 }
                 $passString =  implode($pass); //turn the array into a string
 
-            DB::table('PersonSystemPassword')->insert(
+            //return "".$thisPersonID."\n".$passString;
+
+            $x = DB::table('PersonSystemPassword')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'Password'=>$passString,
-                    'PasswordCreationTimestamp'=>$formatted
+                    'Password'=>$passString 
                 )
             );
 
-            DB::table('PersonalPhysicalAddress')->insert(
+            $x = DB::table('PersonalPhysicalAddress')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'BuildingNumber'=>$request->building_number,
@@ -177,12 +227,58 @@ class PersonNewController extends Controller
                     'MainStreetName'=>$request->main_street_name,
                     'SubStreetName'=>$request->sub_street_name,
                     'ManteqaID'=>$request->manteqa_id,
-                    'DistrictID'=>$request->district_id,
+                    'DistrictID'=>is_null($request->district_id)?1:$request->district_id,
                     'NearestLandmark'=>$request->nearest_landmark
                 )
             );
 
-            return redirect('person.index');
+            return redirect()->route('person.entry-questions', $thisPersonID);
+
+        }
+
+        public function getQuestions ($id)
+        {
+            $person = DB::table('PersonInformation')
+                    ->where('PersonInformation.PersonID', $id)
+                    ->Join('PersonQetaa', 'PersonInformation.PersonID' , '=', 'PersonQetaa.PersonID')
+                    ->Join('Qetaa', 'PersonQetaa.QetaaID', '=', 'Qetaa.QetaaID')
+                    ->Join('PersonSystemPassword', 'PersonInformation.PersonID' , '=', 'PersonSystemPassword.PersonID')
+                    ->select('PersonInformation.*', 'PersonSystemPassword.Password', 'PersonQetaa.QetaaID', 'Qetaa.QetaaName')
+                    ->first();
+
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->get();
+
+            return view('person.person-questions', array('questions'=>$questions, 'person'=>$person));
+        }
+
+        public function submitQuestions(Request $request)
+        {
+            
+            $person = DB::table('PersonInformation')
+                    ->where('PersonInformation.PersonID', $request->person_id)
+                    ->Join('PersonQetaa', 'PersonInformation.PersonID' , '=', 'PersonQetaa.PersonID')
+                    ->Join('Qetaa', 'PersonQetaa.QetaaID', '=', 'Qetaa.QetaaID')
+                    ->Join('PersonSystemPassword', 'PersonInformation.PersonID' , '=', 'PersonSystemPassword.PersonID')
+                    ->select('PersonInformation.*', 'PersonSystemPassword.Password', 'PersonQetaa.QetaaID', 'Qetaa.QetaaName')
+                    ->first();
+            
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
+
+            
+            foreach ($questions as $question)
+            {  
+                $q = $question->QuestionID.'';
+                DB::table('PersonEntryQuestions')->insert(
+                    array(
+                        'PersonID' => $request->person_id,
+                        'QuestionID' => $question->QuestionID,
+                        'Answer' => $q
+                    )
+                );
+            }
+            
+            return redirect()->route('person.index');
+
         }
     
         /**
@@ -193,8 +289,35 @@ class PersonNewController extends Controller
             */
         public function show($id)
         {
-            $person = DB::table('PersonInformation')->where('PersonID', $id)->first();
-            return view("person.person-show", array('person'=>$person));
+            $person = DB::table('PersonInformation')
+            ->leftJoin('BloodType', 'BloodType.BloodTypeID', '=', 'PersonInformation.BloodTypeID')
+            ->leftJoin('PersonEgazetBetakatTaqaddom', 'PersonEgazetBetakatTaqaddom.PersonID' , '=', 'PersonInformation.PersonID')
+            ->leftJoin('EgazetBetakatTaqaddom', 'PersonEgazetBetakatTaqaddom.EgazetBetakatTaqaddomID', '=', 'EgazetBetakatTaqaddom.EgazetBetakatTaqaddomID')
+            ->leftJoin('PersonJob', 'PersonInformation.PersonID', '=', 'PersonJob.PersonID')
+            ->leftJoin('PersonLearningInformation', 'PersonLearningInformation.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Faculty', 'PersonLearningInformation.FacultyID', '=', 'Faculty.FacultyID')
+            ->leftJoin('University', 'PersonLearningInformation.UniversityID', '=', 'University.UniversityID')
+            ->leftJoin('PersonPhoneNumbers', 'PersonPhoneNumbers.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('PersonQetaa', 'PersonQetaa.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Qetaa', 'Qetaa.QetaaID', '=', 'PersonQetaa.QetaaID')
+            ->leftJoin('PersonRotbaKashfeyya', 'PersonRotbaKashfeyya.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('RotbaInformation', 'PersonRotbaKashfeyya.RotbaID', '=', 'RotbaInformation.RotbaID')
+            ->leftJoin('PersonSanaMarhala', 'PersonSanaMarhala.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('SanaMarhala', 'SanaMarhala.SanaMarhalaID', '=', 'PersonSanaMarhala.SanaMarhalaID')
+            ->leftJoin('PersonSpiritualFatherInformation', 'PersonSpiritualFatherInformation.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('PersonSystemPassword', 'PersonInformation.PersonID', '=', 'PersonSystemPassword.PersonID')
+            ->leftJoin('PersonalPhysicalAddress', 'PersonalPhysicalAddress.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Manteqa', 'Manteqa.ManteqaID', '=', 'PersonalPhysicalAddress.ManteqaID')
+            ->leftJoin('Districts', 'Districts.DistrictID', '=', 'PersonalPhysicalAddress.DistrictID')
+            ->where('PersonInformation.PersonID', $id)->get()->first();
+            
+            $questions = DB::table('PersonEntryQuestions')
+                    ->join('MarhalaEntryQuestions', 'MarhalaEntryQuestions.QuestionID', '=', 'PersonEntryQuestions.QuestionID')
+                    ->select('MarhalaEntryQuestions.QuestionText','PersonEntryQuestions.Answer')
+                    ->where('PersonEntryQuestions.PersonID', $id)->get();
+            
+            //return $person;
+            return view('person.person-show', array('person'=>$person, 'questions'=>$questions));
         }
     
         /**
@@ -223,16 +346,27 @@ class PersonNewController extends Controller
     
         public function deletes($id)
         {
-            $marahel = DB::table('Marhala')->get();
-            $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-            return view("person.person-delete", array('marahel' => $marahel, 'entryQuestions' => $entryQuestions, 'title'=> "حذف شخص "));
+            $person = DB::table('PersonInformation')->where('PersonID','=',$id)->select('PersonInformation.PersonID', 'PersonInformation.ShamandoraCode')->first();
+
+            return view("person.person-delete", array('person' => $person));
         }
 
         public function destroy($id)
         {
-            $deleted = DB::table('MarhalaEntryQuestions')->where('QuestionID',$id)->delete();
-
-            return redirect()->route('person.index')->with('status','تم الغاء الشخص بنجاح');
+            
+            $deleted = DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonJob')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonLearningInformation')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonPhoneNumbers')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonQetaa')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonSystemPassword')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
+            $deleted = DB::table('PersonInformation')->where('PersonID',$id)->delete();
+            
+            return redirect()->route('person.index');
         }
 
 }

@@ -50,19 +50,19 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل بيانات مستخدم</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">تعديل كلية</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('faculty.update', $faculty->FacultyID) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>ID = {{$person->PersonID}}</label>
-                                                <input type="text" class="form-control form-control-user" name="person_name" id="person_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل " onfocusout="myFunction()" value="{{$person->PersonID}}">
+                                                <label>ID = {{$faculty->FacultyID}}</label>
+                                                <input type="text" class="form-control form-control-user" name="faculty_name" id="faculty_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                    placeholder="ادخل اسم الكلية" onfocusout="myFunction()" value="{{$faculty->FacultyName}}">
                                                     <br>
                                                 <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
                                 </div>
