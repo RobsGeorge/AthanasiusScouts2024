@@ -318,7 +318,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">مارك ابراهيم</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>
@@ -388,22 +388,35 @@
                                     <span>اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا ويمكنك أيضاً تعديل نص السؤال</span>
                                 </div>
                                 <select class="form-control" style="margin-top: 8px; margin-bottom:  8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا">
-                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر القطاع الكشفي الجديد</option>
                                 @foreach($qetaat as $qetaa)
-                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                    @if($qetaa->QetaaID == $qetaaSelected->QetaaID)
+                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}" selected>{{$qetaa->QetaaName}}</option>
+                                    @else
+                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                    @endif
                                 @endforeach
                                 </select>
+
+                                <br>
+                                <label>اخفاء السؤال؟</label>
+                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':'' }} />
                                 
-                                <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
+                                <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em;"
                                     placeholder="ادخل نص السؤال المطلوب" value="{{$entryQuestion->QuestionText}}">
                                 
                                 <br>
                                 @if($entryQuestion->RequiredAnswerType=="MultipleChoice")
                                 <label>الاختيارات</label>
-                                <label>{{$entryQuestion->MCAnswer}}</label>
+                                <br>
+                                <input type="input" value="{{count($arrayOfMCAnswers)}}" name="answers" id="answers" style="text-align: center; margin-left: 8px" hidden/>
+                                <br>
+                                    @foreach($arrayOfMCAnswers as $answer)
+                                        <input type="text" class="" style="margin-top: 8px; margin-left: 4px; text-align: center;" name="answer{{$loop->iteration}}" id="answer{{$loop->iteration}}" value="{{$answer}}"/>
+                                        <br>
+                                    @endforeach
                                 @endif
                                 <hr>
-                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل السؤال"></input>
+                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
                             </div>
                         </form>
                     </div>
@@ -581,6 +594,10 @@
                 container.appendChild(brx);
 
                 
+    }
+
+    function increaseAnswers(){
+
     }
 }
 </script>

@@ -318,7 +318,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">مارك ابراهيم</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>
@@ -379,6 +379,7 @@
                                             <th>نص السؤال</th>
                                             <th>الاختيارات المتاحة</th>
                                             <th></th>
+                                            <th>اخفاء السؤال؟</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -399,7 +400,11 @@
                                                 <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->QuestionText }}</label>
                                             </td>
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->MCAnswer }}</label>
+                                                @if($entryQuestion->MCAnswer!="")
+                                                    <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $entryQuestion->MCAnswer }}</label>
+                                                @else
+                                                <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">لا يوجد اختيارات</label>
+                                                @endif
                                             </td>
                                             <td> 
                                                     <a href="{{ route('entry-questions.edit', $entryQuestion->QuestionID) }}"
@@ -426,7 +431,7 @@
                                                                 white-space: nowrap;" 
                                                     > تعديل</a>
 
-                                                    <a href="{{ route('entry-questions.delete', $entryQuestion->QuestionID) }}" onclick="return confirm('Are you sure you want to delete?');"
+                                                    <a href="{{ route('entry-questions.delete', $entryQuestion->QuestionID) }}"
                                                         style="appearance: none;
                                                                 background-color: #E21739;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -449,6 +454,9 @@
                                                                 vertical-align: middle;
                                                                 white-space: nowrap;" 
                                                     > مسح</a>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':''}} disabled/>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -318,7 +318,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">مارك ابراهيم</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>
@@ -366,7 +366,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة فصيلة دم جديدة</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">اضافة مرحلة دراسية جديدة</h6>
                         </div>
                     </div>
 

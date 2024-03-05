@@ -60,7 +60,8 @@
                             @csrf
                             <div class="card-header py-3">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>هل أنت متأكد من حذف الحساب كود {{$person->PersonID}}؟</label>
+                                                <label>هل أنت متأكد من حذف الحساب كود {{$person->ShamandoraCode}}؟</label>
+                                                <br>
                                                 <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="حذف"></input>
                                                 <a href="{{ route('person.index') }}">رجوع</a>
                                 </div>

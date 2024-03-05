@@ -31,7 +31,13 @@ class RotbaKashfeyaController extends Controller
         public function insert(Request  $request)
         {
             $lastRotbaID = DB::table('RotbaInformation')->orderBy('RotbaID','desc')->first();
-            $thisRotbaID = $lastRotbaID->RotbaID + 1;
+            
+            if($lastRotbaID==Null)
+                $thisRotbaID = 1;
+            else
+                $thisRotbaID = $lastRotbaID->RotbaID + 1;
+
+
             DB::table('RotbaInformation')->insert(
                 array(
                     'RotbaID' => $thisRotbaID,
@@ -39,6 +45,7 @@ class RotbaKashfeyaController extends Controller
                 )
             );
             return redirect()->route('rotab.index')->with('status',' :تم ادخال بنجاح الرتبة' .$request->rotba_name);
+            
         }
     
         /**
