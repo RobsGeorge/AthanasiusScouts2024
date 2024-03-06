@@ -363,7 +363,7 @@ class PersonNewController extends Controller
             $deleted = DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
             $deleted = DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
             $deleted = DB::table('PersonInformation')->where('PersonID',$id)->delete();
-            
+            $deleted = DB::table('PersonEntryQuestions')->where('PersonID', $id)->delete();
             return redirect()->route('person.index');
         }
 
