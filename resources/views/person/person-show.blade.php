@@ -284,7 +284,7 @@
                                          value="لا يوجد" disabled>
                                     @else
                                     <input dir="rtl" type="text" name="person_job" id="person_job" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                         value="{{$person->PersonJob}}" disabled>
+                                         value="{{$person->JobName}}" disabled>
                                     @endif
                                 </div>
                                 </br>

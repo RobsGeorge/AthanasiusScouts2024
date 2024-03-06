@@ -90,37 +90,46 @@
                             <br/>
                             <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown; text-align:center"> الجزء الأخير: الأسئلة الخاصة بكل قطاع</h2>
                             
+                            @php
+                                $noQuestionsFlag = true;
+                            @endphp
                             @foreach($questions as $question)
-                                @if($question->RequiredAnswerType=="MultipleChoice")
-                                    <div class="form-group">
-                                        <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
-                                        <br/>
-                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر من الاجابات المتاحة</option>
-                                        @foreach(explode('|',$question->MCAnswer) as $answer)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$answer}}">{{$answer}}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                @elseif($question->RequiredAnswerType=="OpenQuestion")
-                                    <div class="form-group">
-                                        <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
-                                        <br/>
-                                        <input type="text" class="form-control form-control-user" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}" 
-                                        style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                        placeholder="أدخل اجابة السؤال  هنا" value="">
-                                        <br/>
-                                    </div>
-                                @elseif($question->RequiredAnswerType=="TrueOrFalse")
-                                    <div class="form-group">
-                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
-                                        <br/>
-                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نعم أم لا</option>
-                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="نعم">نعم</option>
-                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="لا">لا</option>
-                                        </select>
-                                    </div>
+                                @if($question->NotToBeShown==0)
+                                    {{$noQuestionsFlag = false;}}
+                                    @if($question->RequiredAnswerType=="MultipleChoice")
+                                        <div class="form-group">
+                                            <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            <br/>
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر من الاجابات المتاحة</option>
+                                            @foreach(explode('|',$question->MCAnswer) as $answer)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$answer}}">{{$answer}}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    @elseif($question->RequiredAnswerType=="OpenQuestion")
+                                        <div class="form-group">
+                                            <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            <br/>
+                                            <input type="text" class="form-control form-control-user" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}" 
+                                            style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                            placeholder="أدخل اجابة السؤال  هنا" value="">
+                                            <br/>
+                                        </div>
+                                    @elseif($question->RequiredAnswerType=="TrueOrFalse")
+                                        <div class="form-group">
+                                            <label for="joindate" style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            <br/>
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نعم أم لا</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="نعم">نعم</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="لا">لا</option>
+                                            </select>
+                                        </div>
+                                    @endif
+                                @endif
+                                @if($noQuestionsFlag==true)
+                                    <h2 class="text-center" style="font-family: 'Cairo', sans-serif; text-align: center;">لا يوجد أسئلة مختصة لهذا القطاع</h2>
                                 @endif
                             <br/>
                             @endforeach

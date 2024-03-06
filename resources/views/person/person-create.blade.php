@@ -111,7 +111,7 @@
 
                                 </div>
                                 <div class="form-group text-center" dir="rtl">
-                                     <label for="facebookLink" style="font-family: 'Cairo', sans-serif;">Facebook Account URL/Link (if Found)</label>
+                                     <label for="inputFacebookLink" style="font-family: 'Cairo', sans-serif;">Facebook Account URL/Link (if Found)</label>
                                     <input dir="rtl" type="text" class="form-control form-control-user" name="inputFacebookLink" id="inputFacebookLink" style="font-family: 'Cairo', sans-serif; font-size: large"
                                         placeholder="أدخل لينك حساب الفيسبوك الخاص بالمتلحق (إن وُجِد)">
 
