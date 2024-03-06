@@ -117,11 +117,9 @@ class PersonNewController extends Controller
                     'RaqamQawmy' => $request->input_raqam_qawmy,
                     'ScoutJoiningYear'  => $request->joining_year_input,
                     'BloodTypeID' => $request->blood_type_input,
-                    'FacebookProfileURL' =>$request->facebookLink,
-                    'InstagramProfileURL' =>$request->instagramLink ,
-                    'PersonalEmail' => $request->email_input,
-                    'MotherFirstName' => "",
-                    'MotherSecondName' => "",
+                    'FacebookProfileURL' =>$request->inputFacebookLink,
+                    'InstagramProfileURL' =>$request->inputInstagramLink,
+                    'PersonalEmail' => $request->email_input
                 )
             );
 
@@ -140,15 +138,15 @@ class PersonNewController extends Controller
             $x = DB::table('PersonJob')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'JobName'=>$request->job_name,
-                    'WorkPlace'=>$request->work_place
+                    'JobName'=>$request->person_job,
+                    'WorkPlace'=>$request->person_job_place
                 )
             );
 
             $x = DB::table('PersonLearningInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'SchoolName'=>$request->school_name,
+                    'SchoolName'=>$request->person_school,
                     'SchoolGraduationYear'=>$request->school_grad_year,
                     'FacultyID'=>$request->person_faculty,
                     'UniversityID'=>$request->person_university,
