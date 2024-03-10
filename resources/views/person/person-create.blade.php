@@ -369,7 +369,7 @@
                                 <div class="form-group text-center" dir="rtl">
                                 <label  style="font-family: 'Cairo', sans-serif;">ايجازة بطاقة التقدم</label>
                                         <br />
-                                        <select class="form-control" style="margin-top: 8px;" name="betaka_id" id="betaka_id" onChange="" placeholder="اختار ايجازة بطاقة التقدم" onclick="validate('betaka_id')" onfocusout="validate('betaka_id')">
+                                        <select class="form-control" style="margin-top: 8px;" name="betaka_id" id="betaka_id" onChange="" placeholder="اختار ايجازة بطاقة التقدم" onclick="" onfocusout="">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر ايجازة بطاقة التقدم</option>
                                         @foreach($betakat as $betaka)
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$betaka->EgazetBetakatTaqaddomID}}">{{$betaka->EgazetBetakatTaqaddomName}}</option>
