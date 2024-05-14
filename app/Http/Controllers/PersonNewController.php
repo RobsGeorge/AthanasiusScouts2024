@@ -104,7 +104,7 @@ class PersonNewController extends Controller
               
             
 
-            $x = DB::table('PersonInformation')->insert(
+            DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'ShamandoraCode'=>$shamandoraCode,
@@ -125,7 +125,26 @@ class PersonNewController extends Controller
 
         DB::transaction(function(){
 
-            $x = DB::table('PersonPhoneNumbers')->insert(
+            DB::table('PersonInformation')->insert(
+                array(
+                    'PersonID'=>$thisPersonID,
+                    'ShamandoraCode'=>$shamandoraCode,
+                    'FirstName' => $request->first_name,
+                    'SecondName' => $request->second_name,
+                    'ThirdName'   => $request->third_name,
+                    'FourthName' => $request->fourth_name,
+                    'Gender' => $request->gender,
+                    'DateOfBirth' => $request->birthdate_input,
+                    'RaqamQawmy' => $request->input_raqam_qawmy,
+                    'ScoutJoiningYear'  => $request->joining_year_input,
+                    'BloodTypeID' => $request->blood_type_input,
+                    'FacebookProfileURL' =>$request->inputFacebookLink,
+                    'InstagramProfileURL' =>$request->inputInstagramLink,
+                    'PersonalEmail' => $request->email_input
+                )
+            );
+
+            DB::table('PersonPhoneNumbers')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'PersonPersonalMobileNumber' => $request->personal_phone_number,
