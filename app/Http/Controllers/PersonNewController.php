@@ -11,10 +11,7 @@ use \Illuminate\Http\Response;
 
 class PersonNewController extends Controller
 {
-
-    $thisPersonID = 1;
-
-
+    
 /**
         * Display a listing of the resource.
         *
