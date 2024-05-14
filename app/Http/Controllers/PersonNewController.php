@@ -123,6 +123,7 @@ class PersonNewController extends Controller
                 )
             );
 
+        DB::transaction(function(){
 
             $x = DB::table('PersonPhoneNumbers')->insert(
                 array(
@@ -154,11 +155,8 @@ class PersonNewController extends Controller
                 )
             );
 
-
-
-
-            $timestamp = time();
-            $formatted = date('y-m-d h:i:s T', $timestamp);
+            //$timestamp = time();
+            //$formatted = date('y-m-d h:i:s T', $timestamp);
 
             $x = DB::table('PersonRotbaKashfeyya')->insert(
                 array(
@@ -198,21 +196,12 @@ class PersonNewController extends Controller
                 )
             );
 
-                $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-                $pass = array(); //remember to declare $pass as an array
-                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-                for ($i = 0; $i < 8; $i++) {
-                    $n = rand(0, $alphaLength);
-                    $pass[] = $alphabet[$n];
-                }
-                $passString =  implode($pass); //turn the array into a string
-
-            //return "".$thisPersonID."\n".$passString;
+                
 
             $x = DB::table('PersonSystemPassword')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'Password'=>$passString 
+                    'Password'=>generatePassword() 
                 )
             );
 
@@ -230,8 +219,24 @@ class PersonNewController extends Controller
                 )
             );
 
+        }, 3);
+
             return redirect()->route('person.entry-questions', $thisPersonID);
 
+        }
+
+        public function generatePassword()
+        {
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = rand(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            $passString =  implode($pass); //turn the array into a string
+
+            return $passString;
         }
 
         public function getQuestions ($id)
@@ -351,19 +356,21 @@ class PersonNewController extends Controller
 
         public function destroy($id)
         {
-            
-            $deleted = DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonJob')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonLearningInformation')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonPhoneNumbers')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonQetaa')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonSystemPassword')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonInformation')->where('PersonID',$id)->delete();
-            $deleted = DB::table('PersonEntryQuestions')->where('PersonID', $id)->delete();
+            DB::transaction(function () {
+                DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->delete();
+                DB::table('PersonJob')->where('PersonID',$id)->delete();
+                DB::table('PersonLearningInformation')->where('PersonID',$id)->delete();
+                DB::table('PersonPhoneNumbers')->where('PersonID',$id)->delete();
+                DB::table('PersonQetaa')->where('PersonID',$id)->delete();
+                DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->delete();
+                DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->delete();
+                DB::table('PersonSystemPassword')->where('PersonID',$id)->delete();
+                DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
+                DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
+                DB::table('PersonInformation')->where('PersonID',$id)->delete();
+                DB::table('PersonEntryQuestions')->where('PersonID', $id)->delete();
+            },3);
+
             return redirect()->route('person.index');
         }
 
