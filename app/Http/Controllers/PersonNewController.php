@@ -12,6 +12,8 @@ use \Illuminate\Http\Response;
 class PersonNewController extends Controller
 {
 
+    $thisPersonID = 1;
+
 
 /**
         * Display a listing of the resource.
@@ -104,6 +106,10 @@ class PersonNewController extends Controller
               
             
 
+            
+
+        DB::transaction(function(){
+
             DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
@@ -122,8 +128,6 @@ class PersonNewController extends Controller
                     'PersonalEmail' => $request->email_input
                 )
             );
-
-        DB::transaction(function(){
 
             DB::table('PersonInformation')->insert(
                 array(
