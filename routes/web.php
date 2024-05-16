@@ -43,7 +43,7 @@ Route::get('/de7k', array('as'=>'person.de7k','uses'=>'App\Http\Controllers\Pers
 Route::get('/liveform', array('as'=>'person.liveform', 'uses'=>'App\Http\Controllers\PersonNewController@createLiveForm'));
 Route::post('/liveform/insert', array('as'=>'person.liveform-insert', 'uses'=>'App\Http\Controllers\PersonNewController@insertLiveForm'));
 Route::get('/liveform/person/add', array('as' => 'person.liveform-create', 'uses' =>'App\Http\Controllers\PersonNewController@createNewPersonLiveForm'));
-Route::post('/liveform/person/insert', array('as' => 'person.liveform-insert', 'uses' => 'App\Http\Controllers\PersonNewController@insertNewPersonLiveForm'));
+Route::post('/liveform/person/insert', array('as' => 'person.liveform-insert-person', 'uses' => 'App\Http\Controllers\PersonNewController@insertNewPersonLiveForm'));
 Route::get('/liveform/person/entry-questions/insert/{id}', array('as'=> 'person.liveform-entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestionsLiveForm'));
 Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.liveform-entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestionsLiveForm'));
 

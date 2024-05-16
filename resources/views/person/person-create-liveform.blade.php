@@ -37,7 +37,7 @@
 @endif
 <div class="container mt-4">
     <div class="container">
-    <form class="user" id="regForm" method="POST" action="{{ route('person.insert') }}">
+    <form class="user" id="regForm" method="POST" action="{{ route('person.liveform-insert-person') }}">
          @csrf
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -83,7 +83,7 @@
                                 <div class="form-group text-center" dir="rtl">
                                     <label class="text-center" for="email_input" style="font-family: 'Cairo', sans-serif;">البريد الالكتروني</label>
                                     <input dir="rtl" type="email" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                        placeholder="أدخل البريد الالكتروني للملتحق بشكل صحيح">
+                                        placeholder="أدخل البريد الالكتروني للملتحق بشكل صحيح" onclick="validate('email_input')" onfocusout="validate('email_input')">
                                 </div>
 
                                 <div class="form-group row text-center" dir="rtl">
@@ -93,7 +93,7 @@
                                             placeholder="تاريخ الميلاد" onclick="validate('birthdate_input')" onfocusout="validate('birthdate_input')">
                                     </div>
 
-                                    <div class="col-sm-6 text-center">    
+                                    <!--<div class="col-sm-6 text-center">    
                                         <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق</label>
                                         <br />
                                         <select class="form-control" style="margin-top: 8px;" name="joining_year_input" id="joining_year_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('joining_year_input')" onfocusout="validate('joining_year_input')">
@@ -101,6 +101,14 @@
                                         @for($i = 1990; $i <= date('Y'); $i++)
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value={{$i}}>{{$i}}</option>
                                         @endfor
+                                        </select>
+                                    </div>-->
+                                    
+                                    <div class="col-sm-6 text-center">    
+                                        <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق</label>
+                                        <br />
+                                        <select class="form-control" style="margin-top: 8px;" name="joining_year_input" id="joining_year_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('joining_year_input')" onfocusout="validate('joining_year_input')">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="2024" disabled selected></option>
                                         </select>
                                     </div>
                                 </div>
@@ -135,8 +143,8 @@
                                 </div>
                                 
                                 <hr>
-                                <div class="text-center">
-                                <a class="small" style="font-family: 'Cairo', sans-serif;" href={{ url('/index') }}>الرجوع إلى لوحة التحكم الرئيسية</a>
+                                <!--<div class="text-center">-->
+                                <!--<a class="small" style="font-family: 'Cairo', sans-serif;" href={{ url('/index') }}>الرجوع إلى لوحة التحكم الرئيسية</a>-->
                             </div>
                             <hr>
                         </div>
@@ -246,9 +254,9 @@
                                     </div>
                                 </div>
                             <hr>
-                            <div class="text-center">
+                            <!--<div class="text-center">
                                 <a class="small" style="font-family: 'Cairo', sans-serif;" href={{ url('/index') }}>الرجوع إلى لوحة التحكم الرئيسية</a>
-                            </div>
+                            </div>-->
                             <hr>
                         </div>
                     </div>
@@ -259,7 +267,7 @@
                                 <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثالث: البيانات الدراسية والكنسية</h2>
                             </div>
-                                <div class="form-group text-center" dir="rtl">
+                                <!--<div class="form-group text-center" dir="rtl">
                                 <label for="sana_marhala_id" style="font-family: 'Cairo', sans-serif;">السنة والمرحلة الدراسية</label>
                                         <br />
                                         <select class="form-control" style="margin-top: 8px;" name="sana_marhala_id" id="sana_marhala_id" onselect="checkMarhala()" placeholder="اختار السنة والمرحلة الدراسية" onclick="validate('sana_marhala_id')" onfocusout="validate('sana_marhala_id')">
@@ -268,7 +276,7 @@
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$sana_marhala->SanaMarhalaID}}">{{$sana_marhala->SanaMarhalaName}}</option>
                                         @endforeach
                                         </select>
-                                </div>
+                                </div>-->
                                 <br/>
 
                                 <div class="form-group text-center" dir="rtl">
@@ -288,7 +296,8 @@
                                         @endfor
                                         </select>
                                 </div>
-
+                            
+                            <!--
                                 <div class="form-group text-center" dir="rtl">
                                     <label class="text-center" for="person_faculty" style="font-family: 'Cairo', sans-serif;">اسم الكلية</label>
                                     <select class="form-control" style="margin-top: 8px;" name="person_faculty" id="person_faculty" placeholder="اختار الكلية">
@@ -333,6 +342,7 @@
                                 </div>
 
                                 <hr>
+                            -->
                                 <div class="form-group text-center" dir="rtl">
                                     <label class="text-center" for="spiritual_father" style="font-family: 'Cairo', sans-serif;">الأب الروحي / أب الاعتراف</label>
                                     <input dir="rtl" type="text" name="spiritual_father" id="spiritual_father" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
@@ -344,15 +354,16 @@
                                         placeholder="أدخل كنيسة أب الاعتراف أو الأب الروحي للملتحق">
                                 </div>
                                 
-                            <div class="text-center">
+                            <!--<div class="text-center">
                                 <a class="small" style="font-family: 'Cairo', sans-serif;" href={{ url('/index') }}>الرجوع إلى لوحة التحكم الرئيسية</a>
                             </div>
+                        -->
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="p-5">
-                            <div class="text-center">
+                            <!--<div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الرابع: البيانات الكشفية</h2>
                             </div>
@@ -386,6 +397,7 @@
                                         @endforeach
                                         </select>
                                 </div>
+                            -->
                                         <label><strong>برجاء التأكد من البيانات مرة أخرى قبل ضغط  "استمرار" علماً بأن سيتم الانتقال إلى باقي الأسئلة الخاصة بالقطاع بعد الضغط</strong></label>
                                 <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="استمرار" onsubmit=""></input>
                         </div>
