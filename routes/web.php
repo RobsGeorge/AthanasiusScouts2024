@@ -39,6 +39,14 @@ Route::get('/forgot-password', function () {return view('forgot-password');});
 //Route::post('/submitPerson','App\Http\Controllers\PersonController@submitPersonController');
 
 //New Routes for Person Information
+Route::get('/de7k', array('as'=>'person.de7k','uses'=>'App\Http\Controllers\PersonNewController@showLiveForm'));
+Route::get('/liveform', array('as'=>'person.liveform', 'uses'=>'App\Http\Controllers\PersonNewController@createLiveForm'));
+Route::post('/liveform/insert', array('as'=>'person.liveform-insert', 'uses'=>'App\Http\Controllers\PersonNewController@insertLiveForm'));
+Route::get('/liveform/person/add', array('as' => 'person.liveform-create', 'uses' =>'App\Http\Controllers\PersonNewController@createNewPersonLiveForm'));
+Route::post('/liveform/person/insert', array('as' => 'person.liveform-insert', 'uses' => 'App\Http\Controllers\PersonNewController@insertNewPersonLiveForm'));
+Route::get('/liveform/person/entry-questions/insert/{id}', array('as'=> 'person.liveform-entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestionsLiveForm'));
+Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.liveform-entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestionsLiveForm'));
+
 Route::get('/person', array('as'=> 'person.index', 'uses'=>'App\Http\Controllers\PersonNewController@index'));
 Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/add', array('as' => 'person.create', 'uses' =>'App\Http\Controllers\PersonNewController@create'));

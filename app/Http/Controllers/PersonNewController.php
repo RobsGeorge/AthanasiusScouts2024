@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
+use \Illuminate\Database\QueryException;
+use Exception;
+
 
 class PersonNewController extends Controller
 {
-    
+
+
 /**
         * Display a listing of the resource.
         *
@@ -24,6 +28,38 @@ class PersonNewController extends Controller
             ->select('PersonInformation.*', 'PersonPhoneNumbers.PersonPersonalMobileNumber')
             ->get();
             return view("person.person-index", array('persons' => $persons));
+        }
+
+        public function createLiveForm()
+        {
+
+            $seneen_marahel = DB::table('SanaMarhala')->get();
+
+            return view("person.person-create-liveform-1", array(
+                'seneen_marahel'=>$seneen_marahel
+            ));
+        }
+
+        public function insertLiveForm(Request $request)
+        {
+            $marhala_limit = DB::table('MarhalaLiveFormLimit')
+                        ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
+                        ->select('MarhalaLiveFormLimit.MaxLimit')
+                        ->first();
+
+            $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
+                        DB::table('NewUsersInformation')
+                        ->where('NewUsersInformation.SanaMarhalaID', $request->sana_marhala_id)
+                        ->count();
+
+            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
+            {
+                return view('person.liveform-limit-exceeded');
+            }
+
+            return view('person.de7k', array('sana_marhala_id' => $request->sana_marhala_id));
+            //return redirect()->route('person.de7k', $marhala_limit);
+            //return $request->sana_marhala_id;
         }
 
         public function create()
@@ -100,13 +136,10 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
                 'sana_marhala_id'=>'required',
               ]);
-              
             
-
+            DB::beginTransaction();
             
-
-        DB::transaction(function(){
-
+        try{
             DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
@@ -126,24 +159,6 @@ class PersonNewController extends Controller
                 )
             );
 
-            DB::table('PersonInformation')->insert(
-                array(
-                    'PersonID'=>$thisPersonID,
-                    'ShamandoraCode'=>$shamandoraCode,
-                    'FirstName' => $request->first_name,
-                    'SecondName' => $request->second_name,
-                    'ThirdName'   => $request->third_name,
-                    'FourthName' => $request->fourth_name,
-                    'Gender' => $request->gender,
-                    'DateOfBirth' => $request->birthdate_input,
-                    'RaqamQawmy' => $request->input_raqam_qawmy,
-                    'ScoutJoiningYear'  => $request->joining_year_input,
-                    'BloodTypeID' => $request->blood_type_input,
-                    'FacebookProfileURL' =>$request->inputFacebookLink,
-                    'InstagramProfileURL' =>$request->inputInstagramLink,
-                    'PersonalEmail' => $request->email_input
-                )
-            );
 
             DB::table('PersonPhoneNumbers')->insert(
                 array(
@@ -156,7 +171,7 @@ class PersonNewController extends Controller
                 )
             );
 
-            $x = DB::table('PersonJob')->insert(
+            DB::table('PersonJob')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'JobName'=>$request->person_job,
@@ -164,7 +179,7 @@ class PersonNewController extends Controller
                 )
             );
 
-            $x = DB::table('PersonLearningInformation')->insert(
+            DB::table('PersonLearningInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'SchoolName'=>$request->person_school,
@@ -175,10 +190,13 @@ class PersonNewController extends Controller
                 )
             );
 
+
+
+
             //$timestamp = time();
             //$formatted = date('y-m-d h:i:s T', $timestamp);
 
-            $x = DB::table('PersonRotbaKashfeyya')->insert(
+            DB::table('PersonRotbaKashfeyya')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'RotbaID'=>$request->rotba_kashfeyya_id
@@ -186,7 +204,7 @@ class PersonNewController extends Controller
             );
 
 
-            $x = DB::table('PersonQetaa')->insert(
+            DB::table('PersonQetaa')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'QetaaID'=>$request->qetaa_id
@@ -194,21 +212,21 @@ class PersonNewController extends Controller
             );
 
 
-            $x = DB::table('PersonEgazetBetakatTaqaddom')->insert(
+            DB::table('PersonEgazetBetakatTaqaddom')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'EgazetBetakatTaqaddomID'=>$request->betaka_id
                 )
             );
 
-            $x = DB::table('PersonSanaMarhala')->insert(
+            DB::table('PersonSanaMarhala')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'SanaMarhalaID'=>$request->sana_marhala_id
                 )
             );
 
-            $x = DB::table('PersonSpiritualFatherInformation')->insert(
+            DB::table('PersonSpiritualFatherInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'SpiritualFatherName'=>$request->spiritual_father,
@@ -216,16 +234,25 @@ class PersonNewController extends Controller
                 )
             );
 
-                
+                $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+                $pass = array(); //remember to declare $pass as an array
+                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+                for ($i = 0; $i < 8; $i++) {
+                    $n = rand(0, $alphaLength);
+                    $pass[] = $alphabet[$n];
+                }
+                $passString =  implode($pass); //turn the array into a string
 
-            $x = DB::table('PersonSystemPassword')->insert(
+            //return "".$thisPersonID."\n".$passString;
+
+            DB::table('PersonSystemPassword')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'Password'=>generatePassword() 
+                    'Password'=>$passString 
                 )
             );
 
-            $x = DB::table('PersonalPhysicalAddress')->insert(
+            DB::table('PersonalPhysicalAddress')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
                     'BuildingNumber'=>$request->building_number,
@@ -239,24 +266,18 @@ class PersonNewController extends Controller
                 )
             );
 
-        }, 3);
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+            DB::rollBack();
+            return view('person.entry-error');
+        }
+
+            DB::commit();
 
             return redirect()->route('person.entry-questions', $thisPersonID);
 
-        }
-
-        public function generatePassword()
-        {
-            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            $pass = array(); //remember to declare $pass as an array
-            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-            for ($i = 0; $i < 8; $i++) {
-                $n = rand(0, $alphaLength);
-                $pass[] = $alphabet[$n];
-            }
-            $passString =  implode($pass); //turn the array into a string
-
-            return $passString;
         }
 
         public function getQuestions ($id)
@@ -276,6 +297,7 @@ class PersonNewController extends Controller
 
         public function submitQuestions(Request $request)
         {
+            DB::beginTransaction();
             
             $person = DB::table('PersonInformation')
                     ->where('PersonInformation.PersonID', $request->person_id)
@@ -299,6 +321,8 @@ class PersonNewController extends Controller
                     )
                 );
             }
+
+            DB::commit();
             
             return redirect()->route('person.index');
 
@@ -376,20 +400,22 @@ class PersonNewController extends Controller
 
         public function destroy($id)
         {
-            DB::transaction(function () {
-                DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->delete();
-                DB::table('PersonJob')->where('PersonID',$id)->delete();
-                DB::table('PersonLearningInformation')->where('PersonID',$id)->delete();
-                DB::table('PersonPhoneNumbers')->where('PersonID',$id)->delete();
-                DB::table('PersonQetaa')->where('PersonID',$id)->delete();
-                DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->delete();
-                DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->delete();
-                DB::table('PersonSystemPassword')->where('PersonID',$id)->delete();
-                DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
-                DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
-                DB::table('PersonInformation')->where('PersonID',$id)->delete();
-                DB::table('PersonEntryQuestions')->where('PersonID', $id)->delete();
-            },3);
+            DB::beginTransaction();
+
+            DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->delete();
+            DB::table('PersonJob')->where('PersonID',$id)->delete();
+            DB::table('PersonLearningInformation')->where('PersonID',$id)->delete();
+            DB::table('PersonPhoneNumbers')->where('PersonID',$id)->delete();
+            DB::table('PersonQetaa')->where('PersonID',$id)->delete();
+            DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->delete();
+            DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->delete();
+            DB::table('PersonSystemPassword')->where('PersonID',$id)->delete();
+            DB::table('PersonSanaMarhala')->where('PersonID',$id)->delete();
+            DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->delete();
+            DB::table('PersonInformation')->where('PersonID',$id)->delete();
+            DB::table('PersonEntryQuestions')->where('PersonID', $id)->delete();
+
+            DB::commit();
 
             return redirect()->route('person.index');
         }
