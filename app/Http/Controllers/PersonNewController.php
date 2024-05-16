@@ -42,14 +42,24 @@ class PersonNewController extends Controller
 
         public function insertLiveForm(Request $request)
         {
+            $marhala_limit = DB::table('MarhalaLiveFormLimit')
+                        ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
+                        ->select('MarhalaLiveFormLimit.MaxLimit')
+                        ->first();
 
-            /*$marhala_limit = DB::table('MarhalaLiveFormLimit')
-                                ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
-                                ->leftJoin('SanaMarhala','SanaMarhala.SanaMarhalaID','=','MarhalaLiveFormLimit.SanaMarhalaID')
-                                ->select('MarhalaLiveFormLimit.MaxLimit')
-                                ->first();
-            */
-            return view('person.de7k', $request->sana_marhala_id);
+            $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
+                        DB::table('NewUsersInformation')
+                        ->where('NewUsersInformation.SanaMarhalaID', $request->sana_marhala_id)
+                        ->count();
+
+            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
+            {
+                return view('person.liveform-limit-exceeded');
+            }
+
+            return view('person.de7k', array('sana_marhala_id' => $request->sana_marhala_id));
+            //return redirect()->route('person.de7k', $marhala_limit);
+            //return $request->sana_marhala_id;
         }
 
         public function create()
@@ -255,6 +265,7 @@ class PersonNewController extends Controller
                     'NearestLandmark'=>$request->nearest_landmark
                 )
             );
+
         }
         catch(Exception $e)
         {

@@ -45,7 +45,8 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">التحاق جديد</h1>
                             </div>
-                            <form class="user" "{{ route('person.insert') }}">
+                            <form class="user" id="regForm" method="POST" action="{{ route('person.liveform-insert') }}">
+                                @csrf
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
                                     <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأول: البيانات الدراسية</h2>
