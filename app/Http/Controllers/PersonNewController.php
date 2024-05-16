@@ -57,9 +57,112 @@ class PersonNewController extends Controller
                 return view('person.liveform-limit-exceeded');
             }
 
-            return view('person.de7k', array('sana_marhala_id' => $request->sana_marhala_id));
+            return view('person.person-create-liveform', array('sana_marhala_id' => $request->sana_marhala_id));
             //return redirect()->route('person.de7k', $marhala_limit);
             //return $request->sana_marhala_id;
+        }
+
+        public function insertNewPersonLiveForm()
+        {
+            $lastPersonID = DB::table('PersonInformation')->orderBy('PersonID','desc')->first();
+            
+            if($lastPersonID==Null)
+                $thisPersonID = 1;
+            else
+                $thisPersonID = $lastPersonID->PersonID + 1;
+            
+            $shamandoraCode="SH-";
+
+            $shamandoraCodeNumberOfDigits = 5;
+
+            for ($i=0;$i<$shamandoraCodeNumberOfDigits-strlen((string)$thisPersonID);$i++)
+            {
+                $shamandoraCode = $shamandoraCode.'0';
+            }
+
+            $shamandoraCode = $shamandoraCode. $thisPersonID;
+
+            $validatedData = $request->validate([
+                'first_name' => 'required',
+                'second_name' => 'required',
+                'third_name' => 'required',
+                'gender'=>'required',
+                'email_input'=> 'email',
+                'birthdate_input' => 'required',
+                'joining_year_input' => 'required',
+                'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
+                'facebookLink'=>'url',
+                'instagramLink'=>'url',
+                'blood_type_input'=>'required',
+                'personal_phone_number'=>'required|min_digits:11|max_digits:11',
+                'has_whatsapp'=>'required',
+                'building_number'=>'required',
+                'floor_number'=>'required',
+                'appartment_number' =>'required',
+                'sub_street_name' => 'required',
+                'manteqa_id'=>'required',
+                'district_id'=>'required',
+              ]);
+
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        $passString =  implode($pass); //turn the array into a string
+
+            
+        try{
+            DB::table('NewUsersInformation')->insert(
+                array(
+                    'PersonID'              => $thisPersonID,
+                    'ShamandoraCode'        => $shamandoraCode,
+                    'FirstName'             => $request->first_name,
+                    'SecondName'            => $request->second_name,
+                    'ThirdName'             => $request->third_name,
+                    'FourthName'            => $request->fourth_name,
+                    'Gender'                => $request->gender,
+                    'DateOfBirth'           => $request->birthdate_input,
+                    'RaqamQawmy'            => $request->input_raqam_qawmy,
+                    'ScoutJoiningYear'      => $request->joining_year_input,
+                    'BloodTypeID'           => $request->blood_type_input,
+                    'FacebookProfileURL'    => $request->inputFacebookLink,
+                    'InstagramProfileURL'   => $request->inputInstagramLink,
+                    'PersonalEmail'         => $request->email_input,
+                    'BuildingNumber'        => $request->building_number,
+                    'FloorNumber'           => $request->floor_number,
+                    'AppartmentNumber'      => $request->appartment_number,
+                    'MainStreetName'        => $request->main_street_name,
+                    'SubStreetName'         => $request->sub_street_name,
+                    'ManteqaID'             => $request->manteqa_id,
+                    'DistrictID'            => is_null($request->district_id)?1:$request->district_id,
+                    'NearestLandmark'       => $request->nearest_landmark,
+                    'SanaMarhalaID'         => $request->sana_marhala_id, 
+                    'SpiritualFatherName'   => $request->spiritual_father,
+                    'SpiritualFatherChurchName' => $request->spiritual_father_church,
+                    'Password'              => $passString, 
+                    'PersonPersonalMobileNumber' => $request->personal_phone_number,
+                    'FatherMobileNumber'    => $request->father_phone_number,
+                    'MotherMobileNumber'    => $request->mother_phone_number,
+                    'HomePhoneNumber'       => $request->home_phone_number,
+                    'IsOPersonalPhoneNumberHavingWhatsapp' => $request->has_whatsapp,
+                    'SchoolName'            => $request->person_school,
+                    'SchoolGraduationYear'  => $request->school_grad_year,
+                )
+            );
+
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+            return view('person.entry-error');
+        }
+
+            DB::commit();
+
+            return redirect()->route('person.entry-questions', $thisPersonID);
         }
 
         public function create()
@@ -119,7 +222,7 @@ class PersonNewController extends Controller
                 'second_name' => 'required',
                 'third_name' => 'required',
                 'gender'=>'required',
-                'email_input'=> 'required|email',
+                'email_input'=> 'email',
                 'birthdate_input' => 'required',
                 'joining_year_input' => 'required',
                 'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
