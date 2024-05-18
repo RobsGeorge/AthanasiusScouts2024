@@ -96,15 +96,6 @@
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Configurations</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item" href="utilities-color.html">واجهات</a>
-                        <a class="collapse-item" href="utilities-color.html">ألوان</a>
-                        <a class="collapse-item" href="utilities-color.html">جداول</a>
-                    </div>
-                </div>
             </li>
             
 
@@ -116,30 +107,13 @@
                 Person
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
-                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
-                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
-                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href={{ url('/') }}>
                     <i class="fas fa-fw fa-table"></i>
                     <span style="font-family: 'Cairo', sans-serif;">جداول الملتحقين</span></a>
             </li>
+
 
             <hr class="sidebar-divider">
 
@@ -152,6 +126,32 @@
                 <a class="nav-link" href={{ url('/person') }}>
                     <i class="fas fa-fw fa-photo-video"></i>
                     <span style="font-family: 'Cairo', sans-serif;">منصة الميديا</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                 Summer 2024
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                        <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
+                        <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
+                        <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
+                        <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
+                    </div>
+                </div>
             </li>
             
             <!-- Divider -->
