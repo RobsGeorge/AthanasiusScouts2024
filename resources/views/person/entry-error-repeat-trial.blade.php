@@ -47,9 +47,9 @@
                             </div>
                                 
                                 <div class="text-center">
-                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> يتضح أنه حدثت مشكلة تقنية
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> من فضلك عد إلى الصفحة السابقة
                                     </h2>
-                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: #4e73df;"> برجاء المحاولة مرة أخرى
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: #4e73df;"> وتأكد من ادخال البيانات المطلوبة كاملةً وغير فارغة وبشكل سليم
                                     </h2>
                                 </div>
                                 <hr>

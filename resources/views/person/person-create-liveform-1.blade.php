@@ -62,6 +62,17 @@
                                     </select>
                                 </div>
 
+                                <div class="form-group text-center" dir="rtl">
+                                    <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر نوع الملتحق <strong>(ذكر أم أنثى)</strong></label>
+                                    <br />
+                                    <select class="form-control" name="gender" id="gender" onChange="" placeholder="اختر النوع">
+                                    <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر النوع</option>
+                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
+                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>
+                                    </select>
+
+                            </div>
+
                                 <input type="submit" class="btn btn-primary btn-user btn-block" id="submit-button" value="اضغط للاستمرار"></input>
                                 <hr>
                             </form>

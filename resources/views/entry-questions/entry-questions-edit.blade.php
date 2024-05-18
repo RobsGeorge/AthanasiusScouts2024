@@ -396,12 +396,15 @@
                                 </select>
 
                                 <br>
-                                <label>اخفاء السؤال؟</label>
-                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':'' }} />
-                                
                                 <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em;"
                                     placeholder="ادخل نص السؤال المطلوب" value="{{$entryQuestion->QuestionText}}">
                                 
+                                <br>
+                                <label>اخفاء السؤال؟</label>
+                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':'' }} />
+                                <br>
+                                <label>السؤال مطلوب "اجباري"؟</label>
+                                <input type="checkbox" name="questionIsRequired" {{ $entryQuestion->IsRequired==1 ? 'checked':'' }} />
                                 <br>
                                 @if($entryQuestion->RequiredAnswerType=="MultipleChoice")
                                 <label>الاختيارات</label>
