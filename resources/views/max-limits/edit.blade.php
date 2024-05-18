@@ -369,12 +369,12 @@
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->SanaMarhalaID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->QetaaID) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
                                 <div>
-                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->SanaMarhalaName}}" disabled></input>
+                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->QetaaName}}" disabled></input>
                                 <br>
                                 </div>
                             </div>

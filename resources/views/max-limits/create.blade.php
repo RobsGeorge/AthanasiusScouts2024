@@ -376,10 +376,10 @@
                             <div class="card-header py-3">
                                 <div class="">
 
-                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار المرحلة الدراسية">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختار المرحلة الدراسية</option>
-                                        @foreach($marahel as $marhala)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhala->SanaMarhalaID}}">{{$marhala->SanaMarhalaName}}</option>
+                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار القطاع">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختار القطاع</option>
+                                        @foreach($qetaat as $qetaa)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
                                         @endforeach
                                         </select>
 
@@ -399,7 +399,7 @@
                                         <br>
                                         <label><strong>الحد الأقصى لطلبات التسجيل</strong></label>
                                         <input type="text" class="form-control" name="max_limit" id="max_limit" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
-                                            placeholder="ادخل الحد الأقصى المطلوب لهذه المرحلة">
+                                            placeholder="ادخل الحد الأقصى المطلوب لهذا القطاع">
                                         <br>
 
                                         <div class="" id="container">

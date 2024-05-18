@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.destroy', $selectedMarhala->SanaMarhalaID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.destroy', $selectedMarhala->QetaaID) }}">
                             @method('DELETE')
                             @csrf
                             <div class="card-header py-3">

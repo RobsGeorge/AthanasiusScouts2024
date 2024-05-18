@@ -398,7 +398,7 @@
                                     <thead>
                                         <tr>
                                             <th>الرقم</th>
-                                            <th>المرحلة</th>
+                                            <th>القطاع</th>
                                             <th>الحد الأقصى</th>
                                             <th></th>
                                         </tr>
@@ -408,16 +408,16 @@
                                         
                                         <tr> 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $marhala->SanaMarhalaID }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $marhala->QetaaID }}</label>
                                             </td>
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $marhala->SanaMarhalaName }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $marhala->QetaaName }}</label>
                                             </td>
                                             <td>
                                                 <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $marhala->MaxLimit }}</label>
                                             </td>
                                             <td> 
-                                                    <a href="{{ route('max-limits.edit', $marhala->SanaMarhalaID) }}"
+                                                    <a href="{{ route('max-limits.edit', $marhala->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -441,7 +441,7 @@
                                                                 white-space: nowrap;" 
                                                     > تعديل</a>
 
-                                                    <a href="{{ route('max-limits.delete', $marhala->SanaMarhalaID) }}"
+                                                    <a href="{{ route('max-limits.delete', $marhala->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #E21739;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
