@@ -403,13 +403,13 @@ class PersonNewController extends Controller
             {  
                 
                 $q = $request[$question->QuestionID];
-                //return $qs;
 
                 if($question->IsRequired&&$q==NULL)
                 {
                     //return $question->QuestionID;
+                    //return $question->QuestionID;
                     DB::rollBack();
-                    return view('person.entry-error');
+                    return view('person.entry-error-repeat-trial');
                 }
                 DB::table('NewUsersPersonEntryQuestions')->insert(
                     array(
@@ -422,9 +422,9 @@ class PersonNewController extends Controller
         }
         catch(Exception $e)
         {
-            dd($e->getMessage());
+            //dd($e->getMessage());
             DB::rollBack();
-            return view('person.entry-error-repeat-trial');
+            return view('person.entry-error');
         }
         DB::commit();
             
