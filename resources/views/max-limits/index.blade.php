@@ -92,42 +92,6 @@
                 </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Person
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item">تسجيل الدخول</a>
-                        <a class="collapse-item">اضافة حساب جديد</a>
-                        <a class="collapse-item">نسيت كلمة السر؟</a>
-                        <a class="collapse-item">اضافة ملتحق جديد</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                  Summer 2024

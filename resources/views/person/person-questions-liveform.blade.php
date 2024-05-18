@@ -94,7 +94,7 @@
                             </div>
                             <br/>
                             <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown; text-align:center"> الجزء الأخير: الأسئلة الخاصة بكل قطاع</h2>
-                            
+                            <h3 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: rgb(65, 42, 165); text-align:center">ملحوظة: الأسئلة التي يتبعها العلامة (**) هي أسئلة اجبارية يجب الاجابة عليها لاستكمال طلب التسجيل بنجاح</h3>
                             @php
                                 $noQuestionsFlag = true;
                             @endphp
@@ -104,6 +104,9 @@
                                     @if($question->RequiredAnswerType=="MultipleChoice")
                                         <div class="form-group">
                                             <div style="text-align:right">
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                             <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
                                             <br/>
                                             </div>
@@ -117,6 +120,9 @@
                                     @elseif($question->RequiredAnswerType=="OpenQuestion")
                                         <div class="form-group">
                                             <div style="text-align:right">
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                                 <label style="font-family: 'Cairo', sans-serif; text-align:right">{{$question->QuestionText}}</label>
                                                 <br/>
                                             </div>
@@ -128,6 +134,9 @@
                                     @elseif($question->RequiredAnswerType=="TrueOrFalse")
                                         <div class="form-group">
                                             <div style="; text-align:right">
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                             <label for="joindate" style="font-family: 'Cairo', sans-serif;; text-align:right">{{$question->QuestionText}}</label>
                                             <br/>
                                             </div>
