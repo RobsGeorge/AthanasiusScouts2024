@@ -56,9 +56,9 @@
 
                             <div class="container my-auto">
                                 <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Athanasius Scouts 2024</span>
+                                <span>Copyright &copy; Shamandora Scout 2024</span>
                                     <br />
-                                    <span style="font-size: larger;font-weight: bold; color: #4e73df;">كشافة الشمندورة - 2024</span>
+                                    <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
                                 </div>
                             </div>
                         </div>

@@ -45,8 +45,8 @@
                             </div>
 
                             <div class="form-group text-center" dir="rtl">
-                                <label class="text-center" for="email_input" style="font-family: 'Cairo', sans-serif;">الكود</label>
-                                <input dir="rtl" type="text" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large" value="{{$person->ShamandoraCode}}" disabled>
+                                <label class="text-center" for="email_input" style="font-family: 'Cairo', sans-serif;">رقم الطلب</label>
+                                <input dir="rtl" type="text" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large" value="{{$person->PersonID}}" disabled>
                             </div>
 
                             <div class="form-group text-center" dir="rtl">
