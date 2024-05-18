@@ -680,10 +680,22 @@ class PersonNewController extends Controller
             $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
 
             
+            DB::beginTransaction();
+        try{
+            
             foreach ($questions as $question)
             {  
-                $q = $request->QuestionID.'';
-                DB::table('PersonEntryQuestions')->insert(
+                
+                $q = $request[$question->QuestionID];
+                //return $qs;
+
+                if($question->IsRequired&&$q==NULL)
+                {
+                    //return $question->QuestionID;
+                    DB::rollBack();
+                    return view('person.entry-error');
+                }
+                DB::table('NewUsersPersonEntryQuestions')->insert(
                     array(
                         'PersonID' => $request->person_id,
                         'QuestionID' => $question->QuestionID,
@@ -691,8 +703,14 @@ class PersonNewController extends Controller
                     )
                 );
             }
-
-            DB::commit();
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+            DB::rollBack();
+            return view('person.entry-error-repeat-trial');
+        }
+        DB::commit();
             
             return redirect()->route('person.index');
 
