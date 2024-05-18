@@ -366,48 +366,47 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة سؤال جديد</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">اضافة مرحلة جديدة</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('entry-questions.insert') }}">
+                        <form class="user" id="regForm" method="POST" action="{{ route('max-limits.insert') }}">
                             @csrf
                             <div class="card-header py-3">
                                 <div class="">
 
-                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار القطاع الكشفي">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر القطاع الكشفي</option>
-                                        @foreach($qetaat as $qetaa)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار المرحلة الدراسية">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختار المرحلة الدراسية</option>
+                                        @foreach($marahel as $marhala)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhala->SanaMarhalaID}}">{{$marhala->SanaMarhalaName}}</option>
                                         @endforeach
                                         </select>
 
                                         <br>
                                         
-                                        <select class="form-control" style="margin-top: 8px;" name="required_answer_type" id="required_answer_type" onchange="clicked()" placeholder="اختار نوع السؤال">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value=""> اختر نوع السؤال</option>
-                                        @foreach($questionTypes as $questionType)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$questionType->QuestionType}}">{{$questionType->QuestionTypeInArabicWords}}</option>
-                                        @endforeach
-                                        </select>
+                                    <div class="form-group row text-center" dir="rtl">
+                                            <label for="joindate" style="font-family: 'Cairo', sans-serif;">سنة</label>
+                                            <br />
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="year" id="year" onChange="" placeholder="اختار سنة الالتحاق">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" selected>2024</option>
+                                            </select>
+    
+                                    </div>
 
 
 
                                         <br>
-                
-                                        <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
-                                            placeholder="ادخل نص السؤال المطلوب">
-                                        <br>
-                                        <label>سؤال مطلوب "اجباري"؟</label>
-                                        <input type="checkbox" name="questionToBeRequired" checked='' />
+                                        <label><strong>الحد الأقصى لطلبات التسجيل</strong></label>
+                                        <input type="text" class="form-control" name="max_limit" id="max_limit" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
+                                            placeholder="ادخل الحد الأقصى المطلوب لهذه المرحلة">
                                         <br>
 
                                         <div class="" id="container">
 
                                         </div>
                                         <br>
-                                        <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تأكيد ادخال السؤال"></input>
+                                        <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تأكيد الادخال"></input>
                                 </div>
                             </div>
                         </form>

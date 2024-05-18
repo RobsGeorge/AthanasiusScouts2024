@@ -378,6 +378,7 @@
                                             <th>الاختيارات المتاحة</th>
                                             <th></th>
                                             <th>اخفاء السؤال؟</th>
+                                            <th>السؤال مطلوب؟</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -455,6 +456,9 @@
                                             </td>
                                             <td>
                                                 <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':''}} disabled/>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="questionIsRequired" {{ $entryQuestion->IsRequired==1 ? 'checked':''}} disabled/>
                                             </td>
                                         </tr>
                                         @endforeach

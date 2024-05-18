@@ -38,15 +38,35 @@ Route::get('/forgot-password', function () {return view('forgot-password');});
 //Route::get('/createperson','App\Http\Controllers\PersonController@createPersonController');
 //Route::post('/submitPerson','App\Http\Controllers\PersonController@submitPersonController');
 
-//New Routes for Person Information
+//New Routes for Person Information for Live Form
 Route::get('/de7k', array('as'=>'person.de7k','uses'=>'App\Http\Controllers\PersonNewController@showLiveForm'));
 Route::get('/liveform', array('as'=>'person.liveform', 'uses'=>'App\Http\Controllers\PersonNewController@createLiveForm'));
 Route::post('/liveform/insert', array('as'=>'person.liveform-insert', 'uses'=>'App\Http\Controllers\PersonNewController@insertLiveForm'));
 Route::get('/liveform/person/add', array('as' => 'person.liveform-create', 'uses' =>'App\Http\Controllers\PersonNewController@createNewPersonLiveForm'));
 Route::post('/liveform/person/insert', array('as' => 'person.liveform-insert-person', 'uses' => 'App\Http\Controllers\PersonNewController@insertNewPersonLiveForm'));
 Route::get('/liveform/person/entry-questions/insert/{id}', array('as'=> 'person.liveform-entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestionsLiveForm'));
-Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.liveform-entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestionsLiveForm'));
+Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.entry-questions-submit-liveform', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestionsLiveForm'));
 
+Route::get('/liveform/person/delete/{id}', array('as'=> 'person.liveform-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deletesLiveForm'));
+Route::delete('/liveform/person/destroy/{id}', array('as'=> 'person.liveform-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyLiveForm'));
+Route::get('/liveform/person/entry-questions/insert/{id}', array('as'=> 'person.entry-questions-liveform', 'uses'=>'App\Http\Controllers\PersonNewController@getLiveFormQuestions'));
+Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.entry-questions-submit-liveform', 'uses'=>'App\Http\Controllers\PersonNewController@submitLiveFormQuestions'));
+
+Route::get('/liveform/apologize', function() {return view('person.liveform-limit-exceeded');});
+Route::get('/liveform/finalize', function(){return view('person.liveform-finalize');});
+
+Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
+Route::get('/new-enrolments/show/{id}', array('as'=> 'person.new-enrolments-show', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolments'));
+Route::get('/new-enrolments/person/approve/{id}', array('as'=>'person.new-enrolments-approve', 'uses'=>'App\Http\Controllers\PersonNewController@approveNewEnrolments'));
+Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-enrolments-approve-again', 'uses'=>'App\Http\Controllers\PersonNewController@approveAgainNewEnrolments'));
+Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
+Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
+Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
+Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
+
+
+
+//Routes for Person Information for all system
 Route::get('/person', array('as'=> 'person.index', 'uses'=>'App\Http\Controllers\PersonNewController@index'));
 Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/add', array('as' => 'person.create', 'uses' =>'App\Http\Controllers\PersonNewController@create'));
@@ -66,6 +86,16 @@ Route::get('/rotab/edit/{id}', array('as' => 'rotab.edit', 'uses' => 'App\Http\C
 Route::patch('/rotab/update/{id}', array('as'=> 'rotab.update', 'uses'=> 'App\Http\Controllers\RotbaKashfeyaController@updates'));
 Route::get('/rotab/delete/{id}', array('as'=> 'rotab.delete', 'uses'=>'App\Http\Controllers\RotbaKashfeyaController@deletes'));
 Route::delete('/rotab/destroy/{id}', array('as'=> 'rotab.destroy', 'uses'=>'App\Http\Controllers\RotbaKashfeyaController@destroy'));
+
+
+//Routes for LiveForm Max Limits
+Route::get('/max-limits', array('as' => 'max-limits.index', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@index'));
+Route::get('/max-limits/add', array('as' => 'max-limits.create', 'uses' =>'App\Http\Controllers\LiveFormMaxLimitsController@create'));
+Route::post('/max-limits/insert', array('as' => 'max-limits.insert', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@insert'));
+Route::get('/max-limits/edit/{id}', array('as' => 'max-limits.edit', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@edit'));
+Route::patch('/max-limits/update/{id}', array('as'=> 'max-limits.update', 'uses'=> 'App\Http\Controllers\LiveFormMaxLimitsController@updates'));
+Route::get('/max-limits/delete/{id}', array('as'=> 'max-limits.delete', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@deletes'));
+Route::delete('/max-limits/destroy/{id}', array('as'=> 'max-limits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
 
 //Routes for Betakat Takaddom
 Route::get('/betaka', array('as' => 'betaka.index', 'uses' => 'App\Http\Controllers\BetakaTakaddomController@index'));
@@ -157,6 +187,15 @@ Route::get('/entry-questions/edit/{id}', array('as' => 'entry-questions.edit', '
 Route::patch('/entry-questions/update/{id}', array('as'=> 'entry-questions.update', 'uses'=> 'App\Http\Controllers\MarhalaEntryQuestionsController@updates'));
 Route::get('/entry-questions/delete/{id}', array('as'=> 'entry-questions.delete', 'uses'=>'App\Http\Controllers\MarhalaEntryQuestionsController@deletes'));
 Route::delete('/entry-questions/destroy/{id}', array('as'=> 'entry-questions.destroy', 'uses'=>'App\Http\Controllers\MarhalaEntryQuestionsController@destroy'));
+
+//Routes for Entry Questions
+Route::get('/liveform-maxlimits', array('as'=> 'liveform-maxlimits.index', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@index'));
+Route::get('/liveform-maxlimits/add', array('as' => 'liveform-maxlimits.create', 'uses' =>'App\Http\Controllers\LiveFormMaxLimitsController@create'));
+Route::post('/liveform-maxlimits/insert', array('as' => 'liveform-maxlimits.insert', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@insert'));
+Route::get('/liveform-maxlimits/edit/{id}', array('as' => 'liveform-maxlimits.edit', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@edit'));
+Route::patch('/liveform-maxlimits/update/{id}', array('as'=> 'liveform-maxlimits.update', 'uses'=> 'App\Http\Controllers\LiveFormMaxLimitsController@updates'));
+Route::get('/liveform-maxlimits/delete/{id}', array('as'=> 'liveform-maxlimits.delete', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@deletes'));
+Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
 
 //No Title
 Route::get('/multistepform', function () {return view('multistepform');});

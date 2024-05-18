@@ -20,7 +20,7 @@ class QetaaController extends Controller
         public function index()
         {
             $qetaat = DB::table('Qetaa')->get();
-            return view("Qetaa.index", array('qetaat' => $qetaat));
+            return view("qetaa.index", array('qetaat' => $qetaat));
         }
 
         public function create()

@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,10 +21,10 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="../../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
 </head>
 
@@ -40,7 +40,7 @@
                     <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
                 </div>
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
                 <div class="sidebar-brand-text mx-3">Athanasius Scouts</div>
             </a>
 
@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link">
+                <a class="nav-link" href={{ url('/index') }}>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
             </li>
@@ -72,8 +72,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">A</a>
-                        <a class="collapse-item">B</a>
+                        <a class="collapse-item" href="buttons.html">A</a>
+                        <a class="collapse-item" href="cards.html">B</a>
                     </div>
                 </div>
             </li>
@@ -89,7 +89,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">Colors</a>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
                     </div>
                 </div>
             </li>
@@ -112,17 +112,17 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" >تسجيل الدخول</a>
-                        <a class="collapse-item" >اضافة حساب جديد</a>
-                        <a class="collapse-item" >نسيت كلمة السر؟</a>
-                        <a class="collapse-item" >اضافة ملتحق جديد</a>
+                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
+                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
+                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
+                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link" href={{ url('/person') }}>
                     <i class="fas fa-fw fa-table"></i>
                     <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
             </li>
@@ -361,56 +361,150 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">بيانات التحكم</h1>
+                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">الملتحقين الجدد - عام 2024</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة سؤال جديد</h6>
-                        </div>
-                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>تسلسل الطلب</th>
+                                            <th> الاسم</th>
+                                            <th>المرحلة الدراسية</th>
+                                            <th>القطاع</th>
+                                            <th>الرقم القومي</th>
+                                            <th>رقم الموبايل</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($persons as $person)
+                                        <tr> 
+                                            <td>
+                                                {{ $person->PersonID }}
+                                            </td>
 
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('entry-questions.insert') }}">
-                            @csrf
-                            <div class="card-header py-3">
-                                <div class="">
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="personIDLabel-{{$loop->iteration}}">{{ $person->FirstName}} {{$person->SecondName}} {{$person->ThirdName}} {{$person->FourthName}}</label>
+                                            </td>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->SanaMarhalaName}}</label>
+                                            </td>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->QetaaName}}</label>
+                                            </td>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->RaqamQawmy}}</label>
+                                            </td>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="mobileNumberId-{{$loop->iteration}}">{{ $person->PersonPersonalMobileNumber}}</label>
+                                            </td>
+                                            <td>
+                                                @if($person->IsApproved==0)
+                                                    <a href="{{ route('person.new-enrolments-approve', $person->PersonID) }}" 
+                                                        style="appearance: none;
+                                                                background-color: #2ea44f;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > موافقة</a>
+                                                @else
+                                                <a
+                                                style="appearance: none;
+                                                        background-color: #dcdf29;
+                                                        border: 1px solid rgba(27, 31, 35, .15);
+                                                        border-radius: 6px;
+                                                        box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                        box-sizing: border-box;
+                                                        color: #fff;
+                                                        cursor: pointer;
+                                                        display: inline-block;
+                                                        font-size: 14px;
+                                                        font-weight: 600;
+                                                        line-height: 20px;
+                                                        padding: 6px 16px;
+                                                        position: relative;
+                                                        text-align: center;
+                                                        text-decoration: none;
+                                                        user-select: none;
+                                                        -webkit-user-select: none;
+                                                        touch-action: manipulation;
+                                                        vertical-align: middle;
+                                                        white-space: nowrap;" 
+                                                    > تمت الموافقة</a>
+                                                @endif
+                                                    <a href="{{ route('person.new-enrolments-delete', $person->PersonID) }}" 
+                                                        style="appearance: none;
+                                                                background-color: #E21739;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > رفض</a>
 
-                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار القطاع الكشفي">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر القطاع الكشفي</option>
-                                        @foreach($qetaat as $qetaa)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                                    <a href="{{ route('person.new-enrolments-show', $person->PersonID) }}"
+                                                        style="appearance: none;
+                                                                background-color: #202DDF;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > عرض</a>
+                                            </td>
+                                        </tr>
                                         @endforeach
-                                        </select>
-
-                                        <br>
-                                        
-                                        <select class="form-control" style="margin-top: 8px;" name="required_answer_type" id="required_answer_type" onchange="clicked()" placeholder="اختار نوع السؤال">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value=""> اختر نوع السؤال</option>
-                                        @foreach($questionTypes as $questionType)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$questionType->QuestionType}}">{{$questionType->QuestionTypeInArabicWords}}</option>
-                                        @endforeach
-                                        </select>
-
-
-
-                                        <br>
-                
-                                        <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
-                                            placeholder="ادخل نص السؤال المطلوب">
-                                        <br>
-                                        <label>سؤال مطلوب "اجباري"؟</label>
-                                        <input type="checkbox" name="questionToBeRequired" checked='' />
-                                        <br>
-
-                                        <div class="" id="container">
-
-                                        </div>
-                                        <br>
-                                        <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تأكيد ادخال السؤال"></input>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -463,132 +557,42 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script>
 
     <script>
-    
-    var globalIncrement = 0;
-
-    function clicked(){
-    var dropdown = document.getElementById('required_answer_type');
-    var text = dropdown.options[dropdown.selectedIndex].value;
-    console.log(text);
-
-    if(text==="MultipleChoice")
-        {
-            
-
-            console.log('Inside Multiple Choice Options');
-            var container = document.getElementById("container");
-            container.appendChild(document.createElement("br"));
-            while (container.hasChildNodes()) {
-                    container.removeChild(container.lastChild);
-            }
-            
-            var labelA = document.createElement("label");
-            labelA.innerHTML = " أدخل عدد الاختيارات المطلوبة";
-            container.appendChild(labelA);
-            container.appendChild(document.createElement("br"));
-            var labelB = document.createElement("label");
-            labelB.innerHTML = "(بحد أقصى 6 اختيارات فقط)";
-            labelB.style.fontWeight = "bold";
-            container.appendChild(labelB);
-
-
-            container.appendChild(document.createElement("br"));
-
-            var input = document.createElement("input");
-            input.type = "text";
-            input.name = "memberA";
-            input.id = "memberA";
-            input.placeholder = "";
-            input.onchange = "";
-            input.setAttribute("class", "form-control");
-            container.appendChild(input);
-
-            container.appendChild(document.createElement("br"));
-            container.appendChild(document.createElement("hr"));
-            
-            var a = document.createElement("input");
-            a.type = "button";
-            a.id = "filldetails";
-            a.setAttribute("onclick", "addFields()");
-            a.value = "اضغط لاضافة تفاصيل الاختيارات";
-
-            container.appendChild(a);
-            
-            container.appendChild(document.createElement("br"));
-
-        }
-    else
-        {
-            console.log('Inside Else Options');
-            var container = document.getElementById("container");
-            while (container.hasChildNodes()) {
-                    container.removeChild(container.lastChild);
-            }
-        }
-   }
-
-   function addFields(){
-    console.log(globalIncrement);
-    if(globalIncrement!=0)
-    {
-        for(var i = 1; i <= globalIncrement; i++)
-        {
-                document.getElementById("choice"+i).remove();
-                document.getElementById("label"+i).remove();
-                document.getElementById("br"+i).remove();
-                document.getElementById("brx"+i).remove();
-                console.log("Removing choice"+i+" , label"+i+" , br"+i+" , brx"+i);
-        }
-        globalIncrement = 0;
+    function EditButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Editing item ${itemNumber}`);
+        document.getElementById('rotbaIDTextBox-'+itemNumber).removeAttribute("readonly");
+        document.getElementById('SubmitButtonNumber-'+itemNumber).removeAttribute("hidden");
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
-    
-    var numberOfChoices = document.getElementById("memberA").value;
-    if(numberOfChoices>6)
-        numberOfChoices = 6;
-    console.log("Input Function");
-    console.log(numberOfChoices);
-    globalIncrement = numberOfChoices;
 
-    for(var i = 1; i <= numberOfChoices; i++)
-    {
-                var label = document.createElement("label");
-                label.id = "label"+i;
-                label.innerHTML =  "اختيار رقم: "+i;
-                container.appendChild(label);
-                var br = document.createElement("br");
-                br.id = "br"+i;
-                container.appendChild(br);
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "choice" + i;
-                input.id = "choice" + i;
-                container.appendChild(input);
-                // Append a line break 
-                var brx = document.createElement("br");
-                brx.id = "brx"+i;
-                container.appendChild(brx);
-
-                
+    function SubmitButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Submitting item ${itemNumber}`);
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = false;
+        document.getElementById('rotbaIDTextBox-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
-}
-</script>
+    </script>
 
 </body>
 

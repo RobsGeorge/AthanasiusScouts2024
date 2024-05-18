@@ -56,6 +56,11 @@ class MarhalaEntryQuestionsController extends Controller
                 if($i<$numberOfChoices)
                     $stringOfChoices = $stringOfChoices.'|';
             }
+
+            if($request->has('questionIsRequired'))
+                $isRequired = 1;
+            else
+                $isRequired = 0;
             
             DB::table('MarhalaEntryQuestions')->insert(
                     array(
@@ -64,7 +69,8 @@ class MarhalaEntryQuestionsController extends Controller
                         'QuestionText' => $request -> question_text,
                         'RequiredAnswerType' => $request -> required_answer_type,
                         'MCAnswer' => $stringOfChoices,
-                        'NotToBeShown' => 0
+                        'NotToBeShown' => 0,
+                        'IsRequired' => $isRequired,
                     )
                 );
             
@@ -109,7 +115,8 @@ class MarhalaEntryQuestionsController extends Controller
                                         'QuestionsTypes.QuestionTypeInArabicWords', 
                                         'MarhalaEntryQuestions.RequiredAnswerType', 
                                         'MarhalaEntryQuestions.MCAnswer',
-                                        'MarhalaEntryQuestions.NotToBeShown')
+                                        'MarhalaEntryQuestions.NotToBeShown',
+                                        'MarhalaEntryQuestions.IsRequired')
                             ->first();
             $arrayOfMCAnswers = explode('|', $entryQuestion->MCAnswer); 
             //return $arrayOfMCAnswers;
@@ -124,6 +131,12 @@ class MarhalaEntryQuestionsController extends Controller
             else
                 $notToBeShown = 0;
 
+            if($request->has('questionIsRequired'))
+                $isRequired = 1;
+            else
+                $isRequired = 0;
+
+                
                 $numberOfChoices =  $request->answers;
                 
                 $stringOfChoices = "";
@@ -142,7 +155,8 @@ class MarhalaEntryQuestionsController extends Controller
                             ->update(['QuestionText' => $request->question_text, 
                                       'QetaaID' => $request->qetaa_id, 
                                       'NotToBeShown' => $notToBeShown,
-                                      'MCAnswer' => $stringOfChoices
+                                      'MCAnswer' => $stringOfChoices,
+                                      'IsRequired' => $isRequired,
                                     ]);
             
             return redirect()->route('entry-questions.index')->with('status','تم تعديل بنجاح السؤال');

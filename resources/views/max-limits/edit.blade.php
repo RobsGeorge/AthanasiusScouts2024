@@ -72,8 +72,6 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">A</a>
-                        <a class="collapse-item">B</a>
                     </div>
                 </div>
             </li>
@@ -112,10 +110,10 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" >تسجيل الدخول</a>
-                        <a class="collapse-item" >اضافة حساب جديد</a>
-                        <a class="collapse-item" >نسيت كلمة السر؟</a>
-                        <a class="collapse-item" >اضافة ملتحق جديد</a>
+                        <a class="collapse-item">تسجيل الدخول</a>
+                        <a class="collapse-item">اضافة حساب جديد</a>
+                        <a class="collapse-item">نسيت كلمة السر؟</a>
+                        <a class="collapse-item">اضافة ملتحق جديد</a>
                     </div>
                 </div>
             </li>
@@ -366,49 +364,29 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة سؤال جديد</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">تعديل الحد الأقصى</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('entry-questions.insert') }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->SanaMarhalaID) }}">
+                            @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
-                                <div class="">
-
-                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اختار القطاع الكشفي">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر القطاع الكشفي</option>
-                                        @foreach($qetaat as $qetaa)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
-                                        @endforeach
-                                        </select>
-
-                                        <br>
-                                        
-                                        <select class="form-control" style="margin-top: 8px;" name="required_answer_type" id="required_answer_type" onchange="clicked()" placeholder="اختار نوع السؤال">
-                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value=""> اختر نوع السؤال</option>
-                                        @foreach($questionTypes as $questionType)
-                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$questionType->QuestionType}}">{{$questionType->QuestionTypeInArabicWords}}</option>
-                                        @endforeach
-                                        </select>
-
-
-
-                                        <br>
-                
-                                        <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em"
-                                            placeholder="ادخل نص السؤال المطلوب">
-                                        <br>
-                                        <label>سؤال مطلوب "اجباري"؟</label>
-                                        <input type="checkbox" name="questionToBeRequired" checked='' />
-                                        <br>
-
-                                        <div class="" id="container">
-
-                                        </div>
-                                        <br>
-                                        <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تأكيد ادخال السؤال"></input>
+                                <div>
+                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->SanaMarhalaName}}" disabled></input>
+                                <br>
                                 </div>
+                            </div>
+                            
+                            <div style="margin-left: 5px; margin-right: 5px">
+                                <label style="font-family: 'Cairo', sans-serif; color: black;">قيمة الحد الأقصى لطلبات السجيل</label>
+                                <input type="text" class="form-control" name="max_limit" id="max_limit" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em;"
+                                    value="{{$marhalaSelected->MaxLimit}}">
+                                
+                                <br>
+                                <hr>
+                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
                             </div>
                         </form>
                     </div>
@@ -586,6 +564,10 @@
                 container.appendChild(brx);
 
                 
+    }
+
+    function increaseAnswers(){
+
     }
 }
 </script>

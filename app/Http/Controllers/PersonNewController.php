@@ -30,6 +30,100 @@ class PersonNewController extends Controller
             return view("person.person-index", array('persons' => $persons));
         }
 
+
+
+
+
+
+        public function indexNewEnrolments()
+        {
+            $persons = DB::table('NewUsersInformation')
+            ->join('SanaMarhala','SanaMarhala.SanaMarhalaID','=','NewUsersInformation.SanaMarhalaID')
+            ->get();
+            return view("person.new-enrolments-index", array('persons' => $persons));
+        }
+
+        public function countNewEnrolmentsMarahel()
+        {
+            $marahel = array();
+            $counts = array();
+            for($i=3;$i<22;$i++)
+            {
+                $counts[$i] = DB::table('NewUsersInformation')->where('SanaMarhalaID',$i)->count();
+            } 
+            
+            return view('person.new-enrolments-marahel-count', array('marahel'=>$marahel,'counts'=>$counts));
+        }
+
+        public function countNewEnrolmentsQetaat()
+        {
+
+            $counts = array();
+            $qetaat = array();
+            for($i=1;$i<10;$i++)
+            {
+                $counts[$i] = DB::table('NewUsersInformation')->where('QetaaID',$i)->count();
+                $qetaat[$i] = DB::table('Qetaa')->where('QetaaID',$i)->select('QetaaName')->get();
+            }
+            
+            return view('person.new-enrolments-qetaat-count', array('qetaat'=>$qetaat, 'counts'=>$counts));
+        }
+
+
+        public function showNewEnrolments($id)
+        {
+            $person = DB::table('NewUsersInformation')->where('PersonID',$id)
+            ->leftJoin('BloodType', 'BloodType.BloodTypeID','=','NewUsersInformation.BloodTypeID')
+            ->leftJoin('Qetaa', 'Qetaa.QetaaID', '=', 'NewUsersInformation.QetaaID')
+            ->leftJoin('SanaMarhala', 'SanaMarhala.SanaMarhalaID', '=', 'NewUsersInformation.SanaMarhalaID')
+            ->leftJoin('Manteqa', 'Manteqa.ManteqaID', '=', 'NewUsersInformation.ManteqaID')
+            ->leftJoin('Districts', 'Districts.DistrictID', '=', 'NewUsersInformation.DistrictID')
+            ->get()->first();
+            
+            $questions = DB::table('NewUsersPersonEntryQuestions')
+            ->join('MarhalaEntryQuestions', 'MarhalaEntryQuestions.QuestionID', '=', 'NewUsersPersonEntryQuestions.QuestionID')
+            ->select('MarhalaEntryQuestions.QuestionText','NewUsersPersonEntryQuestions.Answer')
+            ->where('NewUsersPersonEntryQuestions.PersonID', $id)->get();
+
+            //return $person->PersonID;
+            return view('person.new-enrolments-show', array('person'=>$person, 'questions'=>$questions));
+        }
+
+        public function deleteNewEnrolments($id)
+        {
+            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.ShamandoraCode')->first();
+
+            return view("person.new-enrolments-delete", array('person' => $person));
+        }
+
+        public function destroyNewEnrolments($id)
+        {
+            DB::beginTransaction();
+
+            DB::table('NewUsersInformation')->where('PersonID',$id)->delete();
+            DB::table('NewUsersPersonEntryQuestions')->where('PersonID', $id)->delete();
+
+            DB::commit();
+
+            return redirect()->route('person.new-enrolments-index');
+        }
+
+        public function approveNewEnrolments($id)
+        {   
+            return redirect()->route('person.new-enrolments-approve-again', $id);
+        }
+
+        public function approveAgainNewEnrolments($id)
+        {
+            $approvedInt = 1;
+            DB::table('NewUsersInformation')->where('PersonID', $id)->update(['IsApproved' => $approvedInt]);
+            return redirect()->route('person.new-enrolments-index', $id);
+        }
+
+
+
+
+
         public function createLiveForm()
         {
 
@@ -42,34 +136,139 @@ class PersonNewController extends Controller
 
         public function insertLiveForm(Request $request)
         {
+            if($request->sana_marhala_id==NULL||$request->gender==NULL)
+            {
+                $seneen_marahel = DB::table('SanaMarhala')->get();
+
+                return view("person.person-create-liveform-1", array(
+                    'seneen_marahel'=>$seneen_marahel
+                ));
+            }
+            //return $request->sana_marhala_id;
             $marhala_limit = DB::table('MarhalaLiveFormLimit')
                         ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
                         ->select('MarhalaLiveFormLimit.MaxLimit')
-                        ->first();
+                        ->first()->MaxLimit;
+            //return $marhala_limit;
 
             $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
                         DB::table('NewUsersInformation')
                         ->where('NewUsersInformation.SanaMarhalaID', $request->sana_marhala_id)
                         ->count();
+            //return $numberOfStudentsCurrentlySubmittedInSanaMarhala;
 
             if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
-            {
+            {      
                 return view('person.liveform-limit-exceeded');
             }
 
-            return view('person.person-create-liveform', array('sana_marhala_id' => $request->sana_marhala_id));
+            $marahel = DB::table('Marhala')->get();
+            $rotab = DB::table('RotbaInformation')->get();
+            $sana_marhala_name = DB::table('SanaMarhala')
+                                -> where('SanaMarhala.SanaMarhalaID',$request->sana_marhala_id)
+                                -> select('SanaMarhalaName')
+                                -> first()
+                                -> SanaMarhalaName;
+
+            $questionTypes = DB::table('QuestionsTypes')->get();
+            $blood = DB::table('BloodType')->get();
+            $betakat = DB::table('EgazetBetakatTaqaddom')->get();
+            $manateq = DB::table('Manteqa')->get();
+            $districts = DB::table('Districts')->get();
+            
+            if($request->sana_marhala_id<5&&$request->sana_marhala_id>2)
+            {
+                $qetaa_name = "براعم";
+                $qetaa_id = 1;
+                $gender = $request->gender;
+            }
+            elseif($request->sana_marhala_id<9&&$request->sana_marhala_id>4)
+            {
+                if($request->gender=="Male")
+                {
+                    $qetaa_name = "أشبال";
+                    $qetaa_id = 2;
+                    $gender = "Male";
+                }
+                elseif($request->gender=="Female")
+                {
+                    $qetaa_name = "زهرات";
+                    $qetaa_id = 9;
+                    $gender = "Female";
+                }
+            }
+            elseif($request->sana_marhala_id<12&&$request->sana_marhala_id>8)
+            {
+                if($request->gender=="Male")
+                {
+                    $qetaa_name = "كشافة";
+                    $qetaa_id = 8;
+                    $gender = "Male";
+                }
+                elseif($request->gender=="Female")
+                {
+                    $qetaa_name = "مرشدات";
+                    $qetaa_id = 6;
+                    $gender = "Female";
+                }
+            }
+            elseif($request->sana_marhala_id<14&&$request->sana_marhala_id>11)
+            {
+                if($request->gender=="Male")
+                {
+                    $qetaa_name = "متقدم";
+                    $qetaa_id = 3;
+                    $gender = "Male";
+                }
+                elseif($request->gender=="Female")
+                {
+                    $qetaa_name = "رائدات";
+                    $qetaa_id = 4;
+                    $gender = "Female";
+                }
+            }
+            elseif($request->sana_marhala_id<21&&$request->sana_marhala_id>14)
+            {
+                    $qetaa_name = "جوالة";
+                    $qetaa_id = 5;
+                    $gender = $request->gender;
+            }
+            else
+            {
+                $qetaa_name = "قادة";
+                $qetaa_id = 7;
+                $gender = $request->gender;
+            }
+            
+
+            return view("person.person-create-liveform", 
+            array('marahel'=>$marahel, 
+                    'rotab'=>$rotab,
+                    'sana_marhala_id'=>$request->sana_marhala_id,
+                    'sana_marhala_name'=>$sana_marhala_name,
+                    'qetaa_id'=>$qetaa_id,
+                    'qetaa_name'=>$qetaa_name,
+                    'gender'=>$gender, 
+                    'questionTypes'=>$questionTypes, 
+                    'blood'=>$blood, 
+                    'manateq'=>$manateq, 
+                    'districts'=>$districts,
+                ));
+            //return view('person.person-create-liveform', array('sana_marhala_id' => $request->sana_marhala_id));
             //return redirect()->route('person.de7k', $marhala_limit);
             //return $request->sana_marhala_id;
         }
 
-        public function insertNewPersonLiveForm()
+        public function insertNewPersonLiveForm(Request $request)
         {
-            $lastPersonID = DB::table('PersonInformation')->orderBy('PersonID','desc')->first();
+            
+            $lastPersonID = DB::table('NewUsersInformation')->orderBy('PersonID','desc')->first();
             
             if($lastPersonID==Null)
                 $thisPersonID = 1;
             else
                 $thisPersonID = $lastPersonID->PersonID + 1;
+            
             
             $shamandoraCode="SH-";
 
@@ -81,6 +280,21 @@ class PersonNewController extends Controller
             }
 
             $shamandoraCode = $shamandoraCode. $thisPersonID;
+            
+            
+              
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        $passString =  implode($pass); //turn the array into a string
+
+        $QetaaName = DB::table('Qetaa')->where('Qetaa.QetaaID', $request->qetaa_id)->first()->QetaaName;
+        //return $QetaaName;
+        try{
 
             $validatedData = $request->validate([
                 'first_name' => 'required',
@@ -103,18 +317,7 @@ class PersonNewController extends Controller
                 'manteqa_id'=>'required',
                 'district_id'=>'required',
               ]);
-
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array(); //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = $alphabet[$n];
-        }
-        $passString =  implode($pass); //turn the array into a string
-
             
-        try{
             DB::table('NewUsersInformation')->insert(
                 array(
                     'PersonID'              => $thisPersonID,
@@ -150,19 +353,75 @@ class PersonNewController extends Controller
                     'IsOPersonalPhoneNumberHavingWhatsapp' => $request->has_whatsapp,
                     'SchoolName'            => $request->person_school,
                     'SchoolGraduationYear'  => $request->school_grad_year,
+                    'QetaaID'               => $request->qetaa_id,
+                    'QetaaName'             => $QetaaName,    
                 )
             );
 
         }
         catch(Exception $e)
         {
-            dd($e->getMessage());
-            return view('person.entry-error');
+            //return view('person.entry-error');
+            //dd($e->getMessage());
+            return view('person.entry-error-repeat-trial');
         }
 
             DB::commit();
 
-            return redirect()->route('person.entry-questions', $thisPersonID);
+            return redirect()->route('person.entry-questions-liveform', $thisPersonID);
+        }
+
+        public function getLiveformQuestions ($id)
+        {
+            $person = DB::table('NewUsersInformation')
+                    ->where('NewUsersInformation.PersonID', $id)
+                    ->first();
+            
+
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->get();
+
+            return view('person.person-questions-liveform', array('questions'=>$questions, 'person'=>$person));
+        }
+
+        public function submitLiveformQuestions(Request $request)
+        {
+            DB::beginTransaction();
+            
+            $person = DB::table('NewUsersInformation')
+                    ->where('NewUsersInformation.PersonID', $request->person_id)
+                    ->first();
+            
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
+            
+        try{
+            foreach ($questions as $question)
+            {  
+                $q = $question->QuestionID.'';
+
+                if($question->isRequired&&$q==NULL)
+                {
+                    DB::rollBack();
+                    return view('person.entry-error');
+                }
+                DB::table('NewUsersPersonEntryQuestions')->insert(
+                    array(
+                        'PersonID' => $request->person_id,
+                        'QuestionID' => $question->QuestionID,
+                        'Answer' => $q
+                    )
+                );
+            }
+        }
+        catch(Exception $e)
+        {
+            //dd($e->getMessage());
+            DB::rollBack();
+            return view('person.entry-error-repeat-trial');
+        }
+        DB::commit();
+            
+        return view('person.liveform-finalize');
+
         }
 
         public function create()
@@ -522,5 +781,7 @@ class PersonNewController extends Controller
 
             return redirect()->route('person.index');
         }
+
+
 
 }
