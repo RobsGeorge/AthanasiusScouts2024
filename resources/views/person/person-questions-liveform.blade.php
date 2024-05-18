@@ -148,11 +148,11 @@
                                         </div>
                                     @endif
                                 @endif
-                                @if($noQuestionsFlag==true)
-                                    <h2 class="text-center" style="font-family: 'Cairo', sans-serif; text-align: center;">لا يوجد أسئلة مختصة لهذا القطاع</h2>
-                                @endif
                             <br/>
                             @endforeach
+                        @if($noQuestionsFlag==true)
+                            <h2 class="text-center" style="font-family: 'Cairo', sans-serif; text-align: center;">لا يوجد أسئلة مختصة لهذا القطاع</h2>
+                        @endif
                         </div>
                         <div class="p-5">
                             <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown; color: azure; font-weight: bolder;" id="submit-button" value="تأكيد"></input>
