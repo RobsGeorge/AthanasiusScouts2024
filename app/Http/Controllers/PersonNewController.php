@@ -224,7 +224,7 @@ class PersonNewController extends Controller
                         ->count();
             //return $numberOfStudentsCurrentlySubmittedInSanaMarhala;
 
-            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
+            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit||$marhala_limit==0)
             {      
                 return view('person.liveform-limit-exceeded');  
             }
