@@ -369,7 +369,7 @@
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->QetaaID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', ['id'=>$marhalaSelected->QetaaID, 'sana_id'=>$marhalaSelected->SanaMarhalaID]) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
@@ -377,6 +377,10 @@
                                 <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->QetaaName}}" disabled></input>
                                 <br>
                                 </div>
+                                <div>
+                                    <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->SanaMarhalaName}}" disabled></input>
+                                    <br>
+                                    </div>
                             </div>
                             
                             <div style="margin-left: 5px; margin-right: 5px">

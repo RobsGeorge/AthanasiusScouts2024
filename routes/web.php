@@ -92,10 +92,10 @@ Route::delete('/rotab/destroy/{id}', array('as'=> 'rotab.destroy', 'uses'=>'App\
 Route::get('/max-limits', array('as' => 'max-limits.index', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@index'));
 Route::get('/max-limits/add', array('as' => 'max-limits.create', 'uses' =>'App\Http\Controllers\LiveFormMaxLimitsController@create'));
 Route::post('/max-limits/insert', array('as' => 'max-limits.insert', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@insert'));
-Route::get('/max-limits/edit/{id}', array('as' => 'max-limits.edit', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@edit'));
-Route::patch('/max-limits/update/{id}', array('as'=> 'max-limits.update', 'uses'=> 'App\Http\Controllers\LiveFormMaxLimitsController@updates'));
-Route::get('/max-limits/delete/{id}', array('as'=> 'max-limits.delete', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@deletes'));
-Route::delete('/max-limits/destroy/{id}', array('as'=> 'max-limits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
+Route::get('/max-limits/edit/{id}/{sana_id}', array('as' => 'max-limits.edit', 'uses' => 'App\Http\Controllers\LiveFormMaxLimitsController@edit'));
+Route::patch('/max-limits/update/{id}/{sana_id}', array('as'=> 'max-limits.update', 'uses'=> 'App\Http\Controllers\LiveFormMaxLimitsController@updates'));
+Route::get('/max-limits/delete/{id}/{sana_id}', array('as'=> 'max-limits.delete', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@deletes'));
+Route::delete('/max-limits/destroy/{id}/{sana_id}', array('as'=> 'max-limits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
 
 //Routes for Betakat Takaddom
 Route::get('/betaka', array('as' => 'betaka.index', 'uses' => 'App\Http\Controllers\BetakaTakaddomController@index'));

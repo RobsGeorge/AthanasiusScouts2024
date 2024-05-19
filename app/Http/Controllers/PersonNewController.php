@@ -208,15 +208,22 @@ class PersonNewController extends Controller
                 $qetaa_id = 7;
                 $gender = $request->gender;
             }
-
+            $marhala_limit = 0;
             //return $request->sana_marhala_id;
+            if(DB::table('MarhalaLiveFormLimit')
+            ->where('MarhalaLiveFormLimit.QetaaID', $qetaa_id)
+            ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
+            ->select('MarhalaLiveFormLimit.MaxLimit')
+            ->exists())
+            {
             $marhala_limit = DB::table('MarhalaLiveFormLimit')
                         ->where('MarhalaLiveFormLimit.QetaaID', $qetaa_id)
                         ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
                         ->select('MarhalaLiveFormLimit.MaxLimit')
                         ->first()->MaxLimit;
             //return $marhala_limit;
-
+            }
+            //return $marhala_limit;
             $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
                         DB::table('NewUsersInformation')
                         ->where('NewUsersInformation.QetaaID', $qetaa_id)
