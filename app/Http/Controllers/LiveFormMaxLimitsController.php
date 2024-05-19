@@ -20,7 +20,7 @@ class LiveFormMaxLimitsController extends Controller
         public function index()
         {
             $marahelLimits = DB::table('MarhalaLiveFormLimit')
-            ->join('SanaMarhala','SanaMarhala.SanaMarhalaID','=','MarhalaLiveFormLimit.SanaMarhalaID')
+            ->join('Qetaa','Qetaa.QetaaID','=','MarhalaLiveFormLimit.QetaaID')
             ->get();
 
             //return $marahelLimits;
@@ -30,23 +30,23 @@ class LiveFormMaxLimitsController extends Controller
 
         public function create()
         {
-            $marahel = DB::table('SanaMarhala')->get();
-            return view("max-limits.create", array('marahel'=>$marahel));
+            $qetaat = DB::table('Qetaa')->get();
+            return view("max-limits.create", array('qetaat'=>$qetaat));
         }
 
         public function insert(Request  $request)
         {
-            $lastQuestionID = DB::table('MarhalaLiveFormLimit')->orderBy('SanaMarhalaID','desc')->first();
+            $lastQuestionID = DB::table('MarhalaLiveFormLimit')->orderBy('QetaaID','desc')->first();
             
             if($lastQuestionID==Null)
                 $thisQuestionID = 1;
             else
-                $thisQuestionID = $lastQuestionID->SanaMarhalaID + 1;
+                $thisQuestionID = $lastQuestionID->QetaaID + 1;
             
             
             DB::table('MarhalaLiveFormLimit')->insert(
                     array(
-                        'SanaMarhalaID' => $thisQuestionID,
+                        'QetaaID' => $thisQuestionID,
                         'MaxLimit' => $request -> max_limit,
                         'Year' => $request -> joindate,
                     )
@@ -77,8 +77,8 @@ class LiveFormMaxLimitsController extends Controller
         {
             //$marahel = DB::table('SanaMarhala')->get();
             $marhalaSelected = DB::table('MarhalaLiveFormLimit')
-                            ->where('MarhalaLiveFormLimit.SanaMarhalaID', '=', $id)
-                            ->Join('SanaMarhala', 'SanaMarhala.SanaMarhalaID', '=', 'MarhalaLiveFormLimit.SanaMarhalaID')
+                            ->where('MarhalaLiveFormLimit.QetaaID', '=', $id)
+                            ->Join('Qetaa', 'Qetaa.QetaaID', '=', 'MarhalaLiveFormLimit.QetaaID')
                             ->first();
             return view("max-limits.edit", array('marhalaSelected'=>$marhalaSelected));
         }
@@ -87,7 +87,7 @@ class LiveFormMaxLimitsController extends Controller
         {
 
             DB::table('MarhalaLiveFormLimit')
-                ->where('SanaMarhalaID',$id)
+                ->where('QetaaID',$id)
                 ->update(
                 [
                     'MaxLimit' => $request -> max_limit,
@@ -101,13 +101,13 @@ class LiveFormMaxLimitsController extends Controller
         public function deletes($id)
         {
             //$marahelLimits = DB::table('MarhalaLiveFormLimit')->get();
-            $selectedMarhala = DB::table('MarhalaLiveFormLimit')->where('SanaMarhalaID', $id)->first();
+            $selectedMarhala = DB::table('MarhalaLiveFormLimit')->where('QetaaID', $id)->first();
             return view("max-limits.delete", array('selectedMarhala'=>$selectedMarhala));
         }
 
         public function destroy($id)
         {
-            DB::table('MarhalaLiveFormLimit')->where('SanaMarhalaID',$id)->delete();
+            DB::table('MarhalaLiveFormLimit')->where('QetaaID',$id)->delete();
             return redirect()->route('max-limits.index');
         }
 }

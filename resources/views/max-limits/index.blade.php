@@ -92,42 +92,6 @@
                 </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Person
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item">تسجيل الدخول</a>
-                        <a class="collapse-item">اضافة حساب جديد</a>
-                        <a class="collapse-item">نسيت كلمة السر؟</a>
-                        <a class="collapse-item">اضافة ملتحق جديد</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                  Summer 2024
@@ -398,7 +362,7 @@
                                     <thead>
                                         <tr>
                                             <th>الرقم</th>
-                                            <th>المرحلة</th>
+                                            <th>القطاع</th>
                                             <th>الحد الأقصى</th>
                                             <th></th>
                                         </tr>
@@ -408,16 +372,16 @@
                                         
                                         <tr> 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $marhala->SanaMarhalaID }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="questionIDLabel-{{$loop->iteration}}">{{ $marhala->QetaaID }}</label>
                                             </td>
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $marhala->SanaMarhalaName }}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaaIDLabel-{{$loop->iteration}}">{{ $marhala->QetaaName }}</label>
                                             </td>
                                             <td>
                                                 <label style="color: #4e73df; font-weight: bolder;" id="questionTextLabel-{{$loop->iteration}}">{{ $marhala->MaxLimit }}</label>
                                             </td>
                                             <td> 
-                                                    <a href="{{ route('max-limits.edit', $marhala->SanaMarhalaID) }}"
+                                                    <a href="{{ route('max-limits.edit', $marhala->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -441,7 +405,7 @@
                                                                 white-space: nowrap;" 
                                                     > تعديل</a>
 
-                                                    <a href="{{ route('max-limits.delete', $marhala->SanaMarhalaID) }}"
+                                                    <a href="{{ route('max-limits.delete', $marhala->QetaaID) }}"
                                                         style="appearance: none;
                                                                 background-color: #E21739;
                                                                 border: 1px solid rgba(27, 31, 35, .15);

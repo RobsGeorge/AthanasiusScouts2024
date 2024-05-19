@@ -92,31 +92,31 @@
                 </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                        <!-- Divider -->
+                        <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Person
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item">تسجيل الدخول</a>
-                        <a class="collapse-item">اضافة حساب جديد</a>
-                        <a class="collapse-item">نسيت كلمة السر؟</a>
-                        <a class="collapse-item">اضافة ملتحق جديد</a>
-                    </div>
-                </div>
-            </li>
+                        <!-- Heading -->
+                        <div class="sidebar-heading">
+                             Summer 2024
+                        </div>
+            
+                        <!-- Nav Item - Pages Collapse Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                                aria-expanded="true" aria-controls="collapsePages">
+                                <i class="fas fa-fw fa-cog"></i>
+                                <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
+                            </a>
+                            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                    <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                                    <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
+                                    <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
+                                    <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
+                                    <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
+                                </div>
+                            </div>
+                        </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -369,12 +369,12 @@
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->SanaMarhalaID) }}">
+                        <form class="user" id="regForm" method="post" action="{{ route('max-limits.update', $marhalaSelected->QetaaID) }}">
                             @method('PATCH')
                             @csrf
                             <div class="card-header py-3">
                                 <div>
-                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->SanaMarhalaName}}" disabled></input>
+                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$marhalaSelected->QetaaName}}" disabled></input>
                                 <br>
                                 </div>
                             </div>

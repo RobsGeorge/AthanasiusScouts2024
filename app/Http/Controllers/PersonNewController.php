@@ -144,38 +144,7 @@ class PersonNewController extends Controller
                     'seneen_marahel'=>$seneen_marahel
                 ));
             }
-            //return $request->sana_marhala_id;
-            $marhala_limit = DB::table('MarhalaLiveFormLimit')
-                        ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
-                        ->select('MarhalaLiveFormLimit.MaxLimit')
-                        ->first()->MaxLimit;
-            //return $marhala_limit;
 
-            $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
-                        DB::table('NewUsersInformation')
-                        ->where('NewUsersInformation.SanaMarhalaID', $request->sana_marhala_id)
-                        ->count();
-            //return $numberOfStudentsCurrentlySubmittedInSanaMarhala;
-
-            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
-            {      
-                return view('person.liveform-limit-exceeded');
-            }
-
-            $marahel = DB::table('Marhala')->get();
-            $rotab = DB::table('RotbaInformation')->get();
-            $sana_marhala_name = DB::table('SanaMarhala')
-                                -> where('SanaMarhala.SanaMarhalaID',$request->sana_marhala_id)
-                                -> select('SanaMarhalaName')
-                                -> first()
-                                -> SanaMarhalaName;
-
-            $questionTypes = DB::table('QuestionsTypes')->get();
-            $blood = DB::table('BloodType')->get();
-            $betakat = DB::table('EgazetBetakatTaqaddom')->get();
-            $manateq = DB::table('Manteqa')->get();
-            $districts = DB::table('Districts')->get();
-            
             if($request->sana_marhala_id<5&&$request->sana_marhala_id>2)
             {
                 $qetaa_name = "براعم";
@@ -239,6 +208,38 @@ class PersonNewController extends Controller
                 $qetaa_id = 7;
                 $gender = $request->gender;
             }
+
+            //return $request->sana_marhala_id;
+            $marhala_limit = DB::table('MarhalaLiveFormLimit')
+                        ->where('MarhalaLiveFormLimit.QetaaID', $qetaa_id)
+                        ->select('MarhalaLiveFormLimit.MaxLimit')
+                        ->first()->MaxLimit;
+            //return $marhala_limit;
+
+            $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
+                        DB::table('NewUsersInformation')
+                        ->where('NewUsersInformation.QetaaID', $qetaa_id)
+                        ->count();
+            //return $numberOfStudentsCurrentlySubmittedInSanaMarhala;
+
+            if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
+            {      
+                return view('person.liveform-limit-exceeded');
+            }
+
+            $marahel = DB::table('Marhala')->get();
+            $rotab = DB::table('RotbaInformation')->get();
+            $sana_marhala_name = DB::table('SanaMarhala')
+                                -> where('SanaMarhala.SanaMarhalaID',$request->sana_marhala_id)
+                                -> select('SanaMarhalaName')
+                                -> first()
+                                -> SanaMarhalaName;
+
+            $questionTypes = DB::table('QuestionsTypes')->get();
+            $blood = DB::table('BloodType')->get();
+            $betakat = DB::table('EgazetBetakatTaqaddom')->get();
+            $manateq = DB::table('Manteqa')->get();
+            $districts = DB::table('Districts')->get();
             
 
             return view("person.person-create-liveform", 
