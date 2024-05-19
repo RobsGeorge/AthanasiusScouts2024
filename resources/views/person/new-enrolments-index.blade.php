@@ -393,12 +393,12 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" style="table-layout: auto; border-collapse: collapse; width: 100%;" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>تسلسل الطلب</th>
+                                            <th>الطلب</th>
                                             <th> الاسم</th>
-                                            <th>المرحلة الدراسية</th>
+                                            <th>المرحلة</th>
                                             <th>القطاع</th>
                                             <th>الرقم القومي</th>
                                             <th>رقم الموبايل</th>
@@ -475,7 +475,7 @@
                                                         touch-action: manipulation;
                                                         vertical-align: middle;
                                                         white-space: nowrap;" 
-                                                    > تمت الموافقة</a>
+                                                    > Done!</a>
                                                 @endif
                                                     <a href="{{ route('person.new-enrolments-delete', $person->PersonID) }}" 
                                                         style="appearance: none;

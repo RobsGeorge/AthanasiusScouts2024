@@ -363,6 +363,7 @@ class PersonNewController extends Controller
         {
             //return view('person.entry-error');
             //dd($e->getMessage());
+            DB::rollBack();
             return view('person.entry-error-repeat-trial');
         }
 
@@ -385,21 +386,27 @@ class PersonNewController extends Controller
 
         public function submitLiveformQuestions(Request $request)
         {
-            DB::beginTransaction();
-            
+            //return $request[88];
+            //$data = $request->all();
             $person = DB::table('NewUsersInformation')
                     ->where('NewUsersInformation.PersonID', $request->person_id)
                     ->first();
             
+            
             $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
             
+            DB::beginTransaction();
         try{
+            
             foreach ($questions as $question)
             {  
-                $q = $question->QuestionID.'';
+                
+                $q = $request[$question->QuestionID];
+                //return $qs;
 
-                if($question->isRequired&&$q==NULL)
+                if($question->IsRequired&&$q==NULL)
                 {
+                    //return $question->QuestionID;
                     DB::rollBack();
                     return view('person.entry-error');
                 }
@@ -414,7 +421,7 @@ class PersonNewController extends Controller
         }
         catch(Exception $e)
         {
-            //dd($e->getMessage());
+            dd($e->getMessage());
             DB::rollBack();
             return view('person.entry-error-repeat-trial');
         }
@@ -661,6 +668,7 @@ class PersonNewController extends Controller
         {
             DB::beginTransaction();
             
+            
             $person = DB::table('PersonInformation')
                     ->where('PersonInformation.PersonID', $request->person_id)
                     ->Join('PersonQetaa', 'PersonInformation.PersonID' , '=', 'PersonQetaa.PersonID')
@@ -672,10 +680,22 @@ class PersonNewController extends Controller
             $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
 
             
+            DB::beginTransaction();
+        try{
+            
             foreach ($questions as $question)
             {  
-                $q = $question->QuestionID.'';
-                DB::table('PersonEntryQuestions')->insert(
+                
+                $q = $request[$question->QuestionID];
+                //return $qs;
+
+                if($question->IsRequired&&$q==NULL)
+                {
+                    //return $question->QuestionID;
+                    DB::rollBack();
+                    return view('person.entry-error');
+                }
+                DB::table('NewUsersPersonEntryQuestions')->insert(
                     array(
                         'PersonID' => $request->person_id,
                         'QuestionID' => $question->QuestionID,
@@ -683,8 +703,14 @@ class PersonNewController extends Controller
                     )
                 );
             }
-
-            DB::commit();
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+            DB::rollBack();
+            return view('person.entry-error-repeat-trial');
+        }
+        DB::commit();
             
             return redirect()->route('person.index');
 
