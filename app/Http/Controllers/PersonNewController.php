@@ -212,6 +212,7 @@ class PersonNewController extends Controller
             //return $request->sana_marhala_id;
             $marhala_limit = DB::table('MarhalaLiveFormLimit')
                         ->where('MarhalaLiveFormLimit.QetaaID', $qetaa_id)
+                        ->where('MarhalaLiveFormLimit.SanaMarhalaID', $request->sana_marhala_id)
                         ->select('MarhalaLiveFormLimit.MaxLimit')
                         ->first()->MaxLimit;
             //return $marhala_limit;
@@ -219,12 +220,13 @@ class PersonNewController extends Controller
             $numberOfStudentsCurrentlySubmittedInSanaMarhala = 
                         DB::table('NewUsersInformation')
                         ->where('NewUsersInformation.QetaaID', $qetaa_id)
+                        ->where('NewUsersInformation.SanaMarhalaID', $request->sana_marhala_id)
                         ->count();
             //return $numberOfStudentsCurrentlySubmittedInSanaMarhala;
 
             if($numberOfStudentsCurrentlySubmittedInSanaMarhala>$marhala_limit)
             {      
-                return view('person.liveform-limit-exceeded');
+                return view('person.liveform-limit-exceeded');  
             }
 
             $marahel = DB::table('Marhala')->get();
@@ -302,7 +304,6 @@ class PersonNewController extends Controller
                 'second_name' => 'required',
                 'third_name' => 'required',
                 'gender'=>'required',
-                'email_input'=> 'email',
                 'birthdate_input' => 'required',
                 'joining_year_input' => 'required',
                 'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
@@ -310,7 +311,6 @@ class PersonNewController extends Controller
                 'instagramLink'=>'url',
                 'blood_type_input'=>'required',
                 'personal_phone_number'=>'required|min_digits:11|max_digits:11',
-                'has_whatsapp'=>'required',
                 'building_number'=>'required',
                 'floor_number'=>'required',
                 'appartment_number' =>'required',
@@ -363,7 +363,7 @@ class PersonNewController extends Controller
         catch(Exception $e)
         {
             //return view('person.entry-error');
-            //dd($e->getMessage());
+            dd($e->getMessage());
             DB::rollBack();
             return view('person.entry-error-repeat-trial');
         }
@@ -694,7 +694,7 @@ class PersonNewController extends Controller
                 {
                     //return $question->QuestionID;
                     DB::rollBack();
-                    return view('person.entry-error');
+                    return view('person.entry-error-repeat-trial');
                 }
                 DB::table('NewUsersPersonEntryQuestions')->insert(
                     array(
