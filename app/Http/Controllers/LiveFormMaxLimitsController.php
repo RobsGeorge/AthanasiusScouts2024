@@ -32,13 +32,68 @@ class LiveFormMaxLimitsController extends Controller
         public function create()
         {
             $qetaat = DB::table('Qetaa')->get();
-            $senee_marahel = DB::table('SanaMarhala')->get();
+            $seneen_marahel = DB::table('SanaMarhala')->get();
             return view("max-limits.create", array('qetaat'=>$qetaat, 'seneen_marahel'=>$seneen_marahel));
         }
 
         public function insert(Request  $request)
         {   
+            //return $request;
             
+            if($request->qetaa_id==NULL||$request->sana_marhala_id==NULL)
+            {
+                return view('person.entry-error-repeat-trial');
+            }
+
+            if($request->qetaa_id==1)
+            {
+                if($request->sana_marhala_id<3||$request->sana_marhala_id>5)
+                    return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==2)
+            {
+                if($request->sana_marhala_id<5||$request->sana_marhala_id>8)
+                    return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==3)
+            {
+                if($request->sana_marhala_id<11||$request->sana_marhala_id>15)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==4)
+            {
+                if($request->sana_marhala_id<11||$request->sana_marhala_id>15)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==5)
+            {
+                if($request->sana_marhala_id<15||$request->sana_marhala_id>20)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==6)
+            {
+                if($request->sana_marhala_id<9||$request->sana_marhala_id>11)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==7)
+            {
+                if($request->sana_marhala_id<21||$request->sana_marhala_id>21)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==8)
+            {
+                if($request->sana_marhala_id<9||$request->sana_marhala_id>11)
+                return view('person.entry-error-repeat-trial');
+            }
+            elseif($request->qetaa_id==9)
+            {
+                if($request->sana_marhala_id<5||$request->sana_marhala_id>8)
+                return view('person.entry-error-repeat-trial');
+            }
+            
+            //return $request;
+            try{
+            DB::beginTransaction();
             DB::table('MarhalaLiveFormLimit')->insert(
                     array(
                         'QetaaID' => $request->qetaa_id,
@@ -47,7 +102,16 @@ class LiveFormMaxLimitsController extends Controller
                         'Year' => $request -> joindate,
                     )
                 );
-            
+            }
+            catch(Exception $e)
+            {
+                //return view('person.entry-error');
+                dd($e->getMessage());
+                DB::rollBack();
+                return view('person.entry-error-repeat-trial');
+            }
+
+        DB::commit();
             return redirect()->route('max-limits.index');
             
         }
@@ -94,7 +158,6 @@ class LiveFormMaxLimitsController extends Controller
             );
             
             return redirect()->route('max-limits.index');
-
         }
     
         public function deletes($id,$sana_id)

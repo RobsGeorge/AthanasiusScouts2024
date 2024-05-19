@@ -337,12 +337,21 @@
                                         </select>
 
                                         <br>
+
+                                        <select class="form-control" style="margin-top: 8px;" name="sana_marhala_id" id="sana_marhala_id" onselect="" placeholder="اختار المرحلة">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختار المرحلة</option>
+                                            @foreach($seneen_marahel as $sana_marhala)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$sana_marhala->SanaMarhalaID}}">{{$sana_marhala->SanaMarhalaName}}</option>
+                                            @endforeach
+                                            </select>
+
+                                        <br>
                                         
                                     <div class="form-group row text-center" dir="rtl">
                                             <label for="joindate" style="font-family: 'Cairo', sans-serif;">سنة</label>
                                             <br />
                                             <select class="form-control col-sm-4" style="margin-right: 20px;" name="year" id="year" onChange="" placeholder="اختار سنة الالتحاق">
-                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" selected>2024</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="2024" selected>2024</option>
                                             </select>
     
                                     </div>
