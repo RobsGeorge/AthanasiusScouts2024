@@ -117,6 +117,9 @@ class PersonNewController extends Controller
 
         public function destroyNewEnrolments($id)
         {
+
+            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.ShamandoraCode')->first();
+            
             DB::beginTransaction();
 
             DB::table('NewUsersInformation')->where('PersonID',$id)->delete();
@@ -124,7 +127,7 @@ class PersonNewController extends Controller
 
             DB::commit();
 
-            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.ShamandoraCode')->first();
+            
 
             return redirect()->route('person.new-enrolments-show-qetaa', $person->QetaaID);
         }
