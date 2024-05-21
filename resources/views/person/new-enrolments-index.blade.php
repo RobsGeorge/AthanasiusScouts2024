@@ -40,19 +40,10 @@
                     <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
                 </div>
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
+            <label class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
                 <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
-            </a>
+            </label>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href={{ url('/index') }}>
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
-            </li>
 
 
             <!-- Divider -->
