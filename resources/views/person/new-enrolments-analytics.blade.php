@@ -94,38 +94,28 @@
                 </div>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
-                Person
-            </div>
+                Summer 2024
+           </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
-                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
-                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
-                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('/person') }}>
-                    <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
-            </li>
+           <!-- Nav Item - Pages Collapse Menu -->
+           <li class="nav-item">
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                   <i class="fas fa-fw fa-cog"></i>
+                   <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
+               </a>
+               <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                   <div class="bg-white py-2 collapse-inner rounded">
+                       <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                       <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
+                       <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
+                       <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
+                       <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
+                   </div>
+               </div>
+           </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -361,7 +351,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">احضائيات الملتحقين الجدد - عام 2024</h1>
+                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">احصائيات الملتحقين الجدد - عام 2024</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -391,7 +381,7 @@
                                                 <label style="color: #4e73df; font-weight: bolder;" id="qetaa_marhala_approved_count">{{$analytic->CountOfApprovedRequests}}</label>
                                             </td>
                                             <td>
-                                                <a href="{{ route('person.new-enrolments-show-qetaa', $analytic->QetaaID) }}"
+                                                <a href="//shamandorascout.com/new-enrolments/show/qetaa/{{$analytic->QetaaID}}"
                                                     style="appearance: none;
                                                             background-color: #1d9dc4;
                                                             border: 1px solid rgba(27, 31, 35, .15);
