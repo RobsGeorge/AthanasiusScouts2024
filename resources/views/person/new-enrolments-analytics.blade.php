@@ -361,7 +361,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">الملتحقين الجدد - عام 2024</h1>
+                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">احضائيات الملتحقين الجدد - عام 2024</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -370,134 +370,50 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>الكود</th>
-                                            <th> الاسم</th>
-                                            <th>المرحلة الدراسية</th>
                                             <th>القطاع</th>
-                                            <th>الرقم القومي</th>
-                                            <th>رقم الموبايل</th>
-                                            <th></th>
+                                            <th>اجمالي عدد الطلبات</th>
+                                            <th>اجمالي عدد الطلبات المقبولة</th>
+                                            <th>رابط طلبات القطاع</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($persons as $person)
+                                        @foreach($analytics as $analytic)
                                         <tr> 
                                             <td>
-                                                {{ $person->ShamandoraCode }}
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaa_id">{{$analytic->QetaaName}}</label>
+                                            </td>
+                                            
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaa_marhala_count">{{$analytic->CountOfRequests}}</label>
                                             </td>
 
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="personIDLabel-{{$loop->iteration}}">{{ $person->FirstName}} {{$person->SecondName}} {{$person->ThirdName}} {{$person->FourthName}}</label>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="qetaa_marhala_approved_count">{{$analytic->CountOfApprovedRequests}}</label>
                                             </td>
                                             <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->SanaMarhalaName}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->QetaaName}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="joiningYearId-{{$loop->iteration}}">{{ $person->RaqamQawmy}}</label>
-                                            </td>
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="mobileNumberId-{{$loop->iteration}}">{{ $person->PersonPersonalMobileNumber}}</label>
-                                            </td>
-                                            <td>
-                                                @if($person->IsApproved==0)
-                                                    <a href="{{ route('person.new-enrolments-approve', $person->PersonID) }}" 
-                                                        style="appearance: none;
-                                                                background-color: #2ea44f;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > موافقة</a>
-                                                @else
-                                                <a
-                                                style="appearance: none;
-                                                        background-color: #dcdf29;
-                                                        border: 1px solid rgba(27, 31, 35, .15);
-                                                        border-radius: 6px;
-                                                        box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                        box-sizing: border-box;
-                                                        color: #fff;
-                                                        cursor: pointer;
-                                                        display: inline-block;
-                                                        font-size: 14px;
-                                                        font-weight: 600;
-                                                        line-height: 20px;
-                                                        padding: 6px 16px;
-                                                        position: relative;
-                                                        text-align: center;
-                                                        text-decoration: none;
-                                                        user-select: none;
-                                                        -webkit-user-select: none;
-                                                        touch-action: manipulation;
-                                                        vertical-align: middle;
-                                                        white-space: nowrap;" 
-                                                    > تمت الموافقة</a>
-                                                @endif
-                                                    <a href="{{ route('person.new-enrolments-delete', $person->PersonID) }}" 
-                                                        style="appearance: none;
-                                                                background-color: #E21739;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > رفض</a>
-
-                                                    <a href="{{ route('person.new-enrolments-show', $person->PersonID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #202DDF;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > عرض</a>
+                                                <a href="{{ route('www.scouts-test.net/new-enrolments/analytics/show/qetaa/{id}', $analytic->QetaaID) }}"
+                                                    style="appearance: none;
+                                                            background-color: #1d9dc4;
+                                                            border: 1px solid rgba(27, 31, 35, .15);
+                                                            border-radius: 6px;
+                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                            box-sizing: border-box;
+                                                            color: #fff;
+                                                            cursor: pointer;
+                                                            display: inline-block;
+                                                            font-size: 14px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            padding: 6px 16px;
+                                                            position: relative;
+                                                            text-align: center;
+                                                            text-decoration: none;
+                                                            user-select: none;
+                                                            -webkit-user-select: none;
+                                                            touch-action: manipulation;
+                                                            vertical-align: middle;
+                                                            white-space: nowrap;" 
+                                                > رابط طلبات القطاع</a>
                                             </td>
                                         </tr>
                                         @endforeach
