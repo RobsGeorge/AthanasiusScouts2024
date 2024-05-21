@@ -118,8 +118,8 @@ class PersonNewController extends Controller
         public function destroyNewEnrolments($id)
         {
 
-            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.ShamandoraCode')->first();
-            
+            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.QetaaID')->first();
+
             DB::beginTransaction();
 
             DB::table('NewUsersInformation')->where('PersonID',$id)->delete();
