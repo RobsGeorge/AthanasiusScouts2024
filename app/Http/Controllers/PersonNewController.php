@@ -124,7 +124,9 @@ class PersonNewController extends Controller
 
             DB::commit();
 
-            return redirect()->route('person.new-enrolments-index');
+            $person = DB::table('NewUsersInformation')->where('PersonID','=',$id)->select('NewUsersInformation.PersonID', 'NewUsersInformation.ShamandoraCode')->first();
+
+            return redirect()->route('person.new-enrolments-show-qetaa', $person->QetaaID);
         }
 
         public function approveNewEnrolments($id)
