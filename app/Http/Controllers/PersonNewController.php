@@ -33,40 +33,59 @@ class PersonNewController extends Controller
 
 
 
-
-
         public function indexNewEnrolments()
-        {
-            $persons = DB::table('NewUsersInformation')
-            ->join('SanaMarhala','SanaMarhala.SanaMarhalaID','=','NewUsersInformation.SanaMarhalaID')
-            ->get();
+        {        
+            $persons = DB::select("SELECT DISTINCT nui.PersonID, 
+                                                    nui.FirstName, 
+                                                    nui.SecondName, 
+                                                    nui.ThirdName, 
+                                                    nui.FourthName, 
+                                                    nui.QetaaName, 
+                                                    sm.SanaMarhalaName, 
+                                                    nui.RaqamQawmy,
+                                                    nui.IsApproved,
+                                                    nui.PersonPersonalMobileNumber, 
+                                                    IF(nupq.PersonID IS NOT NULL, 'نعم', 'لا') AS HasAnsweredQuestions 
+                                                FROM NewUsersInformation nui 
+                                                LEFT JOIN NewUsersPersonEntryQuestions nupq ON nui.PersonID = nupq.PersonID 
+                                                LEFT JOIN SanaMarhala sm ON nui.SanaMarhalaID = sm.SanaMarhalaID;");
+            //return $questionsDistinctCodes;
             return view("person.new-enrolments-index", array('persons' => $persons));
         }
 
-        public function countNewEnrolmentsMarahel()
+        public function showNewEnrolmentsByQetaaID($id)
         {
-            $marahel = array();
-            $counts = array();
-            for($i=3;$i<22;$i++)
-            {
-                $counts[$i] = DB::table('NewUsersInformation')->where('SanaMarhalaID',$i)->count();
-            } 
-            
-            return view('person.new-enrolments-marahel-count', array('marahel'=>$marahel,'counts'=>$counts));
+            $persons = DB::select("SELECT DISTINCT nui.PersonID, 
+                                        nui.FirstName, 
+                                        nui.SecondName, 
+                                        nui.ThirdName, 
+                                        nui.FourthName, 
+                                        nui.QetaaName, 
+                                        sm.SanaMarhalaName, 
+                                        nui.RaqamQawmy,
+                                        nui.IsApproved,
+                                        nui.PersonPersonalMobileNumber, 
+                                        IF(nupq.PersonID IS NOT NULL, 'نعم', 'لا') AS HasAnsweredQuestions 
+                                    FROM NewUsersInformation nui 
+                                    LEFT JOIN NewUsersPersonEntryQuestions nupq ON nui.PersonID = nupq.PersonID 
+                                    LEFT JOIN SanaMarhala sm ON nui.SanaMarhalaID = sm.SanaMarhalaID
+                                    WHERE nui.QetaaID = ?", [$id]);
+            //return $persons;
+            return view("person.new-enrolments-index", array('persons' => $persons));
         }
 
-        public function countNewEnrolmentsQetaat()
+        public function analyticsNewEnrolments()
         {
-
-            $counts = array();
-            $qetaat = array();
-            for($i=1;$i<10;$i++)
-            {
-                $counts[$i] = DB::table('NewUsersInformation')->where('QetaaID',$i)->count();
-                $qetaat[$i] = DB::table('Qetaa')->where('QetaaID',$i)->select('QetaaName')->get();
-            }
-            
-            return view('person.new-enrolments-qetaat-count', array('qetaat'=>$qetaat, 'counts'=>$counts));
+            $analytics = DB::select("SELECT NewUsersInformation.QetaaID,
+                                            NewUsersInformation.QetaaName,
+                                            COUNT(*) AS CountOfRequests,
+                                            COUNT(IF(NewUsersInformation.IsApproved = 1, 1, NULL)) AS CountOfApprovedRequests
+                                    FROM NewUsersInformation
+                                    LEFT JOIN SanaMarhala ON SanaMarhala.SanaMarhalaID = NewUsersInformation.SanaMarhalaID
+                                    GROUP BY NewUsersInformation.QetaaID
+                                    ORDER BY NewUsersInformation.QetaaID ASC");
+            //return $analytics;
+            return view('person.new-enrolments-analytics', array('analytics'=>$analytics));
         }
 
 
@@ -117,7 +136,8 @@ class PersonNewController extends Controller
         {
             $approvedInt = 1;
             DB::table('NewUsersInformation')->where('PersonID', $id)->update(['IsApproved' => $approvedInt]);
-            return redirect()->route('person.new-enrolments-index', $id);
+            $qetaa_id = DB::table('NewUsersInformation')->where('PersonID', $id)->first()->QetaaID;
+            return redirect()->route('person.new-enrolments-show-qetaa', $qetaa_id);
         }
 
 
