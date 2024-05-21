@@ -391,7 +391,7 @@
                                                 <label style="color: #4e73df; font-weight: bolder;" id="qetaa_marhala_approved_count">{{$analytic->CountOfApprovedRequests}}</label>
                                             </td>
                                             <td>
-                                                <a href="{{ route('www.scouts-test.net/new-enrolments/analytics/show/qetaa/{id}', $analytic->QetaaID) }}"
+                                                <a href="//www.scouts-test.net/new-enrolments/analytics/show/qetaa/{{$analytic->QetaaID}}"
                                                     style="appearance: none;
                                                             background-color: #1d9dc4;
                                                             border: 1px solid rgba(27, 31, 35, .15);
