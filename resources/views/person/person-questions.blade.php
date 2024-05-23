@@ -99,6 +99,9 @@
                                     @if($question->RequiredAnswerType=="MultipleChoice")
                                         <div class="form-group">
                                             <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                             <br/>
                                             <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
                                             <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر من الاجابات المتاحة</option>
@@ -110,6 +113,9 @@
                                     @elseif($question->RequiredAnswerType=="OpenQuestion")
                                         <div class="form-group">
                                             <label style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                             <br/>
                                             <input type="text" class="form-control form-control-user" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}" 
                                             style="font-family: 'Cairo', sans-serif; font-size: medium"
@@ -119,6 +125,9 @@
                                     @elseif($question->RequiredAnswerType=="TrueOrFalse")
                                         <div class="form-group">
                                             <label for="joindate" style="font-family: 'Cairo', sans-serif;">{{$question->QuestionText}}</label>
+                                            @if($question->IsRequired==1)
+                                                <label style="font-family: 'Cairo', sans-serif; color:brown">**</label>
+                                            @endif
                                             <br/>
                                             <select class="form-control col-sm-4" style="margin-right: 20px;" name="{{$question->QuestionID}}" id="{{$question->QuestionID}}">
                                             <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نعم أم لا</option>
