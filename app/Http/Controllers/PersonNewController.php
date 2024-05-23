@@ -23,10 +23,32 @@ class PersonNewController extends Controller
         */
         public function index()
         {
-            $persons = DB::table('PersonInformation')
+            /*$persons = DB::table('PersonInformation')
             ->leftJoin('PersonPhoneNumbers', 'PersonInformation.PersonID', '=', 'PersonPhoneNumbers.PersonID')
             ->select('PersonInformation.*', 'PersonPhoneNumbers.PersonPersonalMobileNumber')
-            ->get();
+            ->get();*/
+
+            $persons = DB::select("SELECT DISTINCT  pi.PersonID,
+                                                    pi.ShamandoraCode,
+                                                    pi.FirstName, 
+                                                    pi.SecondName, 
+                                                    pi.ThirdName, 
+                                                    pi.FourthName, 
+                                                    q.QetaaName,
+                                                    pi.ScoutJoiningYear,
+                                                    sm.SanaMarhalaName, 
+                                                    pi.RaqamQawmy,
+                                                    ppn.PersonPersonalMobileNumber,
+                                                    q.QetaaName,
+                                                    IF(peq.PersonID IS NOT NULL, 'نعم', 'لا') AS HasAnsweredQuestions
+                                                FROM PersonInformation pi
+                                                LEFT JOIN PersonEntryQuestions peq ON pi.PersonID = peq.PersonID 
+                                                LEFT JOIN PersonSanaMarhala psm ON psm.PersonID = pi.PersonID
+                                                LEFT JOIN SanaMarhala sm ON sm.SanaMarhalaID = psm.SanaMarhalaID
+                                                LEFT JOIN PersonQetaa pq ON pi.PersonID = pq.PersonID
+                                                LEFT JOIN Qetaa q ON pq.QetaaID = q.QetaaID
+                                                LEFT JOIN PersonPhoneNumbers ppn ON pi.PersonID = ppn.PersonID;");
+
             return view("person.person-index", array('persons' => $persons));
         }
 
