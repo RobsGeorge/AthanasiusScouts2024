@@ -713,7 +713,7 @@ class PersonNewController extends Controller
                     ->select('PersonInformation.*', 'PersonSystemPassword.Password', 'PersonQetaa.QetaaID', 'Qetaa.QetaaName')
                     ->first();
 
-            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->get();
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->where('NotToBeShown', '=', 0)->get();
 
             return view('person.person-questions', array('questions'=>$questions, 'person'=>$person));
         }
@@ -728,7 +728,7 @@ class PersonNewController extends Controller
                     ->select('PersonInformation.*', 'PersonSystemPassword.Password', 'PersonQetaa.QetaaID', 'Qetaa.QetaaName')
                     ->first();
             
-            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
+                    $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->where('NotToBeShown', '=', 0)->get();
             
             
 
