@@ -521,7 +521,6 @@ class PersonNewController extends Controller
                 'second_name' => 'required',
                 'third_name' => 'required',
                 'gender'=>'required',
-                'email_input'=> 'email',
                 'birthdate_input' => 'required',
                 'joining_year_input' => 'required',
                 'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
@@ -699,9 +698,6 @@ class PersonNewController extends Controller
 
         public function submitQuestions(Request $request)
         {
-            DB::beginTransaction();
-            
-            
             $person = DB::table('PersonInformation')
                     ->where('PersonInformation.PersonID', $request->person_id)
                     ->Join('PersonQetaa', 'PersonInformation.PersonID' , '=', 'PersonQetaa.PersonID')
@@ -711,8 +707,11 @@ class PersonNewController extends Controller
                     ->first();
             
             $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
-
             
+            
+
+
+            //return $request;
             DB::beginTransaction();
         try{
             
@@ -728,7 +727,7 @@ class PersonNewController extends Controller
                     DB::rollBack();
                     return view('person.entry-error-repeat-trial');
                 }
-                DB::table('NewUsersPersonEntryQuestions')->insert(
+                DB::table('PersonEntryQuestions')->insert(
                     array(
                         'PersonID' => $request->person_id,
                         'QuestionID' => $question->QuestionID,
