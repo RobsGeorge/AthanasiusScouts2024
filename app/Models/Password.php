@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Roles;
+use App\Models\User;
+use App\Models\Person;
 
-class User extends Authenticatable
+class Password extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,25 +23,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'PersonID',
-        'FirstName',
-        'SecondName',
-        'ThirdName',
-        'ShamandoraCode'
+        'Password'
     ];
 
-    protected $table = "PersonInformation";
     protected $primaryKey = 'PersonID';
+    protected $table = 'PersonSystemPassword';
     public $timestamps = false;
 
-
-    public function roles()
-    {
-        return $this->belongsToMany(Roles::class, 'PersonRole', 'PersonID', 'RoleID');
-    }
-
-    public function password()
-    {
-        return $this->hasOne(Password::class, 'PersonID');
-    }
 
 }
