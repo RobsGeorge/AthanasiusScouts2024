@@ -434,7 +434,7 @@ class PersonNewController extends Controller
                     ->first();
             
 
-            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->get();
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', $person->QetaaID)->where('NotToBeShown', '=', 0)->get();
 
             return view('person.person-questions-liveform', array('questions'=>$questions, 'person'=>$person));
         }
@@ -448,7 +448,7 @@ class PersonNewController extends Controller
                     ->first();
             
             
-            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->get();
+            $questions = DB::table('MarhalaEntryQuestions')->where('QetaaID', '=' ,$person->QetaaID)->where('NotToBeShown', '=', 0)->get();
             
             DB::beginTransaction();
         try{

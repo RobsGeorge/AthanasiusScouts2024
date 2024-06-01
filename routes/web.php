@@ -15,16 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 //General UI Routes
-Route::get('/', function () {return view('index');});
-Route::get('/welcome', function () {return view('welcome');});
-Route::get('/cards', function () {return view('cards');});
-Route::get('/charts', function () {return view('charts');});
-Route::get('/blank', function () {return view('blank');});
-Route::get('/index', function () {return view('index');});
-Route::get('/buttons', function () {return view('buttons');});
+Route::middleware('auth')->group(
+    function(){
+        //Route::get('/', function () {return view('index');})->name('home');
+    });
 
+Route::middleware(['auth','checkAuth:SuperAdmin,Admin'])->group(function(){
+        Route::get('/', function () {return view('index');})->name('home');
+        Route::get('/welcome', function () {return view('welcome');});
+        Route::get('/cards', function () {return view('cards');});
+        Route::get('/charts', function () {return view('charts');});
+        Route::get('/blank', function () {return view('blank');});
+        Route::get('/index', function () {return view('index');});
+        Route::get('/buttons', function () {return view('buttons');});
+});
 //General Registration and Login Routes
-Route::get('/login', function () {return view('login');});
+Route::get('/login-auth', array('as'=>'login-auth', 'uses'=>'App\Http\Controllers\LoginController@show'));
+Route::post('/login', array('as'=>'login', 'uses'=>'App\Http\Controllers\LoginController@login'));
+
+
 Route::get('/register', function () {return view('register');});
 Route::get('/forgot-password', function () {return view('forgot-password');});
 
@@ -55,16 +64,19 @@ Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.entr
 Route::get('/liveform/apologize', function() {return view('person.liveform-limit-exceeded');});
 Route::get('/liveform/finalize', function(){return view('person.liveform-finalize');});
 
-Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
-Route::get('/new-enrolments/show/qetaa/{id}', array('as'=> 'person.new-enrolments-show-qetaa', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolmentsByQetaaID'));
-Route::get('/new-enrolments/show/{id}', array('as'=> 'person.new-enrolments-show', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolments'));
-Route::get('/new-enrolments/person/approve/{id}', array('as'=>'person.new-enrolments-approve', 'uses'=>'App\Http\Controllers\PersonNewController@approveNewEnrolments'));
-Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-enrolments-approve-again', 'uses'=>'App\Http\Controllers\PersonNewController@approveAgainNewEnrolments'));
-Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
-Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
-Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
-Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
-Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analytics', 'uses'=>'App\Http\Controllers\PersonNewController@analyticsNewEnrolments'));
+Route::middleware(['auth','checkAuth:SuperAdmin'])->group(function(){
+    Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
+    Route::get('/new-enrolments/show/qetaa/{id}', array('as'=> 'person.new-enrolments-show-qetaa', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolmentsByQetaaID'));
+    Route::get('/new-enrolments/show/{id}', array('as'=> 'person.new-enrolments-show', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolments'));
+    Route::get('/new-enrolments/person/approve/{id}', array('as'=>'person.new-enrolments-approve', 'uses'=>'App\Http\Controllers\PersonNewController@approveNewEnrolments'));
+    Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-enrolments-approve-again', 'uses'=>'App\Http\Controllers\PersonNewController@approveAgainNewEnrolments'));
+    Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
+    Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
+    Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
+    Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
+    Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analytics', 'uses'=>'App\Http\Controllers\PersonNewController@analyticsNewEnrolments'));
+
+
 
 
 //Routes for Person Information for all system
@@ -197,8 +209,8 @@ Route::get('/liveform-maxlimits/edit/{id}', array('as' => 'liveform-maxlimits.ed
 Route::patch('/liveform-maxlimits/update/{id}', array('as'=> 'liveform-maxlimits.update', 'uses'=> 'App\Http\Controllers\LiveFormMaxLimitsController@updates'));
 Route::get('/liveform-maxlimits/delete/{id}', array('as'=> 'liveform-maxlimits.delete', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@deletes'));
 Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
+});
 
-//No Title
-Route::get('/multistepform', function () {return view('multistepform');});
-
-
+Route::group(['middleware' => ['auth']], function() {
+    Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
+});
