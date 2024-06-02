@@ -345,7 +345,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Athanasius Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts 2023</span>
                         <br />
                         <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir Samir George</span>
                     </div>

@@ -49,6 +49,9 @@
                                 <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأول: البيانات الشخصية</h2>
                             </div>
+                            <div>
+                                <input type="text" class="form-control form-control-user" name="RequestPersonID" id="RequestPersonID" style="font-family: 'Cairo', sans-serif; font-size: medium" value="{{Auth()->user()->PersonID}}" hidden>
+                            </div>
                                 <div class="form-group row" dir="rtl">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"

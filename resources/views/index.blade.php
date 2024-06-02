@@ -37,7 +37,7 @@
                 </div>
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
-                <div class="sidebar-brand-text mx-3">Athanasius Scouts</div>
+                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
             </a>
 
             <!-- Divider -->
@@ -85,6 +85,8 @@
                         <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
                         <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
                         <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
+                        <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
+                        <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
                     </div>
                 </div>
             </li>
@@ -687,7 +689,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Athanasius Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts 2023</span>
                         <br />
                         <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir S. George</span>
                     </div>
