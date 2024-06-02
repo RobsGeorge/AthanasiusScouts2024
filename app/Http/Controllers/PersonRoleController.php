@@ -59,7 +59,7 @@ class PersonRoleController extends Controller
             if($lastPersonRoleID==Null)
                 $thisPersonRoleID = 1;
             else
-                $thisPersonRoleID = $lastPersonRoleID->RoleID + 1;
+                $thisPersonRoleID = $lastPersonRoleID->PersonRoleID + 1;
 
             DB::table('PersonRole')->insert(
                 array(
