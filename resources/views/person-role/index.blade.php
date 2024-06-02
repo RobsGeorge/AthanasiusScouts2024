@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,10 +21,10 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="../../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
 </head>
 
@@ -40,7 +40,7 @@
                     <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
                 </div>
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
                 <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
             </a>
 
@@ -49,7 +49,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link">
+                <a class="nav-link" href={{ url('/index') }}>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
             </li>
@@ -72,6 +72,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
+                        <a class="collapse-item" href="buttons.html">A</a>
+                        <a class="collapse-item" href="cards.html">B</a>
                     </div>
                 </div>
             </li>
@@ -87,38 +89,43 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">Colors</a>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
                     </div>
                 </div>
             </li>
 
-                                 <!-- Divider -->
-                                 <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-                                 <!-- Heading -->
-                                 <div class="sidebar-heading">
-                                      Summer 2024
-                                 </div>
-                     
-                                 <!-- Nav Item - Pages Collapse Menu -->
-                                 <li class="nav-item">
-                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                                         aria-expanded="true" aria-controls="collapsePages">
-                                         <i class="fas fa-fw fa-cog"></i>
-                                         <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
-                                     </a>
-                                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                                         <div class="bg-white py-2 collapse-inner rounded">
-                                             <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                                             <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
-                                             <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
-                                             <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
-                                             <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
-                                             <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
-                                         </div>
-                                     </div>
-                                 </li>
-         
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Person
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
+                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
+                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
+                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href={{ url('/person') }}>
+                    <i class="fas fa-fw fa-table"></i>
+                    <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -359,62 +366,118 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل سؤال</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Assign System Roles</h6>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>تسلسل</th>
+                                            <th>كود الشمندورة</th>
+                                            <th> الاسم</th>
+                                            <th> (System Role) الدور</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($personRoles as $personRole)
+                                        <tr> 
+                                            <td>
+                                                {{ $personRole->PersonRoleID }}
+                                            </td>
 
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('entry-questions.update', $entryQuestion->QuestionID) }}">
-                            @method('PATCH')
-                            @csrf
-                            <div class="card-header py-3">
-                                <div>
-                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$entryQuestion->QuestionTypeInArabicWords}}" disabled></input>
-                                <br>
-                                <input style="font-family: 'Cairo', sans-serif; color: black;" value="{{$entryQuestion->QetaaName}}" disabled></input>
-                                <br>
-                                </div>
-                            </div>
-                            
-                            <div style="margin-left: 5px; margin-right: 5px">
-                                <div style="display: flex;align-items: center;">
-                                    <span>اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا ويمكنك أيضاً تعديل نص السؤال</span>
-                                </div>
-                                <select class="form-control" style="margin-top: 8px; margin-bottom:  8px;" name="qetaa_id" id="qetaa_id" onselect="" placeholder="اذا كنت تريد تغيير القطاع المربوط بالسؤال قم باختيار القطاع الجديد من هنا">
-                                @foreach($qetaat as $qetaa)
-                                    @if($qetaa->QetaaID == $qetaaSelected->QetaaID)
-                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}" selected>{{$qetaa->QetaaName}}</option>
-                                    @else
-                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
-                                    @endif
-                                @endforeach
-                                </select>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="rotbaIDLabel-{{$loop->iteration}}">{{ $personRole->ShamandoraCode }}</label>
+                                            </td>
 
-                                <br>
-                                <input type="text" class="form-control" name="question_text" id="question_text" style="font-family: 'Cairo', sans-serif; font-size: medium; line-height: 6em;"
-                                    placeholder="ادخل نص السؤال المطلوب" value="{{$entryQuestion->QuestionText}}">
-                                
-                                <br>
-                                <label>اخفاء السؤال؟</label>
-                                <input type="checkbox" name="questionNotToBeShown" {{ $entryQuestion->NotToBeShown==1 ? 'checked':'' }} />
-                                <br>
-                                <label>السؤال مطلوب "اجباري"؟</label>
-                                <input type="checkbox" name="questionIsRequired" {{ $entryQuestion->IsRequired==1 ? 'checked':'' }} />
-                                <br>
-                                @if($entryQuestion->RequiredAnswerType=="MultipleChoice")
-                                <label>الاختيارات</label>
-                                <br>
-                                <input type="input" value="{{count($arrayOfMCAnswers)}}" name="answers" id="answers" style="text-align: center; margin-left: 8px" hidden/>
-                                <br>
-                                    @foreach($arrayOfMCAnswers as $answer)
-                                        <input type="text" class="" style="margin-top: 8px; margin-left: 4px; text-align: center;" name="answer{{$loop->iteration}}" id="answer{{$loop->iteration}}" value="{{$answer}}"/>
-                                        <br>
-                                    @endforeach
-                                @endif
-                                <hr>
-                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="rotbaIDLabel-{{$loop->iteration}}">{{ $personRole->PersonFullName }}</label>
+                                            </td>
+
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="rotbaIDLabel-{{$loop->iteration}}">{{ $personRole->RoleName }}</label>
+                                            </td>
+
+                                            <td> 
+                                                    <a href="{{ route('person-role.edit', $personRole->PersonRoleID) }}"
+                                                        style="appearance: none;
+                                                                background-color: #2ea44f;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > تعديل</a>
+
+                                                    <a href="{{ route('person-role.delete', $personRole->PersonRoleID) }}"
+                                                        style="appearance: none;
+                                                                background-color: #E21739;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > مسح</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+                            <div>
+                                                <a href="{{ route('person-role.create') }}"  style="appearance: none;
+                                                            background-color: #1216F0;
+                                                            border: 1px solid rgba(27, 31, 35, .15);
+                                                            border-radius: 6px;
+                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                            box-sizing: border-box;
+                                                            color: #fff;
+                                                            cursor: pointer;
+                                                            display: inline-block;
+                                                            font-size: 14px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            padding: 6px 16px;
+                                                            position: relative;
+                                                            text-align: center;
+                                                            text-decoration: none;
+                                                            user-select: none;
+                                                            -webkit-user-select: none;
+                                                            touch-action: manipulation;
+                                                            vertical-align: middle;
+                                                            white-space: nowrap;" 
+                                                id="s"> ربط جديد</a>
+                                </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -467,136 +530,42 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
     <script>
-    
-    var globalIncrement = 0;
-
-    function clicked(){
-    var dropdown = document.getElementById('required_answer_type');
-    var text = dropdown.options[dropdown.selectedIndex].value;
-    console.log(text);
-
-    if(text==="MultipleChoice")
-        {
-            
-
-            console.log('Inside Multiple Choice Options');
-            var container = document.getElementById("container");
-            container.appendChild(document.createElement("br"));
-            while (container.hasChildNodes()) {
-                    container.removeChild(container.lastChild);
-            }
-            
-            var labelA = document.createElement("label");
-            labelA.innerHTML = " أدخل عدد الاختيارات المطلوبة";
-            container.appendChild(labelA);
-            container.appendChild(document.createElement("br"));
-            var labelB = document.createElement("label");
-            labelB.innerHTML = "(بحد أقصى 6 اختيارات فقط)";
-            labelB.style.fontWeight = "bold";
-            container.appendChild(labelB);
-
-
-            container.appendChild(document.createElement("br"));
-
-            var input = document.createElement("input");
-            input.type = "text";
-            input.name = "memberA";
-            input.id = "memberA";
-            input.placeholder = "";
-            input.onchange = "";
-            input.setAttribute("class", "form-control");
-            container.appendChild(input);
-
-            container.appendChild(document.createElement("br"));
-            container.appendChild(document.createElement("hr"));
-            
-            var a = document.createElement("input");
-            a.type = "button";
-            a.id = "filldetails";
-            a.setAttribute("onclick", "addFields()");
-            a.value = "اضغط لاضافة تفاصيل الاختيارات";
-
-            container.appendChild(a);
-            
-            container.appendChild(document.createElement("br"));
-
-        }
-    else
-        {
-            console.log('Inside Else Options');
-            var container = document.getElementById("container");
-            while (container.hasChildNodes()) {
-                    container.removeChild(container.lastChild);
-            }
-        }
-   }
-
-   function addFields(){
-    console.log(globalIncrement);
-    if(globalIncrement!=0)
-    {
-        for(var i = 1; i <= globalIncrement; i++)
-        {
-                document.getElementById("choice"+i).remove();
-                document.getElementById("label"+i).remove();
-                document.getElementById("br"+i).remove();
-                document.getElementById("brx"+i).remove();
-                console.log("Removing choice"+i+" , label"+i+" , br"+i+" , brx"+i);
-        }
-        globalIncrement = 0;
-    }
-    
-    var numberOfChoices = document.getElementById("memberA").value;
-    if(numberOfChoices>6)
-        numberOfChoices = 6;
-    console.log("Input Function");
-    console.log(numberOfChoices);
-    globalIncrement = numberOfChoices;
-
-    for(var i = 1; i <= numberOfChoices; i++)
-    {
-                var label = document.createElement("label");
-                label.id = "label"+i;
-                label.innerHTML =  "اختيار رقم: "+i;
-                container.appendChild(label);
-                var br = document.createElement("br");
-                br.id = "br"+i;
-                container.appendChild(br);
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "choice" + i;
-                input.id = "choice" + i;
-                container.appendChild(input);
-                // Append a line break 
-                var brx = document.createElement("br");
-                brx.id = "brx"+i;
-                container.appendChild(brx);
-
-                
+    function EditButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Editing item ${itemNumber}`);
+        document.getElementById('rotbaIDTextBox-'+itemNumber).removeAttribute("readonly");
+        document.getElementById('SubmitButtonNumber-'+itemNumber).removeAttribute("hidden");
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
 
-    function increaseAnswers(){
-
+    function SubmitButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Submitting item ${itemNumber}`);
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = false;
+        document.getElementById('rotbaIDTextBox-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
-}
-</script>
+    </script>
 
 </body>
 

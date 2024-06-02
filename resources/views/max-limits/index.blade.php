@@ -41,7 +41,7 @@
                 </div>
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-text mx-3">Athanasius Scouts</div>
+                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
             </a>
 
             <!-- Divider -->
@@ -307,30 +307,30 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">{{Auth::user()->FirstName}} {{Auth::user()->SecondName}}</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    {{Auth::user()->ShamandoraCode}}
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    {{Auth::user()->roles[0]->RoleName}}
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
+                                    @csrf <!-- Include the CSRF token -->
+                                    <button type="submit">Log Out</button>
+                                </form>
                             </div>
                         </li>
 
@@ -475,7 +475,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Athanasius Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts 2023</span>
                         <br />
                         <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir Samir George</span>
                     </div>

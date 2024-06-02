@@ -35,7 +35,7 @@
                 </div>
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
-                <div class="sidebar-brand-text mx-3">Athanasius Scouts</div>
+                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
             </a>
 
             <!-- Divider -->

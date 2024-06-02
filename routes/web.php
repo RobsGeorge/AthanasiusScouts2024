@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //General UI Routes
-Route::middleware('auth')->group(
-    function(){
-        //Route::get('/', function () {return view('index');})->name('home');
-    });
-
 Route::middleware(['auth','checkAuth:SuperAdmin,Admin'])->group(function(){
         Route::get('/', function () {return view('index');})->name('home');
         Route::get('/welcome', function () {return view('welcome');});
@@ -64,19 +59,37 @@ Route::post('/liveform/person/entry-questions/submit', array('as'=> 'person.entr
 Route::get('/liveform/apologize', function() {return view('person.liveform-limit-exceeded');});
 Route::get('/liveform/finalize', function(){return view('person.liveform-finalize');});
 
-Route::middleware(['auth','checkAuth:SuperAdmin'])->group(function(){
-    Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
-    Route::get('/new-enrolments/show/qetaa/{id}', array('as'=> 'person.new-enrolments-show-qetaa', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolmentsByQetaaID'));
-    Route::get('/new-enrolments/show/{id}', array('as'=> 'person.new-enrolments-show', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolments'));
-    Route::get('/new-enrolments/person/approve/{id}', array('as'=>'person.new-enrolments-approve', 'uses'=>'App\Http\Controllers\PersonNewController@approveNewEnrolments'));
-    Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-enrolments-approve-again', 'uses'=>'App\Http\Controllers\PersonNewController@approveAgainNewEnrolments'));
-    Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
-    Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
-    Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
-    Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
-    Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analytics', 'uses'=>'App\Http\Controllers\PersonNewController@analyticsNewEnrolments'));
+Route::middleware(['auth','checkAuth:SuperAdmin,Admin'])->group(function(){
+
+Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
+Route::get('/new-enrolments/show/qetaa/{id}', array('as'=> 'person.new-enrolments-show-qetaa', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolmentsByQetaaID'));
+Route::get('/new-enrolments/show/{id}', array('as'=> 'person.new-enrolments-show', 'uses'=>'App\Http\Controllers\PersonNewController@showNewEnrolments'));
+Route::get('/new-enrolments/person/approve/{id}', array('as'=>'person.new-enrolments-approve', 'uses'=>'App\Http\Controllers\PersonNewController@approveNewEnrolments'));
+Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-enrolments-approve-again', 'uses'=>'App\Http\Controllers\PersonNewController@approveAgainNewEnrolments'));
+Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
+Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
+Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
+Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
+Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analytics', 'uses'=>'App\Http\Controllers\PersonNewController@analyticsNewEnrolments'));
+
+//Routes for Roles
+Route::get('/role', array('as'=> 'role.index', 'uses'=> 'App\Http\Controllers\RoleController@index'));
+Route::get('/role/add', array('as' => 'role.create', 'uses' =>'App\Http\Controllers\RoleController@create'));
+Route::post('/role/insert', array('as' => 'role.insert', 'uses' => 'App\Http\Controllers\RoleController@insert'));
+Route::get('/role/edit/{id}', array('as' => 'role.edit', 'uses' => 'App\Http\Controllers\RoleController@edit'));
+Route::patch('/role/update/{id}', array('as'=> 'role.update', 'uses'=> 'App\Http\Controllers\RoleController@updates'));
+Route::get('/role/delete/{id}', array('as'=> 'role.delete', 'uses'=>'App\Http\Controllers\RoleController@deletes'));
+Route::delete('/role/destroy/{id}', array('as'=> 'role.destroy', 'uses'=>'App\Http\Controllers\RoleController@destroy'));
 
 
+//Routes for Roles
+Route::get('/person-role', array('as'=> 'person-role.index', 'uses'=> 'App\Http\Controllers\PersonRoleController@index'));
+Route::get('/person-role/add', array('as' => 'person-role.create', 'uses' =>'App\Http\Controllers\PersonRoleController@create'));
+Route::post('/person-role/insert', array('as' => 'person-role.insert', 'uses' => 'App\Http\Controllers\PersonRoleController@insert'));
+Route::get('/person-role/edit/{id}', array('as' => 'person-role.edit', 'uses' => 'App\Http\Controllers\PersonRoleController@edit'));
+Route::patch('/person-role/update/{id}', array('as'=> 'person-role.update', 'uses'=> 'App\Http\Controllers\PersonRoleController@updates'));
+Route::get('/person-role/delete/{id}', array('as'=> 'person-role.delete', 'uses'=>'App\Http\Controllers\PersonRoleController@deletes'));
+Route::delete('/person-role/destroy/{id}', array('as'=> 'person-role.destroy', 'uses'=>'App\Http\Controllers\PersonRoleController@destroy'));
 
 
 //Routes for Person Information for all system
