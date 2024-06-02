@@ -409,7 +409,7 @@ class PersonNewController extends Controller
                     'SchoolName'            => $request->person_school,
                     'SchoolGraduationYear'  => $request->school_grad_year,
                     'QetaaID'               => $request->qetaa_id,
-                    'QetaaName'             => $QetaaName,    
+                    'QetaaName'             => $QetaaName,  
                 )
             );
 
@@ -516,6 +516,7 @@ class PersonNewController extends Controller
 
         public function insert(Request  $request)
         {
+            
             $lastPersonID = DB::table('PersonInformation')->orderBy('PersonID','desc')->first();
             
             if($lastPersonID==Null)
@@ -578,7 +579,8 @@ class PersonNewController extends Controller
                     'BloodTypeID' => $request->blood_type_input,
                     'FacebookProfileURL' =>$request->inputFacebookLink,
                     'InstagramProfileURL' =>$request->inputInstagramLink,
-                    'PersonalEmail' => $request->email_input
+                    'PersonalEmail' => $request->email_input,
+                    'RequestPersonID' => $request->RequestPersonID,
                 )
             );
 
