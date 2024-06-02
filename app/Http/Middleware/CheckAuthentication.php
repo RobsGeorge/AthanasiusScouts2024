@@ -13,20 +13,31 @@ class CheckAuthentication
 {
     public function handle($request, Closure $next, $role)
     {
+        //dd($role);
+        $rolesArraySentInRequest = explode("|",$role);
+
+        //dd($rolesArraySentInRequest);
         // Check if the user is authenticated
         if (!auth()->check()) {
             return redirect()->route('login-auth'); // Redirect to login page
         }
     
         // Get the user's roles
-        $userRoles = auth()->user()->roles;
-        
+        $userRole = auth()->user()->role;
+        //dd($userRole);
+
+        $flagUnAuthorized = true;
         // Check if the user has the required role
-        if (!$userRoles->contains('RoleName', $role)) {
-            //return "UnAuthorized";
-            return response()->view('unauthorized', [], 403);
-            //abort(403, 'Unauthorized'); // Return 403 error
+        foreach($rolesArraySentInRequest as $roleSent){
+            if ($userRole->contains('RoleName', $roleSent)) {
+                $flagUnAuthorized = false;
+            }
         }
+
+        //dd($flagUnAuthorized);
+
+        if($flagUnAuthorized)
+            return response()->view('unauthorized', [], 403);
     
         return $next($request);
     }

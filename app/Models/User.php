@@ -31,7 +31,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
 
-    public function roles()
+    public function role()
     {
         return $this->belongsToMany(Roles::class, 'PersonRole', 'PersonID', 'RoleID');
     }

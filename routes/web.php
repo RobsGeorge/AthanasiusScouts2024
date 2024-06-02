@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //General UI Routes
-Route::middleware(['auth','checkAuth:SuperAdmin,Admin'])->group(function(){
+Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
         Route::get('/', function () {return view('index');})->name('home');
         Route::get('/welcome', function () {return view('welcome');});
         Route::get('/cards', function () {return view('cards');});
@@ -82,7 +82,7 @@ Route::delete('/person-role/destroy/{id}', array('as'=> 'person-role.destroy', '
 });
 
 
-Route::middleware(['auth','checkAuth:SuperAdmin,Admin,Khadem'])->group(function(){
+Route::middleware(['auth','checkAuth:SuperAdmin|Admin|Khadem'])->group(function(){
 //Routes for Person Information for all system
 Route::get('/person', array('as'=> 'person.index', 'uses'=>'App\Http\Controllers\PersonNewController@index'));
 Route::get('/person/add', array('as' => 'person.create', 'uses' =>'App\Http\Controllers\PersonNewController@create'));
@@ -92,7 +92,7 @@ Route::post('/person/entry-questions/submit', array('as'=> 'person.entry-questio
 });
 
 
-Route::middleware(['auth','checkAuth:SuperAdmin,Admin'])->group(function(){
+Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
 
 Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));
