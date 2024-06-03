@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -25,6 +25,10 @@
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
     
 </head>
 
@@ -380,17 +384,18 @@
                                 <div class="form-group text-center" dir="rtl">
                                     <label for="khademname" style="font-family: 'Cairo', sans-serif;">اختر اسم الخادم</label>
                                     <br />
-                                    <select class="form-control col-sm-4" style="margin-right: 20px;" name="person_id" id="person_id">
-                                    <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر اسم الخادم</option>
-                                    @foreach($khoddam as $khadem)
-                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$khadem->PersonID}}">{{$khadem->PersonFullName}}</option>
-                                    @endforeach
+                                    <select class="form-control col-sm-4 select2" style="margin-right: 20px;" name="person_id" id="person_id">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر اسم الخادم</option>
+                                        @foreach($khoddam as $khadem)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$khadem->PersonID}}">{{$khadem->PersonFullName}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-group text-center" dir="rtl">
                                     <label for="rolename" style="font-family: 'Cairo', sans-serif;">اختر الدور/المهمة</label>
                                     <br />
-                                    <select class="form-control col-sm-4" style="margin-right: 20px;" name="role_id" id="role_id">
+                                    <select class="form-control col-sm-4 select2" style="margin-right: 20px;" name="role_id" id="role_id">
                                     <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر الدور/المهمة</option>
                                     @foreach($roles as $role)
                                     <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$role->RoleID}}">{{$role->RoleName}}</option>
@@ -453,7 +458,22 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#person_id').select2({
+                theme: "classic"
+            });
+            
+        });
+    </script>
+        <script>
+            $(document).ready(function() {
+                $('#role_id').select2({
+                    theme: "classic"
+                });
+            });
+        </script>
+    
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -468,30 +488,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
-
-    <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
-
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
-    }
-    */
-</script>
 
 </body>
 
