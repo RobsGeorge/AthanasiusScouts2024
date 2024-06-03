@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//General UI Routes
-Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
-        Route::get('/', function () {return view('index');})->name('home');
         Route::get('/welcome', function () {return view('welcome');});
         Route::get('/cards', function () {return view('cards');});
         Route::get('/charts', function () {return view('charts');});
         Route::get('/blank', function () {return view('blank');});
         Route::get('/index', function () {return view('index');});
         Route::get('/buttons', function () {return view('buttons');});
+        Route::get('/utilities-animation', function () {return view('utilities-animation');});
+
+//General UI Routes
+Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
+        Route::get('/', function () {return view('index');})->name('home');
+        
 });
 //General Registration and Login Routes
 Route::get('/login-auth', array('as'=>'login-auth', 'uses'=>'App\Http\Controllers\LoginController@show'));
@@ -31,6 +34,7 @@ Route::post('/login', array('as'=>'login', 'uses'=>'App\Http\Controllers\LoginCo
 
 Route::get('/register', function () {return view('register');});
 Route::get('/forgot-password', function () {return view('forgot-password');});
+
 
 //Person Tables Routes
 //Route::get('/tables', function () {return view('tables');});
@@ -235,4 +239,5 @@ Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimi
 
 Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
+    Route::get('/change-password', function () {return view('change-password');});
 });

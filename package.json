@@ -14,6 +14,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "nice-forms.css": "^0.1.7"
+        "jquery": "^3.7.1",
+        "nice-forms.css": "^0.1.7",
+        "select2": "^4.1.0-rc.0"
     }
 }
