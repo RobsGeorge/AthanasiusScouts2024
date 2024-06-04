@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row text-center" dir="rtl">
-                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر نوع الملتحق<strong>(ذكر أم أنثى)</strong></label>
+                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر نوع الملتحق<strong>(ذكر أم أنثى)</strong> **</label>
                                         <br />
                                         <select class="form-control col-sm-4" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('gender')" onfocusout="validate('gender')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر النوع</option>
@@ -91,13 +91,13 @@
 
                                 <div class="form-group row text-center" dir="rtl">
                                     <div class="col-sm-6 mb-3 mb-sm-0">    
-                                        <label  class="text-center" for="birthdate_input" style="font-family: 'Cairo', sans-serif;">تاريخ الميلاد</label>
+                                        <label  class="text-center" for="birthdate_input" style="font-family: 'Cairo', sans-serif;">تاريخ الميلاد **</label>
                                         <input type="date" class="form-control form-control-user" id="birthdate_input" name="birthdate_input" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
                                             placeholder="تاريخ الميلاد" onclick="validate('birthdate_input')" onfocusout="validate('birthdate_input')">
                                     </div>
 
                                     <div class="col-sm-6 text-center">    
-                                        <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق</label>
+                                        <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق **</label>
                                         <br />
                                         <select class="form-control" style="margin-top: 8px;" name="joining_year_input" id="joining_year_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('joining_year_input')" onfocusout="validate('joining_year_input')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر سنة الالتحاق بالكشافة</option>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center" dir="rtl">
-                                     <label for="joindate" style="font-family: 'Cairo', sans-serif;">الرقم القومي</label>
+                                     <label for="joindate" style="font-family: 'Cairo', sans-serif;">الرقم القومي **</label>
                                     <input dir="rtl" type="number" class="form-control form-control-user" id="input_raqam_qawmy" name="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif; font-size: large"
                                         placeholder="أدخل الرقم القومي المكون من 14 رقماً" onclick="validate('input_raqam_qawmy')" onfocusout="validate('input_raqam_qawmy')">
 
@@ -126,7 +126,7 @@
 
                                 </div>
                                 <div class="form-group row text-center" dir="rtl">
-                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر فصيلة الدم الصحيحة <strong>(اختر "غير محدد" عند عدم التأكد)</strong></label>
+                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر فصيلة الدم الصحيحة <strong>(اختر "غير محدد" عند عدم التأكد)</strong> **</label>
                                         <br />
                                         <select class="form-control col-sm-4" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر فصيلة الدم</option>
@@ -153,7 +153,7 @@
                             </div>
                                 <div class="form-group row text-center" dir="rtl">
                                     <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label  class="text-center" for="personal_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الملتحق (الأساسي)</label>
+                                        <label  class="text-center" for="personal_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الملتحق (الأساسي) **</label>
                                         <input type="number" class="form-control form-control-user" name="personal_phone_number" id="personal_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="رقم الموبايل الشخصي" onclick="validate('personal_phone_number')" onfocusout="validate('personal_phone_number')">
                                     </div>
@@ -190,19 +190,19 @@
                                 <hr>
                                 <div class="form-group row text-center" dir="rtl">
                                     <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
-                                        <label  class="text-center" for="building_number" style="font-family: 'Cairo', sans-serif;">رقم العمارة</label>
+                                        <label  class="text-center" for="building_number" style="font-family: 'Cairo', sans-serif;">رقم العمارة **</label>
                                         <input type="number" class="form-control form-control-user" name="building_number" id="building_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="أدخل رقم العمارة" onclick="validate('building_number')" onfocusout="validate('building_number')">
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0 text-center" dir="rtl">
-                                        <label  class="text-center" for="floor_number" style="font-family: 'Cairo', sans-serif;">رقم الدور</label>
+                                        <label  class="text-center" for="floor_number" style="font-family: 'Cairo', sans-serif;">رقم الدور **</label>
                                         <input type="number" class="form-control form-control-user" name="floor_number" id="floor_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="أدخل رقم الدور">
                                     </div>
 
                                     <div class="col-sm-4 mb-3 mb-sm-0 text-center" dir="rtl">
-                                        <label  class="text-center" for="appartment_number" style="font-family: 'Cairo', sans-serif;">رقم الشقة</label>
+                                        <label  class="text-center" for="appartment_number" style="font-family: 'Cairo', sans-serif;">رقم الشقة **</label>
                                         <input type="number" class="form-control form-control-user" name="appartment_number" id="appartment_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="أدخل رقم الشقة">
                                     </div>
@@ -210,13 +210,13 @@
                                 </div>
                                 <div class="form-group row text-center" dir="rtl">
                                     <div class="col-sm-6 mb-5 mb-sm-0">
-                                        <label  class="text-center" for="sub_street_name" style="font-family: 'Cairo', sans-serif;">اسم الشارع</label>
+                                        <label  class="text-center" for="sub_street_name" style="font-family: 'Cairo', sans-serif;">اسم الشارع **</label>
                                         <input type="text" class="form-control form-control-user" name="sub_street_name" id="sub_street_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="أدخل اسم الشارع" onclick="validate('sub_street_name')" onfocusout="validate('sub_street_name')">
                                     </div>
 
                                     <div class="col-sm-6 mb-5 mb-sm-0 text-center" dir="rtl">
-                                        <label  class="text-center" for="main_street_name" style="font-family: 'Cairo', sans-serif;">اسم أقرب شارع رئيسي</label>
+                                        <label  class="text-center" for="main_street_name" style="font-family: 'Cairo', sans-serif;">اسم أقرب شارع رئيسي **</label>
                                         <input type="text" class="livesearch form-control form-control-user" name="main_street_name" id="main_street_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             placeholder="أدخل اسم أقرب شارع رئيسي للمنزل">
                                     </div>
@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="form-group text-center" dir="rtl">
                                     <div class="col-sm-6" dir="rtl">    
-                                        <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة</label>
+                                        <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة **</label>
                                         <br />
                                         <select class="form-control" style="margin-top: 8px;" name="manteqa_id" id="manteqa_id" placeholder="اختار المنطقة" onclick="validate('manteqa_id')" onfocusout="validate('manteqa_id')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر المنطقة السكنية</option>
@@ -238,7 +238,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-6 text-center" dir="rtl">    
-                                        <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي</label>
+                                        <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي **</label>
                                         <br />
                                         <select class="form-control" style="margin-top: 8px;" name="district_id" id="district_id" onChange="" placeholder="اختار الحي" onclick="validate('district_id')" onfocusout="validate('district_id')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر الحي</option>
