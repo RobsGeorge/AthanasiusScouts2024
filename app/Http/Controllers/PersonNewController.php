@@ -318,6 +318,15 @@ class PersonNewController extends Controller
 
         public function insertNewPersonLiveForm(Request $request)
         {
+
+            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM NewUsersInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+              $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
+              
+  
+              if($raqamQawmyExists)
+              {
+                  return view('person.person-already-exists');
+              }
             
             $lastPersonID = DB::table('NewUsersInformation')->orderBy('PersonID','desc')->first();
             
@@ -372,14 +381,6 @@ class PersonNewController extends Controller
                 'manteqa_id'=>'required',
                 'district_id'=>'required',
               ]);
-            
-            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM NewUsersInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
-            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
-
-            if(!$raqamQawmyExists)
-            {
-                return view('person.person-already-exists');
-            }
 
 
             $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
@@ -533,6 +534,15 @@ class PersonNewController extends Controller
 
         public function insert(Request  $request)
         {
+
+            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+              $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
+              
+  
+              if($raqamQawmyExists)
+              {
+                  return view('person.person-already-exists');
+              }
             
             $lastPersonID = DB::table('PersonInformation')->orderBy('PersonID','desc')->first();
             
@@ -578,14 +588,9 @@ class PersonNewController extends Controller
                 'sana_marhala_id'=>'required',
               ]);
 
-            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
-            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
-
-            if(!$raqamQawmyExists)
-            {
-                return view('person.person-already-exists');
-            }
             
+              
+
             DB::beginTransaction();
             
         try{
