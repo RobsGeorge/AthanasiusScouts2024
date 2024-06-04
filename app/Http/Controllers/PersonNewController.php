@@ -382,15 +382,6 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
               ]);
 
-
-            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
-            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
-
-            if(!$raqamQawmyExists)
-            {
-                return view('person.person-already-exists');
-            }
-            
             DB::table('NewUsersInformation')->insert(
                 array(
                     'PersonID'              => $thisPersonID,
@@ -534,11 +525,11 @@ class PersonNewController extends Controller
 
         public function insert(Request  $request)
         {
-
-            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+            
+              $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
               $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
               
-  
+            
               if($raqamQawmyExists)
               {
                   return view('person.person-already-exists');
@@ -561,11 +552,21 @@ class PersonNewController extends Controller
             }
 
             $shamandoraCode = $shamandoraCode. $thisPersonID;
-
+            //dd($shamandoraCode);
+            
             //print_r($shamandoraCode);
             //return "".$thisPersonID."\n".$shamandoraCode;
 
             
+            
+
+              
+              
+
+            
+            
+        try{
+
             $validatedData = $request->validate([
                 'first_name' => 'required',
                 'second_name' => 'required',
@@ -578,7 +579,6 @@ class PersonNewController extends Controller
                 'instagramLink'=>'url',
                 'blood_type_input'=>'required',
                 'personal_phone_number'=>'required|min_digits:11|max_digits:11',
-                'has_whatsapp'=>'required',
                 'building_number'=>'required',
                 'floor_number'=>'required',
                 'appartment_number' =>'required',
@@ -587,13 +587,10 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
                 'sana_marhala_id'=>'required',
               ]);
-
             
-              
 
             DB::beginTransaction();
-            
-        try{
+
             DB::table('PersonInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
