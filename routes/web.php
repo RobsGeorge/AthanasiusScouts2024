@@ -116,6 +116,24 @@ Route::get('/person/delete/{id}', array('as'=> 'person.delete', 'uses'=>'App\Htt
 Route::delete('/person/destroy/{id}', array('as'=> 'person.destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroy'));
 
 
+//Routes for Group Types
+Route::get('/group-type', array('as' => 'group-type.index', 'uses' => 'App\Http\Controllers\GroupTypeController@index'));
+Route::get('/group-type/add', array('as' => 'group-type.create', 'uses' =>'App\Http\Controllers\GroupTypeController@create'));
+Route::post('/group-type/insert', array('as' => 'group-type.insert', 'uses' => 'App\Http\Controllers\GroupTypeController@insert'));
+Route::get('/group-type/edit/{id}', array('as' => 'group-type.edit', 'uses' => 'App\Http\Controllers\GroupTypeController@edit'));
+Route::patch('/group-type/update/{id}', array('as'=> 'group-type.update', 'uses'=> 'App\Http\Controllers\GroupTypeController@updates'));
+Route::get('/group-type/delete/{id}', array('as'=> 'group-type.delete', 'uses'=>'App\Http\Controllers\GroupTypeController@deletes'));
+Route::delete('/group-type/destroy/{id}', array('as'=> 'group-type.destroy', 'uses'=>'App\Http\Controllers\GroupTypeController@destroy'));
+
+//Routes for Groups
+Route::get('/group', array('as' => 'group.index', 'uses' => 'App\Http\Controllers\GroupController@index'));
+Route::get('/group/add', array('as' => 'group.create', 'uses' =>'App\Http\Controllers\GroupController@create'));
+Route::post('/group/insert', array('as' => 'group.insert', 'uses' => 'App\Http\Controllers\GroupController@insert'));
+Route::get('/group/edit/{id}', array('as' => 'group.edit', 'uses' => 'App\Http\Controllers\GroupController@edit'));
+Route::patch('/group/update/{id}', array('as'=> 'group.update', 'uses'=> 'App\Http\Controllers\GroupController@updates'));
+Route::get('/group/delete/{id}', array('as'=> 'group.delete', 'uses'=>'App\Http\Controllers\GroupController@deletes'));
+Route::delete('/group/destroy/{id}', array('as'=> 'group.destroy', 'uses'=>'App\Http\Controllers\GroupController@destroy'));
+
 
 //Routes for Rotab Kashfeyya
 Route::get('/rotab', array('as' => 'rotab.index', 'uses' => 'App\Http\Controllers\RotbaKashfeyaController@index'));
