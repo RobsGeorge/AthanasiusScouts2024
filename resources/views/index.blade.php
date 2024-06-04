@@ -87,6 +87,8 @@
                         <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
                         <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
                         <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
+                        <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
+                        <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
                     </div>
                 </div>
             </li>
