@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 
 <head>
 
@@ -9,52 +9,43 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>كشافة الشمندورة - لوحة التحكم</title>
+    <title>SB Admin 2 - Other Utilities</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
+
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
-
-
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-                <!-- Sidebar -->
-                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="right:0">
-                <div>
-                    <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
-                </div>
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
-                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href={{ url('/index') }}>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -70,29 +61,32 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span>
+                    <span>Components</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item" href="buttons.html">A</a>
-                        <a class="collapse-item" href="cards.html">B</a>
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Configurations</span>
+                    <span>Utilities</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
+                        <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item active" href="utilities-other.html">Other</a>
                     </div>
                 </div>
             </li>
@@ -102,7 +96,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Person
+                Addons
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -110,24 +104,34 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الملتحقين</span>
+                    <span>Pages</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/login') }}>تسجيل الدخول</a>
-                        <a class="collapse-item" href={{ url('/register') }}>اضافة حساب جديد</a>
-                        <a class="collapse-item" href={{ url('/forgot-password') }}>نسيت كلمة السر؟</a>
-                        <a class="collapse-item" href={{ url('/createperson') }}>اضافة ملتحق جديد</a>
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
 
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href={{ url('/person') }}>
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جدول الملتحقين</span></a>
+                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -137,8 +141,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-            <!-- Sidebar Message -->
 
         </ul>
         <!-- End of Sidebar -->
@@ -161,7 +163,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" style="font-family: 'Cairo', sans-serif; direction: rtl;" placeholder="ابحث عن ...."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -209,8 +211,8 @@
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header" style="font-family: 'Cairo', sans-serif;">
-                                    الاشعارات
+                                <h6 class="dropdown-header">
+                                    Alerts Center
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -260,12 +262,12 @@
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header" style="font-family: 'Cairo', sans-serif;">
-                                    الرسائل
+                                <h6 class="dropdown-header">
+                                    Message Center
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_1.svg') }}
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -277,7 +279,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_2.svg') }}
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -289,7 +291,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_3.svg') }}
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -321,98 +323,127 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">{{Auth::user()->FirstName}} {{Auth::user()->SecondName}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src={{ asset("img/undraw_profile.svg")}}>
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{Auth::user()->ShamandoraCode}}
+                                    Profile
                                 </a>
-                                <a class="dropdown-item">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{Auth::user()->role[0]->RoleName}}
+                                    Settings
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
-                                    @csrf <!-- Include the CSRF token -->
-                                    <button type="submit">Log Out</button>
-                                </form>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
                             </div>
                         </li>
 
                     </ul>
 
                 </nav>
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-
+                <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">بيانات التحكم</h1>
+                    <h1 class="h3 mb-1 text-gray-800">Other Utilities</h1>
+                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
+                            href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
+                        below were created to extend this theme past the default utility classes built into Bootstrap's
+                        framework.</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة مجموعة جديدة</h6>
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="col-lg-6">
+
+                            <!-- Overflow Hidden -->
+                            <div class="card mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Overflow Hidden Utilty</h6>
+                                </div>
+                                <div class="card-body">
+                                    Use <code>.o-hidden</code> to set the overflow property of any element to hidden.
+                                </div>
+                            </div>
+
+                            <!-- Progress Small -->
+                            <div class="card mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Progress Small Utility</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-1 small">Normal Progress Bar</div>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width: 75%"
+                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="mb-1 small">Small Progress Bar</div>
+                                    <div class="progress progress-sm mb-2">
+                                        <div class="progress-bar" role="progressbar" style="width: 75%"
+                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    Use the <code>.progress-sm</code> class along with <code>.progress</code>
+                                </div>
+                            </div>
+
+                            <!-- Dropdown No Arrow -->
+                            <div class="card mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Dropdown - No Arrow</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="dropdown no-arrow mb-4">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Dropdown (no arrow)
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                    Add the <code>.no-arrow</code> class alongside the <code>.dropdown</code>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
 
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('group.insert') }}">
-                            @csrf
-                            <div class="card-header py-3">
-                                <div class="col mb-3 mb-sm-0">
-                                    <div class="card-header">        
-                                        <div class="form-group" dir="rtl" style="text-align: right">
-                                            <label for="grouptype" style="font-family: 'Cairo', sans-serif;">اختر نوع المجموعة</label>
-                                            <br />
-                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="group_type_id" id="group_type_id">
-                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نوع المجموعة</option>
-                                                @foreach($groupTypes as $groupType)
-                                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$groupType->GroupTypeID}}">{{$groupType->GroupTypeName}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                        <div class="col-lg-6">
 
-                                        <div class="form-group" dir="rtl" style="text-align: right">
-                                            <label for="groupincluded" style="font-family: 'Cairo', sans-serif;">اختر المجموعة التي تتضمنها (المجموعة الأكبر منها)</label>
-                                            <br />
-                                            <select class="form-control col-sm-4 select2" style="margin-right: 20px;" name="included_under_group_id" id="included_under_group_id">
-                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر المجموعة التي تتضمنها</option>
-                                                @foreach($groups as $group)
-                                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$group->GroupID}}">{{$group->GroupInfo}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group" dir="rtl" style="text-align: right">
-                                            <label for="groupname" style="font-family: 'Cairo', sans-serif;">اسم المجموعة</label>
-                                            <input type="text" class="form-control form-control-user" name="group_name" id="group_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل اسم المجموعة" onfocusout="myFunction()">
-                                            <br>
-                                            <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
-                                        </div>
+                            <!-- Roitation Utilities -->
+                            <div class="card">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Rotation Utilities</h6>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="bg-primary text-white p-3 rotate-15 d-inline-block my-4">.rotate-15
+                                    </div>
+                                    <hr>
+                                    <div class="bg-primary text-white p-3 rotate-n-15 d-inline-block my-4">.rotate-n-15
                                     </div>
                                 </div>
                             </div>
-                        </form>
+
+                        </div>
+
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -423,9 +454,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Shamandora Scouts 2023</span>
-                        <br />
-                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir Samir George</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -462,39 +491,15 @@
         </div>
     </div>
 
-
-        <script>
-            $(document).ready(function() {
-                $('#included_under_group_id').select2({
-                    theme: "classic"
-                });
-            });
-        </script>
-
-<script>
-    $(document).ready(function() {
-        $('#group_type_id').select2({
-            theme: "classic"
-        });
-    });
-</script>
-
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
-
+    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 

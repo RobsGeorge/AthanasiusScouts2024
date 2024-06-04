@@ -373,6 +373,23 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
               ]);
             
+            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM NewUsersInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
+
+            if(!$raqamQawmyExists)
+            {
+                return view('person.person-already-exists');
+            }
+
+
+            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
+
+            if(!$raqamQawmyExists)
+            {
+                return view('person.person-already-exists');
+            }
+            
             DB::table('NewUsersInformation')->insert(
                 array(
                     'PersonID'              => $thisPersonID,
@@ -560,6 +577,14 @@ class PersonNewController extends Controller
                 'district_id'=>'required',
                 'sana_marhala_id'=>'required',
               ]);
+
+            $raqamQawmyExistsObject = DB::selectOne('SELECT EXISTS(SELECT 1 FROM PersonInformation WHERE RaqamQawmy = :some_id) AS `exists`', ['some_id' => $request->input_raqam_qawmy]);
+            $raqamQawmyExists = $raqamQawmyExistsObject->exists; // 0 or 1
+
+            if(!$raqamQawmyExists)
+            {
+                return view('person.person-already-exists');
+            }
             
             DB::beginTransaction();
             
