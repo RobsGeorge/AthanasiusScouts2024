@@ -108,13 +108,30 @@ Route::post('/person/entry-questions/submit', array('as'=> 'person.entry-questio
 
 
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
-
 Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));
 Route::patch('/person/update/{id}', array('as'=> 'person.update', 'uses'=> 'App\Http\Controllers\PersonNewController@updates'));
 Route::get('/person/delete/{id}', array('as'=> 'person.delete', 'uses'=>'App\Http\Controllers\PersonNewController@deletes'));
 Route::delete('/person/destroy/{id}', array('as'=> 'person.destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroy'));
 
+
+//Routes for Event
+Route::get('/event', array('as' => 'event.index', 'uses' => 'App\Http\Controllers\EventController@index'));
+Route::get('/event/add', array('as' => 'event.create', 'uses' =>'App\Http\Controllers\EventController@create'));
+Route::post('/event/insert', array('as' => 'event.insert', 'uses' => 'App\Http\Controllers\EventController@insert'));
+Route::get('/event/edit/{id}', array('as' => 'event.edit', 'uses' => 'App\Http\Controllers\EventController@edit'));
+Route::patch('/event/update/{id}', array('as'=> 'event.update', 'uses'=> 'App\Http\Controllers\EventController@updates'));
+Route::get('/event/delete/{id}', array('as'=> 'event.delete', 'uses'=>'App\Http\Controllers\EventController@deletes'));
+Route::delete('/event/destroy/{id}', array('as'=> 'event.destroy', 'uses'=>'App\Http\Controllers\EventController@destroy'));
+
+//Routes for Event Types
+Route::get('/event-type', array('as' => 'event-type.index', 'uses' => 'App\Http\Controllers\EventTypeController@index'));
+Route::get('/event-type/add', array('as' => 'event-type.create', 'uses' =>'App\Http\Controllers\EventTypeController@create'));
+Route::post('/event-type/insert', array('as' => 'event-type.insert', 'uses' => 'App\Http\Controllers\EventTypeController@insert'));
+Route::get('/event-type/edit/{id}', array('as' => 'event-type.edit', 'uses' => 'App\Http\Controllers\EventTypeController@edit'));
+Route::patch('/event-type/update/{id}', array('as'=> 'event-type.update', 'uses'=> 'App\Http\Controllers\EventTypeController@updates'));
+Route::get('/event-type/delete/{id}', array('as'=> 'event-type.delete', 'uses'=>'App\Http\Controllers\EventTypeController@deletes'));
+Route::delete('/event-type/destroy/{id}', array('as'=> 'event-type.destroy', 'uses'=>'App\Http\Controllers\EventTypeController@destroy'));
 
 //Routes for Group Types
 Route::get('/group-type', array('as' => 'group-type.index', 'uses' => 'App\Http\Controllers\GroupTypeController@index'));
@@ -259,3 +276,4 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
     Route::get('/change-password', function () {return view('change-password');});
 });
+

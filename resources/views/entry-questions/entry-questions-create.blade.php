@@ -34,106 +34,144 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-                <!-- Sidebar -->
-                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="right:0">
-                <div>
-                    <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
-                </div>
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
+                        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="right:0">
+            <div>
+                <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
+            </div>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
+            <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
+        </a>
+        <div class="sidebar-brand d-flex align-items-center justify-content-center sidebar-brand-text" style="color: rgba(211, 159, 18, 0.849); font-size: large">{{date("Y")}}</div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href={{ url('/index') }}>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Administration</span>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">A</a>
-                        <a class="collapse-item">B</a>
-                    </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Admin Panel</h6>
+                    <a class="collapse-item">الترقيات</a>
+                    <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
+                    <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
+                    <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
+                    <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
+                    <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
+                    <a class="collapse-item" href={{ route('sana-marhala.index') }}>السنوات والمراحل الدراسية</a>
+                    <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
+                    <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
+                    <a class="collapse-item" href={{ route('district.index') }}>الأحياء السكنية</a>
+                    <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
+                    <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
+                    <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
+                    <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
+                    <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
+                    <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
+                    <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
+                    <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
                 </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Configurations</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">Colors</a>
-                    </div>
-                </div>
-            </li>
-
-                                 <!-- Divider -->
-                                 <hr class="sidebar-divider">
-
-                                 <!-- Heading -->
-                                 <div class="sidebar-heading">
-                                      Summer 2024
-                                 </div>
-                     
-                                 <!-- Nav Item - Pages Collapse Menu -->
-                                 <li class="nav-item">
-                                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                                         aria-expanded="true" aria-controls="collapsePages">
-                                         <i class="fas fa-fw fa-cog"></i>
-                                         <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
-                                     </a>
-                                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                                         <div class="bg-white py-2 collapse-inner rounded">
-                                             <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                                             <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
-                                             <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
-                                             <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
-                                             <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
-                                             <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
-                                         </div>
-                                     </div>
-                                 </li>
-         
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+        </li>
 
-            <!-- Sidebar Message -->
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Configurations</span>
+            </a>
+        </li>
+        
 
-        </ul>
-        <!-- End of Sidebar -->
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Person
+        </div>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href={{ url('/') }}>
+                <i class="fas fa-fw fa-table"></i>
+                <span style="font-family: 'Cairo', sans-serif;">جداول الملتحقين</span></a>
+        </li>
+
+
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Midea
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link" href={{ url('/person') }}>
+                <i class="fas fa-fw fa-photo-video"></i>
+                <span style="font-family: 'Cairo', sans-serif;">منصة الميديا</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+             Summer 2024
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-cog"></i>
+                <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                    <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
+                    <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
+                    <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
+                    <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
+                    <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
+                </div>
+            </div>
+        </li>
+        
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+
+    </ul>
+    <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -261,11 +299,7 @@
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
+                                    
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
@@ -273,11 +307,7 @@
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
+                                    
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
@@ -285,11 +315,7 @@
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
+                                    
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
@@ -297,11 +323,7 @@
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
+                                    
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
@@ -417,9 +439,9 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Shamandora Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts {{date("Y")}}</span>
                         <br />
-                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir Samir George</span>
+                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
                     </div>
                 </div>
             </footer>
