@@ -47,20 +47,18 @@
                             </div>
                                 
                                 <div class="text-center">
-                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> من فضلك عد إلى الصفحة السابقة
-                                    </h2>
-                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: #4e73df;"> وتأكد من ادخال البيانات المطلوبة كاملةً وغير فارغة وبشكل سليم
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> برجاء مراجعة التواريخ التي قمت بادخالها
                                     </h2>
                                 </div>
                                 <hr>
 
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Shamandora Scout 2024</span>
-                                    <br />
-                                    <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
+                                <div class="container my-auto">
+                                    <div class="copyright text-center my-auto">
+                                    <span>Copyright &copy; Shamandora Scout 2024</span>
+                                        <br />
+                                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>

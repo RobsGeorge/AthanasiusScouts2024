@@ -345,9 +345,9 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Shamandora Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts {{date("Y")}}</span>
                         <br />
-                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir Samir George</span>
+                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
                     </div>
                 </div>
             </footer>

@@ -39,6 +39,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
                 <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
             </a>
+            <div class="sidebar-brand d-flex align-items-center justify-content-center sidebar-brand-text" style="color: rgba(211, 159, 18, 0.849); font-size: large">{{date("Y")}}</div>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -67,11 +68,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Configurations</h6>
-                        <a class="collapse-item">Granting Access</a>
-                        <a class="collapse-item">Reports</a>
-                        <a class="collapse-item">تعديل بيانات</a>
-                        <a class="collapse-item">كلمات السر</a>
+                        <h6 class="collapse-header">Admin Panel</h6>
                         <a class="collapse-item">الترقيات</a>
                         <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
                         <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
@@ -89,6 +86,7 @@
                         <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
                         <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
                         <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
+                        <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
                     </div>
                 </div>
             </li>
@@ -691,9 +689,9 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Shamandora Scouts 2023</span>
+                    <span>Copyright &copy; Shamandora Scouts {{date("Y")}}</span>
                         <br />
-                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">Robeir S. George</span>
+                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
                     </div>
                 </div>
             </footer>

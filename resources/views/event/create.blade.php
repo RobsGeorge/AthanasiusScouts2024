@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -25,6 +25,9 @@
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
 </head>
 
@@ -36,142 +39,142 @@
     <div id="wrapper">
                         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="right:0">
-                <div>
-                    <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
-                </div>
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
-                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
+            <div>
+                <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
+            </div>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
+            <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
+        </a>
+        <div class="sidebar-brand d-flex align-items-center justify-content-center sidebar-brand-text" style="color: rgba(211, 159, 18, 0.849); font-size: large">{{date("Y")}}</div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href={{ url('/index') }}>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Administration</span>
             </a>
-            <div class="sidebar-brand d-flex align-items-center justify-content-center sidebar-brand-text" style="color: rgba(211, 159, 18, 0.849); font-size: large">{{date("Y")}}</div>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href={{ url('/index') }}>
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Administration</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Admin Panel</h6>
-                        <a class="collapse-item">الترقيات</a>
-                        <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
-                        <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
-                        <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
-                        <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
-                        <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
-                        <a class="collapse-item" href={{ route('sana-marhala.index') }}>السنوات والمراحل الدراسية</a>
-                        <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
-                        <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
-                        <a class="collapse-item" href={{ route('district.index') }}>الأحياء السكنية</a>
-                        <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
-                        <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
-                        <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
-                        <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
-                        <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
-                        <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
-                        <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
-                        <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
-                    </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Admin Panel</h6>
+                    <a class="collapse-item">الترقيات</a>
+                    <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
+                    <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
+                    <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
+                    <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
+                    <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
+                    <a class="collapse-item" href={{ route('sana-marhala.index') }}>السنوات والمراحل الدراسية</a>
+                    <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
+                    <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
+                    <a class="collapse-item" href={{ route('district.index') }}>الأحياء السكنية</a>
+                    <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
+                    <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
+                    <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
+                    <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
+                    <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
+                    <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
+                    <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
+                    <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
                 </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Configurations</span>
-                </a>
-            </li>
-            
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Person
             </div>
+        </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('/') }}>
-                    <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جداول الملتحقين</span></a>
-            </li>
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Configurations</span>
+            </a>
+        </li>
+        
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Person
+        </div>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href={{ url('/') }}>
+                <i class="fas fa-fw fa-table"></i>
+                <span style="font-family: 'Cairo', sans-serif;">جداول الملتحقين</span></a>
+        </li>
 
 
-            <hr class="sidebar-divider">
+        <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Midea
-            </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Midea
+        </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('/person') }}>
-                    <i class="fas fa-fw fa-photo-video"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">منصة الميديا</span></a>
-            </li>
+        <li class="nav-item">
+            <a class="nav-link" href={{ url('/person') }}>
+                <i class="fas fa-fw fa-photo-video"></i>
+                <span style="font-family: 'Cairo', sans-serif;">منصة الميديا</span></a>
+        </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                 Summer 2024
-            </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+             Summer 2024
+        </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
-                        <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
-                        <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
-                    </div>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-cog"></i>
+                <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
+                    <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
+                    <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
+                    <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
+                    <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
+                    <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
                 </div>
-            </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+        </li>
+        
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
-            <!-- Sidebar Message -->
+        <!-- Sidebar Message -->
 
-        </ul>
-        <!-- End of Sidebar -->
+    </ul>
+    <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -383,20 +386,61 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة مجموعة جديدة</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">اضافة حدث/مناسبة جديدة</h6>
                         </div>
                     </div>
 
                     <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('group-type.insert') }}">
+                        <form class="user" id="regForm" method="POST" action="{{ route('event.insert') }}">
                             @csrf
                             <div class="card-header py-3">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" name="group_type_name" id="group_type_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل نوع المجموعة" onfocusout="myFunction()">
-                                                    <br>
-                                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
+                                <div class="col mb-3 mb-sm-0">
+                                    <div class="card-header">        
+                                        <div class="form-group" dir="rtl" style="text-align: right">
+                                            <label for="eventtype" style="font-family: 'Cairo', sans-serif;">اختر نوع الحدث أو المناسبة الكشفية</label>
+                                            <br />
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="event_type_id" id="event_type_id">
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نوع الحدث أو المناسبة الكشفية</option>
+                                                @foreach($eventTypes as $eventType)
+                                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$eventType->EventTypeID}}">{{$eventType->EventTypeName}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </br>
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0" dir="rtl" style="text-align: right">
+                                                <label for="eventname" style="font-family: 'Cairo', sans-serif;">اسم الحدث أو المناسبة الكشفية</label>
+                                                <input type="text" class="form-control form-control-user" name="event_name" id="event_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                        placeholder="ادخل اسم الحدث أو المناسبة" onfocusout="myFunction()">
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0" dir="rtl" style="text-align: right">
+                                                <label for="qetaatnames" style="font-family: 'Cairo', sans-serif;">اختر القطاعات المربوطة بهذا الحدث</label>
+                                                <br />
+                                                <select class="form-control col-sm-4" multiple="multiple" style="width: 75%; margin-right: 20px;" name="qetaa_id[]" id="qetaa_id">
+                                                    @foreach($qetaat as $qetaa)
+                                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </br>
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl" style="text-align: right">    
+                                                <label  class="text-center" for="event_start_date" style="font-family: 'Cairo', sans-serif;">اختر تاريخ بداية الحدث</label>
+                                                <input type="date" class="form-control form-control-user" id="event_start_date" name="event_start_date" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
+                                                    placeholder="تاريخ بداية الحدث أو المناسبة">
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl" style="text-align: right">    
+                                                <label  class="text-center" for="event_end_date" style="font-family: 'Cairo', sans-serif;">اختر تاريخ نهاية الحدث</label>
+                                                <input type="date" class="form-control form-control-user" id="event_end_date" name="event_end_date" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
+                                                    placeholder="تاريخ نهاية الحدث أو المناسبة">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
                             </div>
                         </form>
                     </div>
@@ -450,8 +494,27 @@
     </div>
 
 
+        <script>
+            $(document).ready(function() {
+                $('#eventtype').select2({
+                    theme: "classic"
+                });
+            });
+        </script>
+
+<script>
+    $(document).ready(function() {
+        $('#qetaa_id').select2({
+            theme: "classic",
+            multiple: true,
+            allowClear: true,
+            dropdownAutoWidth: true,
+            width: 'resolve',
+        });
+    });
+</script>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -467,29 +530,6 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
 
-    <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
-
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
-    }
-    */
-</script>
 
 </body>
 

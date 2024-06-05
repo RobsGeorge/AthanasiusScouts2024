@@ -21,10 +21,10 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
 </head>
 
@@ -383,22 +383,107 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">اضافة مجموعة جديدة</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">جدول انواع الأحداث والمناسبات الكشفية</h6>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>تسلسل</th>
+                                            <th> نوع الحدث</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($eventTypes as $eventType)
+                                        <tr> 
+                                            <td>
+                                                {{ $eventType->EventTypeID }}
+                                            </td>
 
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="POST" action="{{ route('group-type.insert') }}">
-                            @csrf
-                            <div class="card-header py-3">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" name="group_type_name" id="group_type_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل نوع المجموعة" onfocusout="myFunction()">
-                                                    <br>
-                                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
-                                </div>
+                                            <td>
+                                                <label style="color: #4e73df; font-weight: bolder;" id="eventIDLabel-{{$loop->iteration}}">{{ $eventType->EventTypeName }}</label>
+                                            </td>
+                                            <td> 
+                                                    <a href="{{ route('event-type.edit', $eventType->EventTypeID) }}"
+                                                        style="appearance: none;
+                                                                background-color: #2ea44f;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > تعديل</a>
+
+                                                    <a href="{{ route('event-type.delete', $eventType->EventTypeID) }}"
+                                                        style="appearance: none;
+                                                                background-color: #E21739;
+                                                                border: 1px solid rgba(27, 31, 35, .15);
+                                                                border-radius: 6px;
+                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                                box-sizing: border-box;
+                                                                color: #fff;
+                                                                cursor: pointer;
+                                                                display: inline-block;
+                                                                font-size: 14px;
+                                                                font-weight: 600;
+                                                                line-height: 20px;
+                                                                padding: 6px 16px;
+                                                                position: relative;
+                                                                text-align: center;
+                                                                text-decoration: none;
+                                                                user-select: none;
+                                                                -webkit-user-select: none;
+                                                                touch-action: manipulation;
+                                                                vertical-align: middle;
+                                                                white-space: nowrap;" 
+                                                    > مسح</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+                            <div>
+                                                <a href="{{ route('event-type.create') }}"  style="appearance: none;
+                                                            background-color: #1216F0;
+                                                            border: 1px solid rgba(27, 31, 35, .15);
+                                                            border-radius: 6px;
+                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                                            box-sizing: border-box;
+                                                            color: #fff;
+                                                            cursor: pointer;
+                                                            display: inline-block;
+                                                            font-size: 14px;
+                                                            font-weight: 600;
+                                                            line-height: 20px;
+                                                            padding: 6px 16px;
+                                                            position: relative;
+                                                            text-align: center;
+                                                            text-decoration: none;
+                                                            user-select: none;
+                                                            -webkit-user-select: none;
+                                                            touch-action: manipulation;
+                                                            vertical-align: middle;
+                                                            white-space: nowrap;" 
+                                                id="s"> اضافة نوع حدث جديد</a>
+                                </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -451,45 +536,42 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 
     <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
+    function EditButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Editing item ${itemNumber}`);
+        document.getElementById('rotbaIDTextBox-'+itemNumber).removeAttribute("readonly");
+        document.getElementById('SubmitButtonNumber-'+itemNumber).removeAttribute("hidden");
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
 
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
+    function SubmitButtonClicked(itemNumber) {
+        // Retrieve the item data based on the itemNumber
+        // Enable editing for the corresponding item
+        console.log(`Submitting item ${itemNumber}`);
+        document.getElementById('EditButtonNumber-'+itemNumber).disabled = false;
+        document.getElementById('rotbaIDTextBox-'+itemNumber).disabled = true;
+        // Implement your custom logic here
     }
-    */
-</script>
+    </script>
 
 </body>
 
