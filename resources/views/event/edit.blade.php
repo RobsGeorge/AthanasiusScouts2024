@@ -94,6 +94,7 @@
                     <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
                     <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
                     <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
+                        <a class="collapse-item" href={{ route('event.index') }}> الأحداث والمناسبات الكشفية</a>
                 </div>
             </div>
         </li>
