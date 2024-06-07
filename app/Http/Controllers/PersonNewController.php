@@ -28,7 +28,7 @@ class PersonNewController extends Controller
             ->select('PersonInformation.*', 'PersonPhoneNumbers.PersonPersonalMobileNumber')
             ->get();*/
 
-            $persons = DB::select("SELECT DISTINCT  pi.PersonID,
+            $persons = DB::select("SELECT DISTINCT  
                                                     pi.ShamandoraCode,
                                                     pi.FirstName, 
                                                     pi.SecondName, 
