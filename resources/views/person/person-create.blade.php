@@ -81,7 +81,6 @@
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>
                                         </select>
-
                                 </div>
                                 <div class="form-group text-center" dir="rtl">
                                     <label class="text-center" for="email_input" style="font-family: 'Cairo', sans-serif;">البريد الالكتروني</label>

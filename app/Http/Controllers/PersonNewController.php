@@ -846,11 +846,64 @@ class PersonNewController extends Controller
             */
         public function edit($id)
         {
-            $questionTypes = DB::table('QuestionsTypes')->get();
             $marahel = DB::table('Marhala')->get();
+            $rotab = DB::table('RotbaInformation')->get();
+            $seneen_marahel = DB::table('SanaMarhala')->get();
+            $questionTypes = DB::table('QuestionsTypes')->get();
+            $blood = DB::table('BloodType')->get();
+            $betakat = DB::table('EgazetBetakatTaqaddom')->get();
+            $manateq = DB::table('Manteqa')->get();
+            $districts = DB::table('Districts')->get();
+            $qetaat = DB::table('Qetaa')->get();
+            $faculties = DB::table('Faculty')->get();
+            $universities = DB::table('University')->get();
             $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-            //print_r($rotab->RotbaID);
-            return view("person.person-edit", array('entryQuestions' => $entryQuestions, 'marahel'=>$marahel, 'questionTypes'=>$questionTypes,'title'=> "تعديل بيانات شخص"));
+            $person = DB::table('PersonInformation')
+            ->leftJoin('BloodType', 'BloodType.BloodTypeID', '=', 'PersonInformation.BloodTypeID')
+            ->leftJoin('PersonEgazetBetakatTaqaddom', 'PersonEgazetBetakatTaqaddom.PersonID' , '=', 'PersonInformation.PersonID')
+            ->leftJoin('EgazetBetakatTaqaddom', 'PersonEgazetBetakatTaqaddom.EgazetBetakatTaqaddomID', '=', 'EgazetBetakatTaqaddom.EgazetBetakatTaqaddomID')
+            ->leftJoin('PersonJob', 'PersonInformation.PersonID', '=', 'PersonJob.PersonID')
+            ->leftJoin('PersonLearningInformation', 'PersonLearningInformation.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Faculty', 'PersonLearningInformation.FacultyID', '=', 'Faculty.FacultyID')
+            ->leftJoin('University', 'PersonLearningInformation.UniversityID', '=', 'University.UniversityID')
+            ->leftJoin('PersonPhoneNumbers', 'PersonPhoneNumbers.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('PersonQetaa', 'PersonQetaa.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Qetaa', 'Qetaa.QetaaID', '=', 'PersonQetaa.QetaaID')
+            ->leftJoin('PersonRotbaKashfeyya', 'PersonRotbaKashfeyya.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('RotbaInformation', 'PersonRotbaKashfeyya.RotbaID', '=', 'RotbaInformation.RotbaID')
+            ->leftJoin('PersonSanaMarhala', 'PersonSanaMarhala.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('SanaMarhala', 'SanaMarhala.SanaMarhalaID', '=', 'PersonSanaMarhala.SanaMarhalaID')
+            ->leftJoin('PersonSpiritualFatherInformation', 'PersonSpiritualFatherInformation.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('PersonSystemPassword', 'PersonInformation.PersonID', '=', 'PersonSystemPassword.PersonID')
+            ->leftJoin('PersonalPhysicalAddress', 'PersonalPhysicalAddress.PersonID', '=', 'PersonInformation.PersonID')
+            ->leftJoin('Manteqa', 'Manteqa.ManteqaID', '=', 'PersonalPhysicalAddress.ManteqaID')
+            ->leftJoin('Districts', 'Districts.DistrictID', '=', 'PersonalPhysicalAddress.DistrictID')
+            ->where('PersonInformation.PersonID', $id)->get()->first();
+            
+            $questions = DB::table('PersonEntryQuestions')
+                    ->join('MarhalaEntryQuestions', 'MarhalaEntryQuestions.QuestionID', '=', 'PersonEntryQuestions.QuestionID')
+                    ->select('MarhalaEntryQuestions.QuestionText','PersonEntryQuestions.Answer')
+                    ->where('PersonEntryQuestions.PersonID', $id)->get();
+            
+            return view('person.person-edit', 
+                        array(
+                            'marahel'=>$marahel, 
+                            'rotab'=>$rotab,
+                            'seneen_marahel'=>$seneen_marahel,
+                            'questionTypes'=>$questionTypes,
+                            'blood'=>$blood,
+                            'betakat'=>$betakat,
+                            'manateq'=>$manateq,
+                            'districts'=>$districts,
+                            'qetaat'=>$qetaat,
+                            'faculties'=>$faculties,
+                            'universities'=>$universities,
+                            'questionTypes'=>$questionTypes,
+                            'entryQuestions'=>$entryQuestions,
+                            'person'=>$person,
+                            'questions'=>$questions,
+                        ));
+            
         }
     
         public function updates(Request $request, $id)

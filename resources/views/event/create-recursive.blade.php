@@ -12,7 +12,7 @@
     <title>كشافة الشمندورة - لوحة التحكم</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -21,10 +21,13 @@
     </style>
     <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
 </head>
 
@@ -384,150 +387,63 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">جدول الأيام والأحداث والمناسبات الكشفية</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">اضافة حدث متكرر</h6>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>كود الحدث</th>
-                                            <th>نوع الحدث</th>
-                                            <th>اسم الحدث</th>
-                                            <th>تاريخ البداية</th>
-                                            <th>تاريخ النهاية</th>
-                                            <th>القطاعات</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($events as $event)
-                                        <tr> 
-                                            <td>
-                                                {{ $event->EventID }}
-                                            </td>
+                    </div>
 
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="eventTypeNameLabel-{{$loop->iteration}}">{{ $event->EventTypeName }}</label>
-                                            </td>
+                    <div class="card shadow mb-4">
+                        <form class="user" id="regForm" method="POST" action="{{ route('event.insert') }}">
+                            @csrf
+                            <div class="card-header py-3">
+                                <div class="col mb-3 mb-sm-0">
+                                    <div class="card-header">        
+                                        <div class="form-group" dir="rtl" style="text-align: right">
+                                            <label for="eventtype" style="font-family: 'Cairo', sans-serif;">اختر نوع الحدث أو المناسبة الكشفية</label>
+                                            <br />
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="event_type_id" id="event_type_id">
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر نوع الحدث أو المناسبة الكشفية</option>
+                                                @foreach($eventTypes as $eventType)
+                                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$eventType->EventTypeID}}">{{$eventType->EventTypeName}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </br>
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0" dir="rtl" style="text-align: right">
+                                                <label for="eventname" style="font-family: 'Cairo', sans-serif;">اسم الحدث أو المناسبة الكشفية</label>
+                                                <input type="text" class="form-control form-control-user" name="event_name" id="event_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                        placeholder="ادخل اسم الحدث أو المناسبة" onfocusout="myFunction()">
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0" dir="rtl" style="text-align: right">
+                                                <label for="qetaatnames" style="font-family: 'Cairo', sans-serif;">اختر القطاعات المربوطة بهذا الحدث</label>
+                                                <br />
+                                                <select class="form-control col-sm-4" multiple="multiple" style="width: 75%; margin-right: 20px;" name="qetaa_id[]" id="qetaa_id">
+                                                    @foreach($qetaat as $qetaa)
+                                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </br>
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl" style="text-align: right">    
+                                                <label  class="text-center" for="event_start_date" style="font-family: 'Cairo', sans-serif;">اختر تاريخ بداية الحدث</label>
+                                                <input type="date" class="form-control form-control-user" id="event_start_date" name="event_start_date" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
+                                                    placeholder="تاريخ بداية الحدث أو المناسبة">
+                                            </div>
 
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="eventNameLabel-{{$loop->iteration}}">{{ $event->EventName }}</label>
-                                            </td>
-
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="EventStartDateLabel-{{$loop->iteration}}">{{ $event->EventStartDate }}</label>
-                                            </td>
-
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="EventEndDateLabel-{{$loop->iteration}}">{{ $event->EventEndDate }}</label>
-                                            </td>
-
-                                            <td>
-                                                <label style="color: #4e73df; font-weight: bolder;" id="EventEndDateLabel-{{$loop->iteration}}">{{ $event->EventQetaat }}</label>
-                                            </td>
-
-                                            <td> 
-                                                    <a href="{{ route('event.edit', $event->EventID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #2ea44f;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > تعديل</a>
-
-                                                    <a href="{{ route('event.delete', $event->EventID) }}"
-                                                        style="appearance: none;
-                                                                background-color: #E21739;
-                                                                border: 1px solid rgba(27, 31, 35, .15);
-                                                                border-radius: 6px;
-                                                                box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                                box-sizing: border-box;
-                                                                color: #fff;
-                                                                cursor: pointer;
-                                                                display: inline-block;
-                                                                font-size: 14px;
-                                                                font-weight: 600;
-                                                                line-height: 20px;
-                                                                padding: 6px 16px;
-                                                                position: relative;
-                                                                text-align: center;
-                                                                text-decoration: none;
-                                                                user-select: none;
-                                                                -webkit-user-select: none;
-                                                                touch-action: manipulation;
-                                                                vertical-align: middle;
-                                                                white-space: nowrap;" 
-                                                    > مسح</a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div>
-                                                <a href="{{ route('event.create') }}"  style="appearance: none;
-                                                            background-color: #1216F0;
-                                                            border: 1px solid rgba(27, 31, 35, .15);
-                                                            border-radius: 6px;
-                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                            box-sizing: border-box;
-                                                            color: #fff;
-                                                            cursor: pointer;
-                                                            display: inline-block;
-                                                            font-size: 14px;
-                                                            font-weight: 600;
-                                                            line-height: 20px;
-                                                            padding: 6px 16px;
-                                                            position: relative;
-                                                            text-align: center;
-                                                            text-decoration: none;
-                                                            user-select: none;
-                                                            -webkit-user-select: none;
-                                                            touch-action: manipulation;
-                                                            vertical-align: middle;
-                                                            white-space: nowrap;" 
-                                                id="s"> انشاء حدث جديد</a>
-                                                <a href="#"  style="appearance: none;
-                                                            background-color: #12f0dd;
-                                                            border: 1px solid rgba(27, 31, 35, .15);
-                                                            border-radius: 6px;
-                                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-                                                            box-sizing: border-box;
-                                                            color: #fff;
-                                                            cursor: pointer;
-                                                            display: inline-block;
-                                                            font-size: 14px;
-                                                            font-weight: 600;
-                                                            line-height: 20px;
-                                                            padding: 6px 16px;
-                                                            position: relative;
-                                                            text-align: center;
-                                                            text-decoration: none;
-                                                            user-select: none;
-                                                            -webkit-user-select: none;
-                                                            touch-action: manipulation;
-                                                            vertical-align: middle;
-                                                            white-space: nowrap;" 
-                                                id="s"> انشاء حدث متكرر</a>
+                                            <div class="col-sm-6 mb-3 mb-sm-0"  dir="rtl" style="text-align: right">    
+                                                <label  class="text-center" for="event_end_date" style="font-family: 'Cairo', sans-serif;">اختر تاريخ نهاية الحدث</label>
+                                                <input type="date" class="form-control form-control-user" id="event_end_date" name="event_end_date" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
+                                                    placeholder="تاريخ نهاية الحدث أو المناسبة">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                        </div>
+
+                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -579,43 +495,42 @@
     </div>
 
 
+        <script>
+            $(document).ready(function() {
+                $('#eventtype').select2({
+                    theme: "classic"
+                });
+            });
+        </script>
+
+<script>
+    $(document).ready(function() {
+        $('#qetaa_id').select2({
+            theme: "classic",
+            multiple: true,
+            allowClear: true,
+            dropdownAutoWidth: true,
+            width: 'resolve',
+        });
+    });
+</script>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script>
 
-    <script>
-    function EditButtonClicked(itemNumber) {
-        // Retrieve the item data based on the itemNumber
-        // Enable editing for the corresponding item
-        console.log(`Editing item ${itemNumber}`);
-        document.getElementById('rotbaIDTextBox-'+itemNumber).removeAttribute("readonly");
-        document.getElementById('SubmitButtonNumber-'+itemNumber).removeAttribute("hidden");
-        document.getElementById('EditButtonNumber-'+itemNumber).disabled = true;
-        // Implement your custom logic here
-    }
-
-    function SubmitButtonClicked(itemNumber) {
-        // Retrieve the item data based on the itemNumber
-        // Enable editing for the corresponding item
-        console.log(`Submitting item ${itemNumber}`);
-        document.getElementById('EditButtonNumber-'+itemNumber).disabled = false;
-        document.getElementById('rotbaIDTextBox-'+itemNumber).disabled = true;
-        // Implement your custom logic here
-    }
-    </script>
 
 </body>
 
