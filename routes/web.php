@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 //General UI Routes
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
         Route::get('/', function () {return view('index');})->name('home');
-        
+
 });
 //General Registration and Login Routes
 Route::get('/login-auth', array('as'=>'login-auth', 'uses'=>'App\Http\Controllers\LoginController@show'));
@@ -105,6 +105,9 @@ Route::post('/person/insert', array('as' => 'person.insert', 'uses' => 'App\Http
 Route::get('/person/entry-questions/insert/{id}', array('as'=> 'person.entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestions'));
 Route::post('/person/entry-questions/submit', array('as'=> 'person.entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestions'));
 });
+Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
+Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));
+Route::patch('/person/update/{id}', array('as'=> 'person.update', 'uses'=> 'App\Http\Controllers\PersonNewController@updates'));
 
 
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
