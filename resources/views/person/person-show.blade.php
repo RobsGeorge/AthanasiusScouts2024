@@ -44,7 +44,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
+                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأول: البيانات الشخصية</h2>
                             </div>
                             <div class="form-group row" dir="rtl">
@@ -57,7 +57,7 @@
                                     <div class="col-sm-3">
                                         <label>كلمة السر</label>
                                         <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                              value="{{$person->Password}}" disabled>
+                                              value="********" disabled>
                                     </div>
 
                                     <div class="col-sm-3">
@@ -170,7 +170,7 @@
                 <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
+                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثاني: بيانات التواصل</h2>
                             </div>
                                 <div class="form-group row" dir="rtl">
@@ -268,7 +268,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
+                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق جديد</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثالث: البيانات الدراسية والكنسية</h2>
                             </div>
                                 <div class="form-group text-center" dir="rtl">
@@ -382,7 +382,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> ادخال بيانات ملتحق جديد</h1>
+                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق جديد</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الرابع: البيانات الكشفية</h2>
                             </div>
                                 <div class="form-group text-center" dir="rtl">
@@ -406,7 +406,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> بيانات ملتحق</h1>
+                                <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
                                 <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأخير: الأسئلة المختصة بالقطاع</h2>
                                 <h2>{{$person->QetaaName}}</h2>
                             </div>

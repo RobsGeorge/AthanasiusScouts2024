@@ -40,6 +40,13 @@ class EventController extends Controller
             return view("event.create", array('qetaat'=>$qetaat, 'eventTypes'=>$eventTypes));
         }
 
+        public function createRecursive()
+        {
+            $eventTypes = DB::table('EventType')->get();
+            $qetaat = DB::table('Qetaa')->get();
+            return view("event.create-recursive", array('qetaat'=>$qetaat, 'eventTypes'=>$eventTypes));
+        }
+
         public function insert(Request  $request)
         {
             $validator = Validator::make($request->all(), [

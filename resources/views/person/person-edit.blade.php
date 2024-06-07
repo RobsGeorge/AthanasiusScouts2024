@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 
 <head>
 
@@ -9,121 +9,419 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>كشافة الشمندورة - لوحة التحكم</title>
+    <title>كشافة الشمندورة - ادخال بيانات</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
         <style>
   @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
+</style>
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 </head>
 
+<body class="bg-gradient-primary">
+@if(session('status'))
+<div class="alert alert-success">
+{{ session('status') }}
+</div>
+@endif
+<div class="container mt-4">
+    <div class="container">
+        <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
+            @method('PATCH')
+            @csrf
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="col">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأول: البيانات الشخصية</h2>
+                                </div>
+                                <div class="form-group row" dir="rtl">
+                                        <div class="col-sm-3 mb-3 mb-sm-3">
+                                            <label>التسلسل</label>
+                                            <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                value="{{$person->PersonID}}" disabled>
+                                        </div>
 
+                                        <div class="col-sm-3">
+                                            <label>كلمة السر</label>
+                                            <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                value="********" disabled>
+                                        </div>
 
-<body id="page-top">
+                                        <div class="col-sm-3">
+                                            <label>كود الشمندورة</label>
+                                            <input type="text" class="form-control form-control-user" name="third_name" id="third_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                value="{{$person->ShamandoraCode}}" disabled>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row" dir="rtl">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                        <label>الاسم الأول</label>
+                                            <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="الاسم الأول" value="{{$person->FirstName}}">
+                                        </div>
 
+                                        <div class="col-sm-3">
+                                        <label>الاسم الثاني</label>
+                                            <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="الاسم الثاني"  value="{{$person->SecondName}}">
+                                        </div>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+                                        <div class="col-sm-3">
+                                        <label>الاسم الثالث</label>
+                                            <input type="text" class="form-control form-control-user" name="third_name" id="third_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="الاسم الثالث"  value="{{$person->ThirdName}}">
+                                        </div>
 
-            <!-- Main Content -->
-            <div id="content">
+                                        <div class="col-sm-3">
+                                        <label>الاسم الرابع</label>
+                                            <input type="text" class="form-control form-control-user" name="fourth_name" id="fourth_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder=""  value="{{$person->FourthName}}">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">نوع الملتحق</label>
+                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('gender')" onfocusout="validate('gender')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" selected disabled>@if($person->Gender == 'Male'){{"ذكر"}} @else {{"أنثى"}} @endif</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>
+                                        </select>
 
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="email_input" style="font-family: 'Cairo', sans-serif;">البريد الالكتروني</label>
+                                        <input dir="rtl" type="email" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="أدخل البريد الالكتروني للملتحق بشكل صحيح"  value="{{$person->PersonalEmail}}">
+                                    </div>
+                                    <br>
+                                    <div class="form-group row text-center" dir="rtl">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">    
+                                            <label  class="text-center" for="birthdate_input" style="font-family: 'Cairo', sans-serif;">تاريخ الميلاد</label>
+                                            <input type="date" class="form-control form-control-user" id="birthdate_input" name="birthdate_input" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
+                                                placeholder="تاريخ الميلاد"  value="{{$person->DateOfBirth}}">
+                                        </div>
 
+                                        <div class="col-sm-6 text-center">    
+                                            <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق بالكشافة</label>
+                                            <input dir="rtl" type="email" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder=""  value="{{$person->ScoutJoiningYear}}">
+                                            </select>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">الرقم القومي</label>
+                                        <input dir="rtl" type="number" class="form-control form-control-user" id="input_raqam_qawmy" name="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="أدخل الرقم القومي المكون من 14 رقماً"  value="{{$person->RaqamQawmy}}">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">بيانات التحكم</h1>
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label for="facebookLink" style="font-family: 'Cairo', sans-serif;">Facebook Account URL/Link</label>
+                                        <input dir="rtl" type="text" class="form-control form-control-user" name="inputFacebookLink" id="inputFacebookLink" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                                placeholder="أدخل لينك حساب الفيسبوك الخاص بالمتلحق (إن وُجِد)"  value="{{$person->FacebookProfileURL}}">
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label for="instagramLink" style="font-family: 'Cairo', sans-serif;">Instagram Account URL/Link (if Found)</label>
+                                        <input dir="rtl" type="text" class="form-control form-control-user" name="inputFacebookLink" id="inputFacebookLink" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                                placeholder="أدخل لينك حساب الفيسبوك الخاص بالمتلحق (إن وُجِد)"  value="{{$person->InstagramProfileURL}}">
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                            <label for="joindate" style="font-family: 'Cairo', sans-serif;">فصيلة الدم</strong></label>
+                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->BloodTypeName}}" disabled selected></option>
+                                            @foreach($blood as $blood_element)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$blood_element->BloodTypeID}}">{{$blood_element->BloodTypeName}}</option>
+                                            @endforeach
+                                            </select>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل بيانات مستخدم</h6>
+                                    </div>
+                                <hr>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
-                            @method('PATCH')
-                            @csrf
-                            <div class="card-header py-3">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>ID = {{$person->PersonID}}</label>
-                                                <input type="text" class="form-control form-control-user" name="person_name" id="person_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                    placeholder="ادخل " onfocusout="myFunction()" value="{{$person->PersonID}}">
-                                                    <br>
-                                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل"></input>
+                    <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثاني: بيانات التواصل</h2>
                                 </div>
+                                    <div class="form-group row" dir="rtl">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <label  class="text-center" for="personal_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الملتحق (الأساسي)</label>
+                                            <input type="number" class="form-control form-control-user" name="personal_phone_number" id="personal_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="رقم الموبايل الشخصي" value="{{$person->PersonPersonalMobileNumber}}">
+                                        </div>
+
+                                        <div class="col-sm-3" dir="rtl">
+                                        <label  class="text-center" for="father_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الأب (إن وُجِد)</label>
+                                            <input type="number" class="form-control form-control-user" name="father_phone_number" id="father_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="رقم موبايل الأب" value="{{$person->FatherMobileNumber}}">
+                                        </div>
+
+                                        <div class="col-sm-3" dir="rtl">
+                                        <label  class="text-center" for="mother_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الأم (إن وُجِد)</label>
+                                            <input type="text" class="form-control form-control-user" name="mother_phone_number" id="mother_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="رقم موبايل الأم" value="{{$person->MotherMobileNumber}}">
+                                        </div>
+
+                                        <div class="col-sm-3" dir="rtl">
+                                        <label  class="text-center" for="home_phone_number" style="font-family: 'Cairo', sans-serif;">رقم التليفون الأرضي (إن وُجِد)</label>
+                                            <input type="text" class="form-control form-control-user" name="home_phone_number" id="home_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="رقم التليفون الأرضي" value="{{$person->HomePhoneNumber}}">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group row" dir="rtl">
+                                            <label for="has_whatsapp" style="font-family: 'Cairo', sans-serif; margin-top: 5px;">هل رقم الموبايل الأساسي للملتحق عليه برنامج Whatsapp<strong>(نعم أم لا)</strong></label>
+                                            <br />
+                                            
+                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="has_whatsapp" id="has_whatsapp" onChange="" placeholder="هل الموبايل الأساسي عليه واتساب؟" id="has_whatsapp">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->IsOPersonalPhoneNumberHavingWhatsapp==True?"نعم":"لا"}}</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="True">نعم</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="False">لا</option>
+                                        </select>
+
+                                    </div>
+                                    <br/>
+                                    <hr>
+                                    <div class="form-group row" dir="rtl">
+                                        <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
+                                            <label  class="text-center" for="building_number" style="font-family: 'Cairo', sans-serif;">رقم العمارة</label>
+                                            <input type="number" class="form-control form-control-user" name="building_number" id="building_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="أدخل رقم العمارة" value="{{$person->BuildingNumber}}">
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
+                                            <label  class="text-center" for="floor_number" style="font-family: 'Cairo', sans-serif;">رقم الدور</label>
+                                            <input type="number" class="form-control form-control-user" name="floor_number" id="floor_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="أدخل رقم الدور" value="{{$person->FloorNumber}}">
+                                        </div>
+
+                                        <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
+                                            <label  class="text-center" for="appartment_number" style="font-family: 'Cairo', sans-serif;">رقم الشقة</label>
+                                            <input type="number" class="form-control form-control-user" name="appartment_number" id="appartment_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="أدخل رقم الشقة" value="{{$person->AppartmentNumber}}">
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="form-group row" dir="rtl">
+                                        <div class="col-sm-6 mb-5 mb-sm-0">
+                                            <label  class="text-center" for="sub_street_name" style="font-family: 'Cairo', sans-serif;">اسم الشارع</label>
+                                            <input type="text" class="form-control form-control-user" name="sub_street_name" id="sub_street_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="أدخل اسم الشارع" value="{{$person->SubStreetName}}">
+                                        </div>
+
+                                        <div class="col-sm-6 mb-5 mb-sm-0" dir="rtl">
+                                            <label  class="text-center" for="main_street_name" style="font-family: 'Cairo', sans-serif;">اسم أقرب شارع رئيسي</label>
+                                            <input type="text" class="livesearch form-control form-control-user" name="main_street_name" id="main_street_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                placeholder="أدخل اسم أقرب شارع رئيسي للمنزل" value="{{$person->MainStreetName}}">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="nearest_landmark" style="font-family: 'Cairo', sans-serif;">أقرب علامة مميزة</label>
+                                        <input dir="rtl" type="text" name="nearest_landmark" id="nearest_landmark" class="form-control form-control-user" id="nearest_landmark" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="أدخل أقرب علامة مميزة لعنوان الملتحق" value="{{$person->NearestLandmark}}">
+                                    </div>
+                                    <br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <div class="col-sm-6" dir="rtl">    
+                                            <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة</label>
+                                            <input dir="rtl" type="text" name="manteqa" id="manteqa" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="" value="{{$person->ManteqaName}}">
+                                        </div>
+                                        <div class="col-sm-6" dir="rtl">    
+                                            <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي</label>
+                                            <input dir="rtl" type="text" name="district" id="district" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="" value="{{$person->DistrictName}}">
+                                        </div>
+                                    </div>
+                                <hr>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق جديد</h1>
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثالث: البيانات الدراسية والكنسية</h2>
+                                </div>
+                                    <div class="form-group text-center" dir="rtl">
+                                    <label for="sana_marhala_id" style="font-family: 'Cairo', sans-serif;">السنة والمرحلة الدراسية</label>
+                                    <input dir="rtl" type="text" name="sana_marhala" id="sana_marhala" class="form-control form-control-user"  style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->SanaMarhalaName}}">
+                                    </div>
+                                    <br/>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="person_job" style="font-family: 'Cairo', sans-serif;">الوظيفة</label>
+                                        <input dir="rtl" type="text" name="person_job" id="person_job" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->JobName}}">
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="person_job_place" style="font-family: 'Cairo', sans-serif;">مكان العمل الحالي</label>
+                                        <input dir="rtl" type="text" name="person_job_place" id="person_job_place" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->WorkPlace}}">
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="school_name" style="font-family: 'Cairo', sans-serif;">اسم المدرسة</label>
+                                        
+                                        <input dir="rtl" type="text" name="school_name" id="school_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->SchoolName}}">
+                                        
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="school_grad_year" style="font-family: 'Cairo', sans-serif;">سنة التخرج من المدرسة</label>
+                                    
+                                        <input dir="rtl" type="text" name="school_grad_year" id="school_grad_year" class="form-control form-control-user"  style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->SchoolGraduationYear}}">
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="faculty_name" style="font-family: 'Cairo', sans-serif;">اسم الكلية</label>
+                                        <input dir="rtl" type="text" name="faculty_name" id="faculty_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->FacultyName}}">
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="university_name" style="font-family: 'Cairo', sans-serif;">اسم الجامعة</label>
+                                        <input dir="rtl" type="text" name="university_name" id="university_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->UniversityName}}">
+                                        
+                                    </div>
+                                    </br>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="university_grad_year" style="font-family: 'Cairo', sans-serif;">سنة التخرج من الجامعة</label>
+                                        
+                                        <input dir="rtl" type="text" name="university_grad_year" id="university_grad_year" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->ActualFacultyGraduationYear}}">
+                                        
+                                    </div>
+                                    </br>
+                                    <hr>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="v" style="font-family: 'Cairo', sans-serif;">اسم الأب الروحي</label>
+                                    
+                                        <input dir="rtl" type="text" name="spiritual_father" id="spiritual_father" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->SpiritualFatherName}}">
+                                        
+                                    </div>
+                                    <div class="form-group text-center" dir="rtl">
+                                        <label class="text-center" for="spiritual_father_church" style="font-family: 'Cairo', sans-serif;">كنيسة الأب الروحي / أب الاعتراف</label>
+                                        
+                                        <input dir="rtl" type="text" name="spiritual_father_church" id="spiritual_father_church" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            value="{{$person->SpiritualFatherChurchName}}">
+                                        
+                                    </div>
+                                    
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق جديد</h1>
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الرابع: البيانات الكشفية</h2>
+                                </div>
+                                    <div class="form-group text-center" dir="rtl">
+                                            <label style="font-family: 'Cairo', sans-serif;">الرتبة الكشفية</label>
+                                            
+                                            <select class="form-control" style="margin-top: 8px;" name="rotba_kashfeyya_id" id="rotba_kashfeyya_id" onChange="" placeholder="اختار الرتبة الكشفية" onclick="validate('rotba_kashfeyya_id')" onfocusout="validate('rotba_kashfeyya_id')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->RotbaName}}" disabled selected> </option>
+                                            @foreach($rotab as $rotba)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$rotba->RotbaID}}">{{$rotba->RotbaName}}</option>
+                                            @endforeach
+                                            </select>
+                                    </div>
+                                    <div class="form-group text-center" dir="rtl">
+                                            <label  style="font-family: 'Cairo', sans-serif;">ايجازة بطاقة التقدم</label>
+                                            <select class="form-control" style="margin-top: 8px;" name="betaka_id" id="betaka_id" onChange="" placeholder="اختار ايجازة بطاقة التقدم" onclick="" onfocusout="">
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->}}</option>
+                                                @foreach($betakat as $betaka)
+                                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$betaka->EgazetBetakatTaqaddomID}}">{{$betaka->EgazetBetakatTaqaddomName}}</option>
+                                                @endforeach
+                                                </select>
+                                    </div>
+                                    <div class="form-group text-center" dir="rtl">
+                                            <label style="font-family: 'Cairo', sans-serif;">القطاع الكشفي</label>
+                                            
+                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onChange="" placeholder="اختار القطاع" onclick="validate('qetaa_id')" onfocusout="validate('qetaa_id')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->QetaaName}}</option>
+                                            @foreach($qetaat as $qetaa)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4" style="font-family: 'Cairo', sans-serif;"> عرض بيانات ملتحق</h1>
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأخير: الأسئلة المختصة بالقطاع</h2>
+                                    <h2>{{$person->QetaaName}}</h2>
+                                </div>
+                                    @if (!$questions->isEmpty()) 
+                                    @foreach ($questions as $question)
+                                    <div class="form-group" dir="rtl">
+                                            <label style="font-family: 'Cairo', sans-serif;">السؤال: {{$question->QuestionText}}</label>
+                                            </br>
+                                            <label style="font-family: 'Cairo', sans-serif;"><strong>إجابة الملتحق</strong></label>
+                                            <input dir="rtl" type="text" name="q" id="q" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="" value="{{$question->Answer}}" disabled>
+                                    </div>
+                                    @endforeach
+                                    @else
+                                    <div class="form-group" dir="rtl">
+                                        <label style="font-family: 'Cairo', sans-serif;">لا يوجد أسئلة لهذا الشخص في هذا القطاع</label>
+                                    </div>  
+                                    @endif
+                            </div>
+                        </div>
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-        
-        </div>
-        <!-- End of Content Wrapper -->
-
+        </form>
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
-    <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
-
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
-    }
-    */
-</script>
+    <!-- Parsley Javascript Validation Form Library -->
+    <script src="jquery.js"></script>
+    <script src="parsley.min.js"></script>
 
 </body>
 

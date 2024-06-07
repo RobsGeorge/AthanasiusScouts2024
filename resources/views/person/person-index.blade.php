@@ -389,7 +389,7 @@
                                                 <label style="color: #4e73df; font-weight: bolder;" id="questions-{{$loop->iteration}}">{{ $person->HasAnsweredQuestions}}</label>
                                             </td>
                                             <td> 
-                                                    <a
+                                                    <a  href="{{ route('person.edit', $person->PersonID) }}" 
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);

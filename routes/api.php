@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+    Route::get('/get-persons-qetaa-baraem', array('as'=>'person-qetaa', 'uses'=>'App\Http\Controllers\API\PersonController@getPersonDataByQetaaID'));  

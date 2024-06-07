@@ -124,6 +124,8 @@ Route::delete('/person/destroy/{id}', array('as'=> 'person.destroy', 'uses'=>'Ap
 
 //Routes for Event
 Route::get('/event', array('as' => 'event.index', 'uses' => 'App\Http\Controllers\EventController@index'));
+Route::get('/event/add-recursive', array('as' => 'event.create-recursive', 'uses' =>'App\Http\Controllers\EventController@createRecursive'));
+Route::post('/event/insert-recursive', array('as' => 'event.insert-recursive', 'uses' => 'App\Http\Controllers\EventController@insertRecursive'));
 Route::get('/event/add', array('as' => 'event.create', 'uses' =>'App\Http\Controllers\EventController@create'));
 Route::post('/event/insert', array('as' => 'event.insert', 'uses' => 'App\Http\Controllers\EventController@insert'));
 Route::get('/event/edit/{id}', array('as' => 'event.edit', 'uses' => 'App\Http\Controllers\EventController@edit'));
