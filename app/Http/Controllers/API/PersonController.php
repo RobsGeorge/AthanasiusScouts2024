@@ -20,7 +20,7 @@ class PersonController extends Controller
     public function getPersonDataByQetaaID()
     {
         $qetaa_id = 1; //Qetaa for Testing for Bara3em
-        $data = DB::select("SELECT DISTINCT  pi.PersonID,
+        $data = DB::select("SELECT DISTINCT  
                                                     pi.ShamandoraCode,
                                                     pi.FirstName, 
                                                     pi.SecondName, 
