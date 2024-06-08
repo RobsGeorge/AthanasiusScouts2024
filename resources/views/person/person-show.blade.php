@@ -53,10 +53,9 @@
                                         <input type="text" class="form-control form-control-user" name="person_id" id="person_id" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                              value="{{$person->PersonID}}" disabled hidden>
                                     </div>
-
                                     <div class="col-sm-3">
                                         <label>كلمة السر</label>
-                                        @if(auth()->user()->role=='SuperAdmin'||auth()->user()->role=='Admin')
+                                        @if(auth()->user()->role[0]->RoleName=="SuperAdmin"||auth()->user()->role[0]->RoleName=="Admin")
                                         <input type="text" class="form-control form-control-user" name="password" id="password" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                         value="{{$person->Password}}" disabled>
                                         @else
