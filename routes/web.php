@@ -98,17 +98,16 @@ Route::delete('/person-role/destroy/{id}', array('as'=> 'person-role.destroy', '
 
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin|Khadem'])->group(function(){
 
-//Routes for Person Information for all system
+//Routes for Person Information for all system (Show ALL, Insert, Show by ID, Edit)
 Route::get('/person', array('as'=> 'person.index', 'uses'=>'App\Http\Controllers\PersonNewController@index'));
 Route::get('/person/add', array('as' => 'person.create', 'uses' =>'App\Http\Controllers\PersonNewController@create'));
 Route::post('/person/insert', array('as' => 'person.insert', 'uses' => 'App\Http\Controllers\PersonNewController@insert'));
 Route::get('/person/entry-questions/insert/{id}', array('as'=> 'person.entry-questions', 'uses'=>'App\Http\Controllers\PersonNewController@getQuestions'));
 Route::post('/person/entry-questions/submit', array('as'=> 'person.entry-questions-submit', 'uses'=>'App\Http\Controllers\PersonNewController@submitQuestions'));
-});
 Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
 Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));
 Route::patch('/person/update/{id}', array('as'=> 'person.update', 'uses'=> 'App\Http\Controllers\PersonNewController@updates'));
-
+});
 
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
 
@@ -118,9 +117,7 @@ Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analy
 Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
 Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));
 
-Route::get('/person/show/{id}', array('as'=> 'person.show', 'uses'=>'App\Http\Controllers\PersonNewController@show'));
-Route::get('/person/edit/{id}', array('as' => 'person.edit', 'uses' => 'App\Http\Controllers\PersonNewController@edit'));
-Route::patch('/person/update/{id}', array('as'=> 'person.update', 'uses'=> 'App\Http\Controllers\PersonNewController@updates'));
+//Routes for Deleting Persons from Database
 Route::get('/person/delete/{id}', array('as'=> 'person.delete', 'uses'=>'App\Http\Controllers\PersonNewController@deletes'));
 Route::delete('/person/destroy/{id}', array('as'=> 'person.destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroy'));
 
