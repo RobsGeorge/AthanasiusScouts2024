@@ -76,7 +76,7 @@
                                 <div class="form-group row text-center" dir="rtl">
                                         <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر نوع الملتحق<strong>(ذكر أم أنثى)</strong> **</label>
                                         <br />
-                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('gender')" onfocusout="validate('gender')">
+                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار نوع الملتحق" onclick="validate('gender')" onfocusout="validate('gender')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر النوع</option>
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>

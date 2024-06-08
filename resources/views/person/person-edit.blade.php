@@ -30,11 +30,6 @@
 </head>
 
 <body class="bg-gradient-primary">
-@if(session('status'))
-<div class="alert alert-success">
-{{ session('status') }}
-</div>
-@endif
 <div class="container mt-4">
     <div class="container">
         <form class="user" id="regForm" method="post" action="{{ route('person.update', $person->PersonID) }}">
@@ -51,21 +46,24 @@
                                     <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الأول: البيانات الشخصية</h2>
                                 </div>
                                 <div class="form-group row" dir="rtl">
+                                    <div>
+                                        <input type="text" class="form-control form-control-user" name="RequestPersonID" id="RequestPersonID" style="font-family: 'Cairo', sans-serif; font-size: medium" value="{{Auth()->user()->PersonID}}" hidden>
+                                    </div>
                                         <div class="col-sm-3 mb-3 mb-sm-3">
-                                            <label>التسلسل</label>
-                                            <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                                value="{{$person->PersonID}}" disabled>
+                                            <!--<label>التسلسل</label>-->
+                                            <input type="text" class="form-control form-control-user" name="person_id" id="person_id" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                                value="{{$person->PersonID}}" disabled hidden>
                                         </div>
 
                                         <div class="col-sm-3">
                                             <label>كلمة السر</label>
-                                            <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                            <input type="text" class="form-control form-control-user" name="password" id="password" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 value="********" disabled>
                                         </div>
 
                                         <div class="col-sm-3">
                                             <label>كود الشمندورة</label>
-                                            <input type="text" class="form-control form-control-user" name="third_name" id="third_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                            <input type="text" class="form-control form-control-user" name="shamandora_code" id="shamandora_code" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 value="{{$person->ShamandoraCode}}" disabled>
                                         </div>
                                     </div>
@@ -98,8 +96,8 @@
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
                                         <label for="joindate" style="font-family: 'Cairo', sans-serif;">نوع الملتحق</label>
-                                        <select class="form-control col-sm-4" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('gender')" onfocusout="validate('gender')">
-                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" selected disabled>@if($person->Gender == 'Male'){{"ذكر"}} @else {{"أنثى"}} @endif</option>
+                                        <select class="form-control col-sm-6 mb-3 mb-sm-0" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار نوع الملتحق" onclick="validate('gender')" onfocusout="validate('gender')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->Gender}}" selected>@if($person->Gender == 'Male'){{"ذكر"}} @else {{"أنثى"}} @endif</option>
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>
                                         </select>
@@ -121,36 +119,36 @@
 
                                         <div class="col-sm-6 text-center">    
                                             <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق بالكشافة</label>
-                                            <input dir="rtl" type="email" name="email_input" id="email_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            placeholder=""  value="{{$person->ScoutJoiningYear}}">
+                                            <input dir="rtl" type="number" name="joining_year_input" id="joining_year_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                            placeholder="أدخل سنة الالتحاق بالكشافة"  value="{{$person->ScoutJoiningYear}}">
                                             </select>
 
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">الرقم القومي</label>
+                                        <label for="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif;">الرقم القومي</label>
                                         <input dir="rtl" type="number" class="form-control form-control-user" id="input_raqam_qawmy" name="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif; font-size: large"
                                             placeholder="أدخل الرقم القومي المكون من 14 رقماً"  value="{{$person->RaqamQawmy}}">
 
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                        <label for="facebookLink" style="font-family: 'Cairo', sans-serif;">Facebook Account URL/Link</label>
+                                        <label for="inputFacebookLink" style="font-family: 'Cairo', sans-serif;">Facebook Account URL/Link</label>
                                         <input dir="rtl" type="text" class="form-control form-control-user" name="inputFacebookLink" id="inputFacebookLink" style="font-family: 'Cairo', sans-serif; font-size: large"
                                                 placeholder="أدخل لينك حساب الفيسبوك الخاص بالمتلحق (إن وُجِد)"  value="{{$person->FacebookProfileURL}}">
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                        <label for="instagramLink" style="font-family: 'Cairo', sans-serif;">Instagram Account URL/Link (if Found)</label>
-                                        <input dir="rtl" type="text" class="form-control form-control-user" name="inputFacebookLink" id="inputFacebookLink" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                        <label for="inputInstagramLink" style="font-family: 'Cairo', sans-serif;">Instagram Account URL/Link (if Found)</label>
+                                        <input dir="rtl" type="text" class="form-control form-control-user" name="inputInstagramLink" id="inputInstagramLink" style="font-family: 'Cairo', sans-serif; font-size: large"
                                                 placeholder="أدخل لينك حساب الفيسبوك الخاص بالمتلحق (إن وُجِد)"  value="{{$person->InstagramProfileURL}}">
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
                                             <label for="joindate" style="font-family: 'Cairo', sans-serif;">فصيلة الدم</strong></label>
-                                            <select class="form-control col-sm-4" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
-                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->BloodTypeName}}" disabled selected></option>
+                                            <select class="form-control col-sm-6 mb-3 mb-sm-0" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->BloodTypeName}}" selected></option>
                                             @foreach($blood as $blood_element)
                                                 <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$blood_element->BloodTypeID}}">{{$blood_element->BloodTypeName}}</option>
                                             @endforeach
@@ -198,7 +196,7 @@
                                             <br />
                                             
                                         <select class="form-control col-sm-4" style="margin-right: 20px;" name="has_whatsapp" id="has_whatsapp" onChange="" placeholder="هل الموبايل الأساسي عليه واتساب؟" id="has_whatsapp">
-                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->IsOPersonalPhoneNumberHavingWhatsapp==True?"نعم":"لا"}}</option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->IsOPersonalPhoneNumberHavingWhatsapp}}" selected>{{$person->IsOPersonalPhoneNumberHavingWhatsapp==True?"نعم":"لا"}}</option>
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="True">نعم</option>
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="False">لا</option>
                                         </select>
@@ -243,20 +241,30 @@
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
                                         <label class="text-center" for="nearest_landmark" style="font-family: 'Cairo', sans-serif;">أقرب علامة مميزة</label>
-                                        <input dir="rtl" type="text" name="nearest_landmark" id="nearest_landmark" class="form-control form-control-user" id="nearest_landmark" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                        <input dir="rtl" type="text" name="nearest_landmark" id="nearest_landmark" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
                                             placeholder="أدخل أقرب علامة مميزة لعنوان الملتحق" value="{{$person->NearestLandmark}}">
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
                                         <div class="col-sm-6" dir="rtl">    
                                             <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة</label>
-                                            <input dir="rtl" type="text" name="manteqa" id="manteqa" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            placeholder="" value="{{$person->ManteqaName}}">
+                                            
+                                            <select class="form-control" style="margin-top: 8px;" name="manteqa_id" id="manteqa_id" placeholder="اختار المنطقة" onclick="validate('manteqa_id')" onfocusout="validate('manteqa_id')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->ManteqaID}}" selected>{{$person->ManteqaName}}</option>
+                                            @foreach($manateq as $manteqa)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$manteqa->ManteqaID}}">{{$manteqa->ManteqaName}}</option>
+                                            @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-sm-6" dir="rtl">    
                                             <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي</label>
-                                            <input dir="rtl" type="text" name="district" id="district" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            placeholder="" value="{{$person->DistrictName}}">
+                                            
+                                        <select class="form-control" style="margin-top: 8px;" name="district_id" id="district_id" onChange="" placeholder="اختار الحي" onclick="validate('district_id')" onfocusout="validate('district_id')">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->DistrictID}}" selected>{{$person->DistrictName}}</option>
+                                            @foreach($districts as $district)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$district->DistrictID}}">{{$district->DistrictName}}</option>
+                                            @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 <hr>
@@ -271,8 +279,12 @@
                                 </div>
                                     <div class="form-group text-center" dir="rtl">
                                     <label for="sana_marhala_id" style="font-family: 'Cairo', sans-serif;">السنة والمرحلة الدراسية</label>
-                                    <input dir="rtl" type="text" name="sana_marhala" id="sana_marhala" class="form-control form-control-user"  style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            value="{{$person->SanaMarhalaName}}">
+                                    <select class="form-control" style="margin-top: 8px;" name="sana_marhala_id" id="sana_marhala_id" onselect="checkMarhala()" placeholder="اختار السنة والمرحلة الدراسية" onclick="validate('sana_marhala_id')" onfocusout="validate('sana_marhala_id')">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->SanaMarhalaID}}" selected>{{$person->SanaMarhalaName}}</option>
+                                        @foreach($seneen_marahel as $sana_marhala)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$sana_marhala->SanaMarhalaID}}">{{$sana_marhala->SanaMarhalaName}}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                     <br/>
                                     <div class="form-group text-center" dir="rtl">
@@ -289,7 +301,6 @@
                                     </br>
                                     <div class="form-group text-center" dir="rtl">
                                         <label class="text-center" for="school_name" style="font-family: 'Cairo', sans-serif;">اسم المدرسة</label>
-                                        
                                         <input dir="rtl" type="text" name="school_name" id="school_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
                                             value="{{$person->SchoolName}}">
                                         
@@ -304,14 +315,22 @@
                                     </br>
                                     <div class="form-group text-center" dir="rtl">
                                         <label class="text-center" for="faculty_name" style="font-family: 'Cairo', sans-serif;">اسم الكلية</label>
-                                        <input dir="rtl" type="text" name="faculty_name" id="faculty_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            value="{{$person->FacultyName}}">
+                                        <select class="form-control" style="margin-top: 8px;" name="person_faculty" id="person_faculty" placeholder="اختار الكلية">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->FacultyID}}" selected>{{$person->FacultyName}}</option>
+                                            @foreach($faculties as $faculty)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$faculty->FacultyID}}">{{$faculty->FacultyName}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     </br>
                                     <div class="form-group text-center" dir="rtl">
                                         <label class="text-center" for="university_name" style="font-family: 'Cairo', sans-serif;">اسم الجامعة</label>
-                                        <input dir="rtl" type="text" name="university_name" id="university_name" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
-                                            value="{{$person->UniversityName}}">
+                                        <select class="form-control" style="margin-top: 8px;" name="person_university" id="person_university" placeholder="اختار الجامعة">
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->UniversityID}}" selected>{{$person->UniversityName}}</option>
+                                            @foreach($universities as $university)
+                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$university->UniversityID}}">{{$university->UniversityName}}</option>
+                                            @endforeach
+                                        </select>
                                         
                                     </div>
                                     </br>
@@ -352,7 +371,7 @@
                                             <label style="font-family: 'Cairo', sans-serif;">الرتبة الكشفية</label>
                                             
                                             <select class="form-control" style="margin-top: 8px;" name="rotba_kashfeyya_id" id="rotba_kashfeyya_id" onChange="" placeholder="اختار الرتبة الكشفية" onclick="validate('rotba_kashfeyya_id')" onfocusout="validate('rotba_kashfeyya_id')">
-                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->RotbaName}}" disabled selected> </option>
+                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->RotbaID}}" selected>{{$person->RotbaName}}</option>
                                             @foreach($rotab as $rotba)
                                                 <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$rotba->RotbaID}}">{{$rotba->RotbaName}}</option>
                                             @endforeach
@@ -361,22 +380,20 @@
                                     <div class="form-group text-center" dir="rtl">
                                             <label  style="font-family: 'Cairo', sans-serif;">ايجازة بطاقة التقدم</label>
                                             <select class="form-control" style="margin-top: 8px;" name="betaka_id" id="betaka_id" onChange="" placeholder="اختار ايجازة بطاقة التقدم" onclick="" onfocusout="">
-                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->}}</option>
+                                                <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->EgazetBetakatTaqaddomID}}" selected>{{$person->EgazetBetakatTaqaddomName}}</option>
                                                 @foreach($betakat as $betaka)
                                                     <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$betaka->EgazetBetakatTaqaddomID}}">{{$betaka->EgazetBetakatTaqaddomName}}</option>
                                                 @endforeach
-                                                </select>
+                                            </select>
                                     </div>
                                     <div class="form-group text-center" dir="rtl">
                                             <label style="font-family: 'Cairo', sans-serif;">القطاع الكشفي</label>
-                                            
-                                        <select class="form-control" style="margin-top: 8px;" name="qetaa_id" id="qetaa_id" onChange="" placeholder="اختار القطاع" onclick="validate('qetaa_id')" onfocusout="validate('qetaa_id')">
-                                            <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>{{$person->QetaaName}}</option>
-                                            @foreach($qetaat as $qetaa)
-                                                <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$qetaa->QetaaID}}">{{$qetaa->QetaaName}}</option>
-                                            @endforeach
-                                        </select>
+                                            <input dir="rtl" type="text" name="qetaa_id" id="qetaa_id" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
+                                                placeholder="القطاع" value="{{$person->QetaaName}}" disabled>
                                     </div>
+                            </div>
+                            <div class="center" style="width: 50%; margin: auto">
+                            <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="تعديل" onsubmit=""></input>
                             </div>
                         </div>
 
@@ -404,24 +421,27 @@
                                     @endif
                             </div>
                         </div>
+                        
                 </div>
             </div>
         </form>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Parsley Javascript Validation Form Library -->
-    <script src="jquery.js"></script>
-    <script src="parsley.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="../js/sb-admin-2.min.js"></script>
+
+<!-- Parsley Javascript Validation Form Library -->
+<script src="jquery.js"></script>
+<script src="parsley.min.js"></script>
 
 </body>
 
