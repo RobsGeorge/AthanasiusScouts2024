@@ -370,8 +370,8 @@ class PersonNewController extends Controller
                 'birthdate_input' => 'required',
                 'joining_year_input' => 'required',
                 'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
-                'facebookLink'=>'url',
-                'instagramLink'=>'url',
+                'inputFacebookLink'=>'url',
+                'inputInstagramLink'=>'url',
                 'blood_type_input'=>'required',
                 'personal_phone_number'=>'required|min_digits:11|max_digits:11',
                 'building_number'=>'required',
@@ -634,7 +634,7 @@ class PersonNewController extends Controller
             DB::table('PersonLearningInformation')->insert(
                 array(
                     'PersonID'=>$thisPersonID,
-                    'SchoolName'=>$request->person_school,
+                    'SchoolName'=>$request->school_name,
                     'SchoolGraduationYear'=>$request->school_grad_year,
                     'FacultyID'=>$request->person_faculty,
                     'UniversityID'=>$request->person_university,
@@ -895,7 +895,6 @@ class PersonNewController extends Controller
                             'betakat'=>$betakat,
                             'manateq'=>$manateq,
                             'districts'=>$districts,
-                            'qetaat'=>$qetaat,
                             'faculties'=>$faculties,
                             'universities'=>$universities,
                             'questionTypes'=>$questionTypes,
@@ -908,11 +907,149 @@ class PersonNewController extends Controller
     
         public function updates(Request $request, $id)
         {
-            $entryQuestions = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->first();
-
-            $affected = DB::table('MarhalaEntryQuestions')->where('QuestionID', $id)->update(['QuestionText' => $request->question_text, 'RequiredAnswerType'=> $request->required_answer_type]);
             
-            return redirect()->route('person.index')->with('status','تم تعديل بنجاح البيانات');
+
+            $raqamQawmyObject = DB::selectOne('SELECT COUNT(*) AS `counts` FROM PersonInformation WHERE RaqamQawmy=? AND PersonID!=?;', [$request->input_raqam_qawmy,$id]);
+            $raqamQawmyCounts = $raqamQawmyObject->counts;
+              
+            
+              if($raqamQawmyCounts>0)
+              {
+                  return view('person.person-already-exists');
+              }
+            
+
+            
+
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required',
+                'second_name' => 'required',
+                'third_name' => 'required',
+                'gender'=>'required',
+                'birthdate_input' => 'required',
+                'joining_year_input' => 'required',
+                'input_raqam_qawmy' => 'required|min_digits:14|max_digits:14',
+                'facebookLink'=>'url',
+                'instagramLink'=>'url',
+                'blood_type_input'=>'required',
+                'personal_phone_number'=>'required|min_digits:11|max_digits:11',
+                'building_number'=>'required',
+                'floor_number'=>'required',
+                'appartment_number' =>'required',
+                'sub_street_name' => 'required',
+                'manteqa_id'=>'required',
+                'district_id'=>'required',
+                'sana_marhala_id'=>'required'
+            ]);
+     
+            if ($validator->fails()) {
+                return view('person.entry-error-repeat-trial');
+            }
+
+            //return $request;
+
+            try{
+            DB::beginTransaction();
+            
+                DB::table('PersonInformation')->where('PersonID',$id)->update(
+                    array(
+                        'FirstName' => $request->first_name,
+                        'SecondName' => $request->second_name,
+                        'ThirdName'   => $request->third_name,
+                        'FourthName' => $request->fourth_name,
+                        'Gender' => $request->gender,
+                        'DateOfBirth' => $request->birthdate_input,
+                        'RaqamQawmy' => $request->input_raqam_qawmy,
+                        'ScoutJoiningYear'  => $request->joining_year_input,
+                        'BloodTypeID' => $request->blood_type_input,
+                        'FacebookProfileURL' =>$request->inputFacebookLink,
+                        'InstagramProfileURL' =>$request->inputInstagramLink,
+                        'PersonalEmail' => $request->email_input,
+                        'RequestPersonID' => $request->RequestPersonID,
+                    )
+                );
+    
+    
+                DB::table('PersonPhoneNumbers')->where('PersonID',$id)->update(
+                    array(
+                        'PersonPersonalMobileNumber' => $request->personal_phone_number,
+                        'FatherMobileNumber' => $request->father_phone_number,
+                        'MotherMobileNumber'   => $request->mother_phone_number,
+                        'HomePhoneNumber' => $request->home_phone_number,
+                        'IsOPersonalPhoneNumberHavingWhatsapp' => $request->has_whatsapp,
+                    )
+                );
+    
+                DB::table('PersonJob')->where('PersonID',$id)->update(
+                    array(
+                        'JobName'=>$request->person_job,
+                        'WorkPlace'=>$request->person_job_place
+                    )
+                );
+    
+                DB::table('PersonLearningInformation')->where('PersonID',$id)->update(
+                    array(
+                        'SchoolName'=>$request->school_name,
+                        'SchoolGraduationYear'=>$request->school_grad_year,
+                        'FacultyID'=>$request->person_faculty,
+                        'UniversityID'=>$request->person_university,
+                        'ActualFacultyGraduationYear'=>$request->university_grad_year
+                    )
+                );
+
+    
+                DB::table('PersonRotbaKashfeyya')->where('PersonID',$id)->update(
+                    array(
+                        'RotbaID'=>$request->rotba_kashfeyya_id
+                    )
+                );
+    
+    
+    
+                DB::table('PersonEgazetBetakatTaqaddom')->where('PersonID',$id)->update(
+                    array(
+                        'EgazetBetakatTaqaddomID'=>$request->betaka_id
+                    )
+                );
+    
+                DB::table('PersonSanaMarhala')->where('PersonID',$id)->update(
+                    array(
+
+                        'SanaMarhalaID'=>$request->sana_marhala_id
+                    )
+                );
+    
+                DB::table('PersonSpiritualFatherInformation')->where('PersonID',$id)->update(
+                    array(
+                        'SpiritualFatherName'=>$request->spiritual_father,
+                        'SpiritualFatherChurchName'=>$request->spiritual_father_church
+                    )
+                );
+    
+    
+                DB::table('PersonalPhysicalAddress')->where('PersonID',$id)->update(
+                    array(
+                        'BuildingNumber'=>$request->building_number,
+                        'FloorNumber'=>$request->floor_number,
+                        'AppartmentNumber'=>$request->appartment_number,
+                        'MainStreetName'=>$request->main_street_name,
+                        'SubStreetName'=>$request->sub_street_name,
+                        'ManteqaID'=>$request->manteqa_id,
+                        'DistrictID'=>is_null($request->district_id)?1:$request->district_id,
+                        'NearestLandmark'=>$request->nearest_landmark
+                    )
+                );
+            }
+            catch(Exception $e)
+            {
+                dd($e->getMessage());
+                DB::rollBack();
+                return view('person.entry-error');
+            }
+
+            DB::commit();
+            
+            return redirect()->route('person.index');
         }
     
         public function deletes($id)

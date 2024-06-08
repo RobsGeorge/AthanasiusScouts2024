@@ -49,9 +49,9 @@
                             </div>
                             <div class="form-group row" dir="rtl">
                                     <div class="col-sm-3 mb-3 mb-sm-3">
-                                        <label>التسلسل</label>
+                                        
                                         <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                             value="{{$person->PersonID}}" disabled>
+                                             value="{{$person->PersonID}}" disabled hidden>
                                     </div>
 
                                     <div class="col-sm-3">
