@@ -50,19 +50,24 @@
                             <div class="form-group row" dir="rtl">
                                     <div class="col-sm-3 mb-3 mb-sm-3">
                                         
-                                        <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                        <input type="text" class="form-control form-control-user" name="person_id" id="person_id" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                              value="{{$person->PersonID}}" disabled hidden>
                                     </div>
 
                                     <div class="col-sm-3">
                                         <label>كلمة السر</label>
-                                        <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
-                                              value="********" disabled>
+                                        @if(auth()->user()->role=='SuperAdmin'||auth()->user()->role=='Admin')
+                                        <input type="text" class="form-control form-control-user" name="password" id="password" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                        value="{{$person->Password}}" disabled>
+                                        @else
+                                        <input type="text" class="form-control form-control-user" name="password" id="password" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                        value="********" disabled>
+                                        @endif
                                     </div>
 
                                     <div class="col-sm-3">
                                         <label>كود الشمندورة</label>
-                                        <input type="text" class="form-control form-control-user" name="third_name" id="third_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
+                                        <input type="text" class="form-control form-control-user" name="shamandora_code" id="shamandora_code" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                             value="{{$person->ShamandoraCode}}" disabled>
                                     </div>
                                 </div>

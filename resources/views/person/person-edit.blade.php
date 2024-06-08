@@ -70,19 +70,19 @@
                                     <br>
                                     <div class="form-group row" dir="rtl">
                                         <div class="col-sm-3 mb-3 mb-sm-0">
-                                        <label>الاسم الأول</label>
+                                        <label>الاسم الأول **</label>
                                             <input type="text" class="form-control form-control-user" name="first_name" id="first_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="الاسم الأول" value="{{$person->FirstName}}">
                                         </div>
 
                                         <div class="col-sm-3">
-                                        <label>الاسم الثاني</label>
+                                        <label>الاسم الثاني **</label>
                                             <input type="text" class="form-control form-control-user" name="second_name" id="second_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="الاسم الثاني"  value="{{$person->SecondName}}">
                                         </div>
 
                                         <div class="col-sm-3">
-                                        <label>الاسم الثالث</label>
+                                        <label>الاسم الثالث **</label>
                                             <input type="text" class="form-control form-control-user" name="third_name" id="third_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="الاسم الثالث"  value="{{$person->ThirdName}}">
                                         </div>
@@ -95,7 +95,7 @@
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">نوع الملتحق</label>
+                                        <label for="joindate" style="font-family: 'Cairo', sans-serif;">نوع الملتحق **</label>
                                         <select class="form-control col-sm-6 mb-3 mb-sm-0" style="margin-right: 20px;" name="gender" id="gender" onChange="" placeholder="اختار نوع الملتحق" onclick="validate('gender')" onfocusout="validate('gender')">
                                             <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->Gender}}" selected>@if($person->Gender == 'Male'){{"ذكر"}} @else {{"أنثى"}} @endif</option>
                                             <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
@@ -112,13 +112,13 @@
                                     <br>
                                     <div class="form-group row text-center" dir="rtl">
                                         <div class="col-sm-6 mb-3 mb-sm-0">    
-                                            <label  class="text-center" for="birthdate_input" style="font-family: 'Cairo', sans-serif;">تاريخ الميلاد</label>
+                                            <label  class="text-center" for="birthdate_input" style="font-family: 'Cairo', sans-serif;">تاريخ الميلاد **</label>
                                             <input type="date" class="form-control form-control-user" id="birthdate_input" name="birthdate_input" style="margin-left: 5px;;font-family: 'Cairo', sans-serif; font-size: large"
                                                 placeholder="تاريخ الميلاد"  value="{{$person->DateOfBirth}}">
                                         </div>
 
                                         <div class="col-sm-6 text-center">    
-                                            <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق بالكشافة</label>
+                                            <label for="joining_year_input" style="font-family: 'Cairo', sans-serif;">سنة الالتحاق بالكشافة **</label>
                                             <input dir="rtl" type="number" name="joining_year_input" id="joining_year_input" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
                                             placeholder="أدخل سنة الالتحاق بالكشافة"  value="{{$person->ScoutJoiningYear}}">
                                             </select>
@@ -127,7 +127,7 @@
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                        <label for="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif;">الرقم القومي</label>
+                                        <label for="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif;">الرقم القومي **</label>
                                         <input dir="rtl" type="number" class="form-control form-control-user" id="input_raqam_qawmy" name="input_raqam_qawmy" style="font-family: 'Cairo', sans-serif; font-size: large"
                                             placeholder="أدخل الرقم القومي المكون من 14 رقماً"  value="{{$person->RaqamQawmy}}">
 
@@ -146,8 +146,8 @@
                                     </div>
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
-                                            <label for="joindate" style="font-family: 'Cairo', sans-serif;">فصيلة الدم</strong></label>
-                                            <select class="form-control col-sm-6 mb-3 mb-sm-0" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار سنة الالتحاق بالكشافة" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
+                                            <label for="joindate" style="font-family: 'Cairo', sans-serif;">فصيلة الدم **</strong></label>
+                                            <select class="form-control col-sm-6 mb-3 mb-sm-0" style="margin-right: 20px;" name="blood_type_input" id="blood_type_input" onChange="" placeholder="اختار فصيلة الدم" onclick="validate('blood_type_input')" onfocusout="validate('blood_type_input')">
                                                 <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->BloodTypeName}}" selected></option>
                                             @foreach($blood as $blood_element)
                                                 <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$blood_element->BloodTypeID}}">{{$blood_element->BloodTypeName}}</option>
@@ -167,7 +167,7 @@
                                 </div>
                                     <div class="form-group row" dir="rtl">
                                         <div class="col-sm-3 mb-3 mb-sm-0">
-                                            <label  class="text-center" for="personal_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الملتحق (الأساسي)</label>
+                                            <label  class="text-center" for="personal_phone_number" style="font-family: 'Cairo', sans-serif;">رقم موبايل الملتحق (الأساسي) **</label>
                                             <input type="number" class="form-control form-control-user" name="personal_phone_number" id="personal_phone_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="رقم الموبايل الشخصي" value="{{$person->PersonPersonalMobileNumber}}">
                                         </div>
@@ -206,19 +206,19 @@
                                     <hr>
                                     <div class="form-group row" dir="rtl">
                                         <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
-                                            <label  class="text-center" for="building_number" style="font-family: 'Cairo', sans-serif;">رقم العمارة</label>
+                                            <label  class="text-center" for="building_number" style="font-family: 'Cairo', sans-serif;">رقم العمارة **</label>
                                             <input type="number" class="form-control form-control-user" name="building_number" id="building_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="أدخل رقم العمارة" value="{{$person->BuildingNumber}}">
                                         </div>
 
                                         <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
-                                            <label  class="text-center" for="floor_number" style="font-family: 'Cairo', sans-serif;">رقم الدور</label>
+                                            <label  class="text-center" for="floor_number" style="font-family: 'Cairo', sans-serif;">رقم الدور **</label>
                                             <input type="number" class="form-control form-control-user" name="floor_number" id="floor_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="أدخل رقم الدور" value="{{$person->FloorNumber}}">
                                         </div>
 
                                         <div class="col-sm-4 mb-3 mb-sm-0" dir="rtl">
-                                            <label  class="text-center" for="appartment_number" style="font-family: 'Cairo', sans-serif;">رقم الشقة</label>
+                                            <label  class="text-center" for="appartment_number" style="font-family: 'Cairo', sans-serif;">رقم الشقة **</label>
                                             <input type="number" class="form-control form-control-user" name="appartment_number" id="appartment_number" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="أدخل رقم الشقة" value="{{$person->AppartmentNumber}}">
                                         </div>
@@ -227,7 +227,7 @@
                                     <br>
                                     <div class="form-group row" dir="rtl">
                                         <div class="col-sm-6 mb-5 mb-sm-0">
-                                            <label  class="text-center" for="sub_street_name" style="font-family: 'Cairo', sans-serif;">اسم الشارع</label>
+                                            <label  class="text-center" for="sub_street_name" style="font-family: 'Cairo', sans-serif;">اسم الشارع **</label>
                                             <input type="text" class="form-control form-control-user" name="sub_street_name" id="sub_street_name" style="font-family: 'Cairo', sans-serif; font-size: medium"
                                                 placeholder="أدخل اسم الشارع" value="{{$person->SubStreetName}}">
                                         </div>
@@ -247,7 +247,7 @@
                                     <br>
                                     <div class="form-group text-center" dir="rtl">
                                         <div class="col-sm-6" dir="rtl">    
-                                            <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة</label>
+                                            <label for="manteqa_id" style="font-family: 'Cairo', sans-serif;">المنطقة **</label>
                                             
                                             <select class="form-control" style="margin-top: 8px;" name="manteqa_id" id="manteqa_id" placeholder="اختار المنطقة" onclick="validate('manteqa_id')" onfocusout="validate('manteqa_id')">
                                             <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->ManteqaID}}" selected>{{$person->ManteqaName}}</option>
@@ -257,7 +257,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-6" dir="rtl">    
-                                            <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي</label>
+                                            <label for="district_id" style="font-family: 'Cairo', sans-serif;">الحي **</label>
                                             
                                         <select class="form-control" style="margin-top: 8px;" name="district_id" id="district_id" onChange="" placeholder="اختار الحي" onclick="validate('district_id')" onfocusout="validate('district_id')">
                                             <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->DistrictID}}" selected>{{$person->DistrictName}}</option>
@@ -278,7 +278,7 @@
                                     <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> الجزء الثالث: البيانات الدراسية والكنسية</h2>
                                 </div>
                                     <div class="form-group text-center" dir="rtl">
-                                    <label for="sana_marhala_id" style="font-family: 'Cairo', sans-serif;">السنة والمرحلة الدراسية</label>
+                                    <label for="sana_marhala_id" style="font-family: 'Cairo', sans-serif;">السنة والمرحلة الدراسية **</label>
                                     <select class="form-control" style="margin-top: 8px;" name="sana_marhala_id" id="sana_marhala_id" onselect="checkMarhala()" placeholder="اختار السنة والمرحلة الدراسية" onclick="validate('sana_marhala_id')" onfocusout="validate('sana_marhala_id')">
                                         <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$person->SanaMarhalaID}}" selected>{{$person->SanaMarhalaName}}</option>
                                         @foreach($seneen_marahel as $sana_marhala)
@@ -387,7 +387,7 @@
                                             </select>
                                     </div>
                                     <div class="form-group text-center" dir="rtl">
-                                            <label style="font-family: 'Cairo', sans-serif;">القطاع الكشفي</label>
+                                            <label style="font-family: 'Cairo', sans-serif;">القطاع الكشفي **</label>
                                             <input dir="rtl" type="text" name="qetaa_id" id="qetaa_id" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
                                                 placeholder="القطاع" value="{{$person->QetaaName}}" disabled>
                                     </div>
