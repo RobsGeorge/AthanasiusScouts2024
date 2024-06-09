@@ -118,20 +118,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">Admin User</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">{{Auth::user()->FirstName}} {{Auth::user()->SecondName}}</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ asset("img/undraw_profile.svg")}}>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    {{Auth::user()->ShamandoraCode}}
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    {{Auth::user()->role[0]->RoleName}}
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -140,13 +140,11 @@
                                 <div class="dropdown-divider"></div>
                                 <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
                                     @csrf <!-- Include the CSRF token -->
-                                    <button class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" type="submit">Log Out</button>
+                                    <button type="submit">Log Out</button>
                                 </form>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
 
         <!-- Content Wrapper -->
@@ -333,6 +331,32 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @if(auth()->user()->role[0]->RoleName=="SuperAdmin")
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments') }}"  style="appearance: none;
+                                            background-color: #e41359;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
