@@ -12,17 +12,17 @@ use Session;
 
 class MigrateNewEnrolments extends Controller
 {
-    public function migrate()
+    public function migrate($qetaaID)
     {
         $personsBeforeMigration = DB::select("  SELECT      NewUsersInformation.*, 
                                                                 GROUP_CONCAT(CONCAT(NewUsersPersonEntryQuestions.QuestionID, ':', NewUsersPersonEntryQuestions.Answer) SEPARATOR ', ') AS AnsweredQuestions
                                                 FROM        NewUsersInformation
                                                 JOIN        NewUsersPersonEntryQuestions ON NewUsersInformation.PersonID = NewUsersPersonEntryQuestions.PersonID
-                                                WHERE       IsApproved = 1
+                                                WHERE       IsApproved = 1 AND NewUsersInformation.QetaaID = ?
                                                 GROUP BY    NewUsersInformation.PersonID
-                                                ");
+                                                ", [$qetaaID]);
         
-
+        return $personsBeforeMigration;
          foreach($personsBeforeMigration as $person)
          {
         
