@@ -22,7 +22,6 @@ class MigrateNewEnrolments extends Controller
                                                 GROUP BY    NewUsersInformation.PersonID
                                                 ", [$qetaaID]);
         
-        return $personsBeforeMigration;
          foreach($personsBeforeMigration as $person)
          {
         
