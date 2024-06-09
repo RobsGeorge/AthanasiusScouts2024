@@ -18,7 +18,7 @@ class MigrateNewEnrolments extends Controller
                                                                 GROUP_CONCAT(CONCAT(NewUsersPersonEntryQuestions.QuestionID, ':', NewUsersPersonEntryQuestions.Answer) SEPARATOR ', ') AS AnsweredQuestions
                                                 FROM        NewUsersInformation
                                                 JOIN        NewUsersPersonEntryQuestions ON NewUsersInformation.PersonID = NewUsersPersonEntryQuestions.PersonID
-                                                WHERE       NewUsersInformation.PersonID = 555 AND IsApproved = 0
+                                                WHERE       IsApproved = 1
                                                 GROUP BY    NewUsersInformation.PersonID
                                                 ");
         
