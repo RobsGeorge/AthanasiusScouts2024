@@ -791,7 +791,7 @@ class PersonNewController extends Controller
         {
             dd($e->getMessage());
             DB::rollBack();
-            return view('person.entry-error-repeat-trial');
+            return view('person.entry-error');
         }
         DB::commit();
             
