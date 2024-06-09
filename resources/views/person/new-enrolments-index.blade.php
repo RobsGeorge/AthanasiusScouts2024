@@ -333,7 +333,8 @@
                             </div>
                             @if(auth()->user()->role[0]->RoleName=="SuperAdmin")
                             <div>
-                                <a href="{{ route('person.migrate-new-enrolments') }}"  style="appearance: none;
+                                <a href="{{ route('person.migrate-new-enrolments', 1) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
                                             background-color: #e41359;
                                             border: 1px solid rgba(27, 31, 35, .15);
                                             border-radius: 6px;
@@ -354,7 +355,107 @@
                                             touch-action: manipulation;
                                             vertical-align: middle;
                                             white-space: nowrap;" 
-                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي</a>
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع براعم)</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments', 2) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
+                                            background-color: #13a2e4;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع أشبال)</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments', 6) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
+                                            background-color: #e4e013;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع مرشدات)</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments', 8) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
+                                            background-color: #13e46a;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع كشافة)</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments', 9) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
+                                            background-color: #8613e4;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع زهرات)</a>
                             </div>
                             @endif
                         </div>
