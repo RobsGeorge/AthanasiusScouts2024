@@ -93,6 +93,16 @@ Route::get('/person-role/edit/{id}', array('as' => 'person-role.edit', 'uses' =>
 Route::patch('/person-role/update/{id}', array('as'=> 'person-role.update', 'uses'=> 'App\Http\Controllers\PersonRoleController@updates'));
 Route::get('/person-role/delete/{id}', array('as'=> 'person-role.delete', 'uses'=>'App\Http\Controllers\PersonRoleController@deletes'));
 Route::delete('/person-role/destroy/{id}', array('as'=> 'person-role.destroy', 'uses'=>'App\Http\Controllers\PersonRoleController@destroy'));
+
+//Routes for Group Person Roles Assignment
+Route::get('/group-person', array('as'=> 'group-person.index', 'uses'=> 'App\Http\Controllers\GroupPersonController@index'));
+Route::get('/group-person/add-khadem', array('as' => 'group-person.create-khadem', 'uses' =>'App\Http\Controllers\GroupPersonController@createKhadem'));
+Route::get('/group-person/add-makhdoom', array('as' => 'group-person.create-makhdoom', 'uses' =>'App\Http\Controllers\GroupPersonController@createMakhdoom'));
+Route::post('/group-person/insert', array('as' => 'group-person.insert', 'uses' => 'App\Http\Controllers\GroupPersonController@insert'));
+Route::get('/group-person/edit/{id}', array('as' => 'group-person.edit', 'uses' => 'App\Http\Controllers\GroupPersonController@edit'));
+Route::patch('/group-person/update/{id}', array('as'=> 'group-person.update', 'uses'=> 'App\Http\Controllers\GroupPersonController@updates'));
+Route::get('/group-person/delete/{id}', array('as'=> 'group-person.delete', 'uses'=>'App\Http\Controllers\GroupPersonController@deletes'));
+Route::delete('/group-person/destroy/{id}', array('as'=> 'group-person.destroy', 'uses'=>'App\Http\Controllers\GroupPersonController@destroy'));
 });
 
 
