@@ -101,7 +101,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Person
+                Attendance
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->

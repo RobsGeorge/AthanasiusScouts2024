@@ -53,7 +53,25 @@ class PersonNewController extends Controller
         }
 
 
-
+        public function indexNewEnrolmentsAndMigrations()
+        {        
+            $persons = DB::select("SELECT DISTINCT nui.PersonID, 
+                                                    nui.FirstName, 
+                                                    nui.SecondName, 
+                                                    nui.ThirdName, 
+                                                    nui.FourthName, 
+                                                    nui.QetaaName, 
+                                                    sm.SanaMarhalaName, 
+                                                    nui.RaqamQawmy,
+                                                    nui.IsApproved,
+                                                    nui.PersonPersonalMobileNumber, 
+                                                    IF(nupq.PersonID IS NOT NULL, 'نعم', 'لا') AS HasAnsweredQuestions 
+                                                FROM NewUsersInformation nui 
+                                                LEFT JOIN NewUsersPersonEntryQuestions nupq ON nui.PersonID = nupq.PersonID 
+                                                LEFT JOIN SanaMarhala sm ON nui.SanaMarhalaID = sm.SanaMarhalaID;");
+            //return $questionsDistinctCodes;
+            return view("person.new-enrolments-migrate-index", array('persons' => $persons));
+        }
 
         public function indexNewEnrolments()
         {        

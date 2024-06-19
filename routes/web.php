@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Route;
 //General UI Routes
 Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
         Route::get('/', function () {return view('index');})->name('home');
-
 });
+
 //General Registration and Login Routes
 Route::get('/login-auth', array('as'=>'login-auth', 'uses'=>'App\Http\Controllers\LoginController@show'));
 Route::post('/login', array('as'=>'login', 'uses'=>'App\Http\Controllers\LoginController@login'));
@@ -71,7 +71,12 @@ Route::get('/new-enrolments/person/approve-again/{id}', array('as'=>'person.new-
 Route::get('/new-enrolments/person/delete/{id}', array('as'=> 'person.new-enrolments-delete', 'uses'=>'App\Http\Controllers\PersonNewController@deleteNewEnrolments'));
 Route::delete('/new-enrolments/person/destroy/{id}', array('as'=> 'person.new-enrolments-destroy', 'uses'=>'App\Http\Controllers\PersonNewController@destroyNewEnrolments'));
 
-
+//Attendance Routes
+Route::middleware(['auth','checkAuth:SuperAdmin|Admin|Khadem'])->group(function(){
+        Route::get('/attendance', array('as'=> 'attendance.index', 'uses'=> 'App\Http\Controllers\AttendanceController@index'));
+        Route::get('/attendance/add', array('as' => 'attendance.create', 'uses' =>'App\Http\Controllers\AttendanceController@create'));
+        Route::post('/attendance/insert', array('as' => 'attendance.insert', 'uses' => 'App\Http\Controllers\AttendanceController@insert'));
+});
 
 
 Route::middleware(['auth','checkAuth:SuperAdmin'])->group(function(){
@@ -123,6 +128,7 @@ Route::middleware(['auth','checkAuth:SuperAdmin|Admin'])->group(function(){
 
 //Routes for New Enrolments
 Route::get('/new-enrolments', array('as'=> 'person.new-enrolments-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolments'));
+Route::get('/new-enrolments/migrations', array('as'=> 'person.new-enrolments-migrate-index', 'uses'=>'App\Http\Controllers\PersonNewController@indexNewEnrolmentsAndMigrations'));
 Route::get('/new-enrolments/analytics', array('as'=>'person.new-enrolments-analytics', 'uses'=>'App\Http\Controllers\PersonNewController@analyticsNewEnrolments'));
 Route::get('/new-enrolments/count/marahel', array('as'=>'person.new-enrolments-marahel-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsMarahel'));
 Route::get('/new-enrolments/count/qetaat', array('as'=>'person.new-enrolments-qetaat-count','uses'=>'App\Http\Controllers\PersonNewController@countNewEnrolmentsQetaat'));

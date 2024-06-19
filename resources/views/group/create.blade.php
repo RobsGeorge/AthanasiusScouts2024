@@ -95,6 +95,7 @@
                         <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
                         <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
                         <a class="collapse-item" href={{ route('event.index') }}> الأحداث والمناسبات الكشفية</a>
+                    <a class="collapse-item" href={{ route('group-person.index') }}>ربط الأشخاص بالمجموعات</a>
                     </div>
                 </div>
             </li>
@@ -114,14 +115,14 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Person
+                Attendance
             </div>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href={{ url('/') }}>
+                <a class="nav-link" href={{ url('/attendance') }}>
                     <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">جداول الملتحقين</span></a>
+                    <span style="font-family: 'Cairo', sans-serif;">الحضور والغياب</span></a>
             </li>
 
 
@@ -161,6 +162,7 @@
                         <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
                         <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
                         <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
+                        <a class="collapse-item" href={{ url('/new-enrolments/migrations') }}>تحويل الطلبات إلى النظام الرئيسي</a>>
                     </div>
                 </div>
             </li>
