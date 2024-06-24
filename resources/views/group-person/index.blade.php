@@ -425,7 +425,7 @@
                                             </td>
 
                                             <td> 
-                                                    <a href="{{ route('group-person.edit', $groupPerson->PersonGroupRoleID) }}"
+                                                    <!--<a href="{{ route('group-person.edit', $groupPerson->PersonGroupRoleID) }}"
                                                         style="appearance: none;
                                                                 background-color: #2ea44f;
                                                                 border: 1px solid rgba(27, 31, 35, .15);
@@ -447,7 +447,7 @@
                                                                 touch-action: manipulation;
                                                                 vertical-align: middle;
                                                                 white-space: nowrap;" 
-                                                    > تعديل</a>
+                                                    > تعديل</a>-->
 
                                                     <a href="{{ route('group-person.delete', $groupPerson->PersonGroupRoleID) }}"
                                                         style="appearance: none;
