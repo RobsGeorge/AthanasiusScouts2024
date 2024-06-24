@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\stdClass;
 use Session;
 
 class GroupPersonController extends Controller
@@ -40,60 +41,96 @@ class GroupPersonController extends Controller
 
         public function createKhadem()
         {
-            $groups =   DB::select("SELECT g1.GroupID,  
+            $groupsResult =   DB::select("SELECT g1.GroupID,  
                                     CONCAT('مجموعة رقم: ', g1.GroupID, ' - ',g3.GroupTypeName, ' ', g1.GroupName, ' -> ', g4.GroupTypeName, ' ', g2.GroupName) AS GroupInfo   
                                     FROM GroupTable g1
                                     LEFT JOIN GroupTable g2 ON g1.IncludedUnderGroupID = g2.GroupID
                                     LEFT JOIN GroupType g3 ON g1.GroupTypeID = g3.GroupTypeID
                                     LEFT JOIN GroupType g4 ON g2.GroupTypeID = g4.GroupTypeID
+                                    WHERE g1.GroupID > 0
                                     ");
-            //return $groups2;
+
+
+            $groups = [];
+            foreach($groupsResult as $g)
+            {
+                $object = new \stdClass;
+                $object->GroupID = $g->GroupID;
+                $object->GroupInfo = GroupPersonController::getParentsPathString($g->GroupID);
+                array_push($groups, $object);
+            }
+
             $persons = DB::select("SELECT PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
                                         CONCAT(PersonInformation.ShamandoraCode, ' ', PersonInformation.FirstName, ' ', PersonInformation.SecondName, ' ', PersonInformation.ThirdName) AS FullName
                                     FROM PersonInformation
                                     LEFT JOIN PersonQetaa ON PersonInformation.PersonID = PersonQetaa.PersonID
                                     LEFT JOIN Qetaa ON Qetaa.QetaaID = PersonQetaa.QetaaID
                                     WHERE Qetaa.QetaaName = ?", ['قادة']);
-            $groupRoles = DB::select("SELECT * FROM GroupRole WHERE GroupRoleName != 'مخدوم'");
-            $makhdoomGroupRole = NULL;
+            $groupRoles = DB::select("SELECT * FROM GroupRole WHERE isKhademRole = 1");
+
             $isKhadem = TRUE;
-            return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem, 'makhdoomGroupRole'=>$makhdoomGroupRole));
+            return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem));
         }
 
         public function createMakhdoom()
         {
             $khademAuthenticatedID = Auth::user()->PersonID;
-            return GroupPersonController::getOrganizations(5);
             $directGroupsConnectedToKhadem = DB::select("SELECT PersonGroup.GroupID FROM PersonGroup WHERE PersonID = ?", [$khademAuthenticatedID]);
-            $groups = NULL;
-            if($directGroupsConnectedToKhadem == NULL)
-            {
-                $persons = NULL;
-            }
-            else
-            {
-                $groups = DB::select("  SELECT  GroupTable.GroupID, 
-                                                CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupInfo
-                                        FROM GroupTable
-                                        LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
-                                    ");
 
-                $persons = DB::select("SELECT PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
-                                            CONCAT(PersonInformation.ShamandoraCode, ' ', PersonInformation.FirstName, ' ', PersonInformation.SecondName, ' ', PersonInformation.ThirdName, ' ', PersonInformation.FourthName) AS FullName
-                                        FROM PersonInformation
-                                        LEFT JOIN PersonQetaa ON PersonInformation.PersonID = PersonQetaa.PersonID
-                                        LEFT JOIN Qetaa ON Qetaa.QetaaID = PersonQetaa.QetaaID
-                                        WHERE Qetaa.QetaaName != ?", ['قادة']);
+            $groups = NULL;
+            $persons = NULL;
+            $groupRoles = NULL;
+
+            if($directGroupsConnectedToKhadem != NULL)
+            {
+                $allGroupsIDsBelowKhadem = [];
+                foreach($directGroupsConnectedToKhadem as $groupConnected)
+                {
+                    $allGroupsIDsBelowKhadem = array_merge($allGroupsIDsBelowKhadem, GroupPersonController::getNodesBelow($groupConnected->GroupID, [$groupConnected->GroupID]));
+                }
+
+                $groups = [];
+                foreach($allGroupsIDsBelowKhadem as $g)
+                {
+                    $object = new \stdClass;
+                    $object->GroupID = $g;
+                    $object->GroupInfo = GroupPersonController::getParentsPathString($g);
+                    array_push($groups, $object);
+                }
+                
+                
+                $persons = [];
+                $rootsArray = [];
+                foreach($directGroupsConnectedToKhadem as $directGroup)
+                {
+                    array_push($rootsArray, GroupPersonController::getLatestParentBeforeRoot($directGroup->GroupID));
+                }
+                $rootsArray = array_unique($rootsArray);
+                
+
+                foreach($rootsArray as $rootItem)
+                {
+                    $sql_result = DB::select("SELECT PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
+                                            CONCAT(PersonInformation.ShamandoraCode, ' ', PersonInformation.FirstName, ' ', PersonInformation.SecondName, ' ', PersonInformation.ThirdName, ' ', PersonInformation.FourthName) AS FullName,
+                                            Qetaa.QetaaName
+                                        FROM GroupQetaa
+                                        LEFT JOIN Qetaa ON Qetaa.QetaaID = GroupQetaa.QetaaID
+                                        LEFT JOIN PersonQetaa ON PersonQetaa.QetaaID = GroupQetaa.QetaaID
+                                        LEFT JOIN PersonInformation ON PersonInformation.PersonID = PersonQetaa.PersonID
+                                        WHERE GroupQetaa.GroupID = ?", [$rootItem]);
+
+                    $persons = array_merge($persons, $sql_result);                    
+                }
+                
             }
             
-            $groupRoles = NULL;
-            $makhdoomGroupRole = DB::selectOne("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
+            
+            $groupRoles = DB::select("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
                                             From GroupRole
-                                            WHERE GroupRole.GroupRoleName = ?
-                                            ", ['مخدوم']);
+                                            WHERE GroupRole.isKhademRole = 0");
             //return $makhdoomGroupRole;
             $isKhadem = FALSE;
-            return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem, 'makhdoomGroupRole'=>$makhdoomGroupRole));
+            return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem));
         }
 
 
@@ -145,7 +182,7 @@ class GroupPersonController extends Controller
             
             $isKhadem = FALSE;
 
-            if(DB::selectOne("SELECT GroupRoleName FROM GroupRole WHERE GroupRoleID=?",[$personGroupRoleRow->GroupRoleID])->GroupRoleName!='مخدوم')
+            if(DB::selectOne("SELECT GroupRoleName FROM GroupRole WHERE GroupRoleID=?",[$personGroupRoleRow->GroupRoleID])->isKhademRole=1)
             {
                 $isKhadem = TRUE;
             }
@@ -154,8 +191,7 @@ class GroupPersonController extends Controller
             {
                 $makhdoomGroupRole = DB::selectOne("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
                                             From GroupRole
-                                            WHERE GroupRole.GroupRoleName = ?
-                                            ", ['مخدوم']);
+                                            WHERE GroupRole.isKhademRole = 0");
                 $groupRoles = NULL;
                 $person = DB::selectOne("SELECT PersonID, 
                                         CONCAT(ShamandoraCode, ' ', FirstName, ' ', SecondName, ' ', ThirdName, ' ', FourthName) AS FullName 
@@ -178,7 +214,7 @@ class GroupPersonController extends Controller
             else
             {
                 $makhdoomGroupRole = NULL;
-                $groupRoles = DB::select("SELECT * FROM GroupRole WHERE GroupRoleName != 'مخدوم'");
+                $groupRoles = DB::select("SELECT * FROM GroupRole WHERE isKhademRole = 1");
                 $person = DB::selectOne("SELECT PersonID, 
                                         CONCAT(ShamandoraCode, ' ', FirstName, ' ', SecondName, ' ', ThirdName, ' ', FourthName) AS FullName 
                                         FROM PersonInformation WHERE PersonID=?",[$personGroupRoleRow->PersonID]);
@@ -265,33 +301,56 @@ class GroupPersonController extends Controller
             return redirect()->route('group-person.index');
         }
 
-        public function getOrganizations($groupID) {
-
-            $sql = "SELECT GroupID FROM GroupTable WHERE GroupTable.IncludedUnderGroupID = $groupID";
-            $result = DB::select($sql);
-            
-            if($result==NULL)
-                return NULL;
-
-            $orgIDs =$groupID;
-            foreach($result as $row){
-                
-                $orgIDs = $row->GroupID;
-                //dd($orgIDs);
-                if(array(GroupPersonController::getOrganizations($row->GroupID))!=NULL)
-                    $orgIDs = array_merge($orgIDs, array(GroupPersonController::getOrganizations($row->GroupID)));
-                else
-                    $orgIDs = $orgIDs;
-                
-            }
-            return $orgIDs;
-        }
-
-        public function getNodesBelow($groupID)
+        private function getNodesBelow($groupID, $orgIDs)
         {
             if ($groupID==NULL)
                 return NULL;
+            
             $sql = "SELECT GroupID FROM GroupTable WHERE GroupTable.IncludedUnderGroupID = $groupID";
+            $sql_result = DB::select($sql);
+
+            foreach($sql_result as $row)
+            {
+                array_push($orgIDs, $row->GroupID);
+                $orgIDs = array_merge($orgIDs, GroupPersonController::getNodesBelow($row->GroupID, []));
+            }
+
+            return $orgIDs;
+        }
+
+        private function getParentsPathString($groupID)
+        {
+            if ($groupID==0)
+                return DB::selectOne("  SELECT  
+                                            CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupInfo,
+                                            GroupTable.IncludedUnderGroupID
+                                            FROM GroupTable
+                                            LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
+                                            WHERE GroupTable.GroupID = $groupID")->GroupInfo;
+            
+            $selectedGroup = DB::selectOne("  SELECT  
+                CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupInfo,
+                GroupTable.IncludedUnderGroupID
+                FROM GroupTable
+                LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
+                WHERE GroupTable.GroupID = $groupID");
+            
+
+            $path = $selectedGroup->GroupInfo." -> ".GroupPersonController::getParentsPathString($selectedGroup->IncludedUnderGroupID);
+
+            return $path;
+            
+        }
+
+        private function getLatestParentBeforeRoot($groupID)
+        {   
+            $parentID = DB::selectOne("     SELECT  GroupTable.IncludedUnderGroupID
+                                            FROM    GroupTable
+                                            WHERE   GroupTable.GroupID = $groupID")->IncludedUnderGroupID;
+            if($parentID==0)
+                return $groupID;
+            
+            return GroupPersonController::getLatestParentBeforeRoot($parentID);
 
         }
 }
