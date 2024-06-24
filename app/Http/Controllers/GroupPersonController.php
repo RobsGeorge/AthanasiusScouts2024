@@ -182,17 +182,16 @@ class GroupPersonController extends Controller
             
             $isKhadem = FALSE;
 
-            if(DB::selectOne("SELECT GroupRoleName FROM GroupRole WHERE GroupRoleID=?",[$personGroupRoleRow->GroupRoleID])->isKhademRole=1)
+            if(DB::selectOne("SELECT isKhademRole FROM GroupRole WHERE GroupRoleID=?",[$personGroupRoleRow->GroupRoleID])->isKhademRole)
             {
                 $isKhadem = TRUE;
             }
 
             if(!$isKhadem)
             {
-                $makhdoomGroupRole = DB::selectOne("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
+                $groupRoles = DB::select("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
                                             From GroupRole
                                             WHERE GroupRole.isKhademRole = 0");
-                $groupRoles = NULL;
                 $person = DB::selectOne("SELECT PersonID, 
                                         CONCAT(ShamandoraCode, ' ', FirstName, ' ', SecondName, ' ', ThirdName, ' ', FourthName) AS FullName 
                                         FROM PersonInformation WHERE PersonID=?",[$personGroupRoleRow->PersonID]);
@@ -202,18 +201,36 @@ class GroupPersonController extends Controller
                                         LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
                                         WHERE GroupTable.GroupID =?
                                     ", [$personGroupRoleRow->GroupID]);
+
                 $selectedGroupRole = DB::selectOne("SELECT * FROM GroupRole
                                                     WHERE GroupRoleID=?", [$personGroupRoleRow->GroupRoleID]);
                                                     
-                $groups = DB::select("  SELECT  GroupTable.GroupID, 
-                    CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupInfo
-                    FROM GroupTable
-                    LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
-    ");                
+                $khademAuthenticatedID = Auth::user()->PersonID;
+                $directGroupsConnectedToKhadem = DB::select("SELECT PersonGroup.GroupID FROM PersonGroup WHERE PersonID = ?", [$khademAuthenticatedID]);
+    
+                $groups = NULL;
+    
+                if($directGroupsConnectedToKhadem != NULL)
+                {
+                    $allGroupsIDsBelowKhadem = [];
+                    foreach($directGroupsConnectedToKhadem as $groupConnected)
+                    {
+                        $allGroupsIDsBelowKhadem = array_merge($allGroupsIDsBelowKhadem, GroupPersonController::getNodesBelow($groupConnected->GroupID, [$groupConnected->GroupID]));
+                    }
+    
+                    $groups = [];
+                    foreach($allGroupsIDsBelowKhadem as $g)
+                    {
+                        $object = new \stdClass;
+                        $object->GroupID = $g;
+                        $object->GroupInfo = GroupPersonController::getParentsPathString($g);
+                        array_push($groups, $object);
+                    }             
+                }
             }
             else
             {
-                $makhdoomGroupRole = NULL;
+
                 $groupRoles = DB::select("SELECT * FROM GroupRole WHERE isKhademRole = 1");
                 $person = DB::selectOne("SELECT PersonID, 
                                         CONCAT(ShamandoraCode, ' ', FirstName, ' ', SecondName, ' ', ThirdName, ' ', FourthName) AS FullName 
@@ -230,14 +247,14 @@ class GroupPersonController extends Controller
                     CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupInfo
                     FROM GroupTable
                     LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
-    ");
+                ");
                 
             }
 
             //return $selectedGroup;
 
             return view("group-person.edit", 
-                    array('makhdoomGroupRole'=>$makhdoomGroupRole, 
+                    array(
                     'groupRoles'=>$groupRoles, 
                     'person'=>$person, 
                     'selectedGroup'=>$selectedGroup, 
