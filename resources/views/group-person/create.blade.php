@@ -354,7 +354,7 @@
                                 </a>
                                 <a class="dropdown-item">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{Auth::user()->role[0]->RoleName}}
+                                     
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -422,22 +422,14 @@
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0" dir="rtl" style="text-align: right">
-                                                @if($isKhadem)
-                                                <label for="group_role_id" style="font-family: 'Cairo', sans-serif;">اختر دور الخادم في المجموعة</label>
+                                                <label for="group_role_id" style="font-family: 'Cairo', sans-serif;">اختر دور الشخص  في المجموعة</label>
                                                 <br />
                                                 <select class="form-control col-sm-4" style="width: 75%; margin-right: 20px;" name="group_role_id" id="group_role_id">
-                                                    <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر دور الخادم</option>
+                                                    <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر دور الشخص</option>
                                                     @foreach($groupRoles as $groupRole)
                                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$groupRole->GroupRoleID}}">{{$groupRole->GroupRoleName}}</option>
                                                     @endforeach
                                                 </select>
-                                                @else
-                                                <label for="group_role_id" style="font-family: 'Cairo', sans-serif;">دور الفرد في المجموعة</label>
-                                                <br />
-                                                <select class="form-control col-sm-4" style="width: 75%; margin-right: 20px;" name="group_role_id" id="group_role_id">
-                                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$makhdoomGroupRole->GroupRoleID}}" selected>{{$makhdoomGroupRole->GroupRoleName}}</option>
-                                                </select>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
