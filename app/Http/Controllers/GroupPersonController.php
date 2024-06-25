@@ -23,7 +23,9 @@ class GroupPersonController extends Controller
         public function index()
         {
 
-            $groupPersons = DB::select("
+            if(auth()->user()->role=="SuperAdmin")
+            {
+                $groupPersons = DB::select("
                                     SELECT PersonGroup.*, PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
                                         CONCAT(PersonInformation.FirstName, ' ', 
                                         PersonInformation.SecondName, ' ', PersonInformation.ThirdName) AS PersonFullName,
@@ -35,6 +37,42 @@ class GroupPersonController extends Controller
                                     LEFT JOIN GroupRole ON GroupRole.GroupRoleID = PersonGroup.GroupRoleID
                                     LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
                                     ");
+            }
+            else
+            {
+                $khademAuthenticatedID = Auth::user()->PersonID;
+                $directGroupsConnectedToKhadem = DB::select("SELECT PersonGroup.GroupID FROM PersonGroup WHERE PersonID = ?", [$khademAuthenticatedID]);
+                $groupPersons = [];
+                
+                if($directGroupsConnectedToKhadem != NULL)
+                {
+                    $allGroupsIDsBelowKhadem = [];
+                    foreach($directGroupsConnectedToKhadem as $groupConnected)
+                    {
+                        $allGroupsIDsBelowKhadem = array_merge($allGroupsIDsBelowKhadem, GroupPersonController::getNodesBelow($groupConnected->GroupID, [$groupConnected->GroupID]));
+                    }
+                    
+
+                    foreach($allGroupsIDsBelowKhadem as $groupID)
+                    {
+                        $tempPersons = DB::select("
+                                                    SELECT PersonGroup.*, PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
+                                                        CONCAT(PersonInformation.FirstName, ' ', 
+                                                        PersonInformation.SecondName, ' ', PersonInformation.ThirdName) AS PersonFullName,
+                                                        GroupRole.GroupRoleName, 
+                                                        CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupDetails
+                                                    FROM PersonGroup
+                                                    LEFT JOIN PersonInformation ON PersonGroup.PersonID = PersonInformation.PersonID
+                                                    LEFT JOIN GroupTable ON GroupTable.GroupID = PersonGroup.GroupID
+                                                    LEFT JOIN GroupRole ON GroupRole.GroupRoleID = PersonGroup.GroupRoleID
+                                                    LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
+                                                    WHERE PersonGroup.GroupID = ? AND PersonGroup.PersonID != ?",[$groupID, $khademAuthenticatedID]
+                                                    );
+                                                    
+                        $groupPersons = array_merge($groupPersons, $tempPersons);
+                    }
+                }
+            }
             
             return view("group-person.index", array('groupPersons' => $groupPersons));
         }
