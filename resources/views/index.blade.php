@@ -155,7 +155,7 @@
                         <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
                         <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
                         <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments/migrations') }}>تحويل الطلبات إلى النظام الرئيسي</a>>
+                        <a class="collapse-item" href={{ url('/new-enrolments/migrations') }}>  تحويل الطلبات إلى النظام الرئيسي</a>
                         
                     </div>
                 </div>
