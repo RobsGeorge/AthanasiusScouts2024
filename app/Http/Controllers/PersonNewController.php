@@ -201,77 +201,96 @@ class PersonNewController extends Controller
 
         public function insertLiveForm(Request $request)
         {
-            if($request->sana_marhala_id==NULL||$request->gender==NULL)
+            if($request->newLeadersSchool)
             {
-                $seneen_marahel = DB::table('SanaMarhala')->get();
+                if($request->sana_marhala_id==NULL||$request->gender==NULL)
+                {
+                    $seneen_marahel = DB::table('SanaMarhala')->get();
 
-                return view("person.person-create-liveform-1", array(
-                    'seneen_marahel'=>$seneen_marahel
-                ));
-            }
+                    return view("person.person-create-liveform-1", array(
+                        'seneen_marahel'=>$seneen_marahel
+                    ));
+                }
 
-            if($request->sana_marhala_id<5&&$request->sana_marhala_id>2)
-            {
-                $qetaa_name = "براعم";
-                $qetaa_id = 1;
+                $qetaa_name = "اعداد قادة";
+                $qetaa_id = 10;
                 $gender = $request->gender;
-            }
-            elseif($request->sana_marhala_id<9&&$request->sana_marhala_id>4)
-            {
-                if($request->gender=="Male")
-                {
-                    $qetaa_name = "أشبال";
-                    $qetaa_id = 2;
-                    $gender = "Male";
-                }
-                elseif($request->gender=="Female")
-                {
-                    $qetaa_name = "زهرات";
-                    $qetaa_id = 9;
-                    $gender = "Female";
-                }
-            }
-            elseif($request->sana_marhala_id<12&&$request->sana_marhala_id>8)
-            {
-                if($request->gender=="Male")
-                {
-                    $qetaa_name = "كشافة";
-                    $qetaa_id = 8;
-                    $gender = "Male";
-                }
-                elseif($request->gender=="Female")
-                {
-                    $qetaa_name = "مرشدات";
-                    $qetaa_id = 6;
-                    $gender = "Female";
-                }
-            }
-            elseif($request->sana_marhala_id<14&&$request->sana_marhala_id>11)
-            {
-                if($request->gender=="Male")
-                {
-                    $qetaa_name = "متقدم";
-                    $qetaa_id = 3;
-                    $gender = "Male";
-                }
-                elseif($request->gender=="Female")
-                {
-                    $qetaa_name = "رائدات";
-                    $qetaa_id = 4;
-                    $gender = "Female";
-                }
-            }
-            elseif($request->sana_marhala_id<21&&$request->sana_marhala_id>14)
-            {
-                    $qetaa_name = "جوالة";
-                    $qetaa_id = 5;
-                    $gender = $request->gender;
+
             }
             else
             {
-                $qetaa_name = "قادة";
-                $qetaa_id = 7;
-                $gender = $request->gender;
+                if($request->sana_marhala_id==NULL||$request->gender==NULL)
+                {
+                    $seneen_marahel = DB::table('SanaMarhala')->get();
+
+                    return view("person.person-create-liveform-1", array(
+                        'seneen_marahel'=>$seneen_marahel
+                    ));
+                }
+
+                if($request->sana_marhala_id<5&&$request->sana_marhala_id>2)
+                {
+                    $qetaa_name = "براعم";
+                    $qetaa_id = 1;
+                    $gender = $request->gender;
+                }
+                elseif($request->sana_marhala_id<9&&$request->sana_marhala_id>4)
+                {
+                    if($request->gender=="Male")
+                    {
+                        $qetaa_name = "أشبال";
+                        $qetaa_id = 2;
+                        $gender = "Male";
+                    }
+                    elseif($request->gender=="Female")
+                    {
+                        $qetaa_name = "زهرات";
+                        $qetaa_id = 9;
+                        $gender = "Female";
+                    }
+                }
+                elseif($request->sana_marhala_id<12&&$request->sana_marhala_id>8)
+                {
+                    if($request->gender=="Male")
+                    {
+                        $qetaa_name = "كشافة";
+                        $qetaa_id = 8;
+                        $gender = "Male";
+                    }
+                    elseif($request->gender=="Female")
+                    {
+                        $qetaa_name = "مرشدات";
+                        $qetaa_id = 6;
+                        $gender = "Female";
+                    }
+                }
+                elseif($request->sana_marhala_id<14&&$request->sana_marhala_id>11)
+                {
+                    if($request->gender=="Male")
+                    {
+                        $qetaa_name = "متقدم";
+                        $qetaa_id = 3;
+                        $gender = "Male";
+                    }
+                    elseif($request->gender=="Female")
+                    {
+                        $qetaa_name = "رائدات";
+                        $qetaa_id = 4;
+                        $gender = "Female";
+                    }
+                }
+                elseif($request->sana_marhala_id<21&&$request->sana_marhala_id>14)
+                {
+                        $qetaa_name = "جوالة";
+                        $qetaa_id = 5;
+                        $gender = $request->gender;
+                }
+                else
+                {
+                    $qetaa_name = "قادة";
+                    $qetaa_id = 7;
+                    $gender = $request->gender;
+                }
             }
             $marhala_limit = 0;
             //return $request->sana_marhala_id;
@@ -311,7 +330,7 @@ class PersonNewController extends Controller
 
             $questionTypes = DB::table('QuestionsTypes')->get();
             $blood = DB::table('BloodType')->get();
-            $betakat = DB::table('EgazetBetakatTaqaddom')->get();
+            //$betakat = DB::table('EgazetBetakatTaqaddom')->get();
             $manateq = DB::table('Manteqa')->get();
             $districts = DB::table('Districts')->get();
             

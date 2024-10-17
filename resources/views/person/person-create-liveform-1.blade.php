@@ -70,8 +70,12 @@
                                     <option style="font-family: 'Cairo', sans-serif; color: black;" value="Male">ذكر</option>
                                     <option style="font-family: 'Cairo', sans-serif; color: black;" value="Female">أنثى</option>
                                     </select>
+                                </div>
 
-                            </div>
+                                <div class="form-group text-center" dir="rtl">
+                                    <label>تقديم لمدرسة اعداد قادة؟</label>
+                                    <input type="checkbox" name="newLeadersSchool" checked='' />
+                                </div>
 
                                 <input type="submit" class="btn btn-primary btn-user btn-block" id="submit-button" value="اضغط للاستمرار"></input>
                                 <hr>

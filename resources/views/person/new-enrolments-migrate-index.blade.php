@@ -457,6 +457,31 @@
                                             white-space: nowrap;" 
                                 id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (قطاع زهرات)</a>
                             </div>
+                            <div>
+                                <a href="{{ route('person.migrate-new-enrolments', 10) }}"  style="appearance: none;
+                                            margin-bottom: 5px;
+                                            background-color: #000000;
+                                            border: 1px solid rgba(27, 31, 35, .15);
+                                            border-radius: 6px;
+                                            box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+                                            box-sizing: border-box;
+                                            color: #fff;
+                                            cursor: pointer;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            line-height: 20px;
+                                            padding: 6px 16px;
+                                            position: relative;
+                                            text-align: center;
+                                            text-decoration: none;
+                                            user-select: none;
+                                            -webkit-user-select: none;
+                                            touch-action: manipulation;
+                                            vertical-align: middle;
+                                            white-space: nowrap;" 
+                                id="s">ادخال جميع الاشخاص التي تم الموافقة عليهم إلى النظام الأساسي (مدرسة اعداد قادة)</a>
+                            </div>
                             @endif
                         </div>
                     </div>
