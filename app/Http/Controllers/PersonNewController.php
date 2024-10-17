@@ -321,6 +321,8 @@ class PersonNewController extends Controller
             }
 
             $marahel = DB::table('Marhala')->get();
+            $faculties = DB::table('Faculty')->get();
+            $universities = DB::table('University')->get();
             $rotab = DB::table('RotbaInformation')->get();
             $sana_marhala_name = DB::table('SanaMarhala')
                                 -> where('SanaMarhala.SanaMarhalaID',$request->sana_marhala_id)
@@ -347,6 +349,8 @@ class PersonNewController extends Controller
                     'blood'=>$blood, 
                     'manateq'=>$manateq, 
                     'districts'=>$districts,
+                    'faculties' =>$faculties,
+                    'universities' =>$universities,
                 ));
             //return view('person.person-create-liveform', array('sana_marhala_id' => $request->sana_marhala_id));
             //return redirect()->route('person.de7k', $marhala_limit);
@@ -453,7 +457,10 @@ class PersonNewController extends Controller
                     'SchoolName'            => $request->person_school,
                     'SchoolGraduationYear'  => $request->school_grad_year,
                     'QetaaID'               => $request->qetaa_id,
-                    'QetaaName'             => $QetaaName,  
+                    'QetaaName'             => $QetaaName, 
+                    'FacultyID'             => $request->person_faculty,
+                    'UniversityID'          => $request->person_university,
+                    'UniversityGraduationYear' => $request->university_grad_year,
                 )
             );
 

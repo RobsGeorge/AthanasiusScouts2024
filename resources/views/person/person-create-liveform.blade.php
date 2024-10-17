@@ -275,7 +275,41 @@
                                         <option style="font-family: 'Cairo', sans-serif; color: black;" value={{$i}}>{{$i}}</option>
                                         @endfor
                                         </select>
+                                </div>  
+                                
+                                @if($sana_marhala_id>14)
+                                <div class="form-group text-center" dir="rtl">
+                                    <label class="text-center" for="person_faculty" style="font-family: 'Cairo', sans-serif;">اسم الكلية</label>
+                                    <select class="form-control" style="margin-top: 8px;" name="person_faculty" id="person_faculty" placeholder="اختار الكلية">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر الكلية</option>
+                                        @foreach($faculties as $faculty)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$faculty->FacultyID}}">{{$faculty->FacultyName}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                </br>
+                                <div class="form-group text-center" dir="rtl">
+                                    <label class="text-center" for="person_university" style="font-family: 'Cairo', sans-serif;">اسم الجامعة</label>
+                                    <select class="form-control" style="margin-top: 8px;" name="person_university" id="person_university" placeholder="اختار الجامعة">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected> اختر الجامعة</option>
+                                        @foreach($universities as $university)
+                                            <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$university->UniversityID}}">{{$university->UniversityName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                </br>
+                                <div class="form-group text-center">    
+                                        <label for="university_grad_year" style="font-family: 'Cairo', sans-serif;">سنة التخرج من الجامعة (في حالة الانتهاء من الجامعة)</label>
+                                        <br />
+                                        <select class="form-control" style="margin-top: 8px; text-align: right;" name="university_grad_year" id="university_grad_year" onChange="" placeholder="اختار سنة التخرج من الجامعة">
+                                        <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="" disabled selected>اختر سنة التخرج من الجامعة</option>
+                                        @for($i = 1970; $i <= date('Y'); $i++)
+                                        <option style="font-family: 'Cairo', sans-serif; color: black;" value={{$i}}>{{$i}}</option>
+                                        @endfor
+                                        </select>
+                                </div>
+                                @endif
+
                                 <div class="form-group text-center" dir="rtl">
                                     <label class="text-center" for="spiritual_father" style="font-family: 'Cairo', sans-serif;">الأب الروحي / أب الاعتراف</label>
                                     <input dir="rtl" type="text" name="spiritual_father" id="spiritual_father" class="form-control form-control-user" style="font-family: 'Cairo', sans-serif; font-size: large"
