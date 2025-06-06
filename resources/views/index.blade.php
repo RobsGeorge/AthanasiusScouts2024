@@ -1,756 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
+@section('title', 'Dashboard')
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@section('content')
+<!-- PAGE TITLE SECTION -->
+<div class="mb-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-2">Dashboard</h2>
+    <p class="text-gray-600">Welcome back, {{ Auth::user()->name }}! Here's what's happening with your projects.</p>
+</div>
 
-    <title>كشافة الشمندورة - لوحة التحكم</title>
+<!-- STATS/CARDS SECTION -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/png" href="{{ asset('img/shamandora.png') }}">
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-</head>
-
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="right:0">
-                <div>
-                    <img class ="" src="{{ asset('img/shamandora.png') }}" style="width: 100px; height: 100px;" alt="Shamandora Image">
-                </div>
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href={{ url('/index') }}>
-                <div class="sidebar-brand-text mx-3">Shamandora Scouts</div>
-            </a>
-            <div class="sidebar-brand d-flex align-items-center justify-content-center sidebar-brand-text" style="color: rgba(211, 159, 18, 0.849); font-size: large">{{date("Y")}}</div>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href={{ url('/index') }}>
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: 'Cairo', sans-serif; font-weight: lighter;">لوحة التحكم</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
+    <!-- Card 1 -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-blue-100 rounded-lg">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
+                </svg>
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Administration</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Admin Panel</h6>
-                        <a class="collapse-item">الترقيات</a>
-                        <a class="collapse-item" href={{ route('rotab.index') }}>الرتب الكشفية</a>
-                        <a class="collapse-item" href={{ route('betaka.index') }}>ايجازة بطاقة تقدم</a>
-                        <a class="collapse-item" href={{ route('blood.index') }}>فصائل الدم</a>
-                        <a class="collapse-item" href={{ route('marhala.index') }}>المراحل الدراسية</a>
-                        <a class="collapse-item" href={{ route('qetaa.index') }}>القطاعات الكشفية</a>
-                        <a class="collapse-item" href={{ route('sana-marhala.index') }}>السنوات والمراحل الدراسية</a>
-                        <a class="collapse-item" href={{ route('entry-questions.index') }}>أسئلة فورم ادخال بيانات</a>
-                        <a class="collapse-item" href={{ route('person.index') }}>بيانات المستخدمين</a>
-                        <a class="collapse-item" href={{ route('district.index') }}>الأحياء السكنية</a>
-                        <a class="collapse-item" href={{ route('manteqa.index') }}>المناطق السكنية</a>
-                        <a class="collapse-item" href={{ route('faculty.index') }}>الكليات</a>
-                        <a class="collapse-item" href={{ route('university.index') }}>الجامعات</a>
-                        <a class="collapse-item" href={{ route('role.index') }}>الأدوار والمهام</a>
-                        <a class="collapse-item" href={{ route('person-role.index') }}>ربط الأدوار والمهام</a>
-                        <a class="collapse-item" href={{ route('group-type.index') }}>أنواع المجموعات</a>
-                        <a class="collapse-item" href={{ route('group.index') }}>ربط المجموعات</a>
-                        <a class="collapse-item" href={{ route('event-type.index') }}>أنواع الأحداث والمناسبات</a>
-                        <a class="collapse-item" href={{ route('event.index') }}> الأحداث والمناسبات الكشفية</a>
-                    <a class="collapse-item" href={{ route('group-person.index') }}>ربط الأشخاص بالمجموعات</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Configurations</span>
-                </a>
-            </li>
-            
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Attendance
-            </div>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('/attendance') }}>
-                    <i class="fas fa-fw fa-table"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الحضور والغياب</span></a>
-            </li>
-
-
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Midea
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('/person') }}>
-                    <i class="fas fa-fw fa-photo-video"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">منصة الميديا</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                 Summer 2024
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span style="font-family: 'Cairo', sans-serif;">الالتحاقات الجديدة</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">صفحات التسجيل والدخول</h6>
-                        <a class="collapse-item" href={{ url('/liveform') }}>فورم التسجيل LIVE!</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments') }}>مراجعة طلبات الالتحاق</a>
-                        <a class="collapse-item" href={{ url('/max-limits') }}>الحد الأقصى للطلبات</a>
-                        <a class="collapse-item" href={{ url('/entry-questions') }}>التحكم في أسئلة القطاعات</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments/analytics') }}>احصائيات طلبات الالتحاق</a>
-                        <a class="collapse-item" href={{ url('/new-enrolments/migrations') }}>  تحويل الطلبات إلى النظام الرئيسي</a>
-                        
-                    </div>
-                </div>
-            </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" style="font-family: 'Cairo', sans-serif; direction: rtl;" placeholder="ابحث عن ...."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header" style="font-family: 'Cairo', sans-serif;">
-                                    الاشعارات
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">Novemer 12, 2023</div>
-                                        <span class="font-weight-bold">كلمة أبونا في المجمع الكشفي 2023 متاحة الآن</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">November 7, 2023</div>
-                                        رسالة عامة من قائد الكشافة
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">November 4, 2023</div>
-                                        تم اضافة صور جديدة للمعسكر الأخير
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">اظهار جميع الاشعارات</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header" style="font-family: 'Cairo', sans-serif;">
-                                    الرسائل
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_1.svg') }}
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="">مساء الخير، حابب أسأل عليك ونطمن على أحوالك</div>
-                                        <div class="small text-gray-500">مينا نادر . 58 دقيقة</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_2.svg') }}
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">انا خلصت تحضير الكلمة الافتتاحية</div>
-                                        <div class="small text-gray-500">ماريو عماد . 5 ساعات</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src={{ asset('img/undraw_profile_3.svg') }}
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="">ماتنساش تبعت الصور بتاعت يوم السبت</div>
-                                        <div class="small text-gray-500">مارينا محب . يومين</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">تصفح باقي الرسايل</a>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-family: 'Cairo', sans-serif;">{{Auth::user()->FirstName}} {{Auth::user()->SecondName}}</span>
-                                <img class="img-profile rounded-circle"
-                                    src={{ asset("img/undraw_profile.svg")}}>
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{Auth::user()->ShamandoraCode}}
-                                </a>
-                                <a class="dropdown-item">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                      
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
-                                    @csrf <!-- Include the CSRF token -->
-                                    <button type="submit">Log Out</button>
-                                </form>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800" style="font-family: 'Cairo', sans-serif;">لوحة التحكم</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="font-family: 'Cairo', sans-serif;"><i
-                                class="fas fa-download fa-sm text-white-50" ></i> تنزيل تقرير خدمتي</a>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row"  style="display: flex; flex-wrap: wrap">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-family: 'Cairo', sans-serif;">
-                                                عدد الخدام الحالي</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">96</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1" style="font-family: 'Cairo', sans-serif;">
-                                                دخل العام الحالي</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1" style="font-family: 'Cairo', sans-serif;">اجمالي عدد الملتحقين
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1635</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1" style="font-family: 'Cairo', sans-serif;">
-                                               الرسائل غير المقروءة</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row"  style="display: flex; flex-wrap: wrap">
-
-                        
-
-                        <!-- Pie Chart -->
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif;">رسم توضيحي لأعداد وأنواع الملتحقين</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 small" style="text-align: center;">
-                                        <span class="">
-                                            <a>براعم</a>
-                                            <i class="fas fa-circle" style="color: #e74a3b;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>أشبال</a>
-                                            <i class="fas fa-circle" style="color: #f6c23e;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>زهرات</a>
-                                            <i class="fas fa-circle" style="color: #2e59d9;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>كشافة</a>
-                                            <i class="fas fa-circle" style="color: #36b9cc;"></i>
-                                        </span>
-                                        <br>
-                                            <span>
-                                            <a>مرشدات</a>
-                                            <i class="fas fa-circle" style="color: #1cc88a;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>متقدم</a>
-                                            <i class="fas fa-circle" style="color: #C74EDF;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>رائدات</a>
-                                            <i class="fas fa-circle" style="color: #2e59d9;"></i>
-                                        </span>
-                                        <div class="">
-                                            <a>جوالة</a>
-                                            <i class="fas fa-circle" style="color: #634561;"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-6 col-lg-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif; text-align: center;" >أعداد الملتحقين الجدد</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body mt-2 mb-4">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row mb-2" style="display: flex; flex-wrap: wrap;">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 col-xl-6 mb-4">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif;">نسبة أعداد قطاعات الكشافة</h6>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="small font-weight-bold">قطاع براعم <span
-                                            class="float-right">7% (112)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 27%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع أشبال <span
-                                            class="float-right">12% (192)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 32%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع زهرات <span
-                                            class="float-right">5% (80)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar" role="progressbar" style="width: 25%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع كشافة <span
-                                            class="float-right">20% (320)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 40%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع متقدم <span
-                                            class="float-right">18% (288)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 38%; background-color: brown"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع رائدات <span
-                                            class="float-right">15% (240)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar" role="progressbar" style="width: 35%; background-color: #C74EDF"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع جوالة <span
-                                            class="float-right">17% (272)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar" role="progressbar" style="width: 37%; background-color: aqua;"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">قطاع القادة <span
-                                            class="float-right">6% (96)</span></h4>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar" role="progressbar" style="width: 26%; background-color: tomato;"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6 col-xl-6 mb-4">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="mb-3 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif;">رسم توضيحي لأعداد وأنواع القادة</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart2"></canvas>
-                                    </div>
-                                    <div class="mt-4 small" style="text-align: center;">
-                                        <span class="">
-                                            <a>سواعد</a>
-                                            <i class="fas fa-circle" style="color: #e74a3b;"></i>
-                                        </span>
-                                        <span class="">
-                                            <a>مساعد قائد</a>
-                                            <i class="fas fa-circle" style="color: #f6c23e;"></i>
-                                        </span>
-                                        <span class="">
-                                            <a>قائد فريق</a>
-                                            <i class="fas fa-circle" style="color: #2e59d9;"></i>
-                                        </span>
-                                            <span class="">
-                                            <a>قائد قطاع</a>
-                                            <i class="fas fa-circle" style="color: #F30E66;"></i>
-                                        </span>
-                                        <br>
-                                        <span>
-                                            <a>قائد عام</a>
-                                            <i class="fas fa-circle" style="color: #36b9cc;"></i>
-                                        </span>
-                                        <span class="">
-                                            <a>نائب قائد عام</a>
-                                            <i class="fas fa-circle" style="color: #1cc88a;"></i>
-                                        </span>
-                                        <br>
-                                        <span class="">
-                                            <a>مجلس الصخرة</a>
-                                            <i class="fas fa-circle" style="color: #C74EDF;"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="row ml-1 mr-1 mb-4" style="display: flex; flex-direction: row; align-items: stretch;;">
-                            <div class="card shadow mr-3" style="flex: 1; width: 50%;">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif;">المعسكرات والأيام الكشفية</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="rtl" style="text-align: right;">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 50rem;"
-                                            src={{ asset("img/camping.jpeg" )}} alt="...">
-                                    </div>
-                                    <a  target="_blank" rel="nofollow" href={{ url('/person') }}>الدخول إلى تقارير المعسكرات الكشفية &rarr;</a>
-                                </div>
-                            </div>
-                            <!-- Illustrations -->
-                            <div class="card shadow ml-3" style="flex: 1; width: 50%">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" style="font-family: 'Cairo', sans-serif;">تقارير الملتحقين</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid mt-3 mb-4 pt-5" style="width: 50rem;"
-                                            src={{ asset("img/undraw_posting_photo.svg" )}} alt="...">
-                                    </div>
-                                    <a  target="_blank" rel="nofollow" href={{ url('/person') }}>الدخول إلى قوائم تقارير الملتحقين &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Shamandora Scouts {{date("Y")}}</span>
-                        <br />
-                        <span style="font-size: larger;font-weight: bold; color: #4e73df;">مجموعة الشمندورة الكشفية</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href={{ url('/login') }}>Logout</a>
-                </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Revenue</p>
+                <p class="text-2xl font-semibold text-gray-900">$34,521</p>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-2 bg-purple-100 rounded-lg">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Performance</p>
+                <p class="text-2xl font-semibold text-gray-900">94.2%</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- MAIN CONTENT AREA -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Left Column: Chart/Graph -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Analytics Overview</h3>
+            <!-- REPLACE THIS DIV WITH YOUR CHART COMPONENT -->
+            <div
+                class="h-64 bg-gray-50 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                <p class="text-gray-500">📊 Your Chart Component Goes Here</p>
+            </div>
+        </div>
+    </div>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <!-- Right Column: Recent Activity -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Recent Activity</h3>
+            <!-- REPLACE THIS DIV WITH YOUR ACTIVITY COMPONENT -->
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                    <p class="text-sm text-gray-700">New user registered</p>
+                    <span class="text-xs text-gray-500 ml-auto">2 min ago</span>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <p class="text-sm text-gray-700">Payment processed</p>
+                    <span class="text-xs text-gray-500 ml-auto">5 min ago</span>
+                </div>
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <p class="text-sm text-gray-700">Report generated</p>
+                    <span class="text-xs text-gray-500 ml-auto">12 min ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="js/demo/chart-pie-demo2.js"></script>
-
-
-</body>
-
-</html>
+<!-- FULL WIDTH SECTION -->
+<div class="mt-6 bg-white rounded-lg shadow">
+    <div class="p-6">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Data Table</h3>
+        <!-- REPLACE THIS DIV WITH YOUR TABLE COMPONENT -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">John Doe</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jan 15, 2024</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button class="text-emerald-600 hover:text-emerald-900">Edit</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
