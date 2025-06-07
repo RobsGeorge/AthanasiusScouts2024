@@ -2,18 +2,15 @@
 @props([
 'title',
 'action',
-'method' => 'POST',
+'method' => '',
 'inputValue' => '',
-'inputPlaceholder' => 'ادخل اسم الكلية',
-'inputLabel' => 'ادخل اسم الكلية',
-'submitText' => 'إرسال',
-'submitColor' => 'emerald',
-'pageTitle' => ''
+'inputPlaceholder' => '',
+'inputLabel' => '',
+'inputName' => '',
+'submitText' => '',
+'submitColor' => '',
 ])
 
-@extends('layouts.app', ['pageTitle' => $pageTitle])
-
-@section('content')
 <div class="min-h-screen flex place-items-center justify-center bg-gray-50 px-4">
     <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md" dir="rtl">
         <!-- Card Title -->
@@ -30,11 +27,11 @@
             <div class="space-y-6">
                 <!-- Input Field -->
                 <div class="relative">
-                    <input id="faculty_name" type="text" name="faculty_name" placeholder="{{ $inputPlaceholder }}"
+                    <input id="{{$inputName}}" type="text" name="{{$inputName}}" placeholder="{{ $inputPlaceholder }}"
                         onfocusout="myFunction()" value="{{ $inputValue }}"
                         class="relative w-full h-12 px-4 text-sm placeholder-transparent transition-all border rounded-lg outline-none focus-visible:outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-{{ $submitColor }}-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 text-right"
                         style="font-family: 'Cairo', sans-serif; font-size: medium" />
-                    <label for="faculty_name"
+                    <label for="{{$inputName}}"
                         class="cursor-text peer-focus:cursor-default peer-autofill:-top-2 absolute right-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:right-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-{{ $submitColor }}-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent">
                         {{ $inputLabel }}
                     </label>
@@ -49,4 +46,3 @@
         </form>
     </div>
 </div>
-@endsection
