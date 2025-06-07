@@ -219,6 +219,13 @@
         </main>
     </div>
 
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-sm border-t border-gray-200 px-4 py-3 text-center">
+        <p class="text-sm text-gray-600"> جميع الحقوق محفوظة . شماندورة الكشافة ٢٠٢٥</p>
+    </footer>
+
+
     <!-- JavaScript -->
     <script>
     // Sidebar functionality
