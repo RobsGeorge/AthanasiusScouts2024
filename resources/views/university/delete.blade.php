@@ -1,128 +1,37 @@
-<!DOCTYPE html>
-<html lang="ar">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>كشافة الشمندورة - لوحة التحكم</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-</head>
-
-
-
-<body id="page-top">
-
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">بيانات التحكم</h1>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">حذف جامعة</h6>
-                        </div>
-                    </div>
-
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('university.destroy', $university->UniversityID) }}">
-                            @method('DELETE')
-                            @csrf
-                            <div class="card-header py-3">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                <label>هل أنت متأكد من حذف جامعة  {{$university->UniversityName}}؟</label>
-                                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="حذف"></input>
-                                                <a href="{{ route('university.index') }}">رجوع</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+@extends('layouts.app' , ['pageTitle' => "الجامعات"?? ''])
+@section('content')
+<div class="min-h-screen flex items-center justify-center bg-gray-50  px-4">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md " dir="rtl">
+        <!-- Card Title -->
+        <div class="mb-6 text-center">
+            <h2 class="text-xl font-bold text-gray-800">مسح الجامعة</h2>
+        </div>
+        <form class="user" id="regForm" method="post"
+            action="{{ route('university.destroy', $university->UniversityID) }}">
+            @method('DELETE')
+            @csrf
+            <div class="space-y-6">
+                <!-- Input Field -->
+                <div class="relative">
+                    <input id="university_name" type="text" name="university_name" placeholder="ادخل اسم الجامعة"
+                        onfocusout="myFunction()"
+                        class="relative w-full h-12 px-4 text-sm placeholder-transparent transition-all border rounded-lg outline-none focus-visible:outline-none peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 text-right"
+                        style="font-family: 'Cairo', sans-serif; font-size: medium"
+                        value="{{$university->UniversityName}}" />
+                    <label for="university_name"
+                        class="cursor-text peer-focus:cursor-default peer-autofill:-top-2 absolute right-2 -top-2 z-[1] px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:right-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-red-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent">
+                        مسح اسم الجامعة
+                    </label>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <input type="submit" id="submit-button" value="مسح"
+                        class="inline-flex items-center justify-center h-12 gap-2 px-8 text-sm font-medium tracking-wide transition duration-300 rounded-full focus-visible:outline-none whitespace-nowrap bg-red-50 text-red-500 hover:bg-red-100 hover:text-red-600 focus:bg-red-200 focus:text-red-700 disabled:cursor-not-allowed disabled:border-red-300 disabled:bg-red-100 disabled:text-red-400 disabled:shadow-none">
+                    </input>
+                </div>
 
             </div>
-            <!-- End of Main Content -->
-
-        
-        </div>
-        <!-- End of Content Wrapper -->
-
+        </form>
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
-
-    <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
-
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
-    }
-    */
-</script>
-
-</body>
-
-</html>
+</div>
+@endsection
