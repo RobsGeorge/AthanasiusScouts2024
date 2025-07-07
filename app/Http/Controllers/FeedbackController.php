@@ -24,7 +24,7 @@ class FeedbackController extends Controller
             return view("feedback.index");
         }
 
-        public function insert(Request $request)
+        public function create(Request $request)
         {
 
             $validated = $request->validate([
