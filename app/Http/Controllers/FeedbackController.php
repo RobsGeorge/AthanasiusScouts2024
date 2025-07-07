@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 use \Illuminate\Http\Response;
 use Session;
 
-class FacultyController extends Controller
+class FeedbackController extends Controller
 {
 /**
         * Display a listing of the resource.
