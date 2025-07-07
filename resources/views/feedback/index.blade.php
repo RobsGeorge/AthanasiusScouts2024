@@ -311,6 +311,7 @@
         </div>
 
         <form id="sectionsForm" class="form-content" action="{{ route('feedback.create') }}" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="participant_name">الاسم الثلاثي بالعربي</label>
                 <input type="text" id="participant_name" name="participant_name">
