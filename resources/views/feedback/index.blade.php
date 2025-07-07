@@ -541,39 +541,7 @@
             <!-- Program Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
-                    البرنامج العام
-                </h2>
-                <p class="section__description">
-                    هذا القسم مخصص لتقييم البرنامج العام للمعسكر، من حيث التنظيم، المحتوى، وعدد الفقرات، ومواعيد الفقرات خلال اليوم والفعاليات المقدمة.
-                </p>
-                
-                <div class="form-group">
-                <label class="label label--required">التقييم العام (1-10)</label>
-                <div class="rating-stars">
-                    @for ($i = 10; $i >= 1; $i--)
-                        <input type="radio" id="program{{ $i }}" name="program_rating" value="{{ $i }}" required>
-                        <label for="program{{ $i }}">★</label>
-                    @endfor
-                </div>
-            </div>
-                
-                <div class="form-group">
-                    <label for="programPros" class="label">الإيجابيات</label>
-                    <textarea id="programPros" name="program_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في البرنامج..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="programCons" class="label">السلبيات والتحسينات المقترحة</label>
-                    <textarea id="programCons" name="program_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
-                </div>
-            </div>
-
-            
-            <!-- Program Section -->
-            <div class="section">
-                <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     البرنامج العام
                 </h2>
                 <p class="section__description">
@@ -605,7 +573,7 @@
             <!-- Leaders Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     توزيع القادة
                 </h2>
                 <p class="section__description">
@@ -637,7 +605,7 @@
             <!-- Games Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     الألعاب
                 </h2>
                 <p class="section__description">
@@ -669,8 +637,8 @@
             <!-- goal_delivery Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
-                    توصيل هدف
+                    
+                    توصيل الهدف
                 </h2>
                 <p class="section__description">
                     هذا القسم مخصص لتقييم طريقة توصيل هدف المعسكر، المحتوى، أماكن المحاضرات، مدة الفقرة، الأنشطة المقدمة فى توصيل الهدف
@@ -701,7 +669,7 @@
             <!-- logo Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     الشعار
                 </h2>
                 <p class="section__description">
@@ -732,7 +700,7 @@
             <!-- gift Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     الهدايا 
                 </h2>
                 <p class="section__description">
@@ -763,7 +731,7 @@
             <!-- secretary Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                      السكرتارية
                 </h2>
                 <p class="section__description">
@@ -794,7 +762,7 @@
             <!-- media Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     الميديا 
                 </h2>
                 <p class="section__description">
@@ -825,7 +793,7 @@
             <!-- emergency Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                      الاسعافات
                 </h2>
                 <p class="section__description">
@@ -856,7 +824,7 @@
             <!-- kitchen Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                      المطبخ
                 </h2>
                 <p class="section__description">
@@ -887,7 +855,7 @@
             <!-- finance Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                     المالية 
                 </h2>
                 <p class="section__description">
@@ -918,7 +886,7 @@
             <!-- custody Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                      العهدة
                 </h2>
                 <p class="section__description">
@@ -949,7 +917,7 @@
             <!-- purchase Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    
                      المشتريات
                 </h2>
                 <p class="section__description">
@@ -980,7 +948,7 @@
             <!-- transportation Section -->
             <div class="section">
                 <h2 class="section__title">
-                    <span class="section__icon">🗓</span>
+                    <span class="section__icon">2</span>
                      المواصلات
                 </h2>
                 
