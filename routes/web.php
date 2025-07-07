@@ -305,7 +305,7 @@ Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimi
 });
 
 Route::view('/feedback', 'feedback.index'); // Shows the form
-Route::post('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create'); // Handles submission
+Route::post('/feedback', [FeedbackController::class, 'create'])->name('feedback.create'); // Handles submission
 
 
 Route::group(['middleware' => ['auth']], function() {
