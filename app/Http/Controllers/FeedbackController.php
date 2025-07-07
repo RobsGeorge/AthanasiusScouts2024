@@ -26,7 +26,7 @@ class FeedbackController extends Controller
         public function insert(Request $request)
         {
 
-            DB::table('evaluation_submissions')->insert([
+            DB::table('Feedback')->insert([
     'participant_name'        => $request->participant_name,
     'main_team'               => $request->main_team,
     'sub_team'                => $request->sub_team,
