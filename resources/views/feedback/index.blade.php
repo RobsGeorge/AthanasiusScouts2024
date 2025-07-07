@@ -481,7 +481,7 @@
         </header>
 
         <!-- Form Section -->
-        <form id="evaluationForm" class="form" action="{{ route('feedback.insert') }}" method="POST">
+        <form id="evaluationForm" class="form" action="{{ route('feedback.create') }}" method="POST">
             <!-- Personal Information -->
             <div class="form-group">
                 <label for="participantName" class="label">الاسم الثلاثي بالعربي</label>
