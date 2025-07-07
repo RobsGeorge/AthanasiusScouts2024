@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar">
-
+<html lang="ar" dir="rtl">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>كشافة الشمندورة - تقييم معسكر مجمع 2025</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
-    <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم معسكر مجمع 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #007bff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -36,916 +30,646 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
             padding: 20px;
             direction: rtl;
-            color: #333;
+            color: var(--primary-color);
+            line-height: 1.6;
         }
 
-        .form-container {
-            max-width: 800px;
+        .container {
+            max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             overflow: hidden;
         }
 
-        .form-header {
-            background: #f8f8f8;
-            color: #333;
-            padding: 30px;
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--light-gray) 0%, #ffffff 100%);
+            padding: 40px 30px;
             text-align: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .form-header img {
+        .header__logo {
             max-width: 100px;
-            margin-bottom: 15px;
-        }
-
-        .form-header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #222;
-        }
-
-        .form-header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .form-header ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 15px;
-            text-align: right;
-            padding-right: 20px;
-        }
-
-        .form-header ul li {
-            margin-bottom: 5px;
-        }
-
-        .form-content {
-            padding: 30px;
-        }
-
-        .section {
-            margin-bottom: 40px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 25px;
-            background: #fafafa;
-        }
-
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ccc;
+            border-radius: 50%;
+        }
+
+        .header__title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .header__subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .header__description {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-section {
+            background: rgba(0, 123, 255, 0.05);
+            border: 1px solid rgba(0, 123, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .info-section__title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
         }
 
-        .section-icon {
+        .info-section__icon {
             margin-left: 10px;
-            font-size: 1.2em;
+            font-size: 1.5rem;
+        }
+
+        .info-section__list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section__item {
+            margin-bottom: 8px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .info-section__item::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Form Section */
+        .form {
+            padding: 40px 30px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .form-group label {
+        .form-group--inline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: var(--primary-color);
+            font-size: 1.1rem;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .label--required::after {
+            content: " *";
+            color: var(--danger-color);
+        }
+
+        .input,
+        .textarea,
+        .select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: white;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .input:focus,
+        .textarea:focus,
+        .select:focus {
             outline: none;
-            border-color: #999;
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
 
-        .form-group textarea {
+        .textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 100px;
         }
 
-        .submit-section {
-            text-align: center;
+        .select {
+            cursor: pointer;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
             padding: 30px;
-            background: #f8f8f8;
-            border-top: 1px solid #e0e0e0;
+            background: var(--light-gray);
+            transition: var(--transition);
         }
 
-        .submit-btn {
-            background: #333;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+        .section:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
-        .submit-btn:hover {
-            background-color: #555;
-            transform: translateY(-2px);
+        .section__title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
-        .download-btn {
-            background: #007bff;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+        .section__icon {
+            margin-left: 12px;
+            font-size: 1.5rem;
         }
 
-        .download-btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+        .section__description {
+            color: var(--dark-gray);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
 
-        .required {
-            color: #e74c3c;
-        }
-
+        /* Rating System */
         .rating {
-            display: inline-block;
-            direction: rtl; /* Reverted to rtl for Arabic */
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 5px;
+            margin: 15px 0;
         }
 
-        .rating input {
+        .rating__input {
             display: none;
         }
 
-        .rating label {
-            color: #ccc;
-            font-size: 30px;
-            padding: 5px;
+        .rating__label {
+            font-size: 2rem;
+            color: var(--medium-gray);
             cursor: pointer;
-            display: inline-block; /* Ensure labels are inline-block for horizontal display */
+            transition: var(--transition);
+            padding: 5px;
         }
 
-        .rating label:hover,
-        .rating label:hover ~ label,
-        .rating input:checked ~ label {
-            color: #f8d64e;
+        .rating__label:hover,
+        .rating_label:hover ~ .rating_label,
+        .rating_input:checked ~ .rating_label {
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .rating__value {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Submit Section */
+        .submit-section {
+            padding: 40px 30px;
+            background: var(--light-gray);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn--primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn--primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn--secondary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn--secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
 
         /* Modal Styles */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 9999; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
+            align-items: center;
         }
 
-        .modal.visible {
-            display: flex !important;
+        .modal--visible {
+            display: flex;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
+        .modal__content {
+            background: white;
             padding: 40px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.3s ease;
         }
 
-        .modal-content img {
-            max-width: 80px;
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal__icon {
+            font-size: 4rem;
             margin-bottom: 20px;
         }
 
-        .modal-content h2 {
-            font-size: 1.8em;
+        .modal__title {
+            font-size: 1.8rem;
             margin-bottom: 15px;
-            color: #333;
+            color: var(--primary-color);
         }
 
-        .modal-content p {
-            font-size: 1.1em;
+        .modal__text {
+            color: var(--dark-gray);
+            margin-bottom: 30px;
             line-height: 1.6;
-            color: #555;
-            margin-bottom: 25px;
         }
 
-        .modal-close-btn {
-            background-color: #333;
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .modal-close-btn:hover {
-            background-color: #555;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-            .form-container {
+            
+            .container {
                 margin: 0;
             }
-            .form-content,
-            .form-header,
+            
+            .header,
+            .form,
             .submit-section {
                 padding: 20px;
             }
-            .form-header h1 {
-                font-size: 2em;
+            
+            .header__title {
+                font-size: 2rem;
             }
-            .modal-content {
-                width: 90%;
-                padding: 30px;
+            
+            .form-group--inline {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .section__title {
+                font-size: 1.5rem;
+            }
+            
+            .rating__label {
+                font-size: 1.5rem;
+            }
+            
+            .modal__content {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header__title {
+                font-size: 1.7rem;
+            }
+            
+            .info-section,
+            .section {
+                padding: 15px;
+            }
+            
+            .rating {
+                gap: 2px;
+            }
+            
+            .rating__label {
+                font-size: 1.3rem;
+                padding: 3px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <div class="form-header">
-            <img href={{ asset('img/shamandora.png') }} alt="شعار الشمندورة">
-            <h1>تقييم معسكر مجمع 2025 - مربوط بكيفي</h1>
-            <p>ربنا يعوضكم على تعبكم وخدمتكم خلال المعسكر.</p>
-            <p>وجودكم كان بركة حقيقية، ومجهودكم هو اللي صنع الفرق.</p>
-            <p>علشان نستفيد فعلاً من تجربة المعسكر وننمو كفريق، بنطلب منكم تشاركونا آرائكم الصادقة عن كل حاجة حصلت — الإيجابي، والتحديات، وكل التفاصيل اللي تهم.</p>
-            <h3>🎯 هدف التقييم</h3>
-            <ul>
-                <li>إننا نتعلم من التجربة دي ونبني عليها.</li>
-                <li>نتجنب أي تقصير حصل خلال المعسكر.</li>
-                <li>نسجل النقاط المهمة علشان تكون مرجعية لينا بعد كده.</li>
-                <li>ونوفر وقت لما نقعد مع بعض نراجع ونخطط للجايات.</li>
-            </ul>
-            <h3>📝 رجاء خاص</h3>
-            <ul>
-                <li>اكتب رأيك بموضوعية.</li>
-                <li>كن صادق وبنّاء في ملاحظاتك.</li>
-                <li>الهدف مش اللوم، الهدف هو دايمًا التطوير والتحسين.</li>
-            </ul>
-            <p>شكراً ليك من القلب — وجودك فرق معانا ❤️</p>
-            <p>وبإذن الله المعسكر الجاي يكون أقوى وأجمل بينا كلنا.</p>
-            <p style="margin-top: 20px; font-weight: bold; color: #555;">يرجى العلم أن جميع الحقول في هذا النموذج اختيارية. يمكنك ملء ما تراه مناسباً وإرسال النموذج في أي وقت.</p>
-        </div>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <img src="shamandora.png" alt="شعار المعسكر" class="header__logo">
+            <h1 class="header__title">تقييم معسكر مجمع 2025 - مربوط بكيفي</h1>
+            <p class="header__subtitle">ربنا يعوضكم على تعبكم وخدمتكم خلال المعسكر</p>
+            <p class="header__description">
+                وجودكم كان بركة حقيقية، ومجهودكم هو اللي صنع الفرق. علشان نستفيد فعلاً من تجربة المعسكر وننمو كفريق، بنطلب منكم تشاركونا آرائكم الصادقة عن كل حاجة حصلت — الإيجابي، والتحديات، وكل التفاصيل اللي تهم.
+            </p>
+            
+            <div class="info-section">
+                <h3 class="info-section__title">
+                    <span class="info-section__icon">🎯</span>
+                    هدف التقييم
+                </h3>
+                <ul class="info-section__list">
+                    <li class="info-section__item">إننا نتعلم من التجربة دي ونبني عليها</li>
+                    <li class="info-section__item">نتجنب أي تقصير حصل خلال المعسكر</li>
+                    <li class="info-section__item">نسجل النقاط المهمة علشان تكون مرجعية لينا بعد كده</li>
+                    <li class="info-section__item">ونوفر وقت لما نقعد مع بعض نراجع ونخطط للجايات</li>
+                </ul>
+            </div>
+            
+            <div class="info-section">
+                <h3 class="info-section__title">
+                    <span class="info-section__icon">📝</span>
+                    رجاء خاص
+                </h3>
+                <ul class="info-section__list">
+                    <li class="info-section__item">اكتب رأيك بموضوعية</li>
+                    <li class="info-section__item">كن صادق وبنّاء في ملاحظاتك</li>
+                    <li class="info-section__item">الهدف مش اللوم، الهدف هو دايمًا التطوير والتحسين</li>
+                </ul>
+            </div>
+            
+            <p class="header__description">
+                شكراً ليك من القلب — وجودك فرق معانا ❤<br>
+                وبإذن الله المعسكر الجاي يكون أقوى وأجمل بينا كلنا
+            </p>
+            
+            <div class="notice">
+                يرجى العلم أن جميع الحقول في هذا النموذج اختيارية. يمكنك ملء ما تراه مناسباً وإرسال النموذج في أي وقت.
+            </div>
+        </header>
 
-        <form id="sectionsForm" class="form-content" action="{{ route('feedback.create') }}" method="POST">
-            @csrf
+        <!-- Form Section -->
+        <form id="evaluationForm" class="form" action="{{ route('feedback.insert') }}" method="POST">
+            <!-- Personal Information -->
             <div class="form-group">
-                <label for="participant_name">الاسم الثلاثي بالعربي</label>
-                <input type="text" id="participant_name" name="participant_name">
+                <label for="participantName" class="label">الاسم الثلاثي بالعربي</label>
+                <input type="text" id="participantName" name="participant_name" class="input" placeholder="أدخل اسمك الثلاثي">
             </div>
-            <div class="form-group">
-                <label for="main_team">الفريق الأساسي (اختياري)</label>
-                <select id="main_team" name="main_team">
-                    <option value="">اختر الفريق الأساسي</option>
-                    <option value="braem">براعم</option>
-                    <option value="ashbal">اشبال</option>
-                    <option value="zahrat">زهرات</option>
-                    <option value="kashafa">كشافه</option>
-                    <option value="morshedat">مرشدات</option>
-                    <option value="motakadem">متقدم</option>
-                    <option value="raedat">رائدات</option>
-                    <option value="jawala">جواله</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="sub_team">الفريق الفرعي (اختياري)</label>
-                <select id="sub_team" name="sub_team">
-                    <option value="">اختر الفريق الفرعي</option>
-                    <option value="media">ميديا</option>
-                    <option value="ohda">عهده</option>
-                    <option value="esafate">اسعافات</option>
-                    <option value="secretary">سكرتاريه</option>
-                    <option value="moshtaryat">مشتريات</option>
-                    <option value="malia">ماليه</option>
-                    <option value="matbakh">مطبخ</option>
-                </select>
+            
+            <div class="form-group form-group--inline">
+                <div>
+                    <label for="mainTeam" class="label">الفريق الأساسي</label>
+                    <select id="mainTeam" name="main_team" class="select">
+                        <option value="">اختر الفريق الأساسي</option>
+                        <option value="braem">براعم</option>
+                        <option value="ashbal">أشبال</option>
+                        <option value="zahrat">زهرات</option>
+                        <option value="kashafa">كشافة</option>
+                        <option value="morshedat">مرشدات</option>
+                        <option value="motakadem">متقدم</option>
+                        <option value="raedat">رائدات</option>
+                        <option value="jawala">جوالة</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="subTeam" class="label">الفريق الفرعي</label>
+                    <select id="subTeam" name="sub_team" class="select">
+                        <option value="">اختر الفريق الفرعي</option>
+                        <option value="media">ميديا</option>
+                        <option value="ohda">عهدة</option>
+                        <option value="esafate">إسعافات</option>
+                        <option value="secretary">سكرتارية</option>
+                        <option value="moshtaryat">مشتريات</option>
+                        <option value="malia">مالية</option>
+                        <option value="matbakh">مطبخ</option>
+                    </select>
+                </div>
             </div>
 
-            <!-- قسم برنامج -->
+            <!-- Program Section -->
             <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🗓️</span>
-                    برنامج
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    البرنامج العام
                 </h2>
-                <p>هذا القسم مخصص لتقييم البرنامج العام للمعسكر، من حيث التنظيم، المحتوى، ,وعدد الغفرات، ومواعيد الفقرات خلال اليوم والفعاليات المقدمة.</p>
-                <fieldset class="form-group">
-                    <legend>
-                        تقييم البرنامج (1-10)
-                        <span class="required">* إجباري</span>
-                    </legend>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم البرنامج العام للمعسكر، من حيث التنظيم، المحتوى، وعدد الفقرات، ومواعيد الفقرات خلال اليوم والفعاليات المقدمة.
+                </p>
+                
+                <div class="form-group">
+                    <label class="label label--required">التقييم العام (1-10)</label>
                     <div class="rating">
-                        <!-- The HTML is in reverse order (10 to 1) to make the CSS sibling selector (~) work -->
-                        <!-- Only one input needs the 'required' attribute for the group -->
-                        <input type="radio" id="program_star10" name="program_rating" value="10" required><label for="program_star10" title="10/10">★</label>
-                        <input type="radio" id="program_star9" name="program_rating" value="9"><label for="program_star9" title="9/10">★</label>
-                        <input type="radio" id="program_star8" name="program_rating" value="8"><label for="program_star8" title="8/10">★</label>
-                        <input type="radio" id="program_star7" name="program_rating" value="7"><label for="program_star7" title="7/10">★</label>
-                        <input type="radio" id="program_star6" name="program_rating" value="6"><label for="program_star6" title="6/10">★</label>
-                        <input type="radio" id="program_star5" name="program_rating" value="5"><label for="program_star5" title="5/10">★</label>
-                        <input type="radio" id="program_star4" name="program_rating" value="4"><label for="program_star4" title="4/10">★</label>
-                        <input type="radio" id="program_star3" name="program_rating" value="3"><label for="program_star3" title="3/10">★</label>
-                        <input type="radio" id="program_star2" name="program_rating" value="2"><label for="program_star2" title="2/10">★</label>
-                        <input type="radio" id="program_star1" name="program_rating" value="1"><label for="program_star1" title="1/10">★</label>
+                        <input type="radio" id="program10" name="program_rating" value="10" class="rating__input" required>
+                        <label for="program10" class="rating__label">★</label>
+                        <input type="radio" id="program9" name="program_rating" value="9" class="rating__input" required>
+                        <label for="program9" class="rating__label">★</label>
+                        <input type="radio" id="program8" name="program_rating" value="8" class="rating__input" required>
+                        <label for="program8" class="rating__label">★</label>
+                        <input type="radio" id="program7" name="program_rating" value="7" class="rating__input" required>
+                        <label for="program7" class="rating__label">★</label>
+                        <input type="radio" id="program6" name="program_rating" value="6" class="rating__input" required>
+                        <label for="program6" class="rating__label">★</label>
+                        <input type="radio" id="program5" name="program_rating" value="5" class="rating__input" required>
+                        <label for="program5" class="rating__label">★</label>
+                        <input type="radio" id="program4" name="program_rating" value="4" class="rating__input" required>
+                        <label for="program4" class="rating__label">★</label>
+                        <input type="radio" id="program3" name="program_rating" value="3" class="rating__input" required>
+                        <label for="program3" class="rating__label">★</label>
+                        <input type="radio" id="program2" name="program_rating" value="2" class="rating__input" required>
+                        <label for="program2" class="rating__label">★</label>
+                        <input type="radio" id="program1" name="program_rating" value="1" class="rating__input" required>
+                        <label for="program1" class="rating__label">★</label>
                     </div>
-                </fieldset>
-                <div class="form-group">
-                    <label for="program_pros">الإيجابيات</label>
-                    <textarea id="program_pros" name="program_pros"></textarea>
+                    <div class="rating__value" id="programRatingValue">اختر التقييم</div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="program_cons">السلبيات</label>
-                    <textarea id="program_cons" name="program_cons"></textarea>
+                    <label for="programPros" class="label">الإيجابيات</label>
+                    <textarea id="programPros" name="program_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في البرنامج..."></textarea>
                 </div>
-            </div>
-
-            <!-- قسم توزيع القاده -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">👥</span>
-                    توزيع القاده
-                </h2>
-                <p>هذا القسم مخصص لتقييم عملية توزيع القادة على الفرق والمجموعات والفقرات والدورى، ومدى فعاليتها في تحقيق الأهداف.</p>
+                
                 <div class="form-group">
-                    <label for="leaders_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="leaders_star10" name="leaders_rating" value="10" required><label for="leaders_star10">★</label>
-                        <input type="radio" id="leaders_star9" name="leaders_rating" value="9"><label for="leaders_star9">★</label>
-                        <input type="radio" id="leaders_star8" name="leaders_rating" value="8"><label for="leaders_star8">★</label>
-                        <input type="radio" id="leaders_star7" name="leaders_rating" value="7"><label for="leaders_star7">★</label>
-                        <input type="radio" id="leaders_star6" name="leaders_rating" value="6"><label for="leaders_star6">★</label>
-                        <input type="radio" id="leaders_star5" name="leaders_rating" value="5"><label for="leaders_star5">★</label>
-                        <input type="radio" id="leaders_star4" name="leaders_rating" value="4"><label for="leaders_star4">★</label>
-                        <input type="radio" id="leaders_star3" name="leaders_rating" value="3"><label for="leaders_star3">★</label>
-                        <input type="radio" id="leaders_star2" name="leaders_rating" value="2"><label for="leaders_star2">★</label>
-                        <input type="radio" id="leaders_star1" name="leaders_rating" value="1"><label for="leaders_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="leaders_pros">الإيجابيات</label>
-                    <textarea id="leaders_pros" name="leaders_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="leaders_cons">السلبيات</label>
-                    <textarea id="leaders_cons" name="leaders_cons"></textarea>
+                    <label for="programCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="programCons" name="program_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
                 </div>
             </div>
 
-            <!-- قسم الالعاب -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🎮</span>
-                    الالعاب
-                </h2>
-                <p>هذا القسم مخصص لتقييم الألعاب والأنشطة الترفيهية المقدمة من لجنة الألعاب خلال المعسكر، من حيث انواع الألعاب، الفائدة، والتنظيم.</p>
-                <div class="form-group">
-                    <label for="games_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="games_star10" name="games_rating" value="10" required><label for="games_star10">★</label>
-                        <input type="radio" id="games_star9" name="games_rating" value="9" required><label for="games_star9">★</label>
-                        <input type="radio" id="games_star8" name="games_rating" value="8" required><label for="games_star8">★</label>
-                        <input type="radio" id="games_star7" name="games_rating" value="7" required><label for="games_star7">★</label>
-                        <input type="radio" id="games_star6" name="games_rating" value="6" required><label for="games_star6">★</label>
-                        <input type="radio" id="games_star5" name="games_rating" value="5" required><label for="games_star5">★</label>
-                        <input type="radio" id="games_star4" name="games_rating" value="4" required><label for="games_star4">★</label>
-                        <input type="radio" id="games_star3" name="games_rating" value="3" required><label for="games_star3">★</label>
-                        <input type="radio" id="games_star2" name="games_rating" value="2" required><label for="games_star2">★</label>
-                        <input type="radio" id="games_star1" name="games_rating" value="1" required><label for="games_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="games_pros">الإيجابيات</label>
-                    <textarea id="games_pros" name="games_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="games_cons">السلبيات</label>
-                    <textarea id="games_cons" name="games_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الشعار -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🎯</span>
-                    توصيل الهدف
-                </h2>
-                <p>هذا القسم مخصص لتقييم مدى وضوح الأهداف، وكفاءة توصيلها للفريق، وتحقيقها خلال المعسكر.</p>
-                <div class="form-group">
-                    <label for="goal_delivery_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="goal_delivery_star10" name="goal_delivery_rating" value="10" required><label for="goal_delivery_star10">★</label>
-                        <input type="radio" id="goal_delivery_star9" name="goal_delivery_rating" value="9"><label for="goal_delivery_star9">★</label>
-                        <input type="radio" id="goal_delivery_star8" name="goal_delivery_rating" value="8"><label for="goal_delivery_star8">★</label>
-                        <input type="radio" id="goal_delivery_star7" name="goal_delivery_rating" value="7"><label for="goal_delivery_star7">★</label>
-                        <input type="radio" id="goal_delivery_star6" name="goal_delivery_rating" value="6"><label for="goal_delivery_star6">★</label>
-                        <input type="radio" id="goal_delivery_star5" name="goal_delivery_rating" value="5"><label for="goal_delivery_star5">★</label>
-                        <input type="radio" id="goal_delivery_star4" name="goal_delivery_rating" value="4"><label for="goal_delivery_star4">★</label>
-                        <input type="radio" id="goal_delivery_star3" name="goal_delivery_rating" value="3"><label for="goal_delivery_star3">★</label>
-                        <input type="radio" id="goal_delivery_star2" name="goal_delivery_rating" value="2"><label for="goal_delivery_star2">★</label>
-                        <input type="radio" id="goal_delivery_star1" name="goal_delivery_rating" value="1"><label for="goal_delivery_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="goal_delivery_pros">الإيجابيات</label>
-                    <textarea id="goal_delivery_pros" name="goal_delivery_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="goal_delivery_cons">السلبيات</label>
-                    <textarea id="goal_delivery_cons" name="goal_delivery_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الشعار -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🎵</span>
-                    شعار
-                </h2>
-                <p>هذا القسم مخصص لتقييم الشعار الخاص بالمعسكر أو الفعالية، من حيث الكلمات، اللحن، الوضوح، والجاذبية.</p>
-                <div class="form-group">
-                    <label for="logo_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="logo_star10" name="logo_rating" value="10" required><label for="logo_star10">★</label>
-                        <input type="radio" id="logo_star9" name="logo_rating" value="9" required><label for="logo_star9">★</label>
-                        <input type="radio" id="logo_star8" name="logo_rating" value="8" required><label for="logo_star8">★</label>
-                        <input type="radio" id="logo_star7" name="logo_rating" value="7" required><label for="logo_star7">★</label>
-                        <input type="radio" id="logo_star6" name="logo_rating" value="6" required><label for="logo_star6">★</label>
-                        <input type="radio" id="logo_star5" name="logo_rating" value="5" required><label for="logo_star5">★</label>
-                        <input type="radio" id="logo_star4" name="logo_rating" value="4" required><label for="logo_star4">★</label>
-                        <input type="radio" id="logo_star3" name="logo_rating" value="3" required><label for="logo_star3">★</label>
-                        <input type="radio" id="logo_star2" name="logo_rating" value="2" required><label for="logo_star2">★</label>
-                        <input type="radio" id="logo_star1" name="logo_rating" value="1" required><label for="logo_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="logo_pros">الإيجابيات</label>
-                    <textarea id="logo_pros" name="logo_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="logo_cons">السلبيات</label>
-                    <textarea id="logo_cons" name="logo_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الهدايا -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🎁</span>
-                    هدايا
-                </h2>
-                <p>هذا القسم مخصص لتقييم الهدايا المقدمة، من حيث الجودة، الملائمة، والقيمة.</p>
-                <div class="form-group">
-                    <label for="gift_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="gift_star10" name="gift_rating" value="10" required><label for="gift_star10">★</label>
-                        <input type="radio" id="gift_star9" name="gift_rating" value="9"><label for="gift_star9">★</label>
-                        <input type="radio" id="gift_star8" name="gift_rating" value="8"><label for="gift_star8">★</label>
-                        <input type="radio" id="gift_star7" name="gift_rating" value="7" required><label for="gift_star7">★</label>
-                        <input type="radio" id="gift_star6" name="gift_rating" value="6" required><label for="gift_star6">★</label>
-                        <input type="radio" id="gift_star5" name="gift_rating" value="5" required><label for="gift_star5">★</label>
-                        <input type="radio" id="gift_star4" name="gift_rating" value="4" required><label for="gift_star4">★</label>
-                        <input type="radio" id="gift_star3" name="gift_rating" value="3" required><label for="gift_star3">★</label>
-                        <input type="radio" id="gift_star2" name="gift_rating" value="2" required><label for="gift_star2">★</label>
-                        <input type="radio" id="gift_star1" name="gift_rating" value="1" required><label for="gift_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="gift_pros">الإيجابيات</label>
-                    <textarea id="gift_pros" name="gift_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="gift_cons">السلبيات</label>
-                    <textarea id="gift_cons" name="gift_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم السكرتارية -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">📋</span>
-                    سكرتارية
-                </h2>
-                <p>هذا القسم مخصص لتقييم أعمال السكرتارية، من حيث توزيع الخيم، والرهوط، والباصات، الدقة، وسرعة الإنجاز، ومرونة القادة خلال الحجز والتوزيع والتغيرات.</p>
-                <div class="form-group">
-                    <label for="secretary_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="secretary_star10" name="secretary_rating" value="10" required><label for="secretary_star10">★</label>
-                        <input type="radio" id="secretary_star9" name="secretary_rating" value="9" required><label for="secretary_star9">★</label>
-                        <input type="radio" id="secretary_star8" name="secretary_rating" value="8" required><label for="secretary_star8">★</label>
-                        <input type="radio" id="secretary_star7" name="secretary_rating" value="7" required><label for="secretary_star7">★</label>
-                        <input type="radio" id="secretary_star6" name="secretary_rating" value="6" required><label for="secretary_star6">★</label>
-                        <input type="radio" id="secretary_star5" name="secretary_rating" value="5" required><label for="secretary_star5">★</label>
-                        <input type="radio" id="secretary_star4" name="secretary_rating" value="4" required><label for="secretary_star4">★</label>
-                        <input type="radio" id="secretary_star3" name="secretary_rating" value="3" required><label for="secretary_star3">★</label>
-                        <input type="radio" id="secretary_star2" name="secretary_rating" value="2" required><label for="secretary_star2">★</label>
-                        <input type="radio" id="secretary_star1" name="secretary_rating" value="1" required><label for="secretary_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="secretary_pros">الإيجابيات</label>
-                    <textarea id="secretary_pros" name="secretary_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="secretary_cons">السلبيات</label>
-                    <textarea id="secretary_cons" name="secretary_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الميديا -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">📱</span>
-                    ميديا
-                </h2>
-                <p>هذا القسم مخصص لتقييم التغطية الإعلامية، من حيث الجودة، التنوع، والانتشار.</p>
-                <div class="form-group">
-                    <label for="media_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="media_star10" name="media_rating" value="10" required><label for="media_star10">★</label>
-                        <input type="radio" id="media_star9" name="media_rating" value="9" required><label for="media_star9">★</label>
-                        <input type="radio" id="media_star8" name="media_rating" value="8" required><label for="media_star8">★</label>
-                        <input type="radio" id="media_star7" name="media_rating" value="7" required><label for="media_star7">★</label>
-                        <input type="radio" id="media_star6" name="media_rating" value="6" required><label for="media_star6">★</label>
-                        <input type="radio" id="media_star5" name="media_rating" value="5" required><label for="media_star5">★</label>
-                        <input type="radio" id="media_star4" name="media_rating" value="4" required><label for="media_star4">★</label>
-                        <input type="radio" id="media_star3" name="media_rating" value="3" required><label for="media_star3">★</label>
-                        <input type="radio" id="media_star2" name="media_rating" value="2" required><label for="media_star2">★</label>
-                        <input type="radio" id="media_star1" name="media_rating" value="1" required><label for="media_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="media_pros">الإيجابيات</label>
-                    <textarea id="media_pros" name="media_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="media_cons">السلبيات</label>
-                    <textarea id="media_cons" name="media_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الإسعافات -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🚑</span>
-                    إسعافات
-                </h2>
-                <p>هذا القسم مخصص لتقييم خدمات الإسعافات الأولية، من حيث الاستجابة، التجهيزات، وكفاءة الفريق، والانتشار.</p>
-                <div class="form-group">
-                    <label for="emergency_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="emergency_star10" name="emergency_rating" value="10" required><label for="emergency_star10">★</label>
-                        <input type="radio" id="emergency_star9" name="emergency_rating" value="9"><label for="emergency_star9">★</label>
-                        <input type="radio" id="emergency_star8" name="emergency_rating" value="8"><label for="emergency_star8">★</label>
-                        <input type="radio" id="emergency_star7" name="emergency_rating" value="7"><label for="emergency_star7">★</label>
-                        <input type="radio" id="emergency_star6" name="emergency_rating" value="6"><label for="emergency_star6">★</label>
-                        <input type="radio" id="emergency_star5" name="emergency_rating" value="5" required><label for="emergency_star5">★</label>
-                        <input type="radio" id="emergency_star4" name="emergency_rating" value="4" required><label for="emergency_star4">★</label>
-                        <input type="radio" id="emergency_star3" name="emergency_rating" value="3" required><label for="emergency_star3">★</label>
-                        <input type="radio" id="emergency_star2" name="emergency_rating" value="2" required><label for="emergency_star2">★</label>
-                        <input type="radio" id="emergency_star1" name="emergency_rating" value="1" required><label for="emergency_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="emergency_pros">الإيجابيات</label>
-                    <textarea id="emergency_pros" name="emergency_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="emergency_cons">السلبيات</label>
-                    <textarea id="emergency_cons" name="emergency_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم المطبخ -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🍽️</span>
-                    مطبخ
-                </h2>
-                <p>هذا القسم مخصص لتقييم خدمات المطبخ والطعام، من حيث الجودة، النظافة، والتنوع، والكميات.</p>
-                <div class="form-group">
-                    <label for="kitchen_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="kitchen_star10" name="kitchen_rating" value="10" required><label for="kitchen_star10">★</label>
-                        <input type="radio" id="kitchen_star9" name="kitchen_rating" value="9"><label for="kitchen_star9">★</label>
-                        <input type="radio" id="kitchen_star8" name="kitchen_rating" value="8"><label for="kitchen_star8">★</label>
-                        <input type="radio" id="kitchen_star7" name="kitchen_rating" value="7"><label for="kitchen_star7">★</label>
-                        <input type="radio" id="kitchen_star6" name="kitchen_rating" value="6"><label for="kitchen_star6">★</label>
-                        <input type="radio" id="kitchen_star5" name="kitchen_rating" value="5"><label for="kitchen_star5">★</label>
-                        <input type="radio" id="kitchen_star4" name="kitchen_rating" value="4"><label for="kitchen_star4">★</label>
-                        <input type="radio" id="kitchen_star3" name="kitchen_rating" value="3"><label for="kitchen_star3">★</label>
-                        <input type="radio" id="kitchen_star2" name="kitchen_rating" value="2"><label for="kitchen_star2">★</label>
-                        <input type="radio" id="kitchen_star1" name="kitchen_rating" value="1"><label for="kitchen_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="kitchen_pros">الإيجابيات</label>
-                    <textarea id="kitchen_pros" name="kitchen_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="kitchen_cons">السلبيات</label>
-                    <textarea id="kitchen_cons" name="kitchen_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم المالية -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">💰</span>
-                    مالية
-                </h2>
-                <p>هذا القسم مخصص لتقييم قطاع المالية، من حيث التنظيم، الكفاءة، ومرونة القادة خلال الحجز.</p>
-                <div class="form-group">
-                    <label for="finance_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="finance_star10" name="finance_rating" value="10" required><label for="finance_star10">★</label>
-                        <input type="radio" id="finance_star9" name="finance_rating" value="9"><label for="finance_star9">★</label>
-                        <input type="radio" id="finance_star8" name="finance_rating" value="8"><label for="finance_star8">★</label>
-                        <input type="radio" id="finance_star7" name="finance_rating" value="7"><label for="finance_star7">★</label>
-                        <input type="radio" id="finance_star6" name="finance_rating" value="6"><label for="finance_star6">★</label>
-                        <input type="radio" id="finance_star5" name="finance_rating" value="5"><label for="finance_star5">★</label>
-                        <input type="radio" id="finance_star4" name="finance_rating" value="4"><label for="finance_star4">★</label>
-                        <input type="radio" id="finance_star3" name="finance_rating" value="3"><label for="finance_star3">★</label>
-                        <input type="radio" id="finance_star2" name="finance_rating" value="2"><label for="finance_star2">★</label>
-                        <input type="radio" id="finance_star1" name="finance_rating" value="1"><label for="finance_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="finance_pros">الإيجابيات</label>
-                    <textarea id="finance_pros" name="finance_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="finance_cons">السلبيات</label>
-                    <textarea id="finance_cons" name="finance_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم العهدة -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">📦</span>
-                    عهدة
-                </h2>
-                <p>هذا القسم مخصص لتقييم قطاع العهدة، من حيث التنظيم، والتسليم والتسلم، الإنتشار، وسرعة الإستجابة.</p>
-                <div class="form-group">
-                    <label for="custody_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="custody_star10" name="custody_rating" value="10" required><label for="custody_star10">★</label>
-                        <input type="radio" id="custody_star9" name="custody_rating" value="9"><label for="custody_star9">★</label>
-                        <input type="radio" id="custody_star8" name="custody_rating" value="8"><label for="custody_star8">★</label>
-                        <input type="radio" id="custody_star7" name="custody_rating" value="7"><label for="custody_star7">★</label>
-                        <input type="radio" id="custody_star6" name="custody_rating" value="6"><label for="custody_star6">★</label>
-                        <input type="radio" id="custody_star5" name="custody_rating" value="5"><label for="custody_star5">★</label>
-                        <input type="radio" id="custody_star4" name="custody_rating" value="4"><label for="custody_star4">★</label>
-                        <input type="radio" id="custody_star3" name="custody_rating" value="3"><label for="custody_star3">★</label>
-                        <input type="radio" id="custody_star2" name="custody_rating" value="2"><label for="custody_star2">★</label>
-                        <input type="radio" id="custody_star1" name="custody_rating" value="1"><label for="custody_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="custody_pros">الإيجابيات</label>
-                    <textarea id="custody_pros" name="custody_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="custody_cons">السلبيات</label>
-                    <textarea id="custody_cons" name="custody_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم المشتريات -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🛒</span>
-                    مشتريات
-                </h2>
-                <p>هذا القسم مخصص لتقييم عملية المشتريات، من حيث الكفاءة، الجودة، وتلبية الاحتياجات</p>
-                <div class="form-group">
-                    <label for="purchase_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="purchase_star10" name="purchase_rating" value="10" required><label for="purchase_star10">★</label>
-                        <input type="radio" id="purchase_star9" name="purchase_rating" value="9"><label for="purchase_star9">★</label>
-                        <input type="radio" id="purchase_star8" name="purchase_rating" value="8"><label for="purchase_star8">★</label>
-                        <input type="radio" id="purchase_star7" name="purchase_rating" value="7"><label for="purchase_star7">★</label>
-                        <input type="radio" id="purchase_star6" name="purchase_rating" value="6"><label for="purchase_star6">★</label>
-                        <input type="radio" id="purchase_star5" name="purchase_rating" value="5"><label for="purchase_star5">★</label>
-                        <input type="radio" id="purchase_star4" name="purchase_rating" value="4"><label for="purchase_star4">★</label>
-                        <input type="radio" id="purchase_star3" name="purchase_rating" value="3"><label for="purchase_star3">★</label>
-                        <input type="radio" id="purchase_star2" name="purchase_rating" value="2"><label for="purchase_star2">★</label>
-                        <input type="radio" id="purchase_star1" name="purchase_rating" value="1"><label for="purchase_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="purchase_pros">الإيجابيات</label>
-                    <textarea id="purchase_pros" name="purchase_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="purchase_cons">السلبيات</label>
-                    <textarea id="purchase_cons" name="purchase_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم الانتقالات -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">🚌</span>
-                    انتقالات
-                </h2>
-                <p>هذا القسم مخصص لتقييم جودة الباصات، تعامل السائقين، جودة التكييف، كفاءة القادة المسئولين عن الإنتقالات، كفاءة قادة الباصات من حيث التعاون</p>
-                <div class="form-group">
-                    <label for="transportation_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="transportation_star10" name="transportation_rating" value="10" required><label for="transportation_star10">★</label>
-                        <input type="radio" id="transportation_star9" name="transportation_rating" value="9" required><label for="transportation_star9">★</label>
-                        <input type="radio" id="transportation_star8" name="transportation_rating" value="8" required><label for="transportation_star8">★</label>
-                        <input type="radio" id="transportation_star7" name="transportation_rating" value="7" required><label for="transportation_star7">★</label>
-                        <input type="radio" id="transportation_star6" name="transportation_rating" value="6" required><label for="transportation_star6">★</label>
-                        <input type="radio" id="transportation_star5" name="transportation_rating" value="5" required><label for="transportation_star5">★</label>
-                        <input type="radio" id="transportation_star4" name="transportation_rating" value="4" required><label for="transportation_star4">★</label>
-                        <input type="radio" id="transportation_star3" name="transportation_rating" value="3" required><label for="transportation_star3">★</label>
-                        <input type="radio" id="transportation_star2" name="transportation_rating" value="2" required><label for="transportation_star2">★</label>
-                        <input type="radio" id="transportation_star1" name="transportation_rating" value="1" required><label for="transportation_star1">★</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="transportation_pros">الإيجابيات</label>
-                    <textarea id="transportation_pros" name="transportation_pros"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="transportation_cons">السلبيات</label>
-                    <textarea id="transportation_cons" name="transportation_cons"></textarea>
-                </div>
-            </div>
-
-            <!-- قسم اقتراحات عامة -->
-            <div class="section">
-                <h2 class="section-title">
-                    <span class="section-icon">💡</span>
-                    اقتراحات عامة
-                </h2>
-                <p>مساحة حرة لكتابة أي اقتراحات أو ملاحظات إضافية تود مشاركتها.</p>
-                <div class="form-group">
-                    <label for="general_suggestions">اقتراحاتك</label>
-                    <textarea id="general_suggestions" name="general_suggestions" rows="8"></textarea>
-                </div>
-            </div>
-
+            <!-- Submit Section -->
             <div class="submit-section">
-                <button type="submit" class="submit-btn">إرسال النموذج</button>
+                <button type="submit" class="btn btn--primary">إرسال التقييم</button>
+                <button type="button" class="btn btn--secondary" onclick="downloadForm()">تحميل النموذج</button>
             </div>
         </form>
     </div>
 
-    <!-- Custom Success Modal -->
-    <div id="successModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <img src="shamandora.png" alt="Shamandora Logo">
-            <h2 id="modalTitle"></h2>
-            <p id="modalMessage"></p>
-            <button class="modal-close-btn" onclick="closeModal()">إغلاق</button>
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal__content">
+            <div class="modal__icon">✅</div>
+            <h2 class="modal__title">تم الإرسال بنجاح!</h2>
+            <p class="modal__text">شكراً لك على وقتك ومشاركتك الصادقة. تقييمك سيساعدنا في تطوير المعسكرات القادمة.</p>
+            <button class="btn btn--primary" onclick="closeModal()">إغلاق</button>
         </div>
     </div>
 
-
-
-
-
-<script>
-    document.getElementById("sectionsForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-        const form = e.target;
-
-        // Required ratings list
-        const requiredRatings = [
-            'program_rating', 'leaders_rating', 'games_rating', 'goal_delivery_rating',
-            'logo_rating', 'gift_rating', 'secretary_rating', 'media_rating',
-            'emergency_rating', 'kitchen_rating', 'finance_rating', 'custody_rating',
-            'purchase_rating', 'transportation_rating'
-        ];
-
-        // Check missing ratings
-        const missingRatings = requiredRatings.filter(rating => {
-            return form.querySelectorAll(`input[name="${rating}"]:checked`).length === 0;
+    <script>
+        // Rating system functionality
+        document.querySelectorAll('.rating__input').forEach(input => {
+            input.addEventListener('change', function() {
+                const value = this.value;
+                const valueDisplay = this.closest('.form-group').querySelector('.rating__value');
+                if (valueDisplay) {
+                    valueDisplay.textContent = ${value}/10;
+                }
+            });
         });
 
-        if (missingRatings.length > 0) {
-            console.log("Missing ratings detected");
-            document.getElementById("validationModal").classList.add("visible");
-            return;
-        }
-
-        // Build FormData
-        const formData = new FormData(form);
-
-        // Submit via fetch
-        fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                const participantName = formData.get("participant_name")?.trim() || "قائد";
-                document.getElementById("modalTitle").innerText = "تم الإرسال بنجاح!";
-                document.getElementById("modalMessage").innerText = `شكرا جدا لوقتك و مجهودك يا ${participantName} ❤️`;
-                document.getElementById("successModal").classList.add("visible");
-                form.reset();
-            } else {
-                return response.json().then(data => {
-                    const errorMsg = data?.errors?.map(e => e.message).join(", ") || "حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.";
-                    alert(errorMsg);
-                });
-            }
-        })
-        .catch(error => {
-            alert("حدث خطأ في الاتصال: " + error.message);
+        // Form submission
+        document.getElementById('evaluationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('.btn--primary');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                showModal();
+            }, 1000);
         });
-    });
 
-    function closeModal() {
-        document.getElementById("successModal").classList.remove("visible");
-    }
-
-    function closeValidationModal() {
-        document.getElementById("validationModal").classList.remove("visible");
-    }
-
-    function showDownloadModal() {
-        document.getElementById("downloadModal").classList.add("visible");
-    }
-
-    function closeDownloadModal() {
-        document.getElementById("downloadModal").classList.remove("visible");
-        document.getElementById("downloadPassword").value = "";
-    }
-
-    function downloadData() {
-        const password = document.getElementById("downloadPassword").value.trim();
-        if (!password) {
-            alert("يرجى إدخال كلمة المرور");
-            return;
+        // Modal functions
+        function showModal() {
+            document.getElementById('successModal').classList.add('modal--visible');
         }
 
-        const downloadUrl = `/api/download?secret=${encodeURIComponent(password)}`;
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('modal--visible');
+        }
 
-        // Create and trigger a temporary download link
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = 'evaluation_data.xlsx'; // This name is a hint; server sends actual name
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Download form function
+        function downloadForm() {
+            // Create form data object
+            const formData = new FormData(document.getElementById('evaluationForm'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Create downloadable content
+            const content = `تقييم معسكر مجمع 2025
+            
+الاسم: ${data.participant_name || 'غير محدد'}
+الفريق الأساسي: ${data.main_team || 'غير محدد'}
+الفريق الفرعي: ${data.sub_team || 'غير محدد'}
 
-        closeDownloadModal();
-    }
-</script>
+تقييم البرنامج: ${data.program_rating || 'غير محدد'}/10
+الإيجابيات: ${data.program_pros || 'غير محدد'}
+السلبيات: ${data.program_cons || 'غير محدد'}
+            `;
+            
+            // Create and download file
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = تقييم_معسكر_${new Date().toISOString().split('T')[0]}.txt;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
 
+        // Close modal on outside click
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
