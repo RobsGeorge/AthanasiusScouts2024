@@ -303,6 +303,9 @@ Route::get('/liveform-maxlimits/delete/{id}', array('as'=> 'liveform-maxlimits.d
 Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
 });
 
+Route::get('/feedback', array('as' => 'feedback.index', 'uses'=>'App\Http\Controllers\FeedbackController@index'));
+Route::post('/feedback', array('as' => 'feedback.create', 'uses'=>'App\Http\Controllers\FeedbackController@create'));
+
 Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
     Route::get('/change-password', function () {return view('change-password');});
