@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -303,8 +304,9 @@ Route::get('/liveform-maxlimits/delete/{id}', array('as'=> 'liveform-maxlimits.d
 Route::delete('/liveform-maxlimits/destroy/{id}', array('as'=> 'liveform-maxlimits.destroy', 'uses'=>'App\Http\Controllers\LiveFormMaxLimitsController@destroy'));
 });
 
-Route::get('/feedback', array('as' => 'feedback.index', 'uses'=>'App\Http\Controllers\FeedbackController@index'));
-Route::post('/feedback', array('as' => 'feedback.create', 'uses'=>'App\Http\Controllers\FeedbackController@create'));
+Route::view('/feedback', 'feedback.index'); // Shows the form
+Route::post('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create'); // Handles submission
+
 
 Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
