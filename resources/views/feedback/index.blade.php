@@ -569,10 +569,452 @@
                 </div>
             </div>
 
+            
+            <!-- Program Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    البرنامج العام
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم البرنامج العام للمعسكر، من حيث التنظيم، المحتوى، وعدد الفقرات، ومواعيد الفقرات خلال اليوم والفعاليات المقدمة.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="program{{ $i }}" name="program_rating" value="{{ $i }}" required>
+                        <label for="program{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="programPros" class="label">الإيجابيات</label>
+                    <textarea id="programPros" name="program_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في البرنامج..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="programCons" name="program_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            
+            <!-- Leaders Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    توزيع القادة
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم عملية توزيع القادة على الفرق، ومدى فعالية كل قائد في إدارة فريقه، والتواصل مع الأعضاء، وتقديم الدعم اللازم.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="leaders{{ $i }}" name="leaders_rating" value="{{ $i }}" required>
+                        <label for="leaders{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="leadersPros" class="label">الإيجابيات</label>
+                    <textarea id="leadersPros" name="leaders_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في توزيع القادة..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="leadersCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="leadersCons" name="leaders_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            
+            <!-- Games Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    الألعاب
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم الألعاب والأنشطة الترفيهية المقدمة من لجنة الألعاب خلال المعسكر، من حيث انواع الألعاب، الفائدة، والتنظيم.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="games{{ $i }}" name="games_rating" value="{{ $i }}" required>
+                        <label for="games{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="gamesPros" class="label">الإيجابيات</label>
+                    <textarea id="gamesPros" name="games_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في الالعاب..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gamesCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="gamesCons" name="games_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            
+            <!-- goal_delivery Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    توصيل هدف
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم طريقة توصيل هدف المعسكر، المحتوى، أماكن المحاضرات، مدة الفقرة، الأنشطة المقدمة فى توصيل الهدف
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="goal_delivery{{ $i }}" name="goal_delivery_rating" value="{{ $i }}" required>
+                        <label for="goal_delivery{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="goal_deliveryPros" class="label">الإيجابيات</label>
+                    <textarea id="goal_deliveryPros" name="goal_delivery_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في توصيل الهدف..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal_deliveryCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="goal_deliveryCons" name="goal_delivery_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+
+            <!-- logo Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    الشعار
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم الشعار الخاص بالمعسكر أو الفعالية، من حيث الكلمات، اللحن، الوضوح، والجاذبية.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="logo{{ $i }}" name="logo_rating" value="{{ $i }}" required>
+                        <label for="logo{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="logoPros" class="label">الإيجابيات</label>
+                    <textarea id="logoPros" name="logo_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في الشعار..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="logoCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="logoCons" name="logo_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- gift Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    الهدايا 
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم الهدايا المقدمة، من حيث الجودة، الملائمة، والقيمة.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="gift{{ $i }}" name="gift_rating" value="{{ $i }}" required>
+                        <label for="gift{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="giftPros" class="label">الإيجابيات</label>
+                    <textarea id="giftPros" name="gift_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في الهدايا..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="giftCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="giftCons" name="gift_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+            
+            <!-- secretary Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     السكرتارية
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم أعمال السكرتارية، من حيث توزيع الخيم، والرهوط، والباصات، الدقة، وسرعة الإنجاز، ومرونة القادة خلال الحجز والتوزيع والتغيرات.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="secretary{{ $i }}" name="secretary_rating" value="{{ $i }}" required>
+                        <label for="secretary{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="secretaryPros" class="label">الإيجابيات</label>
+                    <textarea id="secretaryPros" name="secretary_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في السكرتارية..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="secretaryCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="secretaryCons" name="secretary_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- media Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    الميديا 
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم التغطية الإعلامية، من حيث الجودة، التنوع، والانتشار.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="media{{ $i }}" name="media_rating" value="{{ $i }}" required>
+                        <label for="media{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="mediaPros" class="label">الإيجابيات</label>
+                    <textarea id="mediaPros" name="media_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في الميديا..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mediaCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="mediaCons" name="media_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- emergency Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     الاسعافات
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم خدمات الإسعافات الأولية، من حيث الاستجابة، التجهيزات، وكفاءة الفريق، والانتشار.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="emergency{{ $i }}" name="emergency_rating" value="{{ $i }}" required>
+                        <label for="emergency{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="emergencyPros" class="label">الإيجابيات</label>
+                    <textarea id="emergencyPros" name="emergency_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في الاسعافات..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="emergencyCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="emergencyCons" name="emergency_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- kitchen Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     المطبخ
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم خدمات المطبخ والطعام، من حيث الجودة، النظافة، والتنوع، والكميات.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="kitchen{{ $i }}" name="kitchen_rating" value="{{ $i }}" required>
+                        <label for="kitchen{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="kitchenPros" class="label">الإيجابيات</label>
+                    <textarea id="kitchenPros" name="kitchen_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في المطبخ..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="kitchenCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="kitchenCons" name="kitchen_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- finance Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                    المالية 
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم قطاع المالية، من حيث التنظيم، الكفاءة، ومرونة القادة خلال الحجز.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="finance{{ $i }}" name="finance_rating" value="{{ $i }}" required>
+                        <label for="finance{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="financePros" class="label">الإيجابيات</label>
+                    <textarea id="financePros" name="finance_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في المالية..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="financeCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="financeCons" name="finance_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- custody Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     العهدة
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم قطاع العهدة، من حيث التنظيم، والتسليم والتسلم، الإنتشار، وسرعة الإستجابة.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="custody{{ $i }}" name="custody_rating" value="{{ $i }}" required>
+                        <label for="custody{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="custodyPros" class="label">الإيجابيات</label>
+                    <textarea id="custodyPros" name="custody_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في العهدة..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="custodyCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="custodyCons" name="custody_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- purchase Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     المشتريات
+                </h2>
+                <p class="section__description">
+                    هذا القسم مخصص لتقييم عملية المشتريات، من حيث الكفاءة، الجودة، وتلبية الاحتياجات.
+                </p>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="purchase{{ $i }}" name="purchase_rating" value="{{ $i }}" required>
+                        <label for="purchase{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="purchasePros" class="label">الإيجابيات</label>
+                    <textarea id="purchasePros" name="purchase_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في المشتريات..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="purchaseCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="purchaseCons" name="purchase_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <!-- transportation Section -->
+            <div class="section">
+                <h2 class="section__title">
+                    <span class="section__icon">🗓</span>
+                     المواصلات
+                </h2>
+                
+                <div class="form-group">
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="transportation{{ $i }}" name="transportation_rating" value="{{ $i }}" required>
+                        <label for="transportation{{ $i }}">★</label>
+                    @endfor
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <label for="transportationPros" class="label">الإيجابيات</label>
+                    <textarea id="transportationPros" name="transportation_pros" class="textarea" placeholder="اذكر النقاط الإيجابية في المواصلات..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transportationCons" class="label">السلبيات والتحسينات المقترحة</label>
+                    <textarea id="transportationCons" name="transportation_cons" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="form-group">
+                    <label for="generalSuggestions" class="label">هل لديك اي اقتراحات عامة؟ من فضلك اكتبها هنا</label>
+                    <textarea id="generalSuggestions" name="general_suggestions" class="textarea" placeholder="اذكر النقاط التي تحتاج تحسين واقتراحاتك..."></textarea>
+                </div>
+            </div>
+
             <!-- Submit Section -->
             <div class="submit-section">
                 <button type="submit" class="btn btn--primary">إرسال التقييم</button>
-                <button type="button" class="btn btn--secondary" onclick="downloadForm()">تحميل النموذج</button>
             </div>
         </form>
     </div>
@@ -642,40 +1084,6 @@
 
         function closeModal() {
             document.getElementById('successModal').classList.remove('modal--visible');
-        }
-
-        // Download form function
-        function downloadForm() {
-            // Create form data object
-            const formData = new FormData(document.getElementById('evaluationForm'));
-            const data = {};
-            
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-            
-            // Create downloadable content
-            const content = `تقييم معسكر مجمع 2025
-            
-الاسم: ${data.participant_name || 'غير محدد'}
-الفريق الأساسي: ${data.main_team || 'غير محدد'}
-الفريق الفرعي: ${data.sub_team || 'غير محدد'}
-
-تقييم البرنامج: ${data.program_rating || 'غير محدد'}/10
-الإيجابيات: ${data.program_pros || 'غير محدد'}
-السلبيات: ${data.program_cons || 'غير محدد'}
-            `;
-            
-            // Create and download file
-            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = تقييم_معسكر_${new Date().toISOString().split('T')[0]}.txt;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
         }
 
         // Close modal on outside click
