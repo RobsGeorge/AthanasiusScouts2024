@@ -373,21 +373,26 @@
                     برنامج
                 </h2>
                 <p>هذا القسم مخصص لتقييم البرنامج العام للمعسكر، من حيث التنظيم، المحتوى، ,وعدد الغفرات، ومواعيد الفقرات خلال اليوم والفعاليات المقدمة.</p>
-                <div class="form-group">
-                    <label for="program_rating">التقييم (1-10) <span class="required">*إجباري</span></label>
-                    <div class="rating">
-                        <input type="radio" id="program_star10" name="program_rating" value="10" required><label for="program_star10">★</label>
-                        <input type="radio" id="program_star9" name="program_rating" value="9" required><label for="program_star9">★</label>
-                        <input type="radio" id="program_star8" name="program_rating" value="8" required><label for="program_star8">★</label>
-                        <input type="radio" id="program_star7" name="program_rating" value="7" required><label for="program_star7">★</label>
-                        <input type="radio" id="program_star6" name="program_rating" value="6" required><label for="program_star6">★</label>
-                        <input type="radio" id="program_star5" name="program_rating" value="5" required><label for="program_star5">★</label>
-                        <input type="radio" id="program_star4" name="program_rating" value="4" required><label for="program_star4">★</label>
-                        <input type="radio" id="program_star3" name="program_rating" value="3" required><label for="program_star3">★</label>
-                        <input type="radio" id="program_star2" name="program_rating" value="2" required><label for="program_star2">★</label>
-                        <input type="radio" id="program_star1" name="program_rating" value="1" required><label for="program_star1">★</label>
-                    </div>
+                <fieldset class="form-group">
+                <legend>
+                    تقييم البرنامج (1-10)
+                    <span class="required">* إجباري</span>
+                </legend>
+                <div class="rating">
+                    <!-- The HTML is in reverse order (10 to 1) to make the CSS sibling selector (~) work -->
+                    <!-- Only one input needs the 'required' attribute for the group -->
+                    <input type="radio" id="program_star10" name="program_rating" value="10" required><label for="program_star10" title="10/10">★</label>
+                    <input type="radio" id="program_star9" name="program_rating" value="9"><label for="program_star9" title="9/10">★</label>
+                    <input type="radio" id="program_star8" name="program_rating" value="8"><label for="program_star8" title="8/10">★</label>
+                    <input type="radio" id="program_star7" name="program_rating" value="7"><label for="program_star7" title="7/10">★</label>
+                    <input type="radio" id="program_star6" name="program_rating" value="6"><label for="program_star6" title="6/10">★</label>
+                    <input type="radio" id="program_star5" name="program_rating" value="5"><label for="program_star5" title="5/10">★</label>
+                    <input type="radio" id="program_star4" name="program_rating" value="4"><label for="program_star4" title="4/10">★</label>
+                    <input type="radio" id="program_star3" name="program_rating" value="3"><label for="program_star3" title="3/10">★</label>
+                    <input type="radio" id="program_star2" name="program_rating" value="2"><label for="program_star2" title="2/10">★</label>
+                    <input type="radio" id="program_star1" name="program_rating" value="1"><label for="program_star1" title="1/10">★</label>
                 </div>
+            </fieldset>
                 <div class="form-group">
                     <label for="program_pros">الإيجابيات</label>
                     <textarea id="program_pros" name="program_pros"></textarea>
