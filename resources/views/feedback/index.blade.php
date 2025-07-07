@@ -309,7 +309,7 @@
 <body>
     <div class="form-container">
         <div class="form-header">
-            <img src="href{{asset('img/shamandora.png')}}" alt="شعار الشمندورة">
+            <img href={{ asset('img/shamandora.png') }} alt="شعار الشمندورة">
             <h1>تقييم معسكر مجمع 2025 - مربوط بكيفي</h1>
             <p>ربنا يعوضكم على تعبكم وخدمتكم خلال المعسكر.</p>
             <p>وجودكم كان بركة حقيقية، ومجهودكم هو اللي صنع الفرق.</p>
