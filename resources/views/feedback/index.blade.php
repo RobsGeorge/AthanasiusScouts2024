@@ -232,14 +232,32 @@
             line-height: 1.6;
         }
 
+        
+
         /* Rating System */
-        .rating {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: center;
-            gap: 5px;
-            margin: 15px 0;
-        }
+            .rating-stars {
+                direction: rtl;
+                unicode-bidi: bidi-override;
+                display: inline-block;
+                font-size: 2rem;
+                user-select: none;
+            }
+
+            .rating-stars input[type="radio"] {
+                display: none;
+            }
+
+            .rating-stars label {
+                color: var(--medium-gray);
+                cursor: pointer;
+                transition: var(--transition);
+            }
+
+            .rating-stars input:checked ~ label,
+            .rating-stars label:hover,
+            .rating-stars label:hover ~ label {
+                color: #ffc107;
+            }
 
         .rating__input {
             display: none;
@@ -531,31 +549,14 @@
                 </p>
                 
                 <div class="form-group">
-                    <label class="label label--required">التقييم العام (1-10)</label>
-                    <div class="rating">
-                        <input type="radio" id="program10" name="program_rating" value="10" class="rating__input" required>
-                        <label for="program10" class="rating__label">★</label>
-                        <input type="radio" id="program9" name="program_rating" value="9" class="rating__input" required>
-                        <label for="program9" class="rating__label">★</label>
-                        <input type="radio" id="program8" name="program_rating" value="8" class="rating__input" required>
-                        <label for="program8" class="rating__label">★</label>
-                        <input type="radio" id="program7" name="program_rating" value="7" class="rating__input" required>
-                        <label for="program7" class="rating__label">★</label>
-                        <input type="radio" id="program6" name="program_rating" value="6" class="rating__input" required>
-                        <label for="program6" class="rating__label">★</label>
-                        <input type="radio" id="program5" name="program_rating" value="5" class="rating__input" required>
-                        <label for="program5" class="rating__label">★</label>
-                        <input type="radio" id="program4" name="program_rating" value="4" class="rating__input" required>
-                        <label for="program4" class="rating__label">★</label>
-                        <input type="radio" id="program3" name="program_rating" value="3" class="rating__input" required>
-                        <label for="program3" class="rating__label">★</label>
-                        <input type="radio" id="program2" name="program_rating" value="2" class="rating__input" required>
-                        <label for="program2" class="rating__label">★</label>
-                        <input type="radio" id="program1" name="program_rating" value="1" class="rating__input" required>
-                        <label for="program1" class="rating__label">★</label>
-                    </div>
-                    <div class="rating__value" id="programRatingValue">اختر التقييم</div>
+                <label class="label label--required">التقييم العام (1-10)</label>
+                <div class="rating-stars">
+                    @for ($i = 10; $i >= 1; $i--)
+                        <input type="radio" id="program{{ $i }}" name="program_rating" value="{{ $i }}" required>
+                        <label for="program{{ $i }}">★</label>
+                    @endfor
                 </div>
+            </div>
                 
                 <div class="form-group">
                     <label for="programPros" class="label">الإيجابيات</label>
