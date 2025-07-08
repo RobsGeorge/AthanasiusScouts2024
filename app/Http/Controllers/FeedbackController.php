@@ -78,7 +78,7 @@ class FeedbackController extends Controller
 
             Feedback::create($validated);
 
-            return view('feedback.thanks');
+            //return view('feedback.thanks');
         }
     
         /**
