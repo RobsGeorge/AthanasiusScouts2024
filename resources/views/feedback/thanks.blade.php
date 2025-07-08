@@ -48,7 +48,7 @@
                             </div>
                                 
                                 <div class="text-center">
-                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> تم تقديم رايكم بنجاح
+                                    <h2 class="h4 mb-4" style="font-family: 'Cairo', sans-serif; color: brown;"> تم تقديم رأيكم بنجاح
                                     </h2>
                                 </div>
                                 <hr>
