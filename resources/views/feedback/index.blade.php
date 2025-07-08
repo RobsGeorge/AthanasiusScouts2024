@@ -464,7 +464,7 @@
     <div class="container">
         <!-- Header Section -->
         <header class="header">
-            <img src="images/shamandora.png" alt="شعار المعسكر" class="header__logo">
+            <img src={{ asset('images/shamandora.png') }} alt="شعار المعسكر" class="header__logo">
             <h1 class="header__title">تقييم معسكر مجمع 2025 - مربوط بكيفي</h1>
             <p class="header__subtitle">ربنا يعوضكم على تعبكم وخدمتكم خلال المعسكر</p>
             <p class="header__description">
