@@ -149,6 +149,45 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Media Menu -->
+                <div class="px-3 mb-2">
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="w-full flex items-center justify-between p-3 text-gray-700 rounded-lg hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+                            :class="{ 'bg-emerald-50 text-emerald-600': open }">
+                            <span class="font-medium">الميديا</span>
+                            <svg class="w-4 h-4 transition-transform" :class="{ '-rotate-90': open }" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 pr-4 space-y-1">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Finance Menu -->
+                <div class="px-3 mb-2">
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="w-full flex items-center justify-between p-3 text-gray-700 rounded-lg hover:bg-emerald-50 hover:text-emerald-600 transition-colors"
+                            :class="{ 'bg-emerald-50 text-emerald-600': open }">
+                            <span class="font-medium">الماليه</span>
+                            <svg class="w-4 h-4 transition-transform" :class="{ '-rotate-90': open }" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 pr-4 space-y-1">
+
+                        </div>
+                    </div>
+                </div>
             </nav>
 
             <!-- Mobile Logout Footer -->
@@ -189,11 +228,13 @@
                     <h1 class="hidden lg:block text-lg font-bold text-gray-800 lg:text-xl">{{ $pageTitle }}</h1>
                     @endif
                 </div>
-
                 <div class="flex items-center gap-3">
-                    <!-- Logo - Always visible -->
-                    <img src="{{ asset('img/shamandora.png') }}" alt="Logo" class="h-14 w-auto sm:h-14 lg:h-20">
+                    <!-- Logo - Clickable to go to the top index -->
+                    <a href="{{ url('/') }}">
+                        <img src="{{ asset('img/shamandora.png') }}" alt="Logo" class="h-14 w-auto sm:h-14 lg:h-20">
+                    </a>
                 </div>
+
                 <!-- Desktop Logout Button -->
                 <div class="hidden lg:block">
                     <form method="POST" action="{{ route('logout') }}">
