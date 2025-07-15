@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Your App Name')</title>
+    <title>@yield('title', 'الشمندوره البحريه')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,7 +36,7 @@
 
             <!-- User Profile Section -->
             <div class="flex flex-col items-center p-6 border-b border-gray-200">
-                <div class="relative mb-3">
+                <div class=" relative mb-3">
                     <img src="https://i.pravatar.cc/60?img=7" alt="User Avatar"
                         class="w-16 h-16 rounded-full border-2 border-white shadow-sm">
                     <span
