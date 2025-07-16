@@ -9,13 +9,13 @@
         ]" :columns="[
             [
                 'key' => 'MarhalaID',
-                'label' => 'رقم الفصيلة',
+                'label' => 'رقم المرحلة',
                 'type' => 'text',
                 'cssClass' => 'text-sm text-gray-900 font-medium'
             ],
             [
                 'key' => 'MarhalaName',
-                'label' => 'اسم فصيلة الدم',
+                'label' => 'اسم  المرحلة',
                 'type' => 'label',
                 'cssClass' => 'text-blue-600 font-bold text-sm'
             ]
