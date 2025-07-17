@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Providers;
-
+namespace App\Providers;// Trust all proxies For Testing Purposes with Ngrok
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+    
+      // Trust all proxies For Testing Purposes with Ngrok
+
     }
 }
