@@ -10,9 +10,8 @@
 'submitText' => '',
 'submitColor' => '',
 ])
-
 <div class="min-h-screen flex place-items-center justify-center bg-gray-50 px-4">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md" dir="rtl">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border-2 border-{{ $submitColor }}-300" dir="rtl">
         <!-- Card Title -->
         <div class="mb-6 text-center">
             <h2 class="text-xl font-bold text-gray-800">{{ $title }}</h2>

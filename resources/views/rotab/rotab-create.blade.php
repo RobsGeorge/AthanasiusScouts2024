@@ -4,6 +4,6 @@
 
 
 <x-form-card title="اضافة جامعه جديدة" :action="route('rotab.insert')" method="POST" inputPlaceholder="ادخل اسم الجامعه"
-    inputLabel="ادخل اسم الجامعه" submitText="إضافة الجامعه" submitColor="emerald" inputName="rotba_name" />
+    inputLabel="ادخل اسم الجامعه" submitText="إضافة الجامعه" submitColor="blue" inputName="rotba_name" />
 
 @endsection
