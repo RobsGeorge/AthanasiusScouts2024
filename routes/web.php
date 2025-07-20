@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/welcome', function () {return view('welcome');});
         Route::get('/cards', function () {return view('cards');});
         Route::get('/charts', function () {return view('charts');});
+        Route::get('/profile', function () {return view('profile');});
         Route::get('/blank', function () {return view('blank');});
         Route::get('/index', function () {return view('index');});
         Route::get('/buttons', function () {return view('buttons');});
@@ -46,6 +47,12 @@ Route::get('/forgot-password', function () {return view('forgot-password');});
 //Route::get('/insertperson','App\Http\Controllers\PersonController@insert');
 //Route::get('/createperson','App\Http\Controllers\PersonController@createPersonController');
 //Route::post('/submitPerson','App\Http\Controllers\PersonController@submitPersonController');
+
+
+//Route Profile
+
+
+
 
 //New Routes for Person Information for Live Form
 Route::get('/de7k', array('as'=>'person.de7k','uses'=>'App\Http\Controllers\PersonNewController@showLiveForm'));
@@ -312,4 +319,3 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/logout', 'App\Http\Controllers\LogoutController@perform')->name('logout');
     Route::get('/change-password', function () {return view('change-password');});
 });
-

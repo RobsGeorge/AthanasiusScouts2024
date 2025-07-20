@@ -23,14 +23,18 @@ class PersonRoleController extends Controller
         {
 
             
-            $personRoles = DB::select("SELECT   pi.PersonID, pi.ShamandoraCode, pr.PersonRoleID, r.RoleName, q.QetaaName, r.RoleID,
-                                                CONCAT(pi.FirstName, ' ', pi.SecondName, ' ', pi.ThirdName) as PersonFullName
-                                                FROM PersonRole pr
-                                                LEFT JOIN PersonInformation pi ON pi.PersonID = pr.PersonID
-                                                LEFT JOIN Roles r ON r.RoleID = pr.RoleID
-                                                LEFT JOIN PersonQetaa pq ON pq.PersonID = pi.PersonID
-                                                LEFT JOIN Qetaa q ON q.QetaaID = pq.QetaaID
-                                                WHERE q.QetaaName = 'قادة';");
+$personRoles = DB::select(" SELECT pi.PersonID, pi.ShamandoraCode, pr.PersonRoleID, r.RoleName, q.QetaaName, r.RoleID,
+           CONCAT(pi.FirstName, ' ', pi.SecondName, ' ', pi.ThirdName) as PersonFullName
+    FROM PersonRole pr
+    LEFT JOIN PersonInformation pi ON pi.PersonID = pr.PersonID
+    LEFT JOIN Roles r ON r.RoleID = pr.RoleID
+    LEFT JOIN PersonQetaa pq ON pq.PersonID = pi.PersonID
+    LEFT JOIN Qetaa q ON q.QetaaID = pq.QetaaID
+    WHERE q.QetaaName = 'قادة'
+    ORDER BY pr.PersonRoleID ASC
+");
+
+
 
             //return $personRoles;
 
@@ -117,7 +121,20 @@ class PersonRoleController extends Controller
     
         public function deletes($id)
         {
-            $personRole = DB::table('PersonRole')->where('PersonRoleID', $id)->first();
+            $personRole = DB::table('PersonRole AS pr')
+    ->select(
+        'pr.PersonRoleID',
+        'pi.ShamandoraCode',
+        'pi.FirstName',
+        'pi.SecondName',
+        'pi.ThirdName',
+        'r.RoleName'
+    )
+    ->leftJoin('PersonInformation AS pi', 'pi.PersonID', '=', 'pr.PersonID')
+    ->leftJoin('Roles AS r', 'r.RoleID', '=', 'pr.RoleID')
+    ->where('pr.PersonRoleID', $id)
+    ->first();
+
             return view("person-role.delete", array('personRole' => $personRole));
         }
 
