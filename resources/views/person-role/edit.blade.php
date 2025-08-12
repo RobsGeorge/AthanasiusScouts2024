@@ -1,142 +1,49 @@
-<!DOCTYPE html>
-<html lang="ar">
+@extends('layouts.app', ['pageTitle' => 'تعديل ربط قائد بدور'])
 
-<head>
+@section('content')
+<div class="container mx-auto px-4 py-8" dir="rtl">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <div class="bg-white shadow-md rounded-lg p-6 mb-8  border-2 border-emerald-300">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">تعديل ربط قائد بدور</h2>
 
-    <title>كشافة الشمندورة - لوحة التحكم</title>
+        <form method="POST" action="{{ route('person-role.update', $personSelected->PersonRoleID) }}">
+            @method('PATCH')
+            @csrf
 
-    <!-- Custom fonts for this template-->
-    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;500&display=swap');
-    </style>
-    <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora.png') }}>
-    <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Custom styles for this page -->
-    <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-</head>
+            <!-- Hidden Requester ID -->
+            <input type="hidden" name="RequestPersonID" value="{{ Auth()->user()->PersonID }}">
 
 
-
-<body id="page-top">
-
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" style="font-family: 'Cairo', sans-serif;">بيانات التحكم</h1>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">تعديل ربط شخص بدور</h6>
-                        </div>
-                    </div>
-
-                    <div class="card shadow mb-4">
-                        <form class="user" id="regForm" method="post" action="{{ route('person-role.update', $personSelected->PersonRoleID) }}">
-                            @method('PATCH')
-                            @csrf
-                            <div>
-                                <input type="text" class="form-control form-control-user" name="RequestPersonID" id="RequestPersonID" style="font-family: 'Cairo', sans-serif; font-size: medium" value="{{Auth()->user()->PersonID}}" hidden>
-                            </div>
-
-                            <div class="card-header py-3">
-                                <label>ID = {{$personSelected->PersonRoleID}}</label>
-                                <div class="form-group row text-center" dir="rtl">
-                                    <input type="text" class="form-control form-control-user" name="person" id="person" style="font-family: 'Cairo', sans-serif; font-size: medium" value="{{$personSelected->PersonFullName}}" disabled>
-                                </div>
-                                <div class="form-group row text-center" dir="rtl">
-                                    <label for="joindate" style="font-family: 'Cairo', sans-serif;">اختر الدور/المهمة</label>
-                                    <br />
-                                    <select class="form-control col-sm-4" style="margin-right: 20px;" name="role_id" id="role_id">
-                                    <option style="font-family: 'Cairo', sans-serif; color: black; font-size: large" value="{{$personSelected->RoleID}}" selected disabled>{{$personSelected->RoleName}}</option>
-                                    @foreach($roles as $role)
-                                    <option style="font-family: 'Cairo', sans-serif; color: black;" value="{{$role->RoleID}}">{{$role->RoleName}}</option>
-                                    @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <input type="submit" class="btn-google btn-user btn-block" style="background-color: brown;" id="submit-button" value="ادخال"></input>
-                        </form>
-                    </div>
-                </div>
-                <!-- /.container-fluid -->
-
+            <!-- اسم القائد (غير قابل للتعديل) -->
+            <div class="mb-6">
+                <label for="person" class="block text-sm font-semibold text-gray-700 mb-2">اسم القائد</label>
+                <input type="text" id="person" name="person" value="{{ $personSelected->PersonFullName }}" disabled
+                    class="w-full bg-gray-100 border border-gray-300 rounded-lg py-2 px-4 text-sm text-gray-700">
             </div>
-            <!-- End of Main Content -->
 
-        
-        </div>
-        <!-- End of Content Wrapper -->
+            <!-- اختيار الدور/المهمة -->
+            <div class="mb-6">
+                <label for="role_id" class="block text-sm font-semibold text-gray-700 mb-2">اختر الدور/المهمة</label>
+                <select id="role_id" name="role_id"
+                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500 text-sm py-2 px-4">
+                    <option selected disabled value="{{ $personSelected->RoleID }}">
+                        {{ $personSelected->RoleName }} (الحالي)
+                    </option>
+                    @foreach($roles as $role)
+                    <option value="{{ $role->RoleID }}">{{ $role->RoleName }}</option>
+                    @endforeach
+                </select>
+            </div>
 
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button type="submit"
+                    class="inline-flex items-center justify-center h-12 gap-2 px-8 text-sm font-medium tracking-wide transition duration-300 rounded-full focus-visible:outline-none whitespace-nowrap bg-emerald-50 text-emerald-500 hover:bg-emerald-100 hover:text-emerald-600 focus:bg-emerald-200 focus:text-emerald-700 disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-100 disabled:text-emerald-400 disabled:shadow-none">
+                    تحديث
+                </button>
+            </div>
+        </form>
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../../js/demo/datatables-demo.js"></script>
-
-    <script>
-/*    function myFunction() {
-        const first_name = document.getElementById('rotba_name');
-        if(first_name.value=='') {
-        first_name.style.backgroundColor = '#C53939';
-        first_name.style.color = '#FFFFFF';
-        document.getElementById('submit-button').disabled = true;
-        }
-        else {
-            first_name.style.backgroundColor = 'White';
-            first_name.style.color = '#1D43EC';
-        }
-    }
-
-    function clickSubmitButton(){
-        const rotba_name = document.getElementById('rotba_name');
-        if(rotba_name.value==''){
-            alert("الرجاء ادخال البيانات بشكل صحيح");
-                return false;
-        }
-    }
-    */
-</script>
-
-</body>
-
-</html>
+</div>
+@endsection
