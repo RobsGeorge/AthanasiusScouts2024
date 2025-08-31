@@ -23,8 +23,7 @@ class GroupPersonController extends Controller
         public function index()
         {
 
-            if(auth()->user()->role=="SuperAdmin")
-            {
+          
                 $groupPersons = DB::select("
                                     SELECT PersonGroup.*, PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
                                         CONCAT(PersonInformation.FirstName, ' ', 
@@ -37,48 +36,15 @@ class GroupPersonController extends Controller
                                     LEFT JOIN GroupRole ON GroupRole.GroupRoleID = PersonGroup.GroupRoleID
                                     LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
                                     ");
-            }
-            else
-            {
-                $khademAuthenticatedID = Auth::user()->PersonID;
-                $directGroupsConnectedToKhadem = DB::select("SELECT PersonGroup.GroupID FROM PersonGroup WHERE PersonID = ?", [$khademAuthenticatedID]);
-                $groupPersons = [];
-                
-                if($directGroupsConnectedToKhadem != NULL)
-                {
-                    $allGroupsIDsBelowKhadem = [];
-                    foreach($directGroupsConnectedToKhadem as $groupConnected)
-                    {
-                        $allGroupsIDsBelowKhadem = array_merge($allGroupsIDsBelowKhadem, GroupPersonController::getNodesBelow($groupConnected->GroupID, [$groupConnected->GroupID]));
-                    }
-                    
-
-                    foreach($allGroupsIDsBelowKhadem as $groupID)
-                    {
-                        $tempPersons = DB::select("
-                                                    SELECT PersonGroup.*, PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
-                                                        CONCAT(PersonInformation.FirstName, ' ', 
-                                                        PersonInformation.SecondName, ' ', PersonInformation.ThirdName) AS PersonFullName,
-                                                        GroupRole.GroupRoleName, 
-                                                        CONCAT(GroupType.GroupTypeName, ' ', GroupTable.GroupName) AS GroupDetails
-                                                    FROM PersonGroup
-                                                    LEFT JOIN PersonInformation ON PersonGroup.PersonID = PersonInformation.PersonID
-                                                    LEFT JOIN GroupTable ON GroupTable.GroupID = PersonGroup.GroupID
-                                                    LEFT JOIN GroupRole ON GroupRole.GroupRoleID = PersonGroup.GroupRoleID
-                                                    LEFT JOIN GroupType ON GroupTable.GroupTypeID = GroupType.GroupTypeID
-                                                    WHERE PersonGroup.GroupID = ? AND PersonGroup.PersonID != ?",[$groupID, $khademAuthenticatedID]
-                                                    );
-                                                    
-                        $groupPersons = array_merge($groupPersons, $tempPersons);
-                    }
-                }
-            }
+          
+         
             
             return view("group-person.index", array('groupPersons' => $groupPersons));
         }
 
         public function createKhadem()
         {
+            
             $groupsResult =   DB::select("SELECT g1.GroupID,  
                                     CONCAT('مجموعة رقم: ', g1.GroupID, ' - ',g3.GroupTypeName, ' ', g1.GroupName, ' -> ', g4.GroupTypeName, ' ', g2.GroupName) AS GroupInfo   
                                     FROM GroupTable g1
@@ -110,66 +76,42 @@ class GroupPersonController extends Controller
             return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem));
         }
 
-        public function createMakhdoom()
+         public function createMakhdoom()
         {
-            $khademAuthenticatedID = Auth::user()->PersonID;
-            $directGroupsConnectedToKhadem = DB::select("SELECT PersonGroup.GroupID FROM PersonGroup WHERE PersonID = ?", [$khademAuthenticatedID]);
+            // Fetch all groups (courses) as per createKhadem, but ensure they are relevant for makhdoom
+            $groupsResult = DB::select("SELECT g1.GroupID,  
+                                    CONCAT('مجموعة رقم: ', g1.GroupID, ' - ',g3.GroupTypeName, ' ', g1.GroupName, ' -> ', g4.GroupTypeName, ' ', g2.GroupName) AS GroupInfo   
+                                    FROM GroupTable g1
+                                    LEFT JOIN GroupTable g2 ON g1.IncludedUnderGroupID = g2.GroupID
+                                    LEFT JOIN GroupType g3 ON g1.GroupTypeID = g3.GroupTypeID
+                                    LEFT JOIN GroupType g4 ON g2.GroupTypeID = g4.GroupTypeID
+                                    WHERE g1.GroupID > 0
+                                    ");
 
-            $groups = NULL;
-            $persons = NULL;
-            $groupRoles = NULL;
-
-            if($directGroupsConnectedToKhadem != NULL)
+            $groups = [];
+            foreach($groupsResult as $g)
             {
-                $allGroupsIDsBelowKhadem = [];
-                foreach($directGroupsConnectedToKhadem as $groupConnected)
-                {
-                    $allGroupsIDsBelowKhadem = array_merge($allGroupsIDsBelowKhadem, GroupPersonController::getNodesBelow($groupConnected->GroupID, [$groupConnected->GroupID]));
-                }
-
-                $groups = [];
-                foreach($allGroupsIDsBelowKhadem as $g)
-                {
-                    $object = new \stdClass;
-                    $object->GroupID = $g;
-                    $object->GroupInfo = GroupPersonController::getParentsPathString($g);
-                    array_push($groups, $object);
-                }
-                
-                
-                $persons = [];
-                $rootsArray = [];
-                foreach($directGroupsConnectedToKhadem as $directGroup)
-                {
-                    array_push($rootsArray, GroupPersonController::getLatestParentBeforeRoot($directGroup->GroupID));
-                }
-                $rootsArray = array_unique($rootsArray);
-                
-
-                foreach($rootsArray as $rootItem)
-                {
-                    $sql_result = DB::select("SELECT PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
-                                            CONCAT(PersonInformation.ShamandoraCode, ' ', PersonInformation.FirstName, ' ', PersonInformation.SecondName, ' ', PersonInformation.ThirdName, ' ', PersonInformation.FourthName) AS FullName,
-                                            Qetaa.QetaaName
-                                        FROM GroupQetaa
-                                        LEFT JOIN Qetaa ON Qetaa.QetaaID = GroupQetaa.QetaaID
-                                        LEFT JOIN PersonQetaa ON PersonQetaa.QetaaID = GroupQetaa.QetaaID
-                                        LEFT JOIN PersonInformation ON PersonInformation.PersonID = PersonQetaa.PersonID
-                                        WHERE GroupQetaa.GroupID = ?", [$rootItem]);
-
-                    $persons = array_merge($persons, $sql_result);                    
-                }
-                
+                $object = new \stdClass;
+                $object->GroupID = $g->GroupID;
+                $object->GroupInfo = GroupPersonController::getParentsPathString($g->GroupID);
+                array_push($groups, $object);
             }
-            
-            
+
+            // Fetch all persons (students) without initial filtering, as user will select who attends
+            $persons = DB::select("SELECT PersonInformation.PersonID, PersonInformation.ShamandoraCode, 
+                                        CONCAT(PersonInformation.ShamandoraCode, ' ', PersonInformation.FirstName, ' ', PersonInformation.SecondName, ' ', PersonInformation.ThirdName) AS FullName
+                                    FROM PersonInformation
+                                    ");
+
+            // Fetch group roles relevant for makhdoom (students)
             $groupRoles = DB::select("SELECT GroupRole.GroupRoleID, GroupRole.GroupRoleName
                                             From GroupRole
                                             WHERE GroupRole.isKhademRole = 0");
-            //return $makhdoomGroupRole;
+
             $isKhadem = FALSE;
             return view("group-person.create", array('groups'=>$groups, 'persons'=>$persons, 'groupRoles'=>$groupRoles, 'isKhadem'=>$isKhadem));
         }
+
 
 
         public function insert(Request  $request)

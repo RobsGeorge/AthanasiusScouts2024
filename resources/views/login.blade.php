@@ -1,78 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    body {
+        font-family: 'Cairo', sans-serif;
+    }
 
-    <title>Shamandora Scouts - Login</title>
+    .input-field {
+        transition: all 0.3s ease;
+    }
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href={{ asset('img/shamandora') }}>
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    .input-field:focus {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: #6b7280;
+    }
 
+    .login-btn {
+        transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
+    }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-white min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-8 items-center min-h-[80vh]">
+            <!-- Login Form -->
+            <div class="order-2 lg:order-1">
+                <div class="bg-white rounded-lg p-8 lg:p-12 shadow-lg border border-gray-100">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">تسجيل الدخول</h2>
 
-    <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block">
-                    <img src={{ asset('img/shamandora.png') }} style="width: 100%; height: 100%">
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">تسجيل الدخول</h1>
-                            </div>
-                            <form class="user" method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="person_id" name="person_id"
-                                        placeholder="Person ID">
-                                </div>
-                                <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="person_password" name="person_password" placeholder="Password">
-                                </div>
-                                <input type="submit" class="btn-google btn-user btn-block" style="background-color: rgb(151, 23, 23);" id="submit-button" value="دخـــول"></input>
-                                <hr>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">نسيت كلمة المرور?</a>
-                            </div>
+                    <form id="loginForm" class="space-y-6" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <!-- Person ID Input -->
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">رقم الهوية</label>
+                            <input type="text" id="person_id" name="person_id"
+                                class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:border-gray-500"
+                                placeholder="أدخل رقم الهوية" required>
                         </div>
+
+                        <!-- Password Input -->
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2">كلمة المرور</label>
+                            <input type="password" id="person_password" name="person_password"
+                                class="input-field w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:border-gray-500"
+                                placeholder="أدخل كلمة المرور" required>
+                        </div>
+
+                        <!-- Forgot Password -->
+                        <div class="text-left">
+                            <a href="forgot-password.html"
+                                class="text-gray-600 hover:text-gray-800 text-sm hover:underline transition-all duration-300">
+                                نسيت كلمة المرور؟
+                            </a>
+                        </div>
+
+                        <!-- Login Button -->
+                        <input type="submit"
+                            class="login-btn w-full py-3 px-6 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg focus:outline-none cursor-pointer"
+                            id="submit-button" value="دخـــول">
+                    </form>
+
+                    <!-- Sign Up Link -->
+                    <div class="text-center mt-6">
+                        <p class="text-gray-600">
+                            ليس لديك حساب؟
+                            <a href="#" class="text-gray-800 hover:underline font-medium transition-all duration-300">
+                                إنشاء حساب جديد
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Logo Section -->
+            <div class="flex flex-col items-center justify-center text-gray-800 order-1 lg:order-2">
+                <div class="mb-8">
+                    <div
+                        class="w-40 h-40 bg-gray-100 rounded-full flex items-center justify-center shadow-md border border-gray-200">
+                        <!-- Placeholder for logo -->
+
+                        <img src="{{ asset('img/shamandora.png') }}">
+
+                    </div>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4 text-center text-gray-800">
+                    شماندورة الكشافة
+                </h1>
+                <p class="text-lg lg:text-xl text-center text-gray-600 max-w-md">
+                    منارة للقيادة والتوجيه في رحلة الكشافة
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Simple focus effects for input fields
+    const inputs = document.querySelectorAll('.input-field');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.style.transform = 'translateY(-1px)';
+        });
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+        input.addEventListener('blur', () => {
+            input.style.transform = 'translateY(0)';
+        });
+    });
+    </script>
 </body>
 
 </html>
