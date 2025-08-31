@@ -7,13 +7,19 @@
     <title>@yield('title', 'الشمندوره البحريه')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    body {
+        font-family: 'Cairo', sans-serif;
+    }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
     <script src="//unpkg.com/alpinejs" defer></script>
 
 </head>
 
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-50 ">
     <!-- Main Layout Container -->
     <div class="flex flex-col h-screen">
         <!-- Main Wrapper -->
