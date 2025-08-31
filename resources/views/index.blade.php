@@ -1,4 +1,4 @@
-@extends('layouts.app' , ['pageTitle' => "لوحه التحكم test"?? ''])
+@extends('layouts.app' , ['pageTitle' => "لوحه التحكم"?? ''])
 
 
 
