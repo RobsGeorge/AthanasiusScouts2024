@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50 font-sans">
     <!-- Main Layout Container -->
     <div class="flex flex-col h-screen">
         <!-- Main Wrapper -->
